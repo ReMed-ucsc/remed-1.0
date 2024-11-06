@@ -5,7 +5,7 @@ class User
     use Model;
 
     protected $table = 'users';
-    protected $allowedColumns = ['email', 'password', 'token'];
+    protected $allowedColumns = ['name', 'email', 'password', 'token'];
 
     public function validate($data)
     {
@@ -37,5 +37,15 @@ class User
     {
         $data = ['token' => $token];
         $this->update($email, $data, 'email');
+    }
+
+    public function registerUser($name, $email, $password)
+    {
+        $data = [
+            'name' => $name,
+            'email' => $email,
+            'password' => $password
+        ];
+        return $this->insert($data);
     }
 }

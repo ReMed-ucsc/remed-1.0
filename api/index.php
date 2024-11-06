@@ -12,10 +12,11 @@ $url = explode('/', trim($url, '/'));
 
 // show($url);
 
-$controllerName = ucfirst($url[0] ?? 'Home') . 'Controller';
-$methodName = $url[1] ?? 'index';
+$userType = ucfirst($url[0] ?? 'Home');
+$controllerName = ucfirst($url[1] ?? 'Home') . 'Controller';
+$methodName = $url[2] ?? 'index';
 
-$controllerFile = BASE_PATH . '/api/controllers/' . $controllerName . '.php';
+$controllerFile = BASE_PATH . '/api/controllers/' . strtolower($userType) . '/' . $controllerName . '.php';
 
 if (file_exists($controllerFile)) {
     require_once $controllerFile;

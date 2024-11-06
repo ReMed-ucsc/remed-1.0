@@ -127,4 +127,27 @@ trait Model
 
         return false;
     }
+
+    public function join($table, $joinCondition, $data = [], $data_not = [], $columns = '*', $order_column = 'id', $order_type = 'ASC', $limit = 10, $offset = 0)
+    {
+        $keys = array_keys($data);
+        $keys_not = array_keys($data_not);
+
+        $query = "SELECT $columns FROM $this->table JOIN $table ON $joinCondition WHERE ";
+
+        foreach ($keys as $key) {
+            $query .= $key . " = :" . $key . " AND ";
+        }
+
+        foreach ($keys_not as $key) {
+            $query .= $key . " != :" . $key . " AND ";
+        }
+
+        $query = rtrim($query, " AND ");
+        $query .= " ORDER BY $order_column $order_type LIMIT $limit OFFSET $offset";
+
+        $data = array_merge($data, $data_not);
+
+        return $this->query($query, $data);
+    }
 }

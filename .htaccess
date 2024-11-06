@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# Redirect API requests to api/index.php
+RewriteCond %{REQUEST_URI} ^/MVC/api/
+RewriteRule ^api/(.*)$ api/index.php?url=$1 [L,QSA]
+
+# Redirect all other requests to public/index.php (for web requests)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ public/index.php?url=$1 [L,QSA]

@@ -1,10 +1,10 @@
 <?php
 
-class Patient
+class Patient extends User
 {
-    use Model;
+    // use Model;
 
-    protected $table = 'patients';
+    protected $table = 'patient';
     protected $allowedColumns = ['name', 'email', 'password', 'token'];
 
     public function validate($data)
@@ -53,6 +53,13 @@ class Patient
     {
         $query = "SELECT * FROM medicineOrder WHERE PatientID = :patientID";
         $data = ['patientID' => $patientID];
+        return $this->query($query, $data);
+    }
+
+    public function getOrderMedicines($orderID, $patientID)
+    {
+        $query = "SELECT * FROM OrderView WHERE OrderID = :orderID AND PatientID = :patientID";
+        $data = ['orderID' => $orderID, 'patientID' => $patientID];
         return $this->query($query, $data);
     }
 

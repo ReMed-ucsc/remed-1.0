@@ -1,7 +1,7 @@
 RewriteEngine On
 
 # Redirect API requests to api/index.php
-RewriteCond %{REQUEST_URI} ^/MVC/api/
+RewriteCond %{REQUEST_URI} ^/remed-1.0/api/
 RewriteRule ^api/(.*)$ api/index.php?url=$1 [L,QSA]
 
 # Redirect all other requests to public/index.php (for web requests)

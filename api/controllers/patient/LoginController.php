@@ -11,6 +11,7 @@ class LoginController
         $response = array();
         $result = new Result();
 
+        // get data sent using post method and store
         $input = file_get_contents('php://input');
         $data = json_decode($input, true);
 
@@ -18,7 +19,7 @@ class LoginController
             $email = $data['email'];
             $password = $data['password'];
 
-            $userModel = new User();
+            $userModel = new Patient();
             $user = $userModel->getUserByEmail($email);
 
             if ($user) {
@@ -26,7 +27,7 @@ class LoginController
                     $authToken = hash('sha384', microtime() . uniqid() . bin2hex(random_bytes(10)));
                     $userModel->updateToken($email, $authToken);
 
-                    $response['user']['name'] = $user->name;
+                    $response['user']['name'] = $user->patientName;
                     $response['user']['email'] = $email;
                     $response['user']['auth_token'] = $authToken;
 

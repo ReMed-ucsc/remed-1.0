@@ -31,7 +31,7 @@
         <div id="pharmacy-submenu" class="submenu">
             <div class="tab">
                 <img src="<?=ROOT?>/assets/images/Vector.png" alt="add"/>
-                <a href="http://localhost/php/view/new-pharmacy/new-pharmacy.php"> Add Pharmacy</a>  
+                <a href="<?ROOT?>/"> Add Pharmacy</a>  
             </div>
             
         </div>

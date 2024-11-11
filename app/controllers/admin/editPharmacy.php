@@ -1,6 +1,6 @@
 <?php
 
-class Pharmacy
+class editPharmacy
 {
     use Controller;
     public function index()
@@ -18,13 +18,8 @@ class Pharmacy
 
         // $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
 
-        // $data['username'] = [];
-        
-    }
-
-    public function add()
-    {
-        $this->view('new-pharmacy');
+        $data['username'] = [];
+        $this->view('admin/editPharmacy',$data);
     }
 }
 ?>

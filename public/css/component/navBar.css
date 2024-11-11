@@ -1,0 +1,234 @@
+.navbar {
+    background-color: #02224c;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: auto;
+    align-items: center;
+  }
+  
+  .navbar .navbar-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+  }
+  
+  .navbar-right img {
+    margin-left: 20px;
+    cursor: pointer;
+  }
+  
+  .bell {
+    width: 70px;
+  }
+  
+  .user {
+    margin-top: 8px;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .navbar .navbar-left {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .navbar-left img {
+    margin-left: 20px;
+    cursor: pointer;
+  }
+  
+  .menu {
+    width: 50px;
+  }
+  
+  .logo {
+    width: 130px;
+    height: 50px;
+  }
+  
+  .dropdown-menu{
+    display: none;
+    position: absolute;
+    top: 110px;
+    left: 0px;
+    background-color: #181818;
+    border-radius: 5px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-menu .tab {
+    padding: 20px 50px;
+    border: #e4e4e4 solid 2px;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 0.5fr;
+    justify-content:space-between;
+  }
+  
+  .dropdown-menu .tab:hover {
+    background-color: #555;
+  }
+  
+  .dropdown-menu a{
+    color: white;
+    text-decoration: none;
+    padding-left: 5px;
+    padding-top: 8px;
+    font-size: 18px;
+  }
+  
+  .dropdown-item {
+    position: relative;
+  }
+  
+  .dropdown-menu img {
+    width: 40px;
+    height: auto;
+    padding-right: 10px;
+  }
+  
+  .dropdown-menu .arrow{
+    width: 10px;
+    height: auto;
+    margin-left: 50px;
+    padding-top: 8px;
+  }
+  
+  .submenu {
+    display: none;
+    background-color: #181818;
+    position: absolute;
+    top: 0;
+    left: 350px;
+    border-radius: 5px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .submenu .tab {
+    display:grid;
+    grid-template-columns: 0.5fr 1fr;
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .submenu tab:hover {
+    background-color: #555;
+  } 
+  
+  .bottom{
+    padding-top: 50px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+    border: #e4e4e4 solid 2px;
+  }
+  
+  .bottom img{
+    width: 100px;
+    height: auto;
+    color: #8F8F8F;
+  }
+  
+  .bottom a{
+    font-size: 12px;
+    color: #8F8F8F;
+  }
+  
+  .profile{
+    display: none;
+    position: absolute;
+    top: 110px;
+    right: 0px;
+    background-color: #181818;
+    width: 280px;
+    height:auto;
+    border: #e4e4e4 solid 2px;
+    z-index: 1;
+  }
+  
+  .profile-item{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    padding-bottom: 0;
+    align-items: center;
+  }
+  
+  .profile-item .details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #e4e4e4;
+  }
+  
+  .profile-item .details p{
+      margin-top: -20px;
+      padding-top: 0px;
+  }
+  
+  .profile-item .tab{
+    padding-left: 40px;
+    border: #e4e4e4 2px solid;
+    width: 100%;
+    height: 80px;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .profile-item .tab a{
+    color: white;
+    text-decoration: none;
+    padding-left: 5px;
+    font-size: 18px;
+  }
+  
+  .profile-item .tab img{
+    width: 40px;
+    height: auto;
+    padding-right: 10px;
+    padding-left: auto;
+  }
+  
+  .notification{
+    display: none;
+    position: absolute;
+    top: 110px;
+    right: 50px;
+    background-color: #181818;
+    width: 280px;
+    min-height: 150px;
+    height:auto;
+    border: #e4e4e4 solid 2px;
+    z-index: 2;
+  }
+  
+  .notifi-head{
+    align-items: center;
+    padding-bottom: 20px;
+    height: 50px;
+    padding-left: 80px;
+    color: #e4e4e4;
+    font-size: 18px;
+    border: #e4e4e4 2px solid;
+  }
+  
+  .notifi-item{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    align-items: center;
+    color: #cecece;
+    border: #e4e4e4 2px solid;
+    min-height: 100px;
+    padding-top: 20px;
+  }
+  

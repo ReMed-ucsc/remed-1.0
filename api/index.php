@@ -1,10 +1,10 @@
 <?php
 
 // Define the base path
-define('BASE_PATH', realpath(dirname(__FILE__) . '/../'));
+define('BASE', realpath(dirname(__FILE__) . '/../'));
 
 // Autoload or require necessary files
-require_once BASE_PATH . '/app/core/init.php';
+require_once BASE . '/app/core/init.php';
 
 // Simple routing logic
 $url = $_GET['url'] ?? '';
@@ -16,7 +16,7 @@ $userType = ucfirst($url[0] ? $url[0] . '/' : '');
 $controllerName = ucfirst($url[1] ?? 'Home') . 'Controller';
 $methodName = $url[2] ?? 'index';
 
-$controllerFile = BASE_PATH . '/api/controllers/' . strtolower($userType) . $controllerName . '.php';
+$controllerFile = BASE . '/api/controllers/' . strtolower($userType) . $controllerName . '.php';
 
 if (file_exists($controllerFile)) {
     require_once $controllerFile;

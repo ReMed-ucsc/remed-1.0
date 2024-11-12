@@ -28,7 +28,7 @@ function loadEnv($path)
 loadEnv(__DIR__ . '/../../.env');
 
 if ($_SERVER['SERVER_NAME'] == 'localhost') {
-    define('ROOT', 'http://localhost/MVC/public');
+    define('ROOT', 'http://localhost/remed-1.0/public');
 } else {
     define('ROOT', 'http://example.com');
 }
@@ -38,8 +38,11 @@ define('DBUSER', getenv('DBUSER'));
 define('DBPASS', getenv('DBPASS'));
 define('DBNAME', getenv('DBNAME'));
 
-define('APP_NAME', "MVC Framework");
-define('APP_DESC', "A simple MVC Framework");
+define('APP_NAME', "ReMed");
+define('APP_DESC', "Healthcare solution");
+
+// Define the base path
+define('BASE_PATH', realpath(dirname(__FILE__) . '/../../'));
 
 // true means debug mode on
 define('DEBUG', true);

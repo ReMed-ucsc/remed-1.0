@@ -15,9 +15,11 @@ class App
     public function loadController()
     {
         $URL = $this->splitURL();
+
         // Remove the public folder from the URL
         unset($URL[0]);
         $URL = array_values($URL); // Reindex the array
+        // show($URL);
 
         // Determine if the URL contains 'admin'
         $isAdmin = false;
@@ -26,13 +28,14 @@ class App
             unset($URL[0]);
             $URL = array_values($URL);
         }
+        // show($URL);
 
         // Check if the controller exists and select it
         $controllerPath = $isAdmin ? "../app/controllers/admin/" : "../app/controllers/user/";
-        $filename = $controllerPath . ucfirst($URL[0] ?? 'Home') . ".php";
+        $filename = $controllerPath . ucfirst($URL[0] ?? 'Dashboard') . ".php";
         if (file_exists($filename)) {
             require_once($filename);
-            $this->controller = ucfirst($URL[0] ?? 'Home');
+            $this->controller = ucfirst($URL[0] ?? 'Dashboard');
             unset($URL[0]);
         } else {
             require_once("../app/controllers/_404.php");

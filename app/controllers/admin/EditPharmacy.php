@@ -1,6 +1,6 @@
 <?php
 
-class Home
+class EditPharmacy
 {
     use Controller;
     public function index()
@@ -16,10 +16,9 @@ class Home
 
         // show($result);
 
-        $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
+        // $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
 
-        $this->view('admin/home', $data);
+        $data['username'] = [];
+        $this->view('admin/editPharmacy', $data);
     }
-
-    // add other methods like edit, update, delete, etc.
 }

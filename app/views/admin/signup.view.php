@@ -1,52 +1,65 @@
-<!doctype html>
-<html lang="en">
+<?php
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="generator" content="Hugo 0.88.1">
-    <title>Signup</title>
+// Check if form is submitted
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Replace these with your own validation/authentication logic
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
+    // Example hardcoded credentials for testing
+    $valid_username = 'admin';
+    $valid_password = 'admin123';
 
-</head>
+    if ($username == $valid_username && $password == $valid_password) {
+        // Set session variables
+        $_SESSION['loggedin'] = true;
+        $_SESSION['username'] = $username;
 
-<body class="text-center">
+        // Redirect to admin dashboard or homepage
+        header("Location:http://localhost/MVC/public/admin/dashboard");
+        exit;
+    } else {
+        $error_message = "Invalid username or password!";
+    }
+}
+require_once BASE_PATH . '/app/views/inc/header.view.php'
 
-    <main class="form-signin">
-        <form method="post">
+?>
 
-            <!-- alert errors -->
-            <?php if (!empty($errors)): ?>
-                <div class="alert alert-danger">
-                    <?= implode("<br>", $errors) ?>
-                </div>
-            <?php endif; ?>
+<div class="login-container-out">
+    <div class="login-container">
+        <div class="login-left">
+            <img src="<?= ROOT ?>/assets/images/ReMeD.png" alt="logo">
+            <p>ONLINE PHARMACY LOCATOR <br> AND <br> MEDICINE TRACKER</p>
+            <h3>ADMINISTRATOR</h3>
+        </div>
+        <div class="login-right">
 
-            <h1 class="h3 mb-3 fw-normal">Create account</h1>
+            <form method="POST" action="">
+                <h2 class="login-header">Log in</h2>
+                <ul>
+                    <li>
+                        <label for="username">Username or Email Address:</label><br>
+                        <input type="text" id="username" name="username" placeholder="value" required>
+                    </li>
+                    <li>
+                        <label for="password">Password:</label><br>
+                        <input type="password" id="password" name="password" placeholder="value" required>
+                    </li>
+                    <div class="remember">
+                        <input type="checkbox" name="remember" id="remember" required>
+                        <label for="remember">Remember me</label>
+                    </div>
 
-            <div class="form-floating">
-                <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                <label for="floatingInput">Email address</label>
-            </div>
-            <div class="form-floating">
-                <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                <label for="floatingPassword">Password</label>
-            </div>
+                    <button type="submit">Login</button>
+                    <?php if (isset($error_message)) { ?>
+                        <p class="error"><?php echo $error_message; ?></p>
+                    <?php } ?>
 
-            <div class="checkbox mb-3">
-                <label>
-                    <input name="terms" type="checkbox" value="1"> Accept terms
-                </label>
-            </div>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Create</button>
-            <a href="<?= ROOT ?>/admin">Home</a>
-            <a href="<?= ROOT ?>/admin/login">Login</a>
-        </form>
-    </main>
+                    <p class="forget">Forget <span><a href="#"> Password</a></span>?</p>
+            </form>
+        </div>
+    </div>
+</div>
 
-
-
-</body>
-
-</html>
+<?php require_once  BASE_PATH . '/app/views/inc/footer.view.php' ?>

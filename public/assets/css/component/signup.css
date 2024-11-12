@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.login-container-out {
+    background-color: #B0BEC5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    display: flex;
+    width: 1300px;
+    height: 600px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.login-left {
+    background-color: #02224C;
+    color: white;
+    padding: 40px;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-left h1 {
+    font-size: 48px;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+ }
+
+.login-left p {
+    font-size: 14px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.login-left h3 {
+    margin-top: 30px;
+    font-size: 18px;
+}
+
+.login-right {
+    background-color: #eceff1;
+    padding: 40px;
+    width: 40%;
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+    vertical-align:auto;
+}
+
+form{
+    width: 80%;
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
+.login-right .login-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.login-right li{
+    list-style: none;
+    padding-top: 10px;
+}
+
+.login-right input{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #B0BEC5;
+}
+
+.login-right .remember{
+    display: flex;
+    flex-direction: row;
+    justify-content:start;
+}
+
+.remember input{
+    margin-right: 10px;
+    width: 20px;
+    padding: 2px;
+    margin-top: -5px;
+    margin-bottom: -5px;
+
+}
+
+.login-right form button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+    height: 50px;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #00796B;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+ 
+.login-right form button:hover{
+    background-color: #004D40;
+}
+
+.error{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    color: red;
+}
+
+.forget{
+    margin-top: 5px;
+    color: #AAA0A0;
+    display: flex;
+    justify-content: center;
+}
+
+.forget a{
+    margin-left: 5px;
+    margin-right: 5px;
+
+}

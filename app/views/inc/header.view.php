@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - ReMed</title>
-    <link rel="stylesheet" href="<?= ROOT ?>/css/style.css">
+    <link rel="stylesheet" href="<?=ROOT  ?>/assets/css/style.css">
 </head>
 
 <body>

@@ -62,4 +62,4 @@ require_once BASE_PATH . '/app/views/inc/header.view.php'
     </div>
 </div>
 
-<?php require_once '/opt/lampp/htdocs/MVC/app/views/inc/footer.view.php' ?>
+<?php require_once  BASE_PATH . '/app/views/inc/footer.view.php' ?>

@@ -66,41 +66,51 @@ class Patient extends User
     public function searchPharmaciesWithMedicines($latitude, $longitude, $productIDs, $range = 10)
     {
         $rangeInMeters = $range * 1000;
-        $placeholders = implode(',', array_fill(0, count($productIDs), '?'));
+        $placeholders = implode(',', array_map(function ($key) {
+            return ":productID$key";
+        }, array_keys($productIDs)));
 
-        $joinCondition = "InventoryView.PharmacyID = pharmacies.id";
-        $columns = "pharmacies.id AS PharmacyID, pharmacies.name, pharmacies.latitude, pharmacies.longitude,
-                    ST_Distance_Sphere(POINT(pharmacies.longitude, pharmacies.latitude), POINT(:longitude, :latitude)) AS distance";
+        $sql = "
+        SELECT PharmacyID, name, latitude, longitude,
+        ST_Distance_Sphere(POINT(longitude, latitude), POINT(:longitude, :latitude)) AS distance
+        FROM InventoryView
+        WHERE ST_Distance_Sphere(POINT(longitude, latitude), POINT(:longitude, :latitude)) <= :rangeInMeters
+        AND ProductID IN ($placeholders)
+        GROUP BY PharmacyID
+        ORDER BY distance ASC
+        ";
+
         $data = [
             'longitude' => $longitude,
             'latitude' => $latitude,
             'rangeInMeters' => $rangeInMeters
         ];
-        $data_not = [];
-        $additionalConditions = "ST_Distance_Sphere(POINT(pharmacies.longitude, pharmacies.latitude), POINT(:longitude, :latitude)) <= :rangeInMeters
-                                 AND InventoryView.ProductID IN ($placeholders)";
 
-        $result = $this->join('pharmacies', $joinCondition, $data, $data_not, $columns, 'distance', 'ASC', 10, 0, $additionalConditions, $productIDs);
+        foreach ($productIDs as $key => $productID) {
+            $data["productID$key"] = $productID;
+        }
 
-        return $result;
+        return $this->query($sql, $data);
     }
 
     public function searchNearbyPharmacy($latitude, $longitude, $range = 10)
     {
         $rangeInMeters = $range * 1000;
 
-        $columns = "pharmacies.id AS PharmacyID, pharmacies.name, pharmacies.contactNo, pharmacies.address, pharmacies.latitude, pharmacies.longitude,
-                    ST_Distance_Sphere(POINT(pharmacies.longitude, pharmacies.latitude), POINT(:longitude, :latitude)) AS distance";
+        $sql = "
+        SELECT PharmacyID, name, contactNo, address, latitude, longitude,
+        ST_Distance_Sphere(POINT(longitude, latitude), POINT(:longitude, :latitude)) AS distance
+        FROM pharmacy
+        WHERE ST_Distance_Sphere(POINT(longitude, latitude), POINT(:longitude, :latitude)) <= :rangeInMeters
+        ORDER BY distance ASC
+        ";
+
         $data = [
             'longitude' => $longitude,
             'latitude' => $latitude,
             'rangeInMeters' => $rangeInMeters
         ];
-        $data_not = [];
-        $additionalConditions = "ST_Distance_Sphere(POINT(pharmacies.longitude, pharmacies.latitude), POINT(:longitude, :latitude)) <= :rangeInMeters";
 
-        $result = $this->join('pharmacies', '1=1', $data, $data_not, $columns, 'distance', 'ASC', 10, 0, $additionalConditions);
-
-        return $result;
+        return $this->query($sql, $data);
     }
 }

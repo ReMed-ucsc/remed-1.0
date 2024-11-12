@@ -22,22 +22,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $error_message = "Invalid username or password!";
     }
 }
-require_once '/opt/lampp/htdocs/MVC/app/views/inc/header.view.php'
+require_once BASE_PATH . '/app/views/inc/header.view.php'
 
 ?>
 
-    <div class="login-container-out">
-        <div class="login-container">
-            <div class="login-left">
-                <img src="<?=ROOT?>/assets/images/ReMeD.png" alt="logo">
-                <p>ONLINE PHARMACY LOCATOR <br> AND <br> MEDICINE TRACKER</p>
-                <h3>ADMINISTRATOR</h3>
-            </div>
-            <div class="login-right">
-               
-                <form method="POST" action="">
-                    <h2 class="login-header">Log in</h2>
-                   <ul>
+<div class="login-container-out">
+    <div class="login-container">
+        <div class="login-left">
+            <img src="<?= ROOT ?>/assets/images/ReMeD.png" alt="logo">
+            <p>ONLINE PHARMACY LOCATOR <br> AND <br> MEDICINE TRACKER</p>
+            <h3>ADMINISTRATOR</h3>
+        </div>
+        <div class="login-right">
+
+            <form method="POST" action="">
+                <h2 class="login-header">Log in</h2>
+                <ul>
                     <li>
                         <label for="username">Username or Email Address:</label><br>
                         <input type="text" id="username" name="username" placeholder="value" required>
@@ -50,16 +50,16 @@ require_once '/opt/lampp/htdocs/MVC/app/views/inc/header.view.php'
                         <input type="checkbox" name="remember" id="remember" required>
                         <label for="remember">Remember me</label>
                     </div>
-                   
+
                     <button type="submit">Login</button>
                     <?php if (isset($error_message)) { ?>
                         <p class="error"><?php echo $error_message; ?></p>
                     <?php } ?>
 
                     <p class="forget">Forget <span><a href="#"> Password</a></span>?</p>
-                </form>
-            </div>
+            </form>
         </div>
     </div>
+</div>
 
-<?php require_once '/opt/lampp/htdocs/MVC/app/views/inc/footer.view.php'?>
+<?php require_once '/opt/lampp/htdocs/MVC/app/views/inc/footer.view.php' ?>

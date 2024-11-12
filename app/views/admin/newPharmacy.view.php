@@ -22,13 +22,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<?php require_once '/opt/lampp/htdocs/MVC/app/views/inc/header.view.php' ?>
-<?php require_once '/opt/lampp/htdocs/MVC/app/views/inc/navBar.view.php' ?>
+<?php
+require_once BASE_PATH . '/app/views/inc/header.view.php';
+require_once BASE_PATH . '/app/views/inc/navBar.view.php';
+?>
 
 
 <h2 class="title">Onboard New Pharmacy</h2>
 <div class="container">
-    
+
     <form action="" method="POST" enctype="multipart/form-data">
         <div class="left section">
             <div class="form-group">
@@ -68,8 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="text" id="pharmacyAddress" name="pharmacyAddress" placeholder="Enter address" required>
             </div>
         </div>
-        
-         <div class="right section">
+
+        <div class="right section">
             <div class="form-group">
                 <label for="document">Document:</label>
                 <input type="file" id="document" name="document">
@@ -82,4 +84,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="button" class="btn cancel" onclick="window.history.back()">Cancel</button>
     </div>
 </div>
-<?php require_once '/opt/lampp/htdocs/MVC/app/views/inc/footer.view.php' ?>
+<?php require_once BASE_PATH . '/app/views/inc/footer.view.php' ?>

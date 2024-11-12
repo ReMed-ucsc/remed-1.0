@@ -1,15 +1,11 @@
 <?php
-    class newPharmacy
+class NewPharmacy
+{
+    use Controller;
+    public function index()
     {
-        use Controller;
-        public function index()
-        {
-            // $user = new User;
-            // $arr['email'] = "
-            $this->view('admin/newPharmacy');
-        }
+        // $user = new User;
+        $arr['email'] = "";
+        $this->view('admin/newPharmacy', $arr);
     }
-
-
-
-?>
+}

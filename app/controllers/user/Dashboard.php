@@ -1,6 +1,6 @@
 <?php
 
-class Home
+class Dashboard
 {
     use Controller;
     public function index()

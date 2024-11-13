@@ -16,7 +16,7 @@
 
     <div class="tab">
         <img src="<?= ROOT ?>/assets/images/home.png" alt="" />
-        <a href="http://localhost/php/view/dashboard/dashboard.php"> Home</a>
+        <a href="<?=ROOT?>/admin"> Home</a>
     </div>
 
 
@@ -42,7 +42,7 @@
 
     <div class="tab">
         <img src="<?= ROOT ?>/assets/images/user.png" alt="user" />
-        <a href="http://localhost/php/view/users/users.php">User</a>
+        <a href="<?= ROOT ?>/admin/user">User</a>
     </div>
 
 
@@ -56,15 +56,15 @@
         <div id="settings-submenu" class="submenu">
             <div class="tab">
                 <img src="<?= ROOT ?>/assets/images/settings.png" alt="" />
-                <a href="http://localhost/php/view/setting/genaral/genaral.php">General Settings</a>
+                <a href="<?=ROOT?>/admin/general">General Settings</a>
             </div>
             <div class="tab">
                 <img src="<?= ROOT ?>/assets/images/UserManagement.png" alt="" />
-                <a href="http://localhost/php/view/setting/account-manage/acount.php"> User Management</a>
+                <a href="<?=ROOT?>/admin/accountManage"> User Management</a>
             </div>
             <div class="tab">
                 <img src="<?= ROOT ?>/assets/images/policy.png" alt="" />
-                <a href="http://localhost/php/view/setting/legal/legal.php"> Legal & Compliance</a>
+                <a href="<?=ROOT?>/admin/legal"> Legal & Compliance</a>
             </div>
         </div>
         <!-- Submenu end-->
@@ -86,7 +86,7 @@
         </div>
         <div class="tab">
             <img src="<?= ROOT ?>/assets/images/setting.png" alt="" />
-            <a href="../genaral/genaral.php">Setting</a>
+            <a href="<?=ROOT?>/admin/general">Setting</a>
         </div>
         <div class="tab">
             <img src="<?= ROOT ?>/assets/images/logout.png" alt="" />

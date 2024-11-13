@@ -2,3 +2,10 @@
 @import 'component/home.css';
 @import 'component/signup.css';
 @import 'edit-pharmacy.css';
+@import 'user.css'; 
+@import 'accountManage.css';
+@import 'general.css';
+@import 'legal.css';
+@import 'pharmacyDetails.css';
+@import 'pendingPharmacy.css';
+@import 'removePharmacy.css';

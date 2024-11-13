@@ -56,20 +56,9 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php' ?>
 </div>
 <!-- dashbordBody end -->
 
-
 <script>
-    /* click cards */
-    document.querySelector('.green').addEventListener('click', function() {
-        window.location.href = '../pharmacy-details/pharmacy-details.php'
-    });
-
-    document.querySelector('.blue').addEventListener('click', function() {
-        window.location.href = '../users/users.php'
-    });
-
-    document.querySelector('.red').addEventListener('click', function() {
-        window.location.href = '../pending/pending-pharmacy.php'
-    });
+    var ROOT = '<?= ROOT ?>';
 </script>
+<script src="<?= ROOT ?>/assets/js/admin/dashboard.js"></script>
 
 <?php require_once  BASE_PATH . '/app/views/inc/footer.view.php' ?>

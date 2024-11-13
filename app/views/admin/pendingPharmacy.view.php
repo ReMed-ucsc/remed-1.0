@@ -60,6 +60,5 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
 <script>
     var ROOT = '<?= ROOT ?>';
 </script>
-
 <script src="<?= ROOT ?>/assets/js/admin/pendingPharmacy.js"></script>
 <?php require_once BASE_PATH . '/app/views/inc/footer.view.php'; ?>

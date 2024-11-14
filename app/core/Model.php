@@ -8,7 +8,7 @@ trait Model
     protected $limit = 10;
     protected $offset = 0;
     protected $order_type     = "desc";
-    protected $order_column = "id";
+    // protected $order_column = "id";
     public $errors         = [];
 
     public function findAll()
@@ -25,15 +25,19 @@ trait Model
         $keys = array_keys($data);
         $keys_not = array_keys($data_not);
 
-        $query = "select * from $this->table where ";
+        $query = "select * from $this->table ";
 
-        foreach ($keys as $key) {
-            $query .= $key . " = :" . $key . " AND ";
-        }
+        if (!(empty($where) && empty($where_not))) {
+            $query .= "where ";
 
-        // not equal filtering : optional 
-        foreach ($keys_not as $key) {
-            $query .= $key . " != :" . $key . " AND ";
+            foreach ($keys as $key) {
+                $query .= $key . " = :" . $key . " AND ";
+            }
+
+            // not equal filtering : optional 
+            foreach ($keys_not as $key) {
+                $query .= $key . " != :" . $key . " AND ";
+            }
         }
 
         $query = rtrim($query, "  AND ");
@@ -49,15 +53,19 @@ trait Model
         $keys = array_keys($data);
         $keys_not = array_keys($data_not);
 
-        $query = "select * from $this->table where ";
+        $query = "select * from $this->table ";
 
-        foreach ($keys as $key) {
-            $query .= $key . " = :" . $key . " AND ";
-        }
+        if (!(empty($where) && empty($where_not))) {
+            $query .= "where ";
 
-        // not equal filtering : optional 
-        foreach ($keys_not as $key) {
-            $query .= $key . " != :" . $key . " AND ";
+            foreach ($keys as $key) {
+                $query .= $key . " = :" . $key . " AND ";
+            }
+
+            // not equal filtering : optional 
+            foreach ($keys_not as $key) {
+                $query .= $key . " != :" . $key . " AND ";
+            }
         }
 
         $query = rtrim($query, "  AND ");
@@ -71,6 +79,36 @@ trait Model
         return false;
     }
 
+    // method for vertical and horizontal filtering
+    public function selectWhere($columns = ['*'], $where = [], $where_not = [])
+    {
+        $keys = array_keys($where);
+        $keys_not = array_keys($where_not);
+
+        $columns_str = implode(", ", $columns);
+        $query = "select $columns_str from $this->table ";
+
+        if (!(empty($where) && empty($where_not))) {
+            $query .= "where ";
+
+            foreach ($keys as $key) {
+                $query .= $key . " = :" . $key . " AND ";
+            }
+
+            // not equal filtering : optional 
+            foreach ($keys_not as $key) {
+                $query .= $key . " != :" . $key . " AND ";
+            }
+        }
+
+        $query = rtrim($query, "  AND ");
+        $query .= " order by $this->order_column $this->order_type limit $this->limit offset $this->offset";
+
+        $data = array_merge($where, $where_not);
+
+        // show($query);
+        return $this->query($query, $data);
+    }
 
     public function insert($data)
     {

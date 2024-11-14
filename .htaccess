@@ -8,3 +8,7 @@ RewriteRule ^api/(.*)$ api/index.php?url=$1 [L,QSA]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ public/index.php?url=$1 [L,QSA]
+
+
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]

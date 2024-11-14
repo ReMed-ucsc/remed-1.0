@@ -40,8 +40,8 @@ class RegisterController
             $result->setMessage("Name, email, and password are required");
         }
 
-        $response['error'] = $result->isError();
-        $response['message'] = $result->getMessage();
+        $response['result']['error'] = $result->isError();
+        $response['result']['message'] = $result->getMessage();
         echo json_encode($response);
     }
 }

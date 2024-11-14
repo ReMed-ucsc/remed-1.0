@@ -12,7 +12,7 @@ class SearchNearbyPharmaciesController
         $result = new Result();
 
         $headers = getallheaders();
-        $authHeader = $headers['Authorization'] ?? '';
+        $authHeader = $headers['Authorization'] ?? $_SERVER['HTTP_AUTH'] ?? '';
 
         if (preg_match('/Bearer\s(\S+)/', $authHeader, $matches)) {
             $authToken = $matches[1];
@@ -55,8 +55,8 @@ class SearchNearbyPharmaciesController
             $result->setMessage("Invalid Authorization header format");
         }
 
-        $response['error'] = $result->isError();
-        $response['message'] = $result->getMessage();
+        $response['result']['error'] = $result->isError();
+        $response['result']['message'] = $result->getMessage();
         echo json_encode($response);
     }
 }

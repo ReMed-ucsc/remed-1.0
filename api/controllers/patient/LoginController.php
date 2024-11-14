@@ -20,7 +20,7 @@ class LoginController
             $password = $data['password'];
 
             $userModel = new Patient();
-            $user = $userModel->getUserByEmail($email);
+            $user = $userModel->getPatientByEmail($email);
 
             if ($user) {
                 if (password_verify($password, $user->password)) {
@@ -46,8 +46,8 @@ class LoginController
             $result->setMessage("Email and password are required");
         }
 
-        $response['error'] = $result->isError();
-        $response['message'] = $result->getMessage();
+        $response['result']['error'] = $result->isError();
+        $response['result']['message'] = $result->getMessage();
         echo json_encode($response);
     }
 }

@@ -29,17 +29,17 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php' ?>
 <!-- dashbordBody start -->
 <div class="dashboard">
     <div class="card green">
-        <img src="assets/images/statistics.png" alt="" />
+        <img src="<?=ROOT?>/assets/images/statistics.png" alt="" />
         <p>Registered Pharmacy</p>
         <h2><?= $registeredPharmacies ?></h2>
     </div>
     <div class="card blue">
-        <img src="assets/images/computer.png" alt="" />
+        <img src="<?=ROOT?>/assets/images/computer.png" alt="" />
         <p>Online Users</p>
         <h2><?= $onlineUsers ?></h2>
     </div>
     <div class="card red">
-        <img src="assets/images/time-left.png" alt="" />
+        <img src="<?=ROOT?>/assets/images/time-left.png" alt="" />
         <p>Requested Pharmacy</p>
         <h2><?= $requestedPharmacies ?></h2>
     </div>

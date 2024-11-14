@@ -1,11 +1,143 @@
 @import 'component/navBar.css';
 @import 'component/home.css';
 @import 'component/signup.css';
-@import 'edit-pharmacy.css';
-@import 'user.css'; 
-@import 'accountManage.css';
-@import 'general.css';
-@import 'legal.css';
-@import 'pharmacyDetails.css';
-@import 'pendingPharmacy.css';
-@import 'removePharmacy.css';
+@import 'admin.css'; 
+
+
+body{
+    background-color:var(--form-body);
+}
+.details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    background-color: var(--form-container);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.57);
+    margin: 70px;
+    width: 80%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.page-title{
+    text-align: center;
+    margin-top: 30px;
+}
+
+.form-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.Form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 80%;
+    min-width: 33.333%;
+    height: auto;
+}
+
+label {
+    display: block;
+    font-weight: 520;
+    margin-bottom: 5px;
+}
+
+.Input{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 40px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    padding: 10px;
+    border: 2px solid #ccc;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    margin: 20px;
+}
+
+.btn-green{
+    padding: 15px;
+    width: 200px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: var(--btn-green);
+    color: white;
+}
+.btn-green:hover{
+    background-color:var(--green-hover) ;
+}
+
+.btn-red{
+    padding: 15px;
+    width: 200px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: var(--btn-red);
+    color: white;
+}
+.btn-red:hover{
+    background-color:var(--red-hover) ;
+}
+
+/* Style for the search container */
+.search-container {
+    display: flex;
+    position: absolute;
+    top: 80px;
+    left: 180px;
+    align-items: center;
+    margin-top: 50px;
+}
+.search-container img{
+    position: absolute;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+}
+
+.search-box {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 16px;
+}
+
+.action{
+  padding-left: 10px;
+  width: 20px;
+  height: auto;
+}
+
+
+
+:root{
+    --form-body:#B0BEC5;
+    --form-container:#ECEFF1;
+    --btn-red:#B71C1C;
+    --red-hover:#b10404;
+    --btn-green:#00796B;
+    --green-hover:#004d40;
+}

@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['username'] = $username;
 
         // Redirect to admin dashboard or homepage
-        header("Location:http://localhost/MVC/public/admin/dashboard");
+        header("Location:http://localhost/remed-1.0/public/admin/dashboard");
         exit;
     } else {
         $error_message = "Invalid username or password!";

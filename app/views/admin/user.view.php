@@ -16,17 +16,18 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
 ?>
 
 
-    <!-- Search Box Form -->
-    <div class="search-container">
-        <input type="text" id="searchInput" class="search-box" placeholder="Search here..." >
-        <img src="<?=ROOT?>/assets/images/search.png" alt="icon">
-        <!-- <button class="search-button" onclick="performSearch()">Search</button> -->
-    </div>
+<!-- Search Box Form -->
+<div class="search-container">
+    <input type="text" id="searchInput" class="search-box" placeholder="Search here...">
+    <img src="<?= ROOT ?>/assets/images/search.png" alt="icon">
+    <!-- <button class="search-button" onclick="performSearch()">Search</button> -->
+</div>
 
 
 
-    <!-- Table Structure -->
-    <table class="user-table">
+<!-- Table Structure -->
+<div class="details-container">
+    <table>
         <thead>
             <tr>
                 <th>User ID</th>
@@ -47,16 +48,17 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                     <td><?= $user['contact'] ?></td>
                     <td><?= $user['email'] ?></td>
                     <td><?= $user['address'] ?></td>
-                    <td><span class="status"><?= $user['status'] ?></span></td>
+                    <td><span class="status-user"><?= $user['status'] ?></span></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
+</div>
 
 
 
 
 
 
-    <script src="<?= ROOT ?>/assets/js/admin/user.js"></script>
-    <?php require_once BASE_PATH . '/app/views/inc/footer.view.php'?>
+<script src="<?= ROOT ?>/assets/js/admin/user.js"></script>
+<?php require_once BASE_PATH . '/app/views/inc/footer.view.php' ?>

@@ -10,7 +10,7 @@
 </div>
 
 
-<div class="container">
+<div class="details-container">
     <table>
         <thead>
             <tr>

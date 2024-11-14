@@ -13,32 +13,31 @@ require_once BASE_PATH . '/app/views/inc/header.view.php';
 require_once BASE_PATH . '/app/views/inc/navBar.view.php';
 ?>
 
+<h2 class="page-title">Remove Pharmacy on system</h2>
 
-    <h2>Remove Pharmacy on system</h2>
-
-<div class="container">
-    <form class="form" action="" method="POST">
-        <div class="left section">
-            <div class="form-group">
+<div class="details-container">
+    <form  action="" method="POST">
+        <div class="Form">
+            <div>
                 <label for="pharmacyName">Pharmacy Name:</label>
-                <input type="text" id="pharmacyName" name="pharmacyName" value="Medico" readonly>
+                <input class="Input" type="text" id="pharmacyName" name="pharmacyName" value="Medico" readonly>
             </div>
 
-            <div class="form-group">
+            <div>
                 <label for="pharmacistName">Pharmacist's Name:</label>
-                <input type="text" id="pharmacistName" name="pharmacistName" value="Mr. Saman" readonly>
+                <input class="Input" type="text" id="pharmacistName" name="pharmacistName" value="Mr. Saman" readonly>
             </div>
 
-            <div class="form-group">
+            <div>
                 <label for="licenseNumber">License Number:</label>
-                <input type="text" id="licenseNumber" name="licenseNumber" value="SL-12345-COLO" readonly>
+                <input class="Input" type="text" id="licenseNumber" name="licenseNumber" value="SL-12345-COLO" readonly>
             </div>
         </div>
         
 
-        <div class="form-group section">
+        <div class="Form">
             <label for="reason">Reason for delete pharmacy in system:</label>
-            <select id="reason" name="reason" required>
+            <select  id="reason" name="reason" required>
                 <option value="">Choose the reason</option>
                 <option value="Bad feedback from 10 users">Bad feedback from 10 users</option>
                 <option value="Pharmacist’s request">Pharmacist’s request</option>
@@ -48,9 +47,9 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
 
 
     </form>
-    <div class="form-actions">
-        <button type="submit" class="btn delete">Delete</button>
-        <button type="button" class="btn cancel" onclick="window.history.back()">Cancel Delete</button>
+    <div>
+        <button class="btn-red" type="submit" class="btn delete">Delete</button>
+        <button class="btn-green" type="button" class="btn cancel" onclick="window.history.back()">Cancel Delete</button>
     </div>
 </div>
 

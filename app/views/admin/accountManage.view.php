@@ -18,32 +18,32 @@ require_once BASE_PATH.'/app/views/inc/navBar.view.php';
 ?>
 
 
+<h2 class="page-title">Admin Account Management</h2>
 
-<div class="container">
-    <h2>Admin Account Management</h2>
-    <form action="" method="POST">
-        <div class="form-group">
+<div class="details-container">
+    <form class="Form" action="" method="POST">
+        <div>
             <label for="name">Name:</label>
-            <input type="text" id="name" name="name" placeholder="Enter name" required>
+            <input class="Input" type="text" id="name" name="name" placeholder="Enter name" required>
         </div>
 
-        <div class="form-group">
+        <div>
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter email" required>
+            <input class="Input" type="email" id="email" name="email" placeholder="Enter email" required>
         </div>
 
-        <div class="form-group">
+        <div>
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter password" required>
+            <input class="Input" type="password" id="password" name="password" placeholder="Enter password" required>
         </div>
 
-        <div class="form-group">
+        <div>
             <label for="confirm_password">Confirm password:</label>
-            <input type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter password" required>
+            <input class="Input" type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter password" required>
         </div>
 
-        <div class="form-actions">
-            <button type="submit" class="btn save">Save changes</button>
+        <div>
+            <button type="submit" class="btn-green">Save changes</button>
         </div>
     </form>
 </div>

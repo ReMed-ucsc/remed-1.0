@@ -12,25 +12,26 @@ require_once BASE_PATH.'/app/views/inc/header.view.php';
 require_once BASE_PATH.'/app/views/inc/navBar.view.php';
 ?>
 
-<div class="container">
-    <h2>Legal & Compliance</h2>
+<h2 class="page-title">Legal & Compliance</h2>
+
+<div class="details-container">
     <form action="" method="POST">
-        <div class="form-group">
+        <div class="Form">
             <label for="privacy_policy">Privacy Policy</label>
             <textarea id="privacy_policy" name="privacy_policy" rows="4" placeholder="Edit and update website's privacy policy" required></textarea>
         </div>
 
-        <div class="form-actions">
-            <button type="submit" class="btn save">Save changes</button>
+        <div>
+            <button class="btn-green" type="submit" class="btn save">Save changes</button>
         </div>
 
-        <div class="form-group">
+        <div class="Form">
             <label for="terms_conditions">Terms and Conditions</label>
             <textarea id="terms_conditions" name="terms_conditions" rows="4" placeholder="Manage the terms and conditions" required></textarea>
         </div>
 
-        <div class="form-actions">
-            <button type="submit" class="btn save">Save changes</button>
+        <div>
+            <button class="btn-green" type="submit" class="btn save">Save changes</button>
         </div>
     </form>
 </div>

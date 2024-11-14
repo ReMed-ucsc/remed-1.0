@@ -10,17 +10,17 @@ require_once BASE_PATH.'/app/views/inc/header.view.php';
 require_once BASE_PATH.'/app/views/inc/navBar.view.php';
 ?>
 
+<h2 class="page-title">General Settings</h2>
 
-<div class="container">
-    <h2>General Settings</h2>
+<div class="details-container">
     <form action="" method="POST">
-        <div class="form-group">
+        <div class="Form">
             <label for="contactInfo">Change contact information:</label>
             <textarea id="contactInfo" name="contactInfo" rows="4" placeholder="Enter new contact information" required></textarea>
         </div>
 
-        <div class="form-actions">
-            <button type="submit" class="btn save">Save changes</button>
+        <div class="Form">
+            <button class="btn-green" type="submit" class="btn save">Save changes</button>
         </div>
     </form>
 </div>

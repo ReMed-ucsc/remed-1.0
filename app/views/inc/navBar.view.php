@@ -81,7 +81,7 @@
     <div class="profile-item">
         <img src="<?= ROOT ?>/assets/images/admin.png" alt="" />
         <div class="details">
-            <h3>ADMINISTRATOR</h3>
+            <h4>ADMINISTRATOR</h4>
             <p>admin.remad@gmail.com</p>
         </div>
         <div class="tab">

@@ -1,7 +1,7 @@
 <?php require_once BASE_PATH . '/app/views/inc/header.view.php' ?>
 <?php require_once BASE_PATH . '/app/views/inc/navBar.view.php' ?>
 
-
+<body>
 <!-- Search Box Form -->
 <div class="search-container">
     <input type="text" id="searchInput" class="search-box" placeholder="Search here...">

@@ -26,6 +26,8 @@ require_once BASE_PATH . '/app/views/inc/header.view.php'
 
 ?>
 
+
+<body class="login-body">
 <div class="login-container-out">
     <div class="login-container">
         <div class="login-left">

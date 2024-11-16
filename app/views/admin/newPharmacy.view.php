@@ -28,6 +28,8 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
 ?>
 
 
+
+<body>
 <h2 class="page-title">Onboard New Pharmacy</h2>
 <div class="details-container">
 

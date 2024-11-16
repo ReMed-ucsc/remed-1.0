@@ -90,7 +90,7 @@
         </div>
         <div class="tab">
             <img src="<?= ROOT ?>/assets/images/logout.png" alt="" />
-            <a href="<?= ROOT ?>/admin/signup">Logout</a>
+            <a href="<?= ROOT ?>/admin/login">Logout</a>
         </div>
     </div>
 </div>

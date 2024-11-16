@@ -12,6 +12,9 @@ require_once BASE_PATH.'/app/views/inc/header.view.php';
 require_once BASE_PATH.'/app/views/inc/navBar.view.php';
 ?>
 
+
+
+<body>
 <h2 class="page-title">Legal & Compliance</h2>
 
 <div class="details-container">

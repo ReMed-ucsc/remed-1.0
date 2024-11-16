@@ -25,8 +25,10 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php'
 
 ?>
 
+<body>
 <h2 class="page-title">Edit Pharmacy Details</h2>
 <div class="details-container">
+
 
     <form class="form-container" action="" method="POST" enctype="multipart/form-data">
         <div class="Form">

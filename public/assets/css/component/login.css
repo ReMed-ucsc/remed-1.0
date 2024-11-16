@@ -4,6 +4,11 @@
     box-sizing: border-box;
     font-family: Arial, sans-serif;
 }
+.login-body{
+    margin: 0;
+    padding-top: 0;
+    font-family: Arial, sans-serif;
+}
 
 .login-container-out {
     background-color: #B0BEC5;

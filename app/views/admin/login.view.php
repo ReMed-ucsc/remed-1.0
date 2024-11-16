@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['username'] = $username;
 
         // Redirect to admin dashboard or homepage
-        header("Location:http://localhost/MVC/public/admin/dashboard");
+        header("Location:http://localhost/remed-1.0/public/admin/dashboard");
         exit;
     } else {
         $error_message = "Invalid username or password!";
@@ -26,6 +26,8 @@ require_once BASE_PATH . '/app/views/inc/header.view.php'
 
 ?>
 
+
+<body class="login-body">
 <div class="login-container-out">
     <div class="login-container">
         <div class="login-left">

@@ -1,6 +1,6 @@
 <?php
 
-class Signup
+class Login
 {
     use Controller;
     public function index()
@@ -18,6 +18,6 @@ class Signup
         }
 
 
-        $this->view('admin/signup', $data);
+        $this->view('admin/login', $data);
     }
 }

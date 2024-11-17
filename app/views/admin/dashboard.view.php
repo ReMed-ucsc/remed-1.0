@@ -24,22 +24,22 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php' ?>
 
 
 
-
+<body>
 
 <!-- dashbordBody start -->
 <div class="dashboard">
     <div class="card green">
-        <img src="assets/images/statistics.png" alt="" />
+        <img src="<?=ROOT?>/assets/images/statistics.png" alt="" />
         <p>Registered Pharmacy</p>
         <h2><?= $registeredPharmacies ?></h2>
     </div>
     <div class="card blue">
-        <img src="assets/images/computer.png" alt="" />
+        <img src="<?=ROOT?>/assets/images/computer.png" alt="" />
         <p>Online Users</p>
         <h2><?= $onlineUsers ?></h2>
     </div>
     <div class="card red">
-        <img src="assets/images/time-left.png" alt="" />
+        <img src="<?=ROOT?>/assets/images/time-left.png" alt="" />
         <p>Requested Pharmacy</p>
         <h2><?= $requestedPharmacies ?></h2>
     </div>
@@ -56,20 +56,9 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php' ?>
 </div>
 <!-- dashbordBody end -->
 
-
 <script>
-    /* click cards */
-    document.querySelector('.green').addEventListener('click', function() {
-        window.location.href = '../pharmacy-details/pharmacy-details.php'
-    });
-
-    document.querySelector('.blue').addEventListener('click', function() {
-        window.location.href = '../users/users.php'
-    });
-
-    document.querySelector('.red').addEventListener('click', function() {
-        window.location.href = '../pending/pending-pharmacy.php'
-    });
+    var ROOT = '<?= ROOT ?>';
 </script>
+<script src="<?= ROOT ?>/assets/js/admin/dashboard.js"></script>
 
 <?php require_once  BASE_PATH . '/app/views/inc/footer.view.php' ?>

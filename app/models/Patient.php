@@ -65,52 +65,13 @@ class Patient extends User
 
     public function searchPharmaciesWithMedicines($latitude, $longitude, $productIDs, $range = 10)
     {
-        $rangeInMeters = $range * 1000;
-        $placeholders = implode(',', array_map(function ($key) {
-            return ":productID$key";
-        }, array_keys($productIDs)));
-
-        $sql = "
-        SELECT PharmacyID, name, latitude, longitude,
-        ST_Distance_Sphere(POINT(longitude, latitude), POINT(:longitude, :latitude)) AS distance
-        FROM InventoryView
-        WHERE ST_Distance_Sphere(POINT(longitude, latitude), POINT(:longitude, :latitude)) <= :rangeInMeters
-        AND ProductID IN ($placeholders)
-        GROUP BY PharmacyID
-        ORDER BY distance ASC
-        ";
-
-        $data = [
-            'longitude' => $longitude,
-            'latitude' => $latitude,
-            'rangeInMeters' => $rangeInMeters
-        ];
-
-        foreach ($productIDs as $key => $productID) {
-            $data["productID$key"] = $productID;
-        }
-
-        return $this->query($sql, $data);
+        $orderModel = new OrderView();
+        return $orderModel->searchPharmaciesWithMedicines($latitude, $longitude, $productIDs, $range);
     }
 
     public function searchNearbyPharmacy($latitude, $longitude, $range = 10)
     {
-        $rangeInMeters = $range * 1000;
-
-        $sql = "
-        SELECT PharmacyID, name, contactNo, address, latitude, longitude,
-        ST_Distance_Sphere(POINT(longitude, latitude), POINT(:longitude, :latitude)) AS distance
-        FROM pharmacy
-        WHERE ST_Distance_Sphere(POINT(longitude, latitude), POINT(:longitude, :latitude)) <= :rangeInMeters
-        ORDER BY distance ASC
-        ";
-
-        $data = [
-            'longitude' => $longitude,
-            'latitude' => $latitude,
-            'rangeInMeters' => $rangeInMeters
-        ];
-
-        return $this->query($sql, $data);
+        $orderModel = new OrderView();
+        return $orderModel->searchNearbyPharmacy($latitude, $longitude, $range);
     }
 }

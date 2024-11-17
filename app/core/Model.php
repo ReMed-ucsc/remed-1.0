@@ -11,6 +11,17 @@ trait Model
     // protected $order_column = "id";
     public $errors         = [];
 
+    public function setLimit($limit)
+    {
+        $this->limit = $limit;
+    }
+
+    public function setOffset($offset)
+    {
+        $this->offset = $offset;
+    }
+
+
     public function findAll()
     {
 
@@ -27,7 +38,7 @@ trait Model
 
         $query = "select * from $this->table ";
 
-        if (!(empty($where) && empty($where_not))) {
+        if (!(empty($data) && empty($data_not))) {
             $query .= "where ";
 
             foreach ($keys as $key) {
@@ -55,7 +66,7 @@ trait Model
 
         $query = "select * from $this->table ";
 
-        if (!(empty($where) && empty($where_not))) {
+        if (!(empty($data) && empty($data_not))) {
             $query .= "where ";
 
             foreach ($keys as $key) {
@@ -71,6 +82,7 @@ trait Model
         $query = rtrim($query, "  AND ");
         $query .= " limit $this->limit offset $this->offset";
 
+        // show($query);
         $data = array_merge($data, $data_not);
         $result = $this->query($query, $data);
         if ($result) {
@@ -80,35 +92,84 @@ trait Model
     }
 
     // method for vertical and horizontal filtering
-    public function selectWhere($columns = ['*'], $where = [], $where_not = [])
-    {
-        $keys = array_keys($where);
-        $keys_not = array_keys($where_not);
+    // use like this :
+    // $where = [
+    //     'status' => 'active',
+    //     'price' => ['operator' => '<', 'value' => 100],
+    //     'id' => ['in' => [1, 2, 3]]
+    // ];
+    // $model->selectWhere(['id', 'name'], $where, []);
 
+    public function selectWhere(
+        $columns = ['*'],
+        $conditions = [],
+        $additionalData = [],
+        $orderBy = null,
+        $groupBy = null
+    ) {
+        // Convert columns to string
         $columns_str = implode(", ", $columns);
-        $query = "select $columns_str from $this->table ";
 
-        if (!(empty($where) && empty($where_not))) {
-            $query .= "where ";
+        // Start query
+        $query = "SELECT $columns_str FROM $this->table ";
 
-            foreach ($keys as $key) {
-                $query .= $key . " = :" . $key . " AND ";
+        $data = [];
+
+        // Add conditions
+        if (!empty($conditions)) {
+            $query .= "WHERE ";
+
+            foreach ($conditions as $key => $value) {
+                if ($key === 'raw') {
+                    // Handle raw SQL conditions
+                    $query .= "$value AND ";
+                } elseif (is_array($value)) {
+                    if (isset($value['operator']) && isset($value['value'])) {
+                        $query .= "$key {$value['operator']} :$key AND ";
+                        $data[$key] = $value['value'];
+                    } elseif (isset($value['in'])) {
+                        // Handle IN operation
+                        $placeholders = implode(", ", array_map(fn($i) => ":{$key}_$i", array_keys($value['in'])));
+                        $query .= "$key IN ($placeholders) AND ";
+                        foreach ($value['in'] as $i => $inValue) {
+                            $data["{$key}_$i"] = $inValue;
+                        }
+                    }
+                } else {
+                    $query .= "$key = :$key AND ";
+                    $data[$key] = $value;
+                }
             }
 
-            // not equal filtering : optional 
-            foreach ($keys_not as $key) {
-                $query .= $key . " != :" . $key . " AND ";
+            // Trim trailing AND
+            $query = rtrim($query, " AND ");
+        }
+
+        // Add GROUP BY
+        if ($groupBy) {
+            $query .= " GROUP BY $groupBy";
+        }
+
+        // Add ORDER BY
+        if ($orderBy) {
+            $query .= " ORDER BY $orderBy";
+        }
+
+        // Add LIMIT and OFFSET
+        if ($this->limit) {
+            $query .= " LIMIT $this->limit";
+            if ($this->offset) {
+                $query .= " OFFSET $this->offset";
             }
         }
 
-        $query = rtrim($query, "  AND ");
-        $query .= " order by $this->order_column $this->order_type limit $this->limit offset $this->offset";
+        // Merge with additional data
+        $data = array_merge($data, $additionalData);
 
-        $data = array_merge($where, $where_not);
-
-        // show($query);
+        // Execute the query
         return $this->query($query, $data);
     }
+
 
     public function insert($data)
     {

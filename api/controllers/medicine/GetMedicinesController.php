@@ -1,6 +1,6 @@
 <?php
 
-require_once BASE_PATH . '/app/models/Medicine.php';
+require_once BASE_PATH . '/app/models/MedicineProductView.php';
 require_once BASE_PATH . '/app/core/init.php';
 require_once BASE_PATH . '/app/core/helper_classes.php';
 
@@ -11,9 +11,14 @@ class GetMedicinesController
         $response = array();
         $result = new Result();
 
+        // Get search and pagination parameters from the request
+        $searchQuery = isset($_GET['search']) ? $_GET['search'] : '';
+        $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+        $offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 0;
+
         try {
-            $medicineModel = new Medicine();
-            $medicineList = $medicineModel->getMedicineList();
+            $medicineModel = new MedicineProductView();
+            $medicineList = $medicineModel->getFilteredMedicineList($searchQuery, $limit, $offset);
 
             if (!empty($medicineList)) {
                 $response['data'] = $medicineList;

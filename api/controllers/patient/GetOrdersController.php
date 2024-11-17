@@ -21,7 +21,8 @@ class GetOrdersController
             $patient = $patientModel->first(['token' => $authToken]);
 
             if ($patient) {
-                $orderList = $patientModel->getOrderHistory($patient->PatientID);
+                $orderModel = new MedicineOrder();
+                $orderList = $orderModel->getOrdersByPatient($patient->PatientID);
 
                 if ($orderList == null) {
                     $result->setErrorStatus(true);

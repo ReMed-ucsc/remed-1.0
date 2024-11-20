@@ -23,7 +23,7 @@
                 <p>Follow the steps to complete your registration.</p>
             </div>
             <div class="form-right">
-                <form id="registration-form" action="" method="POST" enctype="multipart/form-data">
+                <form id="registration-form" action="<?= BASE_PATH ?>/app/views/inc/pharmacy/success.php" method="POST" enctype="multipart/form-data">
                     <!-- Step 1: Email -->
                     <div id="step1" class="step">
                         <div class="form-row">
@@ -93,6 +93,16 @@
                         <button type="button" id="back-button" style="display: none;">Back</button>
                         
                     </div>
+
+                    <!-- <div id="step6" class="overlay" id="overlay">
+                        <div class="overlay-content">
+                            <div id="overlay-message"> 
+                                 hii
+                            </div>
+                            <button id="close-overlay">Close</button>
+                        </div>
+                    </div> -->
+
                 </form>
             </div>
         </div>

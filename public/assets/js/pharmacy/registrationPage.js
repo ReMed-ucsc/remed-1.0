@@ -96,7 +96,19 @@ document.getElementById("registration-form").addEventListener("submit", function
     if (!allFieldsFilled) {
         alert("Please fill in all required fields.");
         event.preventDefault();
+        
     }
+
+    // event.preventDefault(); // Prevent form submission
+    // const overlay = document.getElementById("overlay");
+    // const overlayMessage = document.getElementById("overlay-message");
+    
+    // overlayMessage.innerHTML = "This is the overlay content!"; // Set the message dynamically
+    // overlay.style.display = "flex";
 });
+
+// document.getElementById("close-overlay").addEventListener("click", function () {
+//     document.getElementById("overlay").style.display = "none"; 
+// });
 
 showStep(1);

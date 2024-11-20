@@ -15,13 +15,8 @@
     <header>
         <?php
 
-        $isRegisteredUser=false;
-
-        if($isRegisteredUser){
             include BASE_PATH . '/app/views/inc/pharmacy/nonRegNavbar.php';
-        }else{
-            include BASE_PATH . '/app/views/inc/pharmacy/regNavbar.php';
-        }
+        
     ?>
     </header>
 

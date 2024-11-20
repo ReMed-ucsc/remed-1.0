@@ -40,36 +40,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             include BASE_PATH . '/app/views/inc/pharmacy/nonRegNavbar.php';
             // include 'Database.php';
     ?>
+<div class="fullpage">
+    <div class="container">
+        <div class="box-left">
+            <h2>Log in to Remed</h2>
+            <p>Welcome back! Log in to access your pharmacy’s dashboard, where you can manage inventory, process customer orders, and update your pharmacy's details. Stay connected with your customers, track deliveries, and ensure your pharmacy runs smoothly. Enter your credentials to continue.</p>
+        </div>
+        <div class="box-right">
+            <?php
+            // Display error message if credentials are incorrect
+            if (isset($error_message)) {
+                echo "<p class='error-message'>$error_message</p>";
+            }
+            ?>
 
-<div class="container">
-    <div class="box-left">
-        <h2>Log in to Remed</h2>
-        <p>Welcome back! Log in to access your pharmacy’s dashboard, where you can manage inventory, process customer orders, and update your pharmacy's details. Stay connected with your customers, track deliveries, and ensure your pharmacy runs smoothly. Enter your credentials to continue.</p>
-    </div>
-    <div class="box-right">
-        <?php
-        // Display error message if credentials are incorrect
-        if (isset($error_message)) {
-            echo "<p class='error-message'>$error_message</p>";
-        }
-        ?>
+            <form id="login-form" action="" method="POST">
+                <label for="email">User name or Email Address:</label>
+                <input type="email" id="email" name="email" required><br>
 
-        <form id="login-form" action="" method="POST">
-            <label for="email">User name or Email Address:</label>
-            <input type="email" id="email" name="email" required><br>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required><br>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br>
+                <div class="form-footer">
+                    <label>
+                        <input type="checkbox" name="remember"> Remember me
+                    </label>
+                </div>
 
-            <div class="form-footer">
-                <label>
-                    <input type="checkbox" name="remember"> Remember me
-                </label>
-            </div>
-
-            <button type="submit" class="register-btn">Login</button>
-            <a href="#" class="forgot-password">Forgot Password?</a>
-        </form>
+                <button type="submit" class="register-btn">Login</button>
+                <a href="#" class="forgot-password">Forgot Password?</a>
+            </form>
+        </div>
     </div>
 </div>
 

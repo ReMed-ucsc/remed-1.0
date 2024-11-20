@@ -49,7 +49,7 @@ $pharmacyName = isset($_SESSION['pharmacy_name']) ? $_SESSION['pharmacy_name'] :
               </ul>
             </li>
             <li class="active">
-              <a href="#">
+              <a href="<?= ROOT ?>/orderMain">
                 <i class="icon ph-bold ph-file-text"></i>
                 <span class="text">Orders</span>
               </a>
@@ -130,4 +130,4 @@ $pharmacyName = isset($_SESSION['pharmacy_name']) ? $_SESSION['pharmacy_name'] :
   integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
   crossorigin="anonymous"
 ></script>
-<script src="sidebar.js"></script>
+<script src="<?=ROOT?>/assets/js/pharmacy/sidebar.js"></script>

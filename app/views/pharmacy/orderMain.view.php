@@ -1,10 +1,10 @@
 <?php
-session_start();
-if (!isset($_SESSION['user'])) {
-    // Redirect to login page if user is not logged in
-    header("Location: login.php");
-    exit();
-}
+// session_start();
+// if (!isset($_SESSION['user'])) {
+//     // Redirect to login page if user is not logged in
+//     header("Location: login.php");
+//     exit();
+// }
 ?>
 
 
@@ -14,9 +14,9 @@ if (!isset($_SESSION['user'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ReMed Dashboard</title>
-    <link rel="stylesheet" href="Order-main.css">
-    <link rel="stylesheet" href="../../Navbar/Navbar.css">
-    <link rel="stylesheet" href="../../Sidebar/Sidebar.css">
+    <link rel="stylesheet" href="<?=ROOT?>/assets/css/pharmacy/Order-main.css">
+    <link rel="stylesheet" href="<?=ROOT?>/assets/css/pharmacy/navbar.css">
+    <link rel="stylesheet" href="<?=ROOT?>/assets/css/component/sidebar.css">
     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -25,13 +25,13 @@ if (!isset($_SESSION['user'])) {
     
 <header>
     <?php
-    $isRegisteredUser = isset($_SESSION['user']);  // Check if user is logged in
-
+    // $isRegisteredUser = isset($_SESSION['user']);  // Check if user is logged in
+$isRegisteredUser = true;
     if($isRegisteredUser){
-        include '../../Navbar/reg-navbar.php';
-    } else {
-        include '../../Navbar/non-reg-navbar.php';
-    }
+      include BASE_PATH . '/app/views/inc/pharmacy/nonRegNavbar.php';
+  }else{
+      include BASE_PATH . '/app/views/inc/pharmacy/regNavbar.php';
+  }
     ?>
     
 
@@ -44,7 +44,7 @@ if (!isset($_SESSION['user'])) {
 
 <div class="fullpage">
 
-<?php include('../../Sidebar/sidebar.php'); ?>
+<?php include(BASE_PATH . '/app/views/inc/pharmacy/sidebar.php'); ?>
 
 
 <div class="main-content">
@@ -214,8 +214,8 @@ if (!isset($_SESSION['user'])) {
     
 </div>
 
-<script src="Order-main.js"></script>
-<script src="../../Sidebar/sidebar.js"></script>
+<script src="<?=ROOT?>/assets/js/pharmacy/Order-main.js"></script>
+<script src="<?=ROOT?>/assets/js/pharmacy/sidebar.js"></script>
 
 
 

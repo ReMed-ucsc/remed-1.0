@@ -1,7 +1,7 @@
 <?php
-session_start();
+// session_start();
 
-// Check if the form is submitted
+// // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Get email and password from the POST data
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
@@ -15,7 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($email == $valid_email && password_verify($password, $valid_password)) {
         // Store session data (e.g., user is logged in)
         $_SESSION['user'] = $email;
-        header("Location: ../Dashboard/Dashboard-page.php");  // Redirect to the dashboard after successful login
+        redirect('dashboardPage');
+        // header("Location: ../Dashboard/Dashboard-page.php");  // Redirect to the dashboard after successful login
         exit();
     } else {
         $error_message = "Invalid email or password. Please try again.";
@@ -29,13 +30,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <link rel="stylesheet" href="Login-page.css">
-    <link rel="stylesheet" href="../Navbar/navbar.css">
+    <link rel="stylesheet" href="<?=ROOT?>/assets/css/pharmacy/Login-page.css">
+    <link rel="stylesheet" href="<?=ROOT?>/assets/css/pharmacy/navbar.css">
     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
 </head>
-<body>
 
-<?php include '../Navbar/non-reg-navbar.php'; ?>
+<body>
+<?php 
+            include BASE_PATH . '/app/views/inc/pharmacy/nonRegNavbar.php';
+            // include 'Database.php';
+    ?>
 
 <div class="container">
     <div class="box-left">
@@ -50,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         ?>
 
-        <form id="login-form" action="login.php" method="POST">
+        <form id="login-form" action="" method="POST">
             <label for="email">User name or Email Address:</label>
             <input type="email" id="email" name="email" required><br>
 

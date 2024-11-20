@@ -1,11 +1,9 @@
-.content {
-
-    
+.content {    
     display: flex;
     align-items: center;
     justify-content: center; 
     padding: 0px;
-    background-image: url('./SRC/background-2.jpg');
+    background-image: url("http://localhost/remed-1.0/public/assets/images/background.jpg" );
     background-size: contain 80%;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -15,8 +13,6 @@
     height: calc(100vh - 90.6px);
     position: absolute;
     top: 89.6px;
-    
-
 }
 
 .background{

@@ -1,10 +1,10 @@
 <?php
-session_start();
-if (!isset($_SESSION['user'])) {
-    // Redirect to login page if user is not logged in
-    header("Location: login.php");
-    exit();
-}
+// session_start();
+// if (!isset($_SESSION['user'])) {
+//     // Redirect to login page if user is not logged in
+//     header("Location: login.php");
+//     exit();
+// }
 ?>
 
 
@@ -14,9 +14,9 @@ if (!isset($_SESSION['user'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ReMed Dashboard</title>
-    <link rel="stylesheet" href="Dashboard-page.css">
-    <link rel="stylesheet" href="../Navbar/Navbar.css">
-    <link rel="stylesheet" href="../Sidebar/Sidebar.css">
+    <link rel="stylesheet" href="<?=ROOT?>/assets/css/pharmacy/Dashboard-page.css">
+    <link rel="stylesheet" href="<?=ROOT?>/assets/css/pharmacy/navbar.css">
+    <link rel="stylesheet" href="<?=ROOT?>/assets/css/component/sidebar.css">
     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -28,10 +28,10 @@ if (!isset($_SESSION['user'])) {
     $isRegisteredUser = isset($_SESSION['user']);  // Check if user is logged in
 
     if($isRegisteredUser){
-        include '../Navbar/reg-navbar.php';
-    } else {
-        include '../Navbar/non-reg-navbar.php';
-    }
+      include BASE_PATH . '/app/views/inc/pharmacy/nonRegNavbar.php';
+  }else{
+      include BASE_PATH . '/app/views/inc/pharmacy/regNavbar.php';
+  }
     ?>
     
 
@@ -43,8 +43,11 @@ if (!isset($_SESSION['user'])) {
 </header>
 
 <div class="fullpage">
+<?php 
+include BASE_PATH . '/app/views/inc/pharmacy/sidebar.php';
+?>
 
-<div class="sidebar-part">
+<!-- <div class="sidebar-part">
 
     <div class="container">
         <div class="sidebar active">
@@ -53,7 +56,7 @@ if (!isset($_SESSION['user'])) {
             </div>
             <div class="head">
                 <div class="user-img">
-                    <img src="../SRC/image 6.jpg" alt="" />
+                    <img src="<?=ROOT?>/assets/images/image 6.jpg" alt="" />
                 </div>
             <div class="user-details">
                 <p class="title">userexample123@gmail.com</p>
@@ -172,9 +175,9 @@ if (!isset($_SESSION['user'])) {
       integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
       crossorigin="anonymous"
     ></script>
-    <script src="../../Sidebar/sidebar.js"></script>
+    <script src="<?=ROOT?>/assets/js/pharmacy/sidebar.js"></script>
 
-</div>
+</div> -->
 
 <div class="main-content">
     <h1>Dashboard</h1>
@@ -187,19 +190,19 @@ if (!isset($_SESSION['user'])) {
         <div class="top">
             <div class="cards">
                 <div class="card black-card">
-                    <img src="../SRC/image 8.jpg" class="card-icon">
+                    <img src="<?=ROOT?>/assets/images/inventory.jpg" class="card-icon">
                     <h4>Inventory status</h4>
                     <div class="data"><p>Check/Update</p></div>
                     <a href="#">View details</a>
                 </div>
                 <div class="card green-card">
-                    <img src="../SRC/image 9.jpg" class="card-icon">
+                    <img src="<?=ROOT?>/assets/images/revenue.jpg" class="card-icon">
                     <h4>Income</h4>
                     <div class="data"><p>Rs.10,000</p></div>
                     <a href="#">View details</a>
                 </div>
                 <div class="card blue-card">
-                    <img src="../SRC/image 10.jpg" class="card-icon">
+                    <img src="<?=ROOT?>/assets/images/storage.jpg" class="card-icon">
                     <h4>Medicine Storage</h4>
                     
                     <div class="data"><p>515-15</p></div>
@@ -311,8 +314,8 @@ if (!isset($_SESSION['user'])) {
     </div>
 </div>
 
-<script src="Dashboard-page.js"></script>
-<script src="../Sidebar/sidebar.js"></script>
+<script src="<?=ROOT?>/assets/js/pharmacy/dashboardPage.js"></script>
+<script src="<?=ROOT?>/assets/js/pharmacy/sidebar.js"></script>
 
 
 </div>

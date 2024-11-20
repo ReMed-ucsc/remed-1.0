@@ -1,10 +1,10 @@
 <?php
-session_start();
-if (!isset($_SESSION['user'])) {
-    // Redirect to login page if user is not logged in
-    header("Location: login.php");
-    exit();
-}
+// session_start();
+// if (!isset($_SESSION['user'])) {
+//     // Redirect to login page if user is not logged in
+//     header("Location: login.php");
+//     exit();
+// }
 ?>
 
 
@@ -14,9 +14,9 @@ if (!isset($_SESSION['user'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ReMed Dashboard</title>
-    <link rel="stylesheet" href="Order-create.css">
-    <link rel="stylesheet" href="../../Navbar/Navbar.css">
-    <link rel="stylesheet" href="../../Sidebar/Sidebar.css">
+    <link rel="stylesheet" href="<?=ROOT?>/assets/css/pharmacy/Order-create.css">
+    <link rel="stylesheet" href="<?=ROOT?>/assets/css/pharmacy/navbar.css">
+    <link rel="stylesheet" href="<?=ROOT?>/assets/css/component/sidebar.css">
     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -25,13 +25,10 @@ if (!isset($_SESSION['user'])) {
     
 <header>
     <?php
-    $isRegisteredUser = isset($_SESSION['user']);  // Check if user is logged in
+    // $isRegisteredUser = isset($_SESSION['user']);  // Check if user is logged in
 
-    if($isRegisteredUser){
-        include '../../Navbar/reg-navbar.php';
-    } else {
-        include '../../Navbar/non-reg-navbar.php';
-    }
+  include BASE_PATH . '/app/views/inc/pharmacy/regNavbar.php';
+
     ?>
     
 
@@ -73,7 +70,7 @@ if (!isset($_SESSION['user'])) {
                     <p>Acne treatments</p>
                 </div>
                 <div class="image-preview">
-                    <img src="../../SRC/prescription2.jpg" alt="Prescription Image" onclick="showImage(this)">
+                    <img src="<?=ROOT?>/assets/images/prescription2.jpg" alt="Prescription Image" onclick="showImage(this)">
                 </div>
               </div>
             </div>
@@ -459,9 +456,9 @@ if (!isset($_SESSION['user'])) {
   </div>
 </div>
 
-<script src="Order-create.js"></script>
-<script src="Order-main.js"></script>
-<script src="../../Sidebar/sidebar.js"></script>
+<script src="<?=ROOT?>/assets/js/pharmacy/orderCreate.js"></script>
+<script src="<?=ROOT?>/assets/js/pharmacy/orderMain.js"></script>
+<script src="<?=ROOT?>/assets/js/pharmacy/sidebar.js"></script>
 
 
 

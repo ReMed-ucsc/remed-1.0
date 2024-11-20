@@ -11,6 +11,19 @@ trait Model
     // protected $order_column = "id";
     public $errors         = [];
 
+    // ------------usage example-------------------
+
+    // $user = new User;
+    // $arr['email'] = "name@example.com";
+
+    // $result = $model->where(data_for_filtering, data_not_for_filtering);
+    // $result = $model->insert(insert_data);
+    // $result = $model->update(filtering_data updating_data, id_column_for_filtering);
+    // $result = $model->delete(id, id_column);
+    // $result = $user->findAll();
+
+    // show($result);
+
     public function setLimit($limit)
     {
         $this->limit = $limit;
@@ -25,7 +38,7 @@ trait Model
     public function findAll()
     {
 
-        $query = "select * from $this->table order by $this->order_column $this->order_type limit $this->limit offset $this->offset";
+        $query = "select * from $this->table limit $this->limit offset $this->offset";
 
         return $this->query($query);
     }

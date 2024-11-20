@@ -9,12 +9,19 @@ class Signup
 
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $user = new User;
-            if ($user->validate($_POST)) {
-                $user->insert($_POST);
-                redirect('login');
-            }
+            $data = [
+                'name' => $_POST['name'],
+                'email' => $_POST['email'],
+                'password' => $_POST['password']
+            ];
 
-            $data['errors'] = $user->errors;
+            if ($user->validate($data)) {
+                $user->registerUser($data['name'], $data['email'], $data['password']);
+                redirect('login');
+                exit();
+            } else {
+                $data['errors'] = $user->errors;
+            }
         }
 
 

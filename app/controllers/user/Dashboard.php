@@ -3,23 +3,107 @@
 class Dashboard
 {
     use Controller;
+
     public function index()
     {
-        // $user = new User;
-        // $arr['email'] = "name@example.com";
+        // Protect the route
+        $this->protectRoute();
 
-        // $result = $model->where(data_for_filtering, data_not_for_filtering);
-        // $result = $model->insert(insert_data);
-        // $result = $model->update(filtering_data updating_data, id_column_for_filtering);
-        // $result = $model->delete(id, id_column);
-        // $result = $user->findAll();
+        // Get session data
+        $username = $this->getSession('user_name');
+        $userId = $this->getSession('user_id');
+        $authToken = $this->getSession('auth_token');
 
-        // show($result);
+        // Get all users
+        $userModel = new User();
+        $users = $userModel->findAll();
 
-        $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
+        // Pass session data to the view
+        $data = [
+            'username' => $username,
+            'userId' => $userId,
+            'authToken' => $authToken,
+            'users' => $users
+        ];
 
         $this->view('user/home', $data);
     }
 
-    // add other methods like edit, update, delete, etc.
+    public function create()
+    {
+        // Protect the route
+        $this->protectRoute();
+
+        $data = [];
+
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $user = new User();
+            $data = [
+                'name' => $_POST['name'],
+                'email' => $_POST['email'],
+                'password' => $_POST['password']
+            ];
+
+            if ($user->validate($data)) {
+                $user->registerUser($data['name'], $data['email'], $data['password']);
+                redirect('dashboard');
+                exit();
+            } else {
+                $data['errors'] = $user->errors;
+            }
+        }
+
+        $this->view('user/create', $data);
+    }
+
+    public function edit($id)
+    {
+        // Protect the route
+        $this->protectRoute();
+
+        $userModel = new User();
+        $user = $userModel->first(['id' => $id]);
+
+        if (!$user) {
+            redirect('dashboard');
+            exit();
+        }
+
+        $data = ['user' => $user];
+
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $data = [
+                'name' => $_POST['name'],
+                'email' => $_POST['email']
+            ];
+
+            if (!empty($_POST['password'])) {
+                $data['password'] = $_POST['password'];
+            }
+
+            if ($userModel->validate($data)) {
+                if (!empty($data['password'])) {
+                    $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+                }
+                $userModel->update($id, $data, 'id');
+                redirect('dashboard');
+                exit();
+            } else {
+                $data['errors'] = $userModel->errors;
+            }
+        }
+
+        $this->view('user/edit', $data);
+    }
+
+    public function delete($id)
+    {
+        // Protect the route
+        $this->protectRoute();
+
+        $userModel = new User();
+        $userModel->delete($id, 'id');
+        redirect('dashboard');
+        exit();
+    }
 }

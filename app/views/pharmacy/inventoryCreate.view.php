@@ -89,11 +89,11 @@
             <table class= "order-table">
                 <thead>
                     <tr>
-                        <th style="width: 5%;">Batch ID</th>
+                        <th style="width: 5%;">Item ID</th>
+                        <th style="width: 5%;">Brand Name</th>
                         <th style="width: 5%;">Generic Name</th>
-                        <th style="width: 5%;">Medicine Name</th>
-                        <th style="width: 1%;">Item code</th>
-                        <th style="width: 1%;">Cateogry</th>
+                        <th style="width: 1%;">Medicine Name</th>
+                        <th style="width: 1%;">Batch Number</th>
                         <th style="width: 5%;">Unit Price</th>
                         <th style="width: 5%;">Supplier ID</th>
                         <th style="width: 5%;">Expiration Date</th>

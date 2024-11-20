@@ -38,13 +38,10 @@ class Driver extends User
 
     public function registerDriver($name, $email, $password)
     {
-        $token = bin2hex(random_bytes(16));
-
         $data = [
             'name' => $name,
             'email' => $email,
-            'password' => $password,
-            'token' => $token
+            'password' => $password
         ];
 
         return $this->insert($data);

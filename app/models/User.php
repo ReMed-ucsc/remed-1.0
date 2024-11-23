@@ -11,22 +11,38 @@ class User
     {
         $this->errors = [];
 
+        // Validate email
         if (empty($data['email'])) {
             $this->errors['email'] = "Email is required";
         } else if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             $this->errors['email'] = "Invalid email address";
+        } else if ($this->emailExists($data['email'])) {
+            $this->errors['email'] = "Email is already taken";
         }
 
+        // Validate password
         if (empty($data['password'])) {
             $this->errors['password'] = "Password is required";
+        } else if (strlen($data['password']) < 8) {
+            $this->errors['password'] = "Password must be at least 8 characters long";
+        } else if (!preg_match('/[A-Z]/', $data['password'])) {
+            $this->errors['password'] = "Password must contain at least one uppercase letter";
+        } else if (!preg_match('/[a-z]/', $data['password'])) {
+            $this->errors['password'] = "Password must contain at least one lowercase letter";
+        } else if (!preg_match('/[0-9]/', $data['password'])) {
+            $this->errors['password'] = "Password must contain at least one number";
+        } else if (!preg_match('/[\W]/', $data['password'])) {
+            $this->errors['password'] = "Password must contain at least one special character";
         }
 
-        if (empty($this->errors)) {
-            return true;
-        }
-        return false;
+        return empty($this->errors);
     }
 
+    public function emailExists($email)
+    {
+        $user = $this->first(['email' => $email]);
+        return $user != null;
+    }
     public function getUserByEmail($email)
     {
         $data = ['email' => $email];
@@ -44,7 +60,7 @@ class User
         $data = [
             'name' => $name,
             'email' => $email,
-            'password' => $password
+            'password' => password_hash($password, PASSWORD_DEFAULT)
         ];
         return $this->insert($data);
     }

@@ -20,7 +20,7 @@ class LoginController
             $password = $data['password'];
 
             $userModel = new Patient();
-            $user = $userModel->getPatientByEmail($email);
+            $user = $userModel->getUserByEmail($email);
 
             if ($user) {
                 if (password_verify($password, $user->password)) {

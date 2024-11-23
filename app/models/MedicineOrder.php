@@ -5,7 +5,7 @@ class MedicineOrder
     use Model;
 
     protected $table = 'medicineOrder';
-    protected $allowedColumns = ['OrderID', 'date', 'status', 'pickup', 'destination', 'PatientID', 'PharmacyID', 'DeliveryID'];
+    protected $allowedColumns = ['OrderID', 'date', 'status', 'pickup', 'destination', 'PatientID', 'PharmacyID', 'DeliveryID', 'prescription'];
     protected $order_column = "OrderID";
 
     // order status categories
@@ -26,12 +26,12 @@ class MedicineOrder
 
     public function getOrdersByPatient($patientID)
     {
-        $query = "SELECT * FROM $this->table WHERE PatientID = :patientID";
+        $query = "SELECT * FROM $this->table WHERE PatientID = :patientID order by date DESC";
         $data = ['patientID' => $patientID];
         return $this->query($query, $data);
     }
 
-    public function placeOrder($patientID, $pickup, $destination, $pharmacyID, $deliveryID = 0)
+    public function placeOrder($patientID, $pickup, $destination, $pharmacyID, $prescription)
     {
         $data = [
             'date' => date('Y-m-d H:i:s'),
@@ -40,8 +40,8 @@ class MedicineOrder
             'destination' => $destination,
             'PatientID' => $patientID,
             'PharmacyID' => $pharmacyID,
-            'DeliveryID' => $deliveryID // unnassigned => 0
-
+            'DeliveryID' => 0, // unassigned
+            'prescription' => $prescription
         ];
         return $this->insert($data);
     }
@@ -56,5 +56,22 @@ class MedicineOrder
     {
         $data = ['DeliveryID' => $deliveryID];
         $this->update($orderID, $data, 'OrderID');
+    }
+
+
+    public function getStatusName($status)
+    {
+        $statusMap = [
+            $this->WAITING => 'WAITING',
+            $this->PROCESSING => 'PROCESSING',
+            $this->DELIVERED => 'DELIVERED',
+            $this->USER_PICKED_UP => 'USER_PICKED_UP',
+            $this->CANCELED => 'CANCELED',
+            $this->REJECTED => 'REJECTED',
+            $this->PICKED_UP => 'PICKED_UP',
+            $this->DELIVERY_FAILED => 'DELIVERY_FAILED'
+        ];
+
+        return $statusMap[$status] ?? 'UNKNOWN';
     }
 }

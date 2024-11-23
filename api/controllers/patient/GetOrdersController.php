@@ -28,6 +28,11 @@ class GetOrdersController
                     $result->setErrorStatus(true);
                     $result->setMessage("No orders found");
                 } else {
+                    // categorize statuse according to the order status categories in MedicineOrder model
+                    foreach ($orderList as $order) {
+                        $order->status = $orderModel->getStatusName($order->status);
+                    }
+
                     $response['data'] = $orderList;
 
                     $result->setErrorStatus(false);

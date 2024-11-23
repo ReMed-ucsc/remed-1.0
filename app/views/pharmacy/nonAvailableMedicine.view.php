@@ -47,7 +47,7 @@
 
 
         <div class="main-content">
-            <h2>Available Medicine</h2>
+            <h2>Non-Available Medicine</h2>
             <div class="search-container">
                 <input type="text" placeholder="Search here" class="search-bar">
                 <button class="search"><i class="icon ph-bold ph-magnifying-glass"></i>

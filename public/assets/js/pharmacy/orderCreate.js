@@ -7,3 +7,7 @@ function showImage(img) {
     const displayArea = document.getElementById('displayArea');
     displayArea.innerHTML = `<img src="${img.src}" alt="${img.alt}">`;
   }
+
+document.getElementById('sendButton').addEventListener('click', function() {
+    alert('Your PDF has been sent successfully!');
+});

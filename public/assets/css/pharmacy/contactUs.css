@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F5F7FA;
+    display: flex;
+    /* align-items: center; */
+    /* justify-content: center; */
+    height: calc(100vh - 89.6px);
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.fullpage{
+    position: absolute;
+    top: 89.6px;
+    width: 100vw;
+    height: calc(100vh - 89.6px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+/* body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #d6dfe3;
+} */
+.container {
+    /* display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 50px auto;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden; */
+
+    background-color: #ECEFF1;
+    width: 60%;
+    height: 82%;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    overflow: hidden;
+}
+
+.box{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    
+}
+.left {
+    background-color: #001F4D;
+    color: #ffffff;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    flex: 1;
+    text-align:center;
+}
+.left h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.left p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+.right {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex: 2;
+    overflow: scroll;
+    scrollbar-width: thin;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+input, textarea, button {
+    width: 100%;
+    padding: 10px 10px 20px 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: #026c5e;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+button:hover {
+    background-color: #024d45;
+}
+.footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+.footer div {
+    flex: 1;
+    padding: 10px;
+    background: #f4f4f4;
+    margin: 0 5px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+.footer div p {
+    margin: 5px 0;
+}

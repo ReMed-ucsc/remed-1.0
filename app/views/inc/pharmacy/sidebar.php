@@ -12,7 +12,7 @@ $pharmacyName = isset($_SESSION['pharmacy_name']) ? $_SESSION['pharmacy_name'] :
       </div>
       <div class="head">
         <div class="user-img">
-          <img src="/SRC/image 6.jpg" alt="" />
+          <img src="<?= ROOT ?>/assets/images/admin.png" alt="" />
         </div>
         <div class="user-details">
           <p class="title"><?php echo htmlspecialchars($userEmail); ?></p>
@@ -24,44 +24,45 @@ $pharmacyName = isset($_SESSION['pharmacy_name']) ? $_SESSION['pharmacy_name'] :
           <p class="title">Main</p>
           <ul>
             <li>
-              <a href="#">
+              <a href="<?= ROOT ?>/dashboardPage">
                 <i class="icon ph-bold ph-house-simple"></i>
                 <span class="text">Dashboard</span>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="<?= ROOT ?>/medicine">
                 <i class="icon ph-bold ph-user"></i>
                 <span class="text">Medicine</span>
                 <i class="arrow ph-bold ph-caret-down"></i>
               </a>
               <ul class="sub-menu">
                 <li>
-                  <a href="#">
+                  <a href="<?= ROOT ?>/availableMedicine">
                     <span class="text">Available Medicine</span>
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="<?= ROOT ?>/nonAvailableMedicine">
                     <span class="text">Non-Available Medicine</span>
                   </a>
                 </li>
               </ul>
             </li>
-            <li class="active">
+            <!-- <li class="active"> -->
+            <li>
               <a href="<?= ROOT ?>/orderMain">
                 <i class="icon ph-bold ph-file-text"></i>
                 <span class="text">Orders</span>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="<?= ROOT ?>/inventoryMain">
                 <i class="icon ph-bold ph-calendar-blank"></i>
                 <span class="text">Inventory</span>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="<?= ROOT ?>/income">
                 <i class="icon ph-bold ph-chart-bar"></i>
                 <span class="text">Income</span>
                 <i class="arrow ph-bold ph-caret-down"></i>
@@ -113,7 +114,7 @@ $pharmacyName = isset($_SESSION['pharmacy_name']) ? $_SESSION['pharmacy_name'] :
             </a>
           </li>
           <li>
-            <a href="logout.php">
+            <a href="<?= ROOT ?>">
               <i class="icon ph-bold ph-sign-out"></i>
               <span class="text">Logout</span>
             </a>
@@ -128,6 +129,6 @@ $pharmacyName = isset($_SESSION['pharmacy_name']) ? $_SESSION['pharmacy_name'] :
 <script
   src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
   integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-  crossorigin="anonymous"
-></script>
-<script src="<?=ROOT?>/assets/js/pharmacy/sidebar.js"></script>
+  crossorigin="anonymous"></script>
+<script src="<?= ROOT ?>/assets/js/pharmacy/sidebar.js"></script>
+<script src="<?= ROOT ?>/jquery"></script>

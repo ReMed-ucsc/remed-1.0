@@ -25,7 +25,7 @@ body {
 
 
 .main-content {
-    margin: 30px;
+    margin: 30px 30px 30px 130px;
     position: relative;
     top: 89.6px;
     flex: 12;
@@ -99,9 +99,9 @@ body {
     /* flex-wrap: wrap; */
     justify-content: center;
     /* padding: 10px; */
-    border-top: 2px inset rgb(255, 255, 255);
-    border-bottom: 2px inset rgb(255, 255, 255);
-    border-radius: 0px;
+    border: 2px solid #cfd1d6;
+    /* border-bottom: 2px inset rgb(255, 255, 255); */
+    border-radius: 5px;
     width: 70%;
     min-width: 700px;
     /* background-color: #00000025; */
@@ -208,11 +208,25 @@ body {
     margin-bottom: 30px;
 }
 
+.recent-payment{
+    width: 100%;
+}
+
 /* Table styles */
 table {
-    width: 100%;
+    /* width: 100%;
     border-collapse: collapse;
+    margin-top: 20px; */
+
+    width: 100%;
+    /* border-collapse: collapse; */
     margin-top: 20px;
+    /* border: 1px solid black; */
+    background-color: #000000;
+    height: 100px;
+    overflow: scroll;
+    scrollbar-width: thin;
+    
     
 }
 
@@ -220,13 +234,23 @@ th, td {
     padding: 10px;
     text-align: center;
     width: 200px;
+    font-size: 14px;
+    overflow: scroll;
+    scrollbar-width: none;
 }
 
 th {
     background-color: var(--color-dark-blue);
     color: var(--color-white);
-    border-radius: 5px 5px 0px 0px;
 }
+
+th:first-child {
+    border-radius: 10px 0 0 0; /* Top-left corner */
+  }
+  
+  th:last-child {
+    border-radius: 0 10px 0 0; /* Top-right corner */
+  }
 
 tr:nth-child(even) {
     background-color: #f9f9f9;

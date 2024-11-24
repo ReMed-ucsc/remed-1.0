@@ -18,6 +18,7 @@ class LoginController
         if (!empty($data['email']) && !empty($data['password'])) {
             $email = $data['email'];
             $password = $data['password'];
+            $fcmToken = $data['fcmToken'];
 
             $userModel = new Driver();
             $user = $userModel->getDriverByEmail($email);
@@ -26,6 +27,7 @@ class LoginController
                 if (password_verify($password, $user->password)) {
                     $authToken = hash('sha384', microtime() . uniqid() . bin2hex(random_bytes(10)));
                     $userModel->updateToken($email, $authToken);
+                    $userModel->updateFcmToken($email, $fcmToken);
 
                     $response['user']['name'] = $user->driverName;
                     $response['user']['email'] = $email;

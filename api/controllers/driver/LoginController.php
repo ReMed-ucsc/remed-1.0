@@ -1,6 +1,6 @@
 <?php
 
-require_once BASE_PATH . '/app/models/User.php';
+require_once BASE_PATH . '/app/models/Driver.php';
 require_once BASE_PATH . '/app/core/init.php';
 require_once BASE_PATH . '/app/core/helper_classes.php';
 

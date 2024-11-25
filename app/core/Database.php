@@ -22,7 +22,7 @@ trait Database
     {
         $con = $this->connect();
         $stmt = $con->prepare($query);
-        // show($data);
+        // show($query);
         $check = $stmt->execute($data);
         if ($check) {
             // If the query is a SELECT or similar, fetch results

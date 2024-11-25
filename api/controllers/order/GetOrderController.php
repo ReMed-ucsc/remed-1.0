@@ -44,6 +44,7 @@ class GetOrderController
                             'destination' => $orderList[0]->destination,
                             'PatientID' => $orderList[0]->PatientID,
                             'patientName' => $orderList[0]->patientName,
+                            'prescription' => $orderList[0]->prescription,
                             'PharmacyID' => $orderList[0]->PharmacyID,
                             'pharmacyName' => $orderList[0]->name
                         ];
@@ -52,7 +53,9 @@ class GetOrderController
                         foreach ($orderList as $order) {
                             $productDetails[] = [
                                 'ProductID' => $order->ProductID,
-                                'ProductName' => $order->ProductName
+                                'ProductName' => $order->ProductName,
+                                'UnitPrice' => $order->unitPrice,
+                                'Quantity' => $order->quantity
                             ];
                         }
 

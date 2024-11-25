@@ -164,7 +164,7 @@ trait Model
             }
         }
 
-        show($query);
+        // show($query);
         // Merge with additional data
         $data = array_merge($data, $additionalData);
 

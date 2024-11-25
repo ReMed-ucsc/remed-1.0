@@ -24,19 +24,19 @@ class OrderView
         return $this->first(['OrderID' => $orderID]);
     }
 
-    // public function getOrderMedicines($orderID)
-    // {
-    //     $where = ['OrderID' => $orderID];
-    //     // return $this->where($where, []);
-    //     return $this->selectWhere(['ProductID', 'ProductName'], $where, [], 'ProductID ASC');
-    // }
-
     public function getOrderMedicines($orderID)
     {
-        $query = "SELECT * FROM $this->table WHERE OrderID = :orderID";
-        $data = ['orderID' => $orderID];
-        return $this->query($query, $data);
+        $where = ['orderId' => $orderID];
+        // return $this->where($where, []);
+        return $this->selectWhere(['ProductID', 'ProductName'], $where, [], 'ProductID ASC');
     }
+
+    // public function getOrderMedicines($orderID)
+    // {
+    //     $query = "SELECT * FROM $this->table WHERE OrderID = :orderID";
+    //     $data = ['orderID' => $orderID];
+    //     return $this->query($query, $data);
+    // }
 
     public function getOrder($orderID, $patientID)
     {

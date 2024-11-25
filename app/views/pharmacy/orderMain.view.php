@@ -72,141 +72,31 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>#342342</td>
-              <td>ABC123</td>
-              <td>432 Park Ave, NY</td>
-              <td>01/09/2024</td>
-              <td>$45.00</td>
-              <td>PayPal</td>
-              <td><span class="status success">Delivered</span></td>
-              <td><a class="view" href="#">View</a></td>
-            </tr>
-            <tr>
-              <td>#564564</td>
-              <td>DEF456</td>
-              <td>250 River Dr, TX</td>
-              <td>31/08/2024</td>
-              <td>$67.99</td>
-              <td>Cash on Delivery</td>
-              <td><span class="status pending">Pending</span></td>
-              <td><a class="view" href="#">View</a></td>
-            </tr>
-            <tr>
-              <td>#324562</td>
-              <td>XYZ789</td>
-              <td>123 Oak St, FL</td>
-              <td>25/08/2024</td>
-              <td>$100.99</td>
-              <td>Transfer</td>
-              <td><span class="status canceled">Canceled</span></td>
-              <td><a class="view" href="#">View</a></td>
-            </tr>
-            <tr>
-              <td>#564564</td>
-              <td>DEF456</td>
-              <td>250 River Dr, TX</td>
-              <td>31/08/2024</td>
-              <td>$67.99</td>
-              <td>Cash on Delivery</td>
-              <td><span class="status pending">Pending</span></td>
-              <td><a class="view" href="#">View</a></td>
-            </tr>
-            <tr>
-              <td>#342342</td>
-              <td>ABC123</td>
-              <td>432 Park Ave, NY</td>
-              <td>01/09/2024</td>
-              <td>$45.00</td>
-              <td>PayPal</td>
-              <td><span class="status success">Delivered</span></td>
-              <td><a class="view" href="#">View</a></td>
-            </tr>
-            <tr>
-              <td>#564564</td>
-              <td>DEF456</td>
-              <td>250 River Dr, TX</td>
-              <td>31/08/2024</td>
-              <td>$67.99</td>
-              <td>Cash on Delivery</td>
-              <td><span class="status pending">Pending</span></td>
-              <td><a class="view" href="#">View</a></td>
-            </tr>
-            <tr>
-              <td>#324562</td>
-              <td>XYZ789</td>
-              <td>123 Oak St, FL</td>
-              <td>25/08/2024</td>
-              <td>$100.99</td>
-              <td>Transfer</td>
-              <td><span class="status canceled">Canceled</span></td>
-              <td><a class="view" href="#">View</a></td>
-            </tr>
-            <tr>
-              <td>#342342</td>
-              <td>ABC123</td>
-              <td>432 Park Ave, NY</td>
-              <td>01/09/2024</td>
-              <td>$45.00</td>
-              <td>PayPal</td>
-              <td><span class="status success">Delivered</span></td>
-              <td><a class="view" href="#">View</a></td>
-            </tr>
-            <tr>
-              <td>#342342</td>
-              <td>ABC123</td>
-              <td>432 Park Ave, NY</td>
-              <td>01/09/2024</td>
-              <td>$45.00</td>
-              <td>PayPal</td>
-              <td><span class="status success">Delivered</span></td>
-              <td><a class="view" href="#">View</a></td>
-            </tr>
-            <tr>
-              <td>#342342</td>
-              <td>ABC123</td>
-              <td>432 Park Ave, NY</td>
-              <td>01/09/2024</td>
-              <td>$45.00</td>
-              <td>PayPal</td>
-              <td><span class="status success">Delivered</span></td>
-              <td><a class="view" href="#">View</a></td>
-            </tr>
-            <tr>
-              <td>#342342</td>
-              <td>ABC123</td>
-              <td>432 Park Ave, NY</td>
-              <td>01/09/2024</td>
-              <td>$45.00</td>
-              <td>PayPal</td>
-              <td><span class="status success">Delivered</span></td>
-              <td><a class="view" href="#">View</a></td>
-            </tr>
-            <tr>
-              <td>#342342</td>
-              <td>ABC123</td>
-              <td>432 Park Ave, NY</td>
-              <td>01/09/2024</td>
-              <td>$45.00</td>
-              <td>PayPal</td>
-              <td><span class="status success">Delivered</span></td>
-              <td><a class="view" href="#">View</a></td>
-            </tr>
-            <tr>
-              <td>#342342</td>
-              <td>ABC123</td>
-              <td>432 Park Ave, NY</td>
-              <td>01/09/2024</td>
-              <td>$45.00</td>
-              <td>PayPal</td>
-              <td><span class="status success">Delivered</span></td>
-              <td><a class="view" href="#">View</a></td>
-            </tr>
+            <?php if (!empty($orders)): ?>
+              <?php foreach ($orders as $order): ?>
+                <tr>
+                  <td><?= htmlspecialchars($order->OrderID) ?></td>
+                  <td><?= htmlspecialchars($order->PatientID) ?></td>
+                  <td><?= htmlspecialchars($order->destination) ?></td>
+                  <td><?= htmlspecialchars($order->date) ?></td>
+                  <td><?= htmlspecialchars($order->pickup) ?></td>
+                  <td><?= htmlspecialchars($order->pickup) ?></td>
+                  <td><?= htmlspecialchars($order->status) ?></td>
+                  <td><a class="view" href="<?= ROOT ?>/orderView/<?= $order->OrderID ?>">View</a></td>
+                </tr>
+              <?php endforeach; ?>
+            <?php else: ?>
+              <tr>
+                <td colspan="8">No orders found.</td>
+              </tr>
+            <?php endif; ?>
           </tbody>
+
+
         </table>
 
         <button class="new-order-btn"><i class="ph-bold ph-plus"></i>
-          <p class="new-order">New Order</p>
+          <a href="<?= ROOT ?>/orderCreate" style="text-decoration: none; color:white;" class="new-order">New Order</a>
         </button>
 
       </section>

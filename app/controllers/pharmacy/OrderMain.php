@@ -3,10 +3,13 @@
 class OrderMain
 {
     use Controller;
+
     public function index()
     {
         // $user = new User;
         // $arr['email'] = "name@example.com";
+
+
 
         // $result = $model->where(data_for_filtering, data_not_for_filtering);
         // $result = $model->insert(insert_data);
@@ -18,8 +21,20 @@ class OrderMain
 
         // $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
 
-        $data['username'] = [];
-        $this->view('pharmacy/orderMain', $data);
+        $orderModel = new Order();
+        $orders = $orderModel->getOrderDetails();
+
+        // Pass the data to the view
+        $this->View('pharmacy/orderMain', ['orders' => $orders]);
+    }
+
+    public function read()
+    {
+        $orderModel = new Order();
+        $orders = $orderModel->getOrderDetails();
+
+        // Pass the data to the view
+        $this->View('pharmacy/orderMain', ['orders' => $orders]);
     }
 
     // add other methods like edit, update, delete, etc.

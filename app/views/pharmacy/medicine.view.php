@@ -161,13 +161,65 @@
                             <td>SUP-789</td>
                             <td>2024-12-10</td>
                             <td>30</td>
-                            <td>Low Stock</td>
+                            <td>Out of Stock</td>
                         </tr>
                     </tbody>
                 </table>
             </section>
-            <section id="low-stock" class="tab-content">
+            <!-- <section id="low-stock" class="tab-content">
                 <p class="hero">There are no Low Stock Medicines</p>
+            </section> -->
+            <section id="low-stock" class="tab-content">
+                <table class="order-table">
+                    <thead>
+                        <tr>
+                            <th>Item ID</th>
+                            <th>Brand Name</th>
+                            <th>Generic Name</th>
+                            <th>Medicine Name</th>
+                            <th>Unit Price</th>
+                            <th>Supplier ID</th>
+                            <th>Expiration Date</th>
+                            <th>Reorder Level</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>BATCH-004</td>
+                            <td>Amoxicillin</td>
+                            <td>Amoxil</td>
+                            <td>Antibiotics</td>
+                            <td>$8.00</td>
+                            <td>SUP-456</td>
+                            <td>2025-08-15</td>
+                            <td>20</td>
+                            <td>Low Stock</td>
+                        </tr>
+                        <tr>
+                            <td>BATCH-002</td>
+                            <td>Ibuprofen</td>
+                            <td>Advil</td>
+                            <td>Pain Relief</td>
+                            <td>$12.50</td>
+                            <td>SUP-789</td>
+                            <td>2024-12-10</td>
+                            <td>30</td>
+                            <td>Low Stock</td>
+                        </tr>
+                        <tr>
+                            <td>BATCH-004</td>
+                            <td>Amoxicillin</td>
+                            <td>Amoxil</td>
+                            <td>Antibiotics</td>
+                            <td>$8.00</td>
+                            <td>SUP-456</td>
+                            <td>2025-08-15</td>
+                            <td>20</td>
+                            <td>Low Stock</td>
+                        </tr>
+                    </tbody>
+                </table>
             </section>
         </div>
 

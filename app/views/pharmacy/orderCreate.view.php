@@ -275,7 +275,26 @@
 
         <div class="right-section">
           <div class="chat-box">
-            <h3>Messages</h3>
+            <!-- <h3>Status : <input type="select"></h3> -->
+            <li>
+              <!-- <a href="<?= ROOT ?>/medicine"> -->
+              <i class="icon ph-bold ph-user"></i>
+              <span class="text">Status</span>
+              <i class="arrow ph-bold ph-caret-down"></i>
+              <!-- </a> -->
+              <ul class="sub-menu">
+                <li>
+                  <!-- <a href="<?= ROOT ?>/availableMedicine"> -->
+                  <span class="text">Pending</span>
+                  <!-- </a> -->
+                </li>
+                <li>
+                  <!-- <a href="<?= ROOT ?>/nonAvailableMedicine"> -->
+                  <span class="text">To-deliver</span>
+                  <!-- </a> -->
+                </li>
+              </ul>
+            </li>
             <!-- Sample chat messages -->
             <div class="chat-messages">
               <div class="display-area" id="displayArea">

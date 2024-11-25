@@ -19,6 +19,7 @@ trait Database
         $con = $this->connect();
         $stmt = $con->prepare($query);
         $check = $stmt->execute($data);
+        // show($query);
         if ($check) {
             $result = $stmt->fetchAll(PDO::FETCH_OBJ);
             if (is_array($result) && count($result)) {

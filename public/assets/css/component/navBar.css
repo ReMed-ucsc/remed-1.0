@@ -137,6 +137,9 @@
     margin-left: 50px;
     padding-top: 8px;
   }
+  .add-btn{
+    background-color: darkgreen;
+  }
   
   .submenu {
     display: none;

@@ -134,3 +134,36 @@ th,td {
     background-color: #f44336;
 }
 
+.add-btn {
+    background-color: darkgreen;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 20px;
+    left: 1200px;
+}
+
+.add-btn:hover {
+    background-color: #4caf50;
+}
+
+
+.above-table {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+}

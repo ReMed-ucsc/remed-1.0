@@ -31,11 +31,11 @@ class App
         // show($URL);
 
         // Check if the controller exists and select it
-        $controllerPath = $isAdmin ? "../app/controllers/admin/" : "../app/controllers/user/";
-        $filename = $controllerPath . ucfirst($URL[0] ?? 'Dashboard') . ".php";
+        $controllerPath = $isAdmin ? "../app/controllers/admin/" : "../app/controllers/pharmacy/";
+        $filename = $controllerPath . ucfirst($URL[0] ?? ( $isAdmin ? 'Dashboard' : 'Index')) . ".php";
         if (file_exists($filename)) {
             require_once($filename);
-            $this->controller = ucfirst($URL[0] ?? 'Dashboard');
+            $this->controller = ucfirst($URL[0] ?? ( $isAdmin ? 'Dashboard' : 'Index'));
             unset($URL[0]);
         } else {
             require_once("../app/controllers/_404.php");

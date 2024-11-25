@@ -38,6 +38,16 @@ trait Controller
         $_SESSION[$key] = $value;
     }
 
+    protected function unsetSession($key)
+    {
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+        if (isset($_SESSION[$key])) {
+            unset($_SESSION[$key]);
+        }
+    }
+
     // Get a session variable
     public function getSession($key)
     {

@@ -1,8 +1,9 @@
 <!-- Navbar start-->
 <header class="navbar">
     <div class="navbar-left">
-        <img class="menu" src="<?= ROOT ?>/assets/images/hamburger.png" alt="menu" />
-        <img class="logo" src="<?= ROOT ?>/assets/images/ReMeD.png" alt="logo" />
+        <a href="<?= ROOT ?>/admin/dashboard">
+            <img class="logo" src="<?= ROOT ?>/assets/images/ReMeD.png" alt="logo" />
+        </a>
     </div>
 
     <div class="navbar-right">
@@ -16,7 +17,7 @@
 
     <div class="tab">
         <img src="<?= ROOT ?>/assets/images/home.png" alt="" />
-        <a href="<?=ROOT?>/admin"> Home</a>
+        <a href="<?= ROOT ?>/admin"> Home</a>
     </div>
 
 
@@ -56,15 +57,15 @@
         <div id="settings-submenu" class="submenu">
             <div class="tab">
                 <img src="<?= ROOT ?>/assets/images/settings.png" alt="" />
-                <a href="<?=ROOT?>/admin/general">General Settings</a>
+                <a href="<?= ROOT ?>/admin/general">General Settings</a>
             </div>
             <div class="tab">
                 <img src="<?= ROOT ?>/assets/images/UserManagement.png" alt="" />
-                <a href="<?=ROOT?>/admin/accountManage"> User Management</a>
+                <a href="<?= ROOT ?>/admin/accountManage"> User Management</a>
             </div>
             <div class="tab">
                 <img src="<?= ROOT ?>/assets/images/policy.png" alt="" />
-                <a href="<?=ROOT?>/admin/legal"> Legal & Compliance</a>
+                <a href="<?= ROOT ?>/admin/legal"> Legal & Compliance</a>
             </div>
         </div>
         <!-- Submenu end-->
@@ -86,7 +87,7 @@
         </div>
         <div class="tab">
             <img src="<?= ROOT ?>/assets/images/setting.png" alt="" />
-            <a href="<?=ROOT?>/admin/general">Setting</a>
+            <a href="<?= ROOT ?>/admin/general">Setting</a>
         </div>
         <div class="tab">
             <img src="<?= ROOT ?>/assets/images/logout.png" alt="" />
@@ -109,15 +110,15 @@
 
 <script>
     // JavaScript to toggle the dropdown menu visibility
-    document.querySelector('.menu').addEventListener('click', function(event) {
-        event.stopPropagation(); // Prevent the click event from bubbling up to the document
-        var dropdown = document.getElementById('dropdown-menu');
-        if (dropdown.style.display === 'none' || dropdown.style.display === '') {
-            dropdown.style.display = 'block';
-        } else {
-            dropdown.style.display = 'none';
-        }
-    });
+    // document.querySelector('.menu').addEventListener('click', function(event) {
+    //     event.stopPropagation(); // Prevent the click event from bubbling up to the document
+    //     var dropdown = document.getElementById('dropdown-menu');
+    //     if (dropdown.style.display === 'none' || dropdown.style.display === '') {
+    //         dropdown.style.display = 'block';
+    //     } else {
+    //         dropdown.style.display = 'none';
+    //     }
+    // });
 
     document.addEventListener('click', function(event) {
         var dropdown = document.getElementById('dropdown-menu');
@@ -181,4 +182,5 @@
             dropdown.style.display = 'none';
         }
     });
+
 </script>

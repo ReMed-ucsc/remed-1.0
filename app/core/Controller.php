@@ -21,4 +21,50 @@ trait Controller
     // and then the data which has to passed for that view
     // if the view is not found then 404.view.php will be loaded
     // Usage: $this->view('subfolder/viewname', $data);
+
+
+    // Start a session if not already started
+    public function startSession()
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+    }
+
+    // Set a session variable
+    public function setSession($key, $value)
+    {
+        $this->startSession();
+        $_SESSION[$key] = $value;
+    }
+
+    // Get a session variable
+    public function getSession($key)
+    {
+        $this->startSession();
+        return $_SESSION[$key] ?? null;
+    }
+
+    // Destroy the session
+    public function destroySession()
+    {
+        $this->startSession();
+        session_destroy();
+    }
+
+    // Check if a user is authenticated
+    public function isAuthenticated()
+    {
+        $this->startSession();
+        return isset($_SESSION['user_id']);
+    }
+
+    // Protect a route by redirecting to login if not authenticated
+    public function protectRoute()
+    {
+        if (!$this->isAuthenticated()) {
+            redirect('login');
+            exit();
+        }
+    }
 }

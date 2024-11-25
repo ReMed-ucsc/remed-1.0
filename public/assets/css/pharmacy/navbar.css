@@ -1,0 +1,113 @@
+/* Reset and basic styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #001F4D;
+    /* border-bottom: 1px solid white; */
+    width: 100%;
+    position: fixed;
+    z-index: 100000;
+}
+
+.navbar-left {
+    display: flex;
+    flex: 1;
+}
+
+.navbar-right {
+    display: flex;
+    justify-content: space-between;
+    flex: 15;
+    align-items: center;
+}
+
+.logo {
+    color: #fff;
+    font-size: 1.5rem;
+    text-decoration: none;
+    font-family: 'Rock Salt', cursive;
+}
+
+/* Navigation links */
+.nav-links {
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.nav-links img {
+    width: 50px;
+    margin: 0px 15px;
+}
+
+.image img{
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.nav-links li {
+    margin-left: 1.5rem;
+    padding: 0.75rem;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+.nav-links li:hover {
+    border: 1px solid rgb(222, 215, 194);
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: rgb(222, 215, 194);
+}
+
+/* Hamburger icon visibility */
+/* .hamburger {
+    display: none; 
+} */
+
+/* Hamburger styling */
+/* .hamburger span {
+    width: 25px;
+    height: 3px;
+    background: #ffffff;
+    display: block;
+} */
+
+/* Only show the hamburger for registered users */
+/* .is-registered .hamburger {
+    display: flex;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 4px;
+    border-radius: 15px;
+} */
+
+.profile-name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

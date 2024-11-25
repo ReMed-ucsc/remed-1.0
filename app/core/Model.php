@@ -11,6 +11,19 @@ trait Model
     // protected $order_column = "id";
     public $errors         = [];
 
+    // ------------usage example-------------------
+
+    // $user = new User;
+    // $arr['email'] = "name@example.com";
+
+    // $result = $model->where(data_for_filtering, data_not_for_filtering);
+    // $result = $model->insert(insert_data);
+    // $result = $model->update(filtering_data updating_data, id_column_for_filtering);
+    // $result = $model->delete(id, id_column);
+    // $result = $user->findAll();
+
+    // show($result);
+
     public function setLimit($limit)
     {
         $this->limit = $limit;
@@ -25,7 +38,7 @@ trait Model
     public function findAll()
     {
 
-        $query = "select * from $this->table order by $this->order_column $this->order_type limit $this->limit offset $this->offset";
+        $query = "select * from $this->table limit $this->limit offset $this->offset";
 
         return $this->query($query);
     }
@@ -54,6 +67,7 @@ trait Model
         $query = rtrim($query, "  AND ");
         $query .= " order by $this->order_column $this->order_type limit $this->limit offset $this->offset";
 
+        show($query);
         $data = array_merge($data, $data_not);
 
         return $this->query($query, $data);
@@ -163,6 +177,7 @@ trait Model
             }
         }
 
+        // show($query);
         // Merge with additional data
         $data = array_merge($data, $additionalData);
 
@@ -185,9 +200,22 @@ trait Model
 
         $keys = array_keys($data);
         $query = "insert into $this->table (" . implode(",", $keys) . ") values (:" . implode(" ,:", $keys) . ")";
-        $this->query($query, $data);
+        $result = $this->query($query, $data);
+
+        // show($result);
+        if ($result) {
+            // Get the last inserted ID
+            return $this->lastInsertId();
+        }
 
         return false;
+    }
+
+    public function insertBatch($data)
+    {
+        foreach ($data as $row) {
+            $this->insert($row);
+        }
     }
 
     public function update($id, $data, $id_column = 'id')

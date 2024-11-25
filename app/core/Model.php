@@ -67,6 +67,7 @@ trait Model
         $query = rtrim($query, "  AND ");
         $query .= " order by $this->order_column $this->order_type limit $this->limit offset $this->offset";
 
+        show($query);
         $data = array_merge($data, $data_not);
 
         return $this->query($query, $data);
@@ -176,6 +177,7 @@ trait Model
             }
         }
 
+        // show($query);
         // Merge with additional data
         $data = array_merge($data, $additionalData);
 
@@ -198,9 +200,22 @@ trait Model
 
         $keys = array_keys($data);
         $query = "insert into $this->table (" . implode(",", $keys) . ") values (:" . implode(" ,:", $keys) . ")";
-        $this->query($query, $data);
+        $result = $this->query($query, $data);
+
+        // show($result);
+        if ($result) {
+            // Get the last inserted ID
+            return $this->lastInsertId();
+        }
 
         return false;
+    }
+
+    public function insertBatch($data)
+    {
+        foreach ($data as $row) {
+            $this->insert($row);
+        }
     }
 
     public function update($id, $data, $id_column = 'id')

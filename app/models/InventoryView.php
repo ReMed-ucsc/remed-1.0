@@ -18,7 +18,9 @@ class InventoryView
             'latitude',
             'longitude',
             'ST_Distance_Sphere(POINT(longitude, latitude), POINT(:longitude, :latitude)) AS distance',
-            'availableCount'
+            'availableCount',
+            'COUNT(DISTINCT ProductID) AS availableMedicineCount',
+            'GROUP_CONCAT(DISTINCT ProductID) AS availableProducts'
         ];
 
         // Use raw SQL for distance calculation

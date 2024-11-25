@@ -20,9 +20,25 @@ class SearchPharmaciesController
 
             try {
                 $inventoryModel = new InventoryView();
+                $medicineModel = new MedicineProductView();
+
                 $pharmacies = $inventoryModel->searchPharmaciesWithMedicines($latitude, $longitude, $productIDs, $range);
 
                 if (!empty($pharmacies)) {
+                    foreach ($pharmacies as $pharmacy) {
+                        $availableProducts = explode(',', $pharmacy->availableProducts);
+                        $notAvailableProducts = array_diff($productIDs, $availableProducts);
+
+                        // show($availableProducts);
+                        $pharmacy->notAvailableMedicineCount = (string)count($notAvailableProducts);
+
+                        // pass array of not available medicine names 
+                        $notAvailableMedicineNames = array_map(function ($id) use ($medicineModel) {
+                            return $medicineModel->getMedicineName($id);
+                        }, array_values($notAvailableProducts));
+
+                        $pharmacy->notAvailableProducts = implode(',', $notAvailableMedicineNames);
+                    }
                     $response['data'] = $pharmacies;
                     $result->setErrorStatus(false);
                     $result->setMessage("Pharmacy list ready");

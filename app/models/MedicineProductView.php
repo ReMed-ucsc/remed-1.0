@@ -30,4 +30,15 @@ class MedicineProductView
 
         return $medicines;
     }
+
+    public function getMedicineName($productId)
+    {
+        $result =  $this->selectWhere(['ProductName'], ['productId' => $productId]);
+
+        if ($result) {
+            return $result[0]->ProductName;
+        }
+
+        return null; // Return null if no result is found
+    }
 }

@@ -1,15 +1,15 @@
 <?php
 
-class DeliveryView
+class Delivery
 {
     use Model;
 
-    protected $table = 'orderview';
+    protected $table = 'delivery';
     protected $allowed = ['DeliveryID', 'OrderID', 'DriverID', 'PharmacyID', 'PatientID'];
 
-    public function getDeliveryInfo($orderId)
+    public function getDeliveryInfo($deliverId)
     {
-        $data = ["orderID" => $orderId];
+        $data = ["DeliveryID" => $deliverId];
 
         return $this->first($data);
     }

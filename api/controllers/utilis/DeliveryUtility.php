@@ -3,6 +3,8 @@
 require_once BASE_PATH . '/app/models/DeliveryView.php';
 require_once BASE_PATH . '/app/models/Driver.php';
 
+$serviceAccountPath = BASE_PATH . '/api/controllers/utilis/serviceaccount.json';
+
 class DeliveryUility
 {
     private $accessToken;
@@ -41,38 +43,46 @@ class DeliveryUility
 
         $result = $driverModel->selectWhere($columns, [], []);
 
+        echo json_encode($result);
+
         $fcmTokens = [];
 
         if ($result) {
+            // Extract only the 'fcmToken' values from the result
+            $fcmTokens = array_column($result, 'fcmToken');
 
-            foreach ($result as $item) {
-                if (isset($item['fcmToken'])) {
-                    $fcmTokens[] = $item['fcmToken'];
-                }
-            }
+            // Remove null or empty values
+            $fcmTokens = array_filter($fcmTokens, function ($token) {
+                return !empty($token);
+            });
 
-            echo json_encode($fcmTokens);
-            return;
+            echo json_encode(["FCM tokens" => array_values($fcmTokens)]);
         } else {
             echo json_encode("No token found");
         }
 
-        if ($fcmTokens) {
-            $payload = [
-                'message' => [
-                    'token' => $result['fcmToken'],
-                    'data' => [
-                        'title' => 'New delivery Request',
-                        'body' => 'You have a new delivery',
-                        'action' => 'popup',
-                        'pharmacyAddress' => $deliveryData[0]['destination'],
-                        'deliveryAddress' => $deliveryData[0]['address'],
-                        'orderId' =>  strval($orderId),
-                    ],
-                ],
-            ];
 
-            return $this->fcmSender($payload);
+        if ($fcmTokens) {
+            foreach ($fcmTokens as $token) {
+                $payload = [
+                    'message' => [
+                        'token' => $token, // Send each token as a string
+                        'data' => [
+                            'title' => 'New delivery Request',
+                            'body' => 'You have a new delivery',
+                            'action' => 'popup',
+                            'pharmacyAddress' => $deliveryData[0]['destination'],
+                            'deliveryAddress' => $deliveryData[0]['address'],
+                            'orderId' => strval($orderId),
+                        ],
+                    ],
+                ];
+
+                // Send the payload to FCM
+                $this->fcmSender($payload);
+            }
+
+            return "New delivery request sent";
         } else {
             return [
                 "status" => "error",
@@ -85,9 +95,9 @@ class DeliveryUility
     private function fcmSender($payload)
     {
         if (!$payload) {
-            error_log("payload not found");
+            json_encode("payload not found");
         } else {
-            error_log("Payload " . print_r($payload));
+            json_encode("Payload " . print_r($payload));
         }
 
         $this->accessToken =  $this->generateAccessToken();
@@ -112,6 +122,10 @@ class DeliveryUility
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
 
         $response = curl_exec($ch);
+
+        $responseDecoded = json_decode($response, true);
+        echo json_encode("FCM response: " . print_r($responseDecoded, true));
+
 
         if ($response === false) {
             $error = curl_error($ch);

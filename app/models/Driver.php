@@ -5,7 +5,7 @@ class Driver extends User
     use Model;
 
     protected $table = 'driver';
-    protected $allowedColumns = ['name', 'email', 'password', 'token', 'phone', 'address', 'fcmToken'];
+    protected $allowedColumns = ['DriverID', 'driverName', 'email', 'password', 'token', 'phone', 'address', 'fcmToken'];
 
     public function validate($data)
     {
@@ -40,11 +40,18 @@ class Driver extends User
     public function registerDriver($name, $email, $password)
     {
         $data = [
-            'name' => $name,
+            'driverName' => $name,
             'email' => $email,
-            'password' => $password
+            'password' => password_hash($password, PASSWORD_DEFAULT)
         ];
 
         return $this->insert($data);
+    }
+
+    public function getDriverId($driverID)
+    {
+        $data = ['DriverID' => $driverID];
+
+        return $this->first($data, []);
     }
 }

@@ -28,13 +28,17 @@ class DeleteCommentController
         $deliveryModel = new Delivery();
         //$driverModel = new Driver();
 
-        $commentId = $data['CommentID'];
+        $commentId = $data['commentId'];
 
         if ($commentId) {
+            $res = $commentModel->getOneComment($commentId);
+        }
+
+        if ($res) {
             $commentModel->deleteComment($commentId);
         } else {
             $result->setErrorStatus(true);
-            $result->setMessage("no driverId found");
+            $result->setMessage("no comment found");
         }
         $response['result']['error'] = $result->isError();
         $response['result']['message'] = $result->getMessage();

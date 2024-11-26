@@ -28,8 +28,8 @@ class UpdateCommentController
         $deliveryModel = new Delivery();
         //$driverModel = new Driver();
 
-        $commentId = $data['CommentID'];
-        $comment = $data['Comment'];
+        $commentId = $data['commentId'];
+        $comment = $data['comment'];
 
         if ($commentId) {
 

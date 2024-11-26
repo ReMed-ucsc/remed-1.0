@@ -71,6 +71,10 @@
                       <p><?= htmlspecialchars($medicine->ProductName) ?></p>
                     <?php endforeach; ?>
 
+                    <?php
+                    // show($medicineList) 
+                    ?>
+
                   </div>
                   <div class="image-preview">
                     <img src="<?= ROOT ?>/assets/images/prescription2.jpg" alt="Prescription Image" onclick="showImage(this)">
@@ -82,14 +86,18 @@
 
             </div>
 
-            <!-- <?php show($order) ?> -->
             <!-- Table Section -->
             <div class="table-section">
               <?php if (!$viewOnly) { ?>
                 <div class="search-bar">
-                  <input type="text" placeholder="Search by medicine or generic name...">
-                  <button>Add</button>
+                  <form action="<?= ROOT ?>/order/addItem/<?= $order->OrderID ?>" method="post">
+                    <input type="hidden" id="medicine-id" name="medicineId" value="" />
+                    <input type="text" id="medicine-search" placeholder="Search by medicine or generic name..." />
+                    <input type="text" id="medicine-quantity" name="quantity" placeholder="Quantity" />
+                    <button id="add-medicine">Add</button>
+                  </form>
                 </div>
+                <div id="search-results" class="search-results"></div>
               <?php } ?>
 
               <table class="order-table">
@@ -101,6 +109,7 @@
                     <th style="width: 1%;">Dosage</th>
                     <th style="width: 1%;">Quantity</th>
                     <th style="width: 5%;">Price</th>
+                    <th style="<?php echo ($viewOnly ? 'display:none;' : '') ?> width: 5%; ">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -121,7 +130,11 @@
                           <i class="dropdown-icon">▼</i>
                         </div> -->
                       </td>
-                      <td><input type="number" name="quantity" class="short-input" value="<?= htmlspecialchars($medicine->quantity) ?>"></td>
+                      <td>
+                        <form action="<?= ROOT ?>/order/edit/<?= $order->OrderID ?>" method="post">
+                          <input type="hidden" id="medicine-id" name="productId" value="<?= htmlspecialchars($medicine->ProductID) ?>" />
+                          <input type="number" name="quantity" class="short-input" value="<?= htmlspecialchars($medicine->quantity) ?>" min="1" <?php echo ($viewOnly ? 'disabled' : '') ?>>
+                      </td>
                       <td>
                         <?php
                         $quantity = $_POST['quantity'][$medicine->ProductID] ?? 0;
@@ -129,6 +142,20 @@
                         echo number_format($price, 2);
                         ?>
                       </td>
+                      <?php if (!$viewOnly): ?>
+                        <td>
+                          <button type="submit" name="update" value="<?= htmlspecialchars($medicine->ProductID) ?>">
+                            Update
+                          </button>
+                          </form>
+                          <form action="<?= ROOT ?>/order/deleteItem/<?= $order->OrderID ?>" method="post">
+                            <button type="submit" name="delete" value="<?= htmlspecialchars($medicine->ProductID) ?>">
+                              Delete
+                            </button>
+                          </form>
+                        </td>
+                      <?php endif; ?>
+
                     </tr>
                   <?php endforeach; ?>
 
@@ -140,11 +167,12 @@
             <!-- Submit Button -->
             <div class="submit-section">
               <?php if ($viewOnly) { ?>
-
                 <button class="edit-order">
                   <a href="<?= ROOT ?>/order/edit/<?= $order->OrderID ?>" style="text-decoration: none; color:white;">
                     Edit Order
-                  </a></button>
+                  </a>
+                </button>
+                </form>
                 <button class="delete-order">Delete Order</button>
               <?php } else {  ?>
                 <button class="delete-order">
@@ -152,10 +180,7 @@
                     Cancel
                   </a>
                 </button>
-                <button class="edit-order">
-                  <a href="<?= ROOT ?>/order/<?= $order->OrderID ?>" style="text-decoration: none; color:white;">
-                    Update
-                  </a></button>
+
               <?php } ?>
 
             </div>
@@ -181,6 +206,7 @@
 
       <script src="<?= ROOT ?>/assets/js/pharmacy/orderCreate.js"></script>
       <script src="<?= ROOT ?>/assets/js/pharmacy/orderMain.js"></script>
+      <script src="<?= ROOT ?>/assets/js/pharmacy/orderView.js"></script>
 
 
 

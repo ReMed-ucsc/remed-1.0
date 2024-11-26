@@ -246,6 +246,42 @@ trait Model
         return false;
     }
 
+    public function updateWithConditions($data, $conditions)
+    {
+        // Check if allowed columns are only updated and remove unwanted data
+        if (!empty($this->allowedColumns)) {
+            foreach ($data as $key => $value) {
+                if (!in_array($key, $this->allowedColumns)) {
+                    unset($data[$key]);
+                }
+            }
+        }
+
+        $keys = array_keys($data);
+        $query = "UPDATE $this->table SET ";
+
+        foreach ($keys as $key) {
+            $query .= $key . " = :" . $key . ", ";
+        }
+
+        $query = rtrim($query, ", ");
+        $query .= " WHERE ";
+
+        $conditionKeys = array_keys($conditions);
+        foreach ($conditionKeys as $key) {
+            $query .= $key . " = :" . $key . " AND ";
+        }
+
+        $query = rtrim($query, " AND ");
+
+        // Merge data and conditions for binding
+        $params = array_merge($data, $conditions);
+
+        // Execute the query
+        $this->query($query, $params);
+        return true;
+    }
+
     public function delete($id, $id_column = 'id')
     {
         $data[$id_column] = $id;
@@ -253,6 +289,22 @@ trait Model
         $this->query($query, $data);
 
         return false;
+    }
+
+    public function deleteWithConditions($conditions)
+    {
+        $query = "DELETE FROM $this->table WHERE ";
+
+        $conditionKeys = array_keys($conditions);
+        foreach ($conditionKeys as $key) {
+            $query .= $key . " = :" . $key . " AND ";
+        }
+
+        $query = rtrim($query, " AND ");
+
+        // Execute the query
+        $this->query($query, $conditions);
+        return true;
     }
 
     public function join($table, $joinCondition, $data = [], $data_not = [], $columns = '*', $order_column = 'id', $order_type = 'ASC', $limit = 10, $offset = 0)

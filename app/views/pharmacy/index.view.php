@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="Navbar/navbar.css"></link>
+    <link rel="stylesheet" href="<?=ROOT?>/assets/css/pharmacy/navbar.css"></link>
     <link rel="stylesheet" href="colours.css"></link>
-    <link rel="stylesheet" href="index.css"></link>
+    <link rel="stylesheet" href="<?=ROOT?>/assets/css/pharmacy/index.css"></link>
     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
 
 </head>
@@ -15,13 +15,8 @@
     <header>
         <?php
 
-        $isRegisteredUser=false;
-
-        if($isRegisteredUser){
-            include 'Navbar/reg-navbar.php';
-        }else{
-            include 'Navbar/non-reg-navbar.php';
-        }
+            include BASE_PATH . '/app/views/inc/pharmacy/nonRegNavbar.php';
+        
     ?>
     </header>
 
@@ -40,8 +35,8 @@
         </div>
     </main>
 
-    <script src="Navbar/navbar.js"></script>
-    <script src="index.js"></script>
+    <script src="<?=ROOT?>/assets/js/pharmacy/navbar.js"></script>
+    <script src="<?=ROOT?>/assets/js/pharmacy/index.js"></script>
     
 </body>
 </html>

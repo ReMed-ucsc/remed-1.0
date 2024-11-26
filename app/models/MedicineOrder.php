@@ -18,9 +18,15 @@ class MedicineOrder
     private $PICKED_UP = 'P';
     private $DELIVERY_FAILED = 'F';
 
+    public function getOrderDetails()
+    {
+        $sql = "Select * FROM $this->table";
+        return $this->query($sql);
+    }
+
     public function getMedicineOrder($orderID)
     {
-        return $this->first(['OrderID' => $orderID]);
+        return $this->first(['OrderId' => $orderID]);
     }
 
 

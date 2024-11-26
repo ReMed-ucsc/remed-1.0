@@ -1,5 +1,6 @@
 <?php
 
+
 // Dummy data for the dashboard
 $registeredPharmacies = 123;
 $onlineUsers = 45;

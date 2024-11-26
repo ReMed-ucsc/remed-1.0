@@ -414,7 +414,10 @@ table th {
 }
 
 .order-management{
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
   /* overflow-y: scroll;
   scrollbar-width: none; */
 }
@@ -452,11 +455,11 @@ th {
 }
 
 th:first-child {
-  border-radius: 10px 0 0 0; /* Top-left corner */
+  border-radius: 0 0 0 0; /* Top-left corner */
 }
 
 th:last-child {
-  border-radius: 0 10px 0 0; /* Top-right corner */
+  border-radius: 0 0 0 0; /* Top-right corner */
 }
 
 tr:nth-child(even) {

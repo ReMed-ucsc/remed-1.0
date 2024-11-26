@@ -1,6 +1,6 @@
 <?php
 
-class OrderView
+class Notifications
 {
     use Controller;
     public function index()
@@ -19,7 +19,7 @@ class OrderView
         // $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
 
         $data['username'] = [];
-        $this->view('pharmacy/orderView', $data);
+        $this->view('pharmacy/notifications', $data);
     }
 
     // add other methods like edit, update, delete, etc.

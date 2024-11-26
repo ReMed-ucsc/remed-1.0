@@ -38,7 +38,7 @@ body {
 }
 
 .search-container {
-  margin: 20px 0;
+  margin: 10px 0;
 }
 
 .search-bar {
@@ -46,8 +46,9 @@ body {
   border-radius: 5px;
   border: 1px solid #b0bec5;
   width: 100%;
-  max-width: 500px;
   margin-bottom: 20px;
+  /* display: flex;
+  justify-content: space-between; */
 }
 
 .structure {
@@ -63,30 +64,30 @@ body {
   background-color: transparent;
 }
 
-.Order-page {
+/* .Order-page {
   display: flex;
-  flex-direction: column;
-  /* height: 100%;
-  overflow: scroll; */
-}
+  flex-direction: row;
+  
+} */
 
 /* Overlay container */
 .overlay {
-  position: absolute;
-  top: 56%;
-  left: 53%;
+  position: relative;
+  top: 409px;
+  left: 645px;
   transform: translate(-50%, -50%);
-  z-index: 2; /* Above the background */
-  background: white;
+  z-index: 2;
+  background: #dbe2f4;
   /* padding: 20px 10px 20px 10px; */
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 1200px;
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+  width: 1042px;
   height: calc(100vh - 120px);
   text-align: center;
   overflow: scroll;
   scrollbar-width: none;
-  display: flex;
+  display: flex
+;
   justify-content: center;
   align-items: center;
 }
@@ -101,7 +102,7 @@ body {
 .order-container {
   max-width: 1200px;
   /* margin: 20px auto; */
-  background: white;
+  background: #dbe2f4;
   border-radius: 10px;
   /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
   padding: 30px;
@@ -109,20 +110,20 @@ body {
 
   width: 1180px;
   height: calc(100vh - 120px);
+  border: none;
 }
 
 .order-header h1 {
   font-size: 24px;
   color: #333;
   margin: 0 0 20px;
-  position: fixed;
-  top: 30px;
-  left: 400px;
+  justify-content: center;
+  
 }
 
 .order-body {
   position: relative;
-  top: 50px;
+  top: 10px;
 }
 
 .order-content {
@@ -138,8 +139,9 @@ body {
 }
 
 .id {
+  margin-top: 5px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .input-group {
@@ -147,6 +149,7 @@ body {
   display: flex;
   flex-direction: row;
   gap: 10px;
+  align-items: center;
 }
 
 .input-group label {
@@ -156,12 +159,16 @@ body {
   margin-bottom: 5px;
   display: flex;
   align-items: center;
+  font-weight: 500;
 }
 
 .input-group input {
-  width: 70%;
+  position: absolute;
+  right: 40px;
+  width: 60%;
   padding: 8px;
   border: 1px solid #ddd;
+  background-color: white;
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -183,24 +190,35 @@ body {
 }
 
 .prescription {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 10px;
+
+  /* padding: 10px; */
+  width: 100%;
 }
 
 .details {
-  background: #f0f0f0;
+  /* background: #f0f0f0;
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 15px;
   height: 200px;
   width: 60%;
   font-size: 14px;
-  display: flex;
+  display: grid;
   text-align: left;
-  flex-direction: column;
+  flex-direction: column; */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust column width */
+  gap: 1px; 
 }
+
+.medicine-item {
+  margin-bottom: 10px; /* Add spacing between each medicine item */
+  padding: 10px; /* Add padding inside the div */
+  background-color: #f9f9f9; /* Optional: background color */
+  border: 1px solid #ddd; /* Optional: border around each item */
+  border-radius: 5px; /* Optional: rounded corners */
+}
+
 
 .image-preview {
   width: 39%;
@@ -220,11 +238,23 @@ body {
 /* Right Section */
 .right-section {
   flex: 1;
-  background: #f0f0f0;
+  height: calc(100vh - 89.6px);
+  background: radial-gradient(ellipse,rgb(208, 227, 246), rgb(186, 216, 248), rgb(191, 226, 252));
   padding: 15px;
-  border-radius: 10px;
-  margin-right: 20px;
+  border-radius: 30px 0px 0px 30px;
+  margin-right: 20 0 20 20;
+  /* z-index: 200000; */
+  position: fixed;
+  top: 89.6px;
+  right: 0px;
+  box-shadow: 4px 4px 14px rgb(0, 0, 0);
+
 }
+
+/* .right{
+  display: flex;
+  flex-direction: row;
+} */
 
 .gallery {
   display: flex;
@@ -245,7 +275,7 @@ body {
   margin-top: 20px;
   width: 300px;
   height: 450px;
-  border: 2px solid #ccc;
+  border: 2px dotted #000000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -267,25 +297,50 @@ body {
   color: #333;
 }
 
+.patient{
+  display: flex;
+  justify-content: center;
+  color: #0056b3;
+  font-weight: 500;
+  margin: 10px;
+  font-size: 18px;
+  /* text-decoration: underline; */
+}
+
+.table{
+  display: flex;
+  flex-direction: column;
+  display: flex;
+  justify-content: center; /* Centers the table horizontally */
+  align-items: center; /* Centers the table vertically */
+}
+
 /* Table Section */
 .table-section {
   margin-bottom: 20px;
   overflow: auto;
   scrollbar-width: none;
-  height: 250px;
+  height: 400px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 30px;
+  
 }
 
-.search-bar {
+
+/* .search-bar {
   display: flex;
   gap: 10px;
   margin-bottom: 10px;
-}
+  align-items: center;
+} */
 
 .search-bar input {
   flex: 1;
   padding: 8px;
   border: 1px solid #ddd;
   border-radius: 5px;
+  width: 40%;
 }
 
 .search-bar button {
@@ -356,6 +411,12 @@ table th {
   color: white;
 } */
 
+.price{
+  display: flex;
+  text-align: left;
+
+}
+
 .total-price {
   text-align: left;
   font-weight: bold;
@@ -403,7 +464,7 @@ button {
 
 .edit-order {
   padding: 10px 20px;
-  background: #1e57dc;
+  background: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
@@ -411,13 +472,13 @@ button {
   font-size: 16px;
   position: absolute;
   top: 90%;
-  left: 50%;
+  right: 10px;
   width: 150px;
 }
 
 .delete-order {
   padding: 10px 20px;
-  background: #c12f2f;
+  background: #dc3545;
   color: white;
   border: none;
   border-radius: 5px;
@@ -425,7 +486,7 @@ button {
   font-size: 16px;
   position: absolute;
   top: 90%;
-  left: 70%;
+  left: 10px;
   width: 150px;
 }
 
@@ -447,13 +508,16 @@ button {
 /* Table styles */
 .table-section table {
   width: 95%;
-  /* border-collapse: collapse; */
+  border-collapse: collapse;
   margin-top: 20px;
   /* border: 1px solid black; */
   background-color: #000000;
   height: 100px;
   overflow: scroll;
   scrollbar-width: thin;
+  border-bottom: 1px solid black;
+  /* display: flex
+; */
 }
 
 th,

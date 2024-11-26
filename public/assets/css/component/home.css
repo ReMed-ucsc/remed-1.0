@@ -16,7 +16,7 @@ body {
 }
 
 .card {
-  width: 400px;
+  width: 250px;
   height: 250px;
   border-radius: 20px;
   color: white;
@@ -38,6 +38,11 @@ body {
   font-size: 50px;
 }
 
+.card img{
+  width: 35px;
+  height: auto
+}
+
 .green {
   background-color: #005b4e;
 }
@@ -49,6 +54,15 @@ body {
 .red {
   background-color: #c30000;
 }
+
+.yellow{
+  background-color: #ffcc00;
+}
+
+.black{
+  background-color: #000000;
+}
+
 
 .recent-activity {
   background-color: white;

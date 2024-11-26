@@ -2,30 +2,29 @@
 
 class Driver extends User
 {
-    use Model;
-
     protected $table = 'driver';
-    protected $allowedColumns = ['name', 'email', 'password', 'token', 'phone', 'address', 'fcmToken'];
+    protected $allowedColumns = ['name' , 'email', 'password', 'token', 'phone', 'address', 'fcmToken'];
 
     public function validate($data)
     {
         $this->errors = [];
 
-        if (empty($data['name'])) {
+        if(empty($data['name']))
+        {
             $this->errors['email'] = 'Email is required';
-        } else if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+        } else if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
             $$this->errors['email'] = 'Invalid email address';
         }
 
-        if (empty($data['password'])) {
+        if(empty($data['password'])){
             $this->errors['password'] = 'Password is required';
         }
 
-        if (empty($data['fcmToken'])) {
+        if(empty($data['fcmToken'])){
             $this->errors['fcmToken'] = 'FCm token is required';
         }
 
-        if (empty($this->errors)) {
+        if(empty($this->errors)){
             return true;
         }
         return false;

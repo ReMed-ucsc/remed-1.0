@@ -33,16 +33,16 @@ class GetDeliveryController
             $response['error'] = true;
             $response['message'] = 'No order found';
         } else {
-            $response['data'] = $delivery;
+            if ($delivery['status'] == 'P') {
+                $response['data'] = $delivery;
+            } else {
+                $response['error'] = true;
+                $response['message'] = 'Order already Confirmed';
+            }
         }
 
         $response['result']['error'] = $result->isError();
         $response['result']['message'] = $result->getMessage();
         echo json_encode($response);
     }
-
-    // public function index()
-    // {
-    //     echo json_encode("get comment controller");
-    // }
 }

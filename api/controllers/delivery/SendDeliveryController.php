@@ -29,6 +29,8 @@ class SendDeliveryController
 
         $deliveryData = $utilityModel->sendDetailstoDriver($orderId);
 
+        echo json_encode("New delivery requeset sent");
+
         // $orderId = $data['orderId'];
 
         // $orderModel = new OrderView();

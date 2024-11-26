@@ -144,15 +144,17 @@
                       </td>
                       <?php if (!$viewOnly): ?>
                         <td>
-                          <button type="submit" name="update" value="<?= htmlspecialchars($medicine->ProductID) ?>">
-                            Update
-                          </button>
-                          </form>
-                          <form action="<?= ROOT ?>/order/deleteItem/<?= $order->OrderID ?>" method="post">
-                            <button type="submit" name="delete" value="<?= htmlspecialchars($medicine->ProductID) ?>">
-                              Delete
+                          <div class="button-container">
+                            <button type="submit" name="update" class="image-button" value="<?= htmlspecialchars($medicine->ProductID) ?> ">
+                              <img src="<?= ROOT ?>/assets/images/edit.PNG" alt="edit">
                             </button>
-                          </form>
+                            </form>
+                            <form action="<?= ROOT ?>/order/deleteItem/<?= $order->OrderID ?>" method="post">
+                              <button type="submit" name="delete" class="image-button" value="<?= htmlspecialchars($medicine->ProductID) ?>">
+                                <img src="<?= ROOT ?>/assets/images/delete.PNG" alt="delete">
+                              </button>
+                            </form>
+                          </div>
                         </td>
                       <?php endif; ?>
 

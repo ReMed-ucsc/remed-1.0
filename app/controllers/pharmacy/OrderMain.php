@@ -21,7 +21,7 @@ class OrderMain
 
         // $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
 
-        $orderModel = new Order();
+        $orderModel = new MedicineOrder();
         $orders = $orderModel->getOrderDetails();
 
         // Pass the data to the view
@@ -30,7 +30,7 @@ class OrderMain
 
     public function read()
     {
-        $orderModel = new Order();
+        $orderModel = new MedicineOrder();
         $orders = $orderModel->getOrderDetails();
 
         // Pass the data to the view

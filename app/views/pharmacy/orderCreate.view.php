@@ -307,7 +307,7 @@
 
       </div>
 
-      <div class="background">
+      <!-- <div class="background">
         <div class="main-content">
           <h2>Orders</h2>
           <div class="search-container">
@@ -476,7 +476,7 @@
 
 
         </div>
-      </div>
+      </div> -->
 
       <script src="<?= ROOT ?>/assets/js/pharmacy/orderCreate.js"></script>
       <script src="<?= ROOT ?>/assets/js/pharmacy/orderMain.js"></script>

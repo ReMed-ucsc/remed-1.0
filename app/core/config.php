@@ -48,18 +48,18 @@ define('BASE_PATH', realpath(dirname(__FILE__) . '/../../'));
 define('DEBUG', true);
 
 
-require BASE_PATH . '/vendor/autoload.php';
+// require BASE_PATH . '/vendor/autoload.php';
 
-use Cloudinary\Configuration\Configuration;
+// use Cloudinary\Configuration\Configuration;
 
-// Cloudinary configuration
-Configuration::instance([
-    'cloud' => [
-        'cloud_name' => getenv('CLOUDINARY_CLOUD_NAME'),
-        'api_key' => getenv('CLOUDINARY_API_KEY'),
-        'api_secret' => getenv('CLOUDINARY_API_SECRET')
-    ],
-    'url' => [
-        'secure' => true
-    ]
-]);
+// // Cloudinary configuration
+// Configuration::instance([
+//     'cloud' => [
+//         'cloud_name' => getenv('CLOUDINARY_CLOUD_NAME'),
+//         'api_key' => getenv('CLOUDINARY_API_KEY'),
+//         'api_secret' => getenv('CLOUDINARY_API_SECRET')
+//     ],
+//     'url' => [
+//         'secure' => true
+//     ]
+// ]);

@@ -58,18 +58,19 @@
                 <div class="id">
                   <div class="input-group">
                     <label>Patient ID</label>
-                    <input type="text" placeholder="Value">
+                    <input type="text" placeholder="Value" value="<?= htmlspecialchars($order->PatientID) ?>" disabled>
                   </div>
                   <div class="input-group">
                     <label>Order ID</label>
-                    <input type="text" placeholder="Value">
+                    <input type="text" placeholder="Value" value="<?= htmlspecialchars($order->OrderID) ?>" disabled>
                   </div>
                 </div>
                 <div class="prescription">
                   <div class="details">
-                    <p>Strepsils 03</p>
-                    <p>Vitamin C</p>
-                    <p>Acne treatments</p>
+                    <?php foreach ($medicineList as $medicine): ?>
+                      <p><?= htmlspecialchars($medicine->ProductName) ?></p>
+                    <?php endforeach; ?>
+
                   </div>
                   <div class="image-preview">
                     <img src="<?= ROOT ?>/assets/images/prescription2.jpg" alt="Prescription Image" onclick="showImage(this)">
@@ -81,12 +82,16 @@
 
             </div>
 
+            <!-- <?php show($order) ?> -->
             <!-- Table Section -->
             <div class="table-section">
-              <div class="search-bar">
-                <input type="text" placeholder="Search by medicine or generic name...">
-                <button>Add</button>
-              </div>
+              <?php if (!$viewOnly) { ?>
+                <div class="search-bar">
+                  <input type="text" placeholder="Search by medicine or generic name...">
+                  <button>Add</button>
+                </div>
+              <?php } ?>
+
               <table class="order-table">
                 <thead>
                   <tr>
@@ -99,168 +104,34 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Auto fill</td>
-                    <td>Auto fill</td>
-                    <td>Auto fill</td>
-                    <td>
-                      <div class="dropdown-container">
-                        <select class="custom-select">
-                          <option value="" disabled selected>Choose an option</option>
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </select>
-                        <i class="dropdown-icon">▼</i>
-                      </div>
-                    </td>
-                    <td>1</td>
-                    <td>50.00</td>
-                  </tr>
-                  <tr>
-                    <td>Auto fill</td>
-                    <td>Auto fill</td>
-                    <td>Auto fill</td>
-                    <td>
-                      <div class="dropdown-container">
-                        <select class="custom-select">
-                          <option value="" disabled selected>Choose an option</option>
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </select>
-                        <i class="dropdown-icon">▼</i>
-                      </div>
-                    </td>
-                    <td>1</td>
-                    <td>50.00</td>
-                  </tr>
-                  <tr>
-                    <td>Auto fill</td>
-                    <td>Auto fill</td>
-                    <td>Auto fill</td>
-                    <td>
-                      <div class="dropdown-container">
-                        <select class="custom-select">
-                          <option value="" disabled selected>Choose an option</option>
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </select>
-                        <i class="dropdown-icon">▼</i>
-                      </div>
-                    </td>
-                    <td>1</td>
-                    <td>50.00</td>
-                  </tr>
-                  <tr>
-                    <td>Auto fill</td>
-                    <td>Auto fill</td>
-                    <td>Auto fill</td>
-                    <td>
-                      <div class="dropdown-container">
-                        <select class="custom-select">
-                          <option value="" disabled selected>Choose an option</option>
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </select>
-                        <i class="dropdown-icon">▼</i>
-                      </div>
-                    </td>
-                    <td>1</td>
-                    <td>50.00</td>
-                  </tr>
-                  <tr>
-                    <td>Auto fill</td>
-                    <td>Auto fill</td>
-                    <td>Auto fill</td>
-                    <td>
-                      <div class="dropdown-container">
-                        <select class="custom-select">
-                          <option value="" disabled selected>Choose an option</option>
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </select>
-                        <i class="dropdown-icon">▼</i>
-                      </div>
-                    </td>
-                    <td>1</td>
-                    <td>50.00</td>
-                  </tr>
-                  <tr>
-                    <td>Auto fill</td>
-                    <td>Auto fill</td>
-                    <td>Auto fill</td>
-                    <td>
-                      <div class="dropdown-container">
-                        <select class="custom-select">
-                          <option value="" disabled selected>Choose an option</option>
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </select>
-                        <i class="dropdown-icon">▼</i>
-                      </div>
-                    </td>
-                    <td>1</td>
-                    <td>50.00</td>
-                  </tr>
-                  <tr>
-                    <td>Auto fill</td>
-                    <td>Auto fill</td>
-                    <td>Auto fill</td>
-                    <td>
-                      <div class="dropdown-container">
-                        <select class="custom-select">
-                          <option value="" disabled selected>Choose an option</option>
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </select>
-                        <i class="dropdown-icon">▼</i>
-                      </div>
-                    </td>
-                    <td>1</td>
-                    <td>50.00</td>
-                  </tr>
-                  <tr>
-                    <td>Auto fill</td>
-                    <td>Auto fill</td>
-                    <td>Auto fill</td>
-                    <td>
-                      <div class="dropdown-container">
-                        <select class="custom-select">
-                          <option value="" disabled selected>Choose an option</option>
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </select>
-                        <i class="dropdown-icon">▼</i>
-                      </div>
-                    </td>
-                    <td>1</td>
-                    <td>50.00</td>
-                  </tr>
-                  <tr>
-                    <td>Auto fill</td>
-                    <td>Auto fill</td>
-                    <td>Auto fill</td>
-                    <td>
-                      <div class="dropdown-container">
-                        <select class="custom-select">
-                          <option value="" disabled selected>Choose an option</option>
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </select>
-                        <i class="dropdown-icon">▼</i>
-                      </div>
-                    </td>
-                    <td>1</td>
-                    <td>50.00</td>
-                  </tr>
+                  <?php foreach ($medicineList as $medicine): ?>
+                    <tr>
+                      <td><?= htmlspecialchars($medicine->ProductName) ?></td>
+                      <td><?= htmlspecialchars($medicine->genericName) ?></td>
+                      <td><?= htmlspecialchars($medicine->ManufactureName) ?> </td>
+                      <td>
+                        <?= htmlspecialchars($medicine->strength) ?>
+                        <!-- <div class="dropdown-container">
+                          <select class="custom-select" <?php echo ($viewOnly ? 'disabled' : '') ?>>
+                            <option value="" disabled selected>Choose an option</option>
+                            <option value="option1">Option 1</option>
+                            <option value="option2">Option 2</option>
+                            <option value="option3">Option 3</option>
+                          </select>
+                          <i class="dropdown-icon">▼</i>
+                        </div> -->
+                      </td>
+                      <td><input type="number" name="quantity" class="short-input" value="<?= htmlspecialchars($medicine->quantity) ?>"></td>
+                      <td>
+                        <?php
+                        $quantity = $_POST['quantity'][$medicine->ProductID] ?? 0;
+                        $price = $quantity * $medicine->unitPrice;
+                        echo number_format($price, 2);
+                        ?>
+                      </td>
+                    </tr>
+                  <?php endforeach; ?>
+
                 </tbody>
               </table>
               <p class="total-price">Total price</p>
@@ -268,8 +139,25 @@
 
             <!-- Submit Button -->
             <div class="submit-section">
-              <button class="edit-order">Edit Order</button>
-              <button class="delete-order">Delete Order</button>
+              <?php if ($viewOnly) { ?>
+
+                <button class="edit-order">
+                  <a href="<?= ROOT ?>/order/edit/<?= $order->OrderID ?>" style="text-decoration: none; color:white;">
+                    Edit Order
+                  </a></button>
+                <button class="delete-order">Delete Order</button>
+              <?php } else {  ?>
+                <button class="delete-order">
+                  <a href="<?= ROOT ?>/order/<?= $order->OrderID ?>" style="text-decoration: none; color:white;">
+                    Cancel
+                  </a>
+                </button>
+                <button class="edit-order">
+                  <a href="<?= ROOT ?>/order/<?= $order->OrderID ?>" style="text-decoration: none; color:white;">
+                    Update
+                  </a></button>
+              <?php } ?>
+
             </div>
           </div>
         </div>
@@ -289,176 +177,7 @@
 
       </div>
 
-      <div class="background">
-        <div class="main-content">
-          <h2>Orders</h2>
-          <div class="search-container">
-            <input type="text" placeholder="Search here" class="search-bar">
-            <button class="search"><i class="icon ph-bold ph-magnifying-glass"></i>
-            </button>
-          </div>
 
-          <div class="ongoing">Ongoing Orders</div>
-
-          <section class="order-management">
-
-
-            <table class="order-table">
-              <thead>
-                <tr>
-                  <th style="width: 7%;">Order ID</th>
-                  <th style="width: 7%;">Patient ID</th>
-                  <th style="width: 20%;">Delivery Address</th>
-                  <th style="width: 5%;">Date</th>
-                  <th style="width: 10%;">Payment</th>
-                  <th style="width: 5%;">Type</th>
-                  <th style="width: 5%;">Status</th>
-                  <th style="width: 5%;"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>#342342</td>
-                  <td>ABC123</td>
-                  <td>432 Park Ave, NY</td>
-                  <td>01/09/2024</td>
-                  <td>$45.00</td>
-                  <td>PayPal</td>
-                  <td><span class="status success">Delivered</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-                <tr>
-                  <td>#564564</td>
-                  <td>DEF456</td>
-                  <td>250 River Dr, TX</td>
-                  <td>31/08/2024</td>
-                  <td>$67.99</td>
-                  <td>Cash on Delivery</td>
-                  <td><span class="status pending">Pending</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-                <tr>
-                  <td>#324562</td>
-                  <td>XYZ789</td>
-                  <td>123 Oak St, FL</td>
-                  <td>25/08/2024</td>
-                  <td>$100.99</td>
-                  <td>Transfer</td>
-                  <td><span class="status canceled">Canceled</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-                <tr>
-                  <td>#564564</td>
-                  <td>DEF456</td>
-                  <td>250 River Dr, TX</td>
-                  <td>31/08/2024</td>
-                  <td>$67.99</td>
-                  <td>Cash on Delivery</td>
-                  <td><span class="status pending">Pending</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-                <tr>
-                  <td>#342342</td>
-                  <td>ABC123</td>
-                  <td>432 Park Ave, NY</td>
-                  <td>01/09/2024</td>
-                  <td>$45.00</td>
-                  <td>PayPal</td>
-                  <td><span class="status success">Delivered</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-                <tr>
-                  <td>#564564</td>
-                  <td>DEF456</td>
-                  <td>250 River Dr, TX</td>
-                  <td>31/08/2024</td>
-                  <td>$67.99</td>
-                  <td>Cash on Delivery</td>
-                  <td><span class="status pending">Pending</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-                <tr>
-                  <td>#324562</td>
-                  <td>XYZ789</td>
-                  <td>123 Oak St, FL</td>
-                  <td>25/08/2024</td>
-                  <td>$100.99</td>
-                  <td>Transfer</td>
-                  <td><span class="status canceled">Canceled</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-                <tr>
-                  <td>#342342</td>
-                  <td>ABC123</td>
-                  <td>432 Park Ave, NY</td>
-                  <td>01/09/2024</td>
-                  <td>$45.00</td>
-                  <td>PayPal</td>
-                  <td><span class="status success">Delivered</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-                <tr>
-                  <td>#342342</td>
-                  <td>ABC123</td>
-                  <td>432 Park Ave, NY</td>
-                  <td>01/09/2024</td>
-                  <td>$45.00</td>
-                  <td>PayPal</td>
-                  <td><span class="status success">Delivered</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-                <tr>
-                  <td>#342342</td>
-                  <td>ABC123</td>
-                  <td>432 Park Ave, NY</td>
-                  <td>01/09/2024</td>
-                  <td>$45.00</td>
-                  <td>PayPal</td>
-                  <td><span class="status success">Delivered</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-                <tr>
-                  <td>#342342</td>
-                  <td>ABC123</td>
-                  <td>432 Park Ave, NY</td>
-                  <td>01/09/2024</td>
-                  <td>$45.00</td>
-                  <td>PayPal</td>
-                  <td><span class="status success">Delivered</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-                <tr>
-                  <td>#342342</td>
-                  <td>ABC123</td>
-                  <td>432 Park Ave, NY</td>
-                  <td>01/09/2024</td>
-                  <td>$45.00</td>
-                  <td>PayPal</td>
-                  <td><span class="status success">Delivered</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-                <tr>
-                  <td>#342342</td>
-                  <td>ABC123</td>
-                  <td>432 Park Ave, NY</td>
-                  <td>01/09/2024</td>
-                  <td>$45.00</td>
-                  <td>PayPal</td>
-                  <td><span class="status success">Delivered</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-              </tbody>
-            </table>
-
-            <button class="new-order-btn"><i class="ph-bold ph-plus"></i>
-              <p class="new-order">New Order</p>
-            </button>
-
-          </section>
-
-
-        </div>
-      </div>
 
       <script src="<?= ROOT ?>/assets/js/pharmacy/orderCreate.js"></script>
       <script src="<?= ROOT ?>/assets/js/pharmacy/orderMain.js"></script>

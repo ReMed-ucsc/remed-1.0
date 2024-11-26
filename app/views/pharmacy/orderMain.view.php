@@ -82,7 +82,7 @@
                   <td><?= htmlspecialchars($order->pickup) ?></td>
                   <td><?= htmlspecialchars($order->pickup) ?></td>
                   <td><?= htmlspecialchars($order->status) ?></td>
-                  <td><a class="view" href="<?= ROOT ?>/orderView/<?= $order->OrderID ?>">View</a></td>
+                  <td><a class="view" href="<?= ROOT ?>/order/<?= $order->OrderID ?>">View</a></td>
                 </tr>
               <?php endforeach; ?>
             <?php else: ?>

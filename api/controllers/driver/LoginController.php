@@ -23,13 +23,15 @@ class LoginController
             $userModel = new Driver();
             $user = $userModel->getDriverByEmail($email);
 
+            //var_dump($user);
+
             if ($user) {
-                if (password_verify($password, $user->password)) {
+                if (password_verify($password, $user['password'])) {
                     $authToken = hash('sha384', microtime() . uniqid() . bin2hex(random_bytes(10)));
                     $userModel->updateToken($email, $authToken);
                     $userModel->updateFcmToken($email, $fcmToken);
 
-                    $response['user']['name'] = $user->driverName;
+                    $response['user']['name'] = $user['driverName'];
                     $response['user']['email'] = $email;
                     $response['user']['auth_token'] = $authToken;
 

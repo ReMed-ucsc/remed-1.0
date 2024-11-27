@@ -22,6 +22,7 @@ class Login
                     $this->setSession('user_id', $row->email);
                     $this->setSession('auth_token', $authToken);
                     $this->setSession('isAdmin', true);
+                    $this->setSession('last_activity', time());
 
                     redirect('admin/dashboard');
                     exit();

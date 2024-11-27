@@ -62,13 +62,49 @@ trait Controller
     public function isAuthorized()
     {
         $this->startSession();
-        return $_SESSION['isAdmin'];
+        return isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'];
+    }
+
+    public function checkSessionTimeout()
+    {
+        $app = new App();
+
+        $timeoutDuration = 30; // 30 minutes
+
+        if ($this->getSession('last_activity') && (time() - $this->getSession('last_activity') > $timeoutDuration)) {
+            // Last activity was more than $timeoutDuration ago
+            $this->destroySession();
+            if ($app->checkAdmin()) {
+                redirect('admin/login');
+            } else {
+                redirect('login');
+            }
+            exit();
+        }
+
+        // Update last activity time
+        // $_SESSION['last_activity'] = time();
     }
 
     // Protect a route by redirecting to login if not authenticated
     public function protectRoute()
     {
         $app = new App();
+
+        if (!$this->isAuthenticated()) {
+            $timeoutDuration = 30; // in seconds
+
+            if ($this->getSession('last_activity') && (time() - $this->getSession('last_activity') > $timeoutDuration)) {
+                // Last activity was more than $timeoutDuration ago
+                $this->destroySession();
+                if ($app->checkAdmin()) {
+                    redirect('admin/login');
+                } else {
+                    redirect('login');
+                }
+                exit();
+            }
+        }
 
         if (!$this->isAuthenticated()) {
             if ($app->checkAdmin()) {

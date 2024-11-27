@@ -62,7 +62,7 @@ trait Controller
     public function isAuthorized()
     {
         $this->startSession();
-        return isset($_SESSION['isAdmin']);
+        return $_SESSION['isAdmin'];
     }
 
     // Protect a route by redirecting to login if not authenticated
@@ -77,9 +77,13 @@ trait Controller
                 redirect('login');
             }
             exit();
-        } else {
-            if (!($app->checkAdmin() && $this->isAuthorized())) {
+        } else if ($app->checkAdmin()) {
+            if (!$this->isAuthorized()) {
                 redirect('admin/login');
+            }
+        } else {
+            if ($this->isAuthorized()) {
+                redirect('login');
             }
         }
     }

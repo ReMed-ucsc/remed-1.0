@@ -5,7 +5,7 @@ class Pharmacy extends User
     use Model;
 
     protected $table = 'pharmacy';
-    protected $allowedColumns = ['PharmacyID', 'RegNo', 'email', 'password', 'name', 'pharmacistName', 'contactNo', 'address', 'latitude', 'longitude', 'license'];
+    protected $allowedColumns = ['PharmacyID', 'RegNo', 'email', 'password', 'token', 'name', 'pharmacistName', 'contactNo', 'address', 'latitude', 'longitude', 'license'];
     protected $order_column = "PharmacyID";
 
     public function searchNearbyPharmacy($latitude, $longitude, $range = 10)

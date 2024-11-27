@@ -1,7 +1,7 @@
 document.getElementById('registrationButton').addEventListener('click', function() {
-    window.location.href = "./Registration/Register-page.php"; // Replace with your sign-up page path
+    window.location.href = "./registerPage"; // Replace with your sign-up page path
 });
 
 document.getElementById('loginButton').addEventListener('click', function() {
-    window.location.href = 'Login/Login-page.php'; // Replace with your login page path
+    window.location.href = './login'; // Replace with your login page path
 });

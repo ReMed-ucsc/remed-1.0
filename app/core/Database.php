@@ -24,6 +24,7 @@ trait Database
         $stmt = $con->prepare($query);
         // show($query);
         $check = $stmt->execute($data);
+        // show($query);
         if ($check) {
             // If the query is a SELECT or similar, fetch results
             if (str_starts_with(strtoupper(trim($query)), 'SELECT')) {

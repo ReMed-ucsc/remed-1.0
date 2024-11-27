@@ -1,5 +1,6 @@
 <?php
 
+
 // Dummy data for the dashboard
 $registeredPharmacies = 123;
 $onlineUsers = 45;
@@ -20,6 +21,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php' ?>
 
 <body>
 
+
     <!-- dashboardBody start -->
     <div class="dashboard">
         <div class="card greenA">
@@ -37,6 +39,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php' ?>
             <p>Requested Pharmacy</p>
             <h2 id="count"><?= $requestedPharmacies ?></h2>
         </div>
+
         <div class="card yellow">
             <img src="<?= ROOT ?>/assets/images/driver.png" alt="" />
             <p>Total Drivers</p>
@@ -48,6 +51,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php' ?>
             <h2 id="count"><?= $requestedDrivers ?></h2>
         </div>
     </div>
+
     <div class="recent-activity">
         <h3>Recent Activity</h3>
         <?php foreach ($recentActivities as $activity): ?>
@@ -57,6 +61,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php' ?>
             </div>
         <?php endforeach; ?>
     </div>
+
     <!-- dashboardBody end -->
 
     <script>

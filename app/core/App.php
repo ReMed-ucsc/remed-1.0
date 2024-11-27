@@ -56,4 +56,20 @@ class App
         // If no method is specified, default to 'index'
         call_user_func_array([$controller, $this->method], $URL);
     }
+
+    public function checkAdmin()
+    {
+        $URL = $this->splitURL();
+
+        unset($URL[0]);
+        $URL = array_values($URL); // Reindex the array
+        // show($URL);
+
+        // Determine if the URL contains 'admin'
+        if (!empty($URL[0]) && strtolower($URL[0]) === 'admin') {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

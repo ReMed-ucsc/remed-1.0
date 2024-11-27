@@ -16,7 +16,7 @@
 
     <div class="tab">
         <img src="<?= ROOT ?>/assets/images/home.png" alt="" />
-        <a href="<?=ROOT?>/admin"> Home</a>
+        <a href="<?= ROOT ?>/admin"> Home</a>
     </div>
 
 
@@ -56,15 +56,15 @@
         <div id="settings-submenu" class="submenu">
             <div class="tab">
                 <img src="<?= ROOT ?>/assets/images/settings.png" alt="" />
-                <a href="<?=ROOT?>/admin/general">General Settings</a>
+                <a href="<?= ROOT ?>/admin/general">General Settings</a>
             </div>
             <div class="tab">
                 <img src="<?= ROOT ?>/assets/images/UserManagement.png" alt="" />
-                <a href="<?=ROOT?>/admin/accountManage"> User Management</a>
+                <a href="<?= ROOT ?>/admin/accountManage"> User Management</a>
             </div>
             <div class="tab">
                 <img src="<?= ROOT ?>/assets/images/policy.png" alt="" />
-                <a href="<?=ROOT?>/admin/legal"> Legal & Compliance</a>
+                <a href="<?= ROOT ?>/admin/legal"> Legal & Compliance</a>
             </div>
         </div>
         <!-- Submenu end-->
@@ -82,15 +82,15 @@
         <img src="<?= ROOT ?>/assets/images/admin.png" alt="" />
         <div class="details">
             <h4>ADMINISTRATOR</h4>
-            <p>admin.remad@gmail.com</p>
+            <p>admin@gmail.com</p>
         </div>
         <div class="tab">
             <img src="<?= ROOT ?>/assets/images/setting.png" alt="" />
-            <a href="<?=ROOT?>/admin/general">Setting</a>
+            <a href="<?= ROOT ?>/admin/general">Setting</a>
         </div>
         <div class="tab">
             <img src="<?= ROOT ?>/assets/images/logout.png" alt="" />
-            <a href="<?= ROOT ?>/admin/login">Logout</a>
+            <a href="<?= ROOT ?>/admin/login/logout">Logout</a>
         </div>
     </div>
 </div>

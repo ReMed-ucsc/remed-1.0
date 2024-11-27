@@ -5,20 +5,21 @@ class Dashboard
     use Controller;
     public function index()
     {
-        // $user = new User;
-        // $arr['email'] = "name@example.com";
+        // Protect the route
+        $this->protectRoute();
 
-        // $result = $model->where(data_for_filtering, data_not_for_filtering);
-        // $result = $model->insert(insert_data);
-        // $result = $model->update(filtering_data updating_data, id_column_for_filtering);
-        // $result = $model->delete(id, id_column);
-        // $result = $user->findAll();
+        // Get session data
+        $username = $this->getSession('isAdmin');
+        $userId = $this->getSession('user_id');
+        $authToken = $this->getSession('auth_token');
 
-        // show($result);
 
-        // $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
-
-        $data['username'] = [];
+        // Pass session data to the view
+        $data = [
+            'username' => $username,
+            'userId' => $userId,
+            'authToken' => $authToken,
+        ];
         $this->view('admin/dashboard', $data);
     }
 

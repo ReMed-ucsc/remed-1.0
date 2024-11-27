@@ -59,11 +59,22 @@ trait Controller
         return isset($_SESSION['user_id']);
     }
 
+    public function isAuthorized()
+    {
+        $this->startSession();
+        return isset($_SESSION['isAdmin']);
+    }
+
     // Protect a route by redirecting to login if not authenticated
     public function protectRoute()
     {
         if (!$this->isAuthenticated()) {
-            redirect('login');
+            $app = new App();
+            if ($app->checkAdmin()) {
+                redirect('admin/login');
+            } else {
+                redirect('login');
+            }
             exit();
         }
     }

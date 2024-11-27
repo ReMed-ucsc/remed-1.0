@@ -1,6 +1,6 @@
 <?php
 
-class Pharmacy
+class Pharmacy extends User
 {
     use Model;
 

@@ -96,4 +96,4 @@
 
     <script src="<?= ROOT ?>/assets/js/admin/pharmacyDetails.js"></script>
 
-    <?php require_once BASE_PATH . '/app/views/inc/footer.view.php' ?>
+    <?php require_once BASE_PATH . '/app/views/inc/footer.view.php' ?>app

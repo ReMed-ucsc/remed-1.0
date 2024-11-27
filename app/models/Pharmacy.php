@@ -1,40 +1,106 @@
 <?php
-
 class Pharmacy
 {
     use Model;
 
     protected $table = 'pharmacy';
-    protected $allowedColumns = ['PharmacyID', 'RegNo', 'name', 'contactNo', 'address', 'latitude', 'longitude'];
+    protected $allowedColumns = [
+        'PharmacyID',
+        'RegNo',
+        'contactNo',
+        'address',
+        'pharmacyName',
+        'pharmacistName',
+        'license',
+        'approvedDate',
+        'email',
+        'status',
+        'document',
+        'latitude',
+        'longitude'
+    ];
     protected $order_column = "PharmacyID";
 
-    public function searchNearbyPharmacy($latitude, $longitude, $range = 10)
+    public function delete($id, $id_column = 'PharmacyID')
     {
-        $rangeInMeters = $range * 1000;
+        try {
+            // Validate ID
+            if (empty($id)) {
+                throw new Exception("Invalid pharmacy ID");
+            }
 
-        // Define columns to select
-        $columns = [
-            'PharmacyID',
-            'name',
-            'contactNo',
-            'address',
-            'latitude',
-            'longitude',
-            'ST_Distance_Sphere(POINT(longitude, latitude), POINT(:longitude, :latitude)) AS distance'
+            $data[$id_column] = $id;
+            $query = "DELETE FROM $this->table WHERE $id_column = :$id_column";
+
+            // Execute the query and check result
+            $result = $this->query($query, $data);
+
+            if ($result === false) {
+                throw new Exception("Failed to execute delete query");
+            }
+
+            return true;
+        } catch (Exception $e) {
+            error_log("Error deleting pharmacy: " . $e->getMessage());
+            return false;
+        }
+    }
+    public function getPharmacyById($id)
+    {
+        $data = ['PharmacyID' => $id];
+        return $this->first($data);
+    }
+
+    // function checkLicenseNumberUnique($licenseNumber)
+    // {
+    //     // Assuming you have a database connection $db
+    //     global $db;
+    //     $query = $db->prepare("SELECT COUNT(*) FROM pharmacy WHERE license = ?");
+    //     $query->execute([$licenseNumber]);
+    //     $count = $query->fetchColumn();
+
+    //     return $count == 0;
+    // }
+
+    function validate($data)
+    {
+        $this->errors = []; // Reset errors
+
+        // Validate pharmacy name
+        if (empty($data['pharmacyName'])) {
+            $this->errors['pharmacyName'] = "Pharmacy name is required.";
+        }
+
+        // Validate email
+        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            $this->errors['email'] = "Invalid email format.";
+        }
+
+        // Validate contact number
+        if (!is_numeric($data['contactNo']) || strlen($data['contactNo']) < 10) {
+            $this->errors['contactNo'] = "Invalid contact number.";
+        }
+
+        // Check if license is unique
+        // if (!$this->checkLicenseNumberUnique($data['license'])) {
+        //     $this->errors['license'] = "License number already exists.";
+        // }
+
+        return empty($this->errors); // Pass if no errors
+    }
+
+    public function registerPharmacy($pharmacyName, $pharmacistName, $license, $contactNo, $email, $address, $document)
+    {
+        $data = [
+            'pharmacyName' => $pharmacyName,
+            'pharmacistName' => $pharmacistName,
+            'email' => $email,
+            'address' => $address,
+            'contactNo' => $contactNo,
+            'license' => $license,
+            'document' => $document,
+            'status' => 'APPROVED'
         ];
-
-        // Define conditions
-        $conditions = [
-            'raw' => "ST_Distance_Sphere(POINT(longitude, latitude), POINT(:longitude, :latitude)) <= :rangeInMeters"
-        ];
-
-        // Bind additional parameters for raw SQL conditions
-        $additionalData = [
-            'longitude' => $longitude,
-            'latitude' => $latitude,
-            'rangeInMeters' => $rangeInMeters
-        ];
-
-        return $this->selectWhere($columns, $conditions, $additionalData, 'distance ASC');
+        return $this->insert($data);
     }
 }

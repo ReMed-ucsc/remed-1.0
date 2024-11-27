@@ -36,6 +36,7 @@ class App
         if (file_exists($filename)) {
             require_once($filename);
             $this->controller = ucfirst($URL[0] ?? ($isAdmin ? 'Dashboard'  : 'Index'));
+
             unset($URL[0]);
         } else {
             require_once("../app/controllers/_404.php");

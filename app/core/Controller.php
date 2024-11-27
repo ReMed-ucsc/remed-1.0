@@ -38,6 +38,16 @@ trait Controller
         $_SESSION[$key] = $value;
     }
 
+    protected function unsetSession($key)
+    {
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+        if (isset($_SESSION[$key])) {
+            unset($_SESSION[$key]);
+        }
+    }
+
     // Get a session variable
     public function getSession($key)
     {
@@ -56,7 +66,7 @@ trait Controller
     public function isAuthenticated()
     {
         $this->startSession();
-        return isset($_SESSION['user_id']);
+        return isset($_SESSION['id']);
     }
 
     // Protect a route by redirecting to login if not authenticated

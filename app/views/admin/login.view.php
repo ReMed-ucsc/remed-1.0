@@ -55,7 +55,7 @@ require_once BASE_PATH . '/app/views/inc/header.view.php'
 
                         <button type="submit">Login</button>
                         <?php if (!empty($errors)): ?>
-                            <div class="alert alert-danger error">
+                            <div class="error">
                                 <?= implode("<br>", $errors) ?>
                             </div>
                         <?php endif; ?>

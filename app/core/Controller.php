@@ -68,14 +68,19 @@ trait Controller
     // Protect a route by redirecting to login if not authenticated
     public function protectRoute()
     {
+        $app = new App();
+
         if (!$this->isAuthenticated()) {
-            $app = new App();
             if ($app->checkAdmin()) {
                 redirect('admin/login');
             } else {
                 redirect('login');
             }
             exit();
+        } else {
+            if (!($app->checkAdmin() && $this->isAuthorized())) {
+                redirect('admin/login');
+            }
         }
     }
 }

@@ -7,9 +7,6 @@ class Login
     {
         $data = [];
 
-        $user = new Admin;
-
-
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $user = new Admin;
             $arr['email'] = $_POST['email'];
@@ -22,7 +19,6 @@ class Login
                     $authToken = hash('sha384', microtime() . uniqid() . bin2hex(random_bytes(10)));
                     $user->updateToken($arr['email'], $authToken);
 
-                    $this->setSession('USER', $row);
                     $this->setSession('user_id', $row->email);
                     $this->setSession('auth_token', $authToken);
                     $this->setSession('isAdmin', true);

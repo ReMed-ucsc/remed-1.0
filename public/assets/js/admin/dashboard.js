@@ -1,5 +1,5 @@
 /* click cards */
-document.querySelector(".green").addEventListener("click", function () {
+document.querySelector(".greenA").addEventListener("click", function () {
   window.location.href = ROOT + "/admin/pharmacyDetails";
 });
 

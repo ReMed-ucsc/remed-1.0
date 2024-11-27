@@ -20,9 +20,9 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php' ?>
 
 <body>
 
-    <!-- dashbordBody start -->
+    <!-- dashboardBody start -->
     <div class="dashboard">
-        <div class="card green">
+        <div class="card greenA">
             <img src="<?= ROOT ?>/assets/images/statistics.png" alt="" />
             <p>Registered Pharmacy</p>
             <h2 id="count"><?= $registeredPharmacies ?></h2>
@@ -57,7 +57,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php' ?>
             </div>
         <?php endforeach; ?>
     </div>
-    <!-- dashbordBody end -->
+    <!-- dashboardBody end -->
 
     <script>
         var ROOT = '<?= ROOT ?>';

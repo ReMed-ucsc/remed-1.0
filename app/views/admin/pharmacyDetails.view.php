@@ -71,7 +71,7 @@
                                 <td><?= htmlspecialchars($pharmacy_item->approvedDate) ?></td>
                                 <td><?= htmlspecialchars($pharmacy_item->email) ?></td>
                                 <td><?= htmlspecialchars($pharmacy_item->address) ?></td>
-                                <td><?= htmlspecialchars($pharmacy_item->status) ?></td>
+                                <td class="status statusA"><?= htmlspecialchars($pharmacy_item->status) ?></td>
                                 <td>
                                     <a href="<?= ROOT ?>/admin/PharmacyDetails/edit/<?= htmlspecialchars($pharmacy_item->PharmacyID) ?>">
                                         <img class="action edit" src="../../public/assets/images/pencil.png" alt="Edit" />

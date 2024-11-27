@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -35,11 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
 
-<?php include '../Navbar/non-reg-navbar.php'; ?>
+<!-- <?php include '../Navbar/non-reg-navbar.php'; ?> -->
 
 <div class="container">
     <div class="box-left">
-        <h2>Log in to Remed</h2>
+        <h2>Log in to ReMed</h2>
         <p>Welcome back! Log in to access your pharmacy’s dashboard, where you can manage inventory, process customer orders, and update your pharmacy's details. Stay connected with your customers, track deliveries, and ensure your pharmacy runs smoothly. Enter your credentials to continue.</p>
     </div>
     <div class="box-right">

@@ -1,8 +1,9 @@
 <!-- Navbar start-->
 <header class="navbar">
     <div class="navbar-left">
-        <img class="menu" src="<?= ROOT ?>/assets/images/hamburger.png" alt="menu" />
-        <img class="logo" src="<?= ROOT ?>/assets/images/ReMeD.png" alt="logo" />
+        <a href="<?= ROOT ?>/admin/dashboard">
+            <img class="logo" src="<?= ROOT ?>/assets/images/ReMeD.png" alt="logo" />
+        </a>
     </div>
 
     <div class="navbar-right">
@@ -109,15 +110,15 @@
 
 <script>
     // JavaScript to toggle the dropdown menu visibility
-    document.querySelector('.menu').addEventListener('click', function(event) {
-        event.stopPropagation(); // Prevent the click event from bubbling up to the document
-        var dropdown = document.getElementById('dropdown-menu');
-        if (dropdown.style.display === 'none' || dropdown.style.display === '') {
-            dropdown.style.display = 'block';
-        } else {
-            dropdown.style.display = 'none';
-        }
-    });
+    // document.querySelector('.menu').addEventListener('click', function(event) {
+    //     event.stopPropagation(); // Prevent the click event from bubbling up to the document
+    //     var dropdown = document.getElementById('dropdown-menu');
+    //     if (dropdown.style.display === 'none' || dropdown.style.display === '') {
+    //         dropdown.style.display = 'block';
+    //     } else {
+    //         dropdown.style.display = 'none';
+    //     }
+    // });
 
     document.addEventListener('click', function(event) {
         var dropdown = document.getElementById('dropdown-menu');
@@ -181,4 +182,5 @@
             dropdown.style.display = 'none';
         }
     });
+
 </script>

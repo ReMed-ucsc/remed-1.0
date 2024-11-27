@@ -1,27 +1,5 @@
 <?php
 
-// Check if form is submitted
-// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//     // Replace these with your own validation/authentication logic
-//     $username = $_POST['email'];
-//     $password = $_POST['password'];
-
-//     // Example hardcoded credentials for testing
-//     $valid_username = 'admin';
-//     $valid_password = 'admin123';
-
-//     if ($username == $valid_username && $password == $valid_password) {
-//         // Set session variables
-//         $_SESSION['loggedin'] = true;
-//         $_SESSION['username'] = $username;
-
-//         // Redirect to admin dashboard or homepage
-//         header("Location:http://localhost/remed-1.0/public/admin/dashboard");
-//         exit;
-//     } else {
-//         $error_message = "Invalid username or password!";
-//     }
-// }
 require_once BASE_PATH . '/app/views/inc/header.view.php'
 
 ?>
@@ -52,6 +30,7 @@ require_once BASE_PATH . '/app/views/inc/header.view.php'
                             <input type="checkbox" name="remember" id="remember">
                             <label for="remember">Remember me</label>
                         </div>
+
 
                         <button type="submit">Login</button>
                         <?php if (!empty($errors)): ?>

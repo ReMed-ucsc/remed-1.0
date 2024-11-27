@@ -14,3 +14,4 @@ class DeliveryView
         return $this->first($data);
     }
 }
+

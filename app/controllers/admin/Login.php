@@ -3,6 +3,7 @@
 class Login
 {
     use Controller;
+
     public function index()
     {
         $data = [];
@@ -24,16 +25,17 @@ class Login
                     $this->setSession('isAdmin', true);
                     $this->setSession('last_activity', time());
 
+
                     redirect('admin/dashboard');
                     exit();
                 }
             }
 
-            $user->errors['email'] = "Wrong email or password";
 
-            $data['errors'] = $user->errors;
+            $admin->errors['email'] = "Wrong email or password";
+
+            $data['errors'] = $admin->errors;
         }
-
 
         $this->view('admin/login', $data);
     }
@@ -42,6 +44,7 @@ class Login
     {
         $this->destroySession();
         redirect('admin/login');
+
         exit();
     }
 }

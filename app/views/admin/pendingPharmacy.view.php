@@ -23,6 +23,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
 </div>
 
 
+
 <!-- Table Structure -->
 <div class="details-container">
     <table>

@@ -114,7 +114,7 @@ $pharmacyName = isset($_SESSION['pharmacy_name']) ? $_SESSION['pharmacy_name'] :
             </a>
           </li>
           <li>
-            <a href="<?= ROOT ?>">
+            <a href="<?= ROOT ?>/login/logout">
               <i class="icon ph-bold ph-sign-out"></i>
               <span class="text">Logout</span>
             </a>

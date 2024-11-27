@@ -83,7 +83,7 @@
         <img src="<?= ROOT ?>/assets/images/admin.png" alt="" />
         <div class="details">
             <h4>ADMINISTRATOR</h4>
-            <p>admin.remad@gmail.com</p>
+            <p>admin@gmail.com</p>
         </div>
         <div class="tab">
             <img src="<?= ROOT ?>/assets/images/setting.png" alt="" />
@@ -91,7 +91,7 @@
         </div>
         <div class="tab">
             <img src="<?= ROOT ?>/assets/images/logout.png" alt="" />
-            <a href="<?= ROOT ?>/admin/login">Logout</a>
+            <a href="<?= ROOT ?>/admin/login/logout">Logout</a>
         </div>
     </div>
 </div>

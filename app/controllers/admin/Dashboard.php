@@ -3,11 +3,11 @@
 class Dashboard
 {
     use Controller;
-    
+
     public function index()
     {
         // Protect the route
-        $this->protectRoute();
+        // $this->protectRoute();
 
         // Get session data
         $AdminID = $this->getSession('id');

@@ -9,16 +9,16 @@ class Login
         $data = [];
 
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $user = new Admin;
+            $admin = new Admin;
             $arr['email'] = $_POST['email'];
 
-            $row = $user->first($arr);
+            $row = $admin->first($arr);
 
             if ($row) {
                 if (password_verify($_POST['password'], $row->password)) {
 
                     $authToken = hash('sha384', microtime() . uniqid() . bin2hex(random_bytes(10)));
-                    $user->updateToken($arr['email'], $authToken);
+                    $admin->updateToken($arr['email'], $authToken);
 
                     $this->setSession('user_id', $row->email);
                     $this->setSession('auth_token', $authToken);

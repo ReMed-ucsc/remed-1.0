@@ -15,8 +15,8 @@ class Pharmacy extends User
         'pharmacistName',
         'approvedDate',
         'email',
-        'password', 
-        'token', 
+        'password',
+        'token',
         'name',
         'status',
         'document',
@@ -105,7 +105,13 @@ class Pharmacy extends User
             'status' => $status,
             'document' => $document ?? 'N/A' // Default to 'N/A' if no document
         ];
-    
+
         return $this->insert($data);
+    }
+
+    public function getPharmacies()
+    {
+        $sql = "Select * FROM $this->table";
+        return $this->query($sql);
     }
 }

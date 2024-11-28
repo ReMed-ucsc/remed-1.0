@@ -18,7 +18,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
             <div class="Form">
                 <div>
                     <label for="pharmacyName">Pharmacy Name:</label>
-                    <input class="Input" type="text" id="pharmacyName" name="pharmacyName" placeholder="Enter pharmacy name" required>
+                    <input class="Input" type="text" id="pharmacyName" name="name" placeholder="Enter pharmacy name" required>
                 </div>
 
                 <div>

@@ -7,5 +7,4 @@ class Admin extends User
 
     protected $table = 'admin';
     protected $allowedColumns = ['email', 'password', 'token', 'level'];
-
 }

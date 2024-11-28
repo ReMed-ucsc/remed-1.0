@@ -3,24 +3,38 @@
 class Dashboard
 {
     use Controller;
+
     public function index()
     {
-        // $user = new User;
-        // $arr['email'] = "name@example.com";
+        // Protect the route
+        $this->protectRoute();
 
-        // $result = $model->where(data_for_filtering, data_not_for_filtering);
-        // $result = $model->insert(insert_data);
-        // $result = $model->update(filtering_data updating_data, id_column_for_filtering);
-        // $result = $model->delete(id, id_column);
-        // $result = $user->findAll();
+        // Get session data
+        $AdminID = $this->getSession('id');
+        $adminEmail = $this->getSession('email');
+        $authToken = $this->getSession('auth_token');
 
-        // show($result);
+        // Get all pharmacies
+        $AdminModel = new Admin();
+        $admin = $AdminModel->findAll();
 
-        // $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
+        if ($admin === false) {
+            $data['error_message'] = 'Error loading pharmacy data. Please try again later.';
+        } else {
+            $data['admin'] = $admin;
+        }
+        // Pass session data to the view
+        $data = [
+            'email' => $adminEmail,
+            'id' => $AdminID,
+            'authToken' => $authToken,
+            'admin' => $admin
+        ];
 
-        $data['username'] = [];
+        $this->unsetSession('error_message');
+        $this->unsetSession('success_message');
+
         $this->view('admin/dashboard', $data);
     }
-
     // add other methods like edit, update, delete, etc.
 }

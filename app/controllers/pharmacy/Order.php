@@ -5,6 +5,8 @@ class Order
     use Controller;
     public function index($orderId)
     {
+        $this->protectRoute();
+
         $orderModel = new MedicineOrder();
         $orderMedicineModel = new OrderView();
         $order = $orderModel->getMedicineOrder($orderId);

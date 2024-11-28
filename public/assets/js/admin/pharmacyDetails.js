@@ -16,8 +16,22 @@ function performSearch() {
   document.getElementById("searchResults").innerText = results;
 }
 document.querySelector(".edit").addEventListener("click", function () {
-  window.location.href = ROOT+"/admin/editPharmacy";
+  window.location.href = ROOT + "/admin/editPharmacy";
 });
 document.querySelector(".remove").addEventListener("click", function () {
-  window.location.href = ROOT+"/admin/removePharmacy";
+  window.location.href = ROOT + "/admin/removePharmacy";
 });
+
+
+function confirmDelete(deleteUrl) {
+  const userConfirmed = confirm(
+    "Are you sure you want to delete this pharmacy?"
+  );
+  if (userConfirmed) {
+    // Redirect to the delete URL
+    window.location.href = deleteUrl;
+  } else {
+    // Reload the page if the user cancels
+    window.location.reload();
+  }
+}

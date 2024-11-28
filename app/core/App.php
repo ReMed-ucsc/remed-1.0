@@ -36,6 +36,7 @@ class App
         if (file_exists($filename)) {
             require_once($filename);
             $this->controller = ucfirst($URL[0] ?? ($isAdmin ? 'Dashboard'  : 'Index'));
+
             unset($URL[0]);
         } else {
             require_once("../app/controllers/_404.php");
@@ -55,5 +56,21 @@ class App
         // read the url and pass the remaining parts as arguments to the method
         // If no method is specified, default to 'index'
         call_user_func_array([$controller, $this->method], $URL);
+    }
+
+    public function checkAdmin()
+    {
+        $URL = $this->splitURL();
+
+        unset($URL[0]);
+        $URL = array_values($URL); // Reindex the array
+        // show($URL);
+
+        // Determine if the URL contains 'admin'
+        if (!empty($URL[0]) && strtolower($URL[0]) === 'admin') {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

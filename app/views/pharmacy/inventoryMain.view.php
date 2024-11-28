@@ -81,7 +81,7 @@
               <td>2024-12-15</td>
               <td>20</td>
               <td>In Stock</td>
-              <td><a class="view" href="#">View</a></td>
+              <td><a class="view" href="<?= ROOT ?>/inventoryView">View</a></td>
             </tr>
             <tr>
               <td>BATCH-002</td>
@@ -147,7 +147,7 @@
         </table>
 
         <button class="new-order-btn"><i class="ph-bold ph-plus"></i>
-          <p class="new-order">New Stock</p>
+          <a href="<?= ROOT ?>/inventoryCreate" style="text-decoration: none; color:white;" class="new-order">New Stock</a>
         </button>
 
       </section>

@@ -166,6 +166,19 @@
 
     <div class="right-section">
       <div class="chat-box">
+        <div class="orderStatus">
+          <label for="status">Order Status:</label>
+          <div class="selectWrapper">
+            <select id="status" class="statusSelect">
+              <option value="pending">Pending</option>
+              <option value="processing">Processing</option>
+              <option value="shipped">Shipped</option>
+              <option value="delivered">Delivered</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+        </div>
+
         <div class="id">
           <div class="input-group">
             <label>Patient ID</label>
@@ -187,7 +200,7 @@
       <div class="submit-section">
         <?php if ($viewOnly) { ?>
           <button class="edit-order">
-            <a href="<?= ROOT ?>/order/edit/<?= $order->OrderID ?>" style="text-decoration: none; color:white;">
+            <a href="<?= ROOT ?>/order/edit/<?= $order->OrderID ?>" style="text-decoration: none; color:black;">
               Edit Order
             </a>
           </button>

@@ -4,7 +4,6 @@ require_once BASE_PATH . '/app/models/DeliveryComment.php';
 require_once BASE_PATH . '/app/models/Driver.php';
 require_once BASE_PATH . '/app/core/init.php';
 require_once BASE_PATH . '/app/core/helper_classes.php';
-
 class GetCommentsController
 {
     use Model;
@@ -13,7 +12,6 @@ class GetCommentsController
     {
         $response = array();
         $result = new Result();
-
         $headers = getallheaders();
         $authHeader = $headers['Authorization'] ?? $_SERVER['HTTP_AUTH'] ?? '';
 
@@ -30,6 +28,7 @@ class GetCommentsController
             } else {
                 $result->setErrorStatus(true);
                 $result->setMessage("Invalid comment ID");
+
             }
             $response['result']['error'] = $result->isError();
             $response['result']['message'] = $result->getMessage();

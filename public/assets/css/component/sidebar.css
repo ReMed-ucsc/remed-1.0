@@ -18,8 +18,9 @@ body {
 .sidebar-part{
   display: flex;
   flex: 1;
+  width: 100px;
   /* background-color: rgba(255, 0, 0, 0.207); */
-  width: 0px;
+  width: 100px;
   z-index: 10000000000;
   /* position: absolute;
   top: 89.6px; */
@@ -33,6 +34,7 @@ body {
   top: 89.6px;
   /* flex: 1; */
   gap: 0px;
+  z-index: 10000000;
   /* overflow: auto;  */
 }
 
@@ -51,7 +53,7 @@ body {
   scrollbar-width: none;
 
   height: calc(100vh - 89.6px);
-
+  z-index: 10000000;
   
     /* z-index: 1000;
     transition: width 0.3s ease; */
@@ -101,7 +103,7 @@ body {
 }
 .nav {
   flex: 1;
-  overflow: scroll;
+  overflow:visible;
   scrollbar-width: none;
 }
 .menu ul li {

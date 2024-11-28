@@ -21,12 +21,18 @@ class GetOrdersController
             $patient = $patientModel->first(['token' => $authToken]);
 
             if ($patient) {
-                $orderList = $patientModel->getOrderHistory($patient->PatientID);
+                $orderModel = new MedicineOrder();
+                $orderList = $orderModel->getOrdersByPatient($patient->PatientID);
 
                 if ($orderList == null) {
                     $result->setErrorStatus(true);
                     $result->setMessage("No orders found");
                 } else {
+                    // categorize statuse according to the order status categories in MedicineOrder model
+                    foreach ($orderList as $order) {
+                        $order->status = $orderModel->getStatusName($order->status);
+                    }
+
                     $response['data'] = $orderList;
 
                     $result->setErrorStatus(false);

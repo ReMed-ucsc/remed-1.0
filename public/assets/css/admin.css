@@ -21,10 +21,13 @@ tbody tr:hover {
 .status {
     padding: 5px 10px;
     border-radius: 15px;
-    color: white;
+    /* color: white; */
     display: inline-block;
     margin-left: 10px;
     margin-bottom: 10px;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-weight: bold;
 }
 
 .status.pending {
@@ -65,15 +68,11 @@ table tbody tr:hover {
     background-color: #f5f5f5;
 }
 
-.status {
-    padding: 6px 12px;
-    border-radius: 12px;
-    font-weight: bold;
-}
-
-.status.Approved {
+.statusA {
     background-color: #9df5b2;
     color: #1cbd42;
+    margin-top: 13px;
+    margin-bottom: auto;
 }
 
 .status.Pending {
@@ -134,3 +133,36 @@ th,td {
     background-color: #f44336;
 }
 
+.add-btn {
+    background-color: darkgreen;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 20px;
+    left: 1200px;
+}
+
+.add-btn:hover {
+    background-color: #4caf50;
+}
+
+
+.above-table {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+}

@@ -22,35 +22,31 @@ class App
 
     public function loadController()
     {
-        list($type, $URL) = $this->splitURL();
 
-        if ($type === 'api') {
-            // API logic
-            $controllerPath = "../api/";
-            $filename = $controllerPath . ucfirst($URL[1] ?? 'Login') . "Controller.php";  // Assuming 'Controller.php' files
-            if (file_exists($filename)) {
-                require_once($filename);
-                $this->controller = ucfirst($URL[1] ?? 'Login') . "Controller";  // Example: Api\Patient\LoginController
-                unset($URL[1]);
-            } else {
-                echo json_encode(['error' => 'Controller not found']);
-                exit;
-            }
+        $URL = $this->splitURL();
 
-            // Call the API method (POST or GET)
-            $controller = new $this->controller;
-            $method = $URL[2] ?? 'index';  // Default to 'index' method if no method is provided
+        // Remove the public folder from the URL
+        unset($URL[0]);
+        $URL = array_values($URL); // Reindex the array
+        // show($URL);
 
-            // Handle POST requests
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                if (method_exists($controller, $method)) {
-                    call_user_func_array([$controller, $method], array_values($URL));
-                } else {
-                    echo json_encode(['error' => 'Method not found']);
-                }
-            } else {
-                echo json_encode(['error' => 'Invalid request method']);
-            }
+        // Determine if the URL contains 'admin'
+        $isAdmin = false;
+        if (!empty($URL[0]) && strtolower($URL[0]) === 'admin') {
+            $isAdmin = true;
+            unset($URL[0]);
+            $URL = array_values($URL);
+        }
+        // show($URL);
+
+        // Check if the controller exists and select it
+        $controllerPath = $isAdmin ? "../app/controllers/admin/" : "../app/controllers/pharmacy/";
+        $filename = $controllerPath . ucfirst($URL[0] ?? ($isAdmin ? 'Dashboard'  : 'Index')) . ".php";
+        if (file_exists($filename)) {
+            require_once($filename);
+            $this->controller = ucfirst($URL[0] ?? ($isAdmin ? 'Dashboard'  : 'Index'));
+
+            unset($URL[0]);
         } else {
             // Web page logic (as it is in your current code)
             $isAdmin = false;
@@ -81,6 +77,22 @@ class App
             }
 
             call_user_func_array([$controller, $this->method], $URL);
+        }
+    }
+
+    public function checkAdmin()
+    {
+        $URL = $this->splitURL();
+
+        unset($URL[0]);
+        $URL = array_values($URL); // Reindex the array
+        // show($URL);
+
+        // Determine if the URL contains 'admin'
+        if (!empty($URL[0]) && strtolower($URL[0]) === 'admin') {
+            return true;
+        } else {
+            return false;
         }
     }
 }

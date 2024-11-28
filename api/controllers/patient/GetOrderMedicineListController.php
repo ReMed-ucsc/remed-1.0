@@ -1,6 +1,7 @@
 <?php
 
 require_once BASE_PATH . '/app/models/Patient.php';
+require_once BASE_PATH . '/app/models/OrderView.php';
 require_once BASE_PATH . '/app/core/init.php';
 require_once BASE_PATH . '/app/core/helper_classes.php';
 
@@ -21,6 +22,7 @@ class GetOrderMedicineListController
             $authToken = $matches[1];
 
             $patientModel = new Patient();
+            $orderModel = new OrderView();
             $orderID = $data['orderID'] ?? '';
 
             if (empty($orderID)) {
@@ -30,8 +32,10 @@ class GetOrderMedicineListController
                 try {
                     $patient = $patientModel->first(['token' => $authToken]);
 
+                    // show($patient);
                     if ($patient) {
-                        $orderMedicineList = $patientModel->getOrderMedicines($orderID, $patient->PatientID);
+                        $orderMedicineList = $orderModel->getOrderMedicines($orderID);
+                        // $orderMedicineList = $patientModel->getOrderMedicines($orderID, $patient->PatientID);
 
                         if ($orderMedicineList == null) {
                             $result->setErrorStatus(true);
@@ -48,7 +52,7 @@ class GetOrderMedicineListController
                     }
                 } catch (Exception $e) {
                     $result->setErrorStatus(true);
-                    $result->setMessage("Something went wrong");
+                    $result->setMessage("Something went wrong " . $e->getMessage());
                 }
             }
         } else {

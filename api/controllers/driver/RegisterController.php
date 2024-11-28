@@ -1,6 +1,6 @@
 <?php
 
-require_once BASE_PATH . '/app/models/User.php';
+require_once BASE_PATH . '/app/models/Driver.php';
 require_once BASE_PATH . '/app/core/init.php';
 require_once BASE_PATH . '/app/core/helper_classes.php';
 
@@ -14,28 +14,28 @@ class RegisterController
         $input = file_get_contents('php://input');
         $data = json_decode($input, true);
 
-        if(!empty($data['name']) && !empty($data['email']) && !empty($data['password'])){
+        if (!empty($data['name']) && !empty($data['email']) && !empty($data['password'])) {
             $name = $data['name'];
             $email = $data['email'];
             $password = $data['password'];
 
-            $userModel = new User;
+            $userModel = new Driver;
             $user = $userModel->getUserByEmail($email);
 
-            if(!$user){
+            if (!$user) {
                 $encryptedPassword = password_hash($password, PASSWORD_DEFAULT);
-                if($userModel->registerUser($name, $email, $password)){
+                if ($userModel->registerDriver($name, $email, $password)) {
                     $result->setErrorStatus(false);
                     $result->setMessage("Registration succesfull");
-                }else{
+                } else {
                     $result->setErrorStatus(true);
                     $result->setMessage("Error happend");
                 }
-            }else{
+            } else {
                 $result->setErrorStatus(true);
                 $result->setMessage("User Already exist");
             }
-        }else{
+        } else {
             $result->setErrorStatus(true);
             $result->setMessage("All the fields are required");
         }

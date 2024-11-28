@@ -87,7 +87,7 @@
         </div>
         <div class="tab">
             <img src="<?= ROOT ?>/assets/images/setting.png" alt="" />
-            <a href="<?= ROOT ?>/admin/general">Setting</a>
+            <a href="<?= ROOT ?>/admin/accountManage">Setting</a>
         </div>
         <div class="tab">
             <img src="<?= ROOT ?>/assets/images/logout.png" alt="" />

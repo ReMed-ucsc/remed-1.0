@@ -143,9 +143,10 @@ th,td {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    position: relative;
-    top: 20px;
-    left: 1200px;
+    position:fixed;
+    /* top: 20px;
+    left: 1200px; */
+    right: 40px;
 }
 
 .add-btn:hover {
@@ -166,3 +167,4 @@ th,td {
     justify-content: space-between;
     margin-top: 20px;
 }
+

@@ -55,7 +55,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                     <input class="Input" type="file" id="document" name="document">
                 </div>
 
-                <div class="buttons">
+                <div>
                     <button type="submit" class="btn-green">Save</button>
                     <button type="button" class="btn-red" onclick="window.history.back()">Cancel</button>
                 </div>

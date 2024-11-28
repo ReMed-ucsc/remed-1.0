@@ -49,11 +49,13 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php'
                     <label for="document">Document:</label>
                     <input class="Input" type="file" id="document" name="document">
                 </div>
+
+                <div>
+                    <button type="submit" class="btn-green">Save Changes</button>
+                    <button type="button" class="btn-red" onclick="window.history.back()">Discard Changes</button>
+                </div>
             </div>
-            <div>
-                <button type="submit" class="btn-green">Save Changes</button>
-                <button type="button" class="btn-red" onclick="window.history.back()">Discard Changes</button>
-            </div>
+
         </form>
 
     </div>

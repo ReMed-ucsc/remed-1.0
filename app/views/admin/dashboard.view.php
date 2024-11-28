@@ -1,6 +1,5 @@
 <?php
 
-
 // Dummy data for the dashboard
 $registeredPharmacies = 123;
 $onlineUsers = 45;
@@ -61,11 +60,33 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php' ?>
             </div>
         <?php endforeach; ?>
     </div>
-
-    <!-- dashboardBody end -->
+    <!-- dashbordBody end -->
 
     <script>
         var ROOT = '<?= ROOT ?>';
+
+        //Animation for card number counting
+        document.addEventListener("DOMContentLoaded", function() {
+            const cards = document.querySelectorAll('.card h2');
+
+            cards.forEach((card) => {
+                const countTo = parseInt(card.innerText, 10);
+                const duration = 2000;
+                const interval = 10;
+                const increment = Math.ceil(countTo / (duration / interval));
+                let currentCount = 0;
+
+                const counter = setInterval(() => {
+                    currentCount += increment;
+                    if (currentCount >= countTo) {
+                        currentCount = countTo;
+                        clearInterval(counter);
+                    }
+                    card.innerText = currentCount;
+                }, interval);
+            });
+        });
+
     </script>
     <script src="<?= ROOT ?>/assets/js/admin/dashboard.js"></script>
 

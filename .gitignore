@@ -2,4 +2,4 @@
 uploads/
 vendor/
 
-api/controllers/utilis/serviceaccount.json
+/api/controllers/utilis/serviceaccount.json

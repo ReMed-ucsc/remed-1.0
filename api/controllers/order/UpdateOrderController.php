@@ -25,13 +25,16 @@ class UpdateOrderController
 
             if ($patient) {
                 // Decode JSON input
-                file_put_contents('php://stderr', print_r($_POST, true));
+                // file_put_contents('php://stderr', print_r($_POST, true));
 
-                // Assuming you have received the multipart data
-                $orderJson = $_POST['order']; // This is the JSON string part
+                // // Assuming you have received the multipart data
+                // $orderJson = $_POST['order']; // This is the JSON string part
 
-                // Convert the JSON string back to an associative array
-                $data = json_decode($orderJson, true);
+                // // Convert the JSON string back to an associative array
+                // $data = json_decode($orderJson, true);
+
+                $input = file_get_contents('php://input');
+                $data = json_decode($input, true);
 
                 if (json_last_error() !== JSON_ERROR_NONE) {
                     $result->setErrorStatus(true);
@@ -51,7 +54,7 @@ class UpdateOrderController
 
                     // Validate productIDs and quantities
                     if (count($productIDs) === count($quantities)) {
-                        $orderModel = new MedicineOrder();
+                        // $orderModel = new MedicineOrder();
                         $orderListModel = new OrderList();
 
                         // Update order items
@@ -62,7 +65,6 @@ class UpdateOrderController
                         $response['result']['error'] = $result->isError();
                         $response['result']['message'] = $result->getMessage();
                         $response['data'] = ['orderID' => $orderID];
-                        echo json_encode($response);
                     } else {
                         $result->setErrorStatus(true);
                         $result->setMessage("Mismatch between product IDs and quantities");

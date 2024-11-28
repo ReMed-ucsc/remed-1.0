@@ -1,9 +1,11 @@
 <?php
-class Pharmacy
+class Pharmacy extends User
+
 {
     use Model;
 
     protected $table = 'pharmacy';
+
     protected $allowedColumns = [
         'PharmacyID',
         'RegNo',
@@ -13,6 +15,9 @@ class Pharmacy
         'pharmacistName',
         'approvedDate',
         'email',
+        'password', 
+        'token', 
+        'name',
         'status',
         'document',
         'latitude',

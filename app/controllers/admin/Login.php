@@ -9,31 +9,28 @@ class Login
         $data = [];
 
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $admin = new Admin;
+            $user = new Admin;
             $arr['email'] = $_POST['email'];
 
-            $row = $admin->first($arr);
+            $row = $user->first($arr);
 
             if ($row) {
-                // if ($row->password === $_POST['password']) {
-                //     $_SESSION['USER'] = $row;
-                //     redirect('home');
-                // }
-
                 if (password_verify($_POST['password'], $row->password)) {
 
                     $authToken = hash('sha384', microtime() . uniqid() . bin2hex(random_bytes(10)));
-                    $admin->updateToken($arr['email'], $authToken);
+                    $user->updateToken($arr['email'], $authToken);
 
-                    $this->setSession('ADMIN', $row);
-                    $this->setSession('id', $row->id);
-                    $this->setSession('username', $row->username);
+                    $this->setSession('user_id', $row->email);
                     $this->setSession('auth_token', $authToken);
+                    $this->setSession('isAdmin', true);
+                    $this->setSession('last_activity', time());
+
 
                     redirect('admin/dashboard');
                     exit();
                 }
             }
+
 
             $admin->errors['email'] = "Wrong email or password";
 
@@ -46,8 +43,24 @@ class Login
     public function logout()
     {
         $this->destroySession();
-        redirect('login');
-        // header("Location: /login");
+        redirect('admin/login');
+
         exit();
     }
 }
+
+
+// admin account create
+ // $data = [
+//     'email' => $_POST['email'],
+//     'password' => $_POST['password'],
+//     'level' => 1
+// ];
+
+// if ($user->validate($data)) {
+//     $user->registerUser($data['name'], $data['email'], $data['password']);
+//     redirect('login');
+//     exit();
+// } else {
+//     $data['errors'] = $user->errors;
+// }

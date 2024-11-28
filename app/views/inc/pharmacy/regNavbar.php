@@ -1,7 +1,7 @@
 <body class="is-registered">
     <nav class="navbar">
         <div class="navbar-right">
-            <a href="#" class="logo">ReMED</a>
+            <a href="<?= ROOT ?>/index" class="logo">ReMED</a>
             <div class="nav-links">
                 <a href="<?= ROOT ?>/notifications.php"><img src="<?= ROOT ?>/assets/images/bell-icon.png" alt="Bell Icon"></a>
                 <a href="#profile">

@@ -41,9 +41,9 @@
 
 
     <div class="details-container">
-        <?php if (is_array($pharmacy) || is_object($pharmacy)): ?>
-            <?php if (empty($pharmacy)): ?>
-                <p>No pharmacy records found.</p>
+        <?php if (is_array($data) || is_object($data)): ?>
+            <?php if (empty($data)): ?>
+                <p>No data records found.</p>
             <?php else: ?>
                 <table>
                     <thead>
@@ -61,10 +61,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($pharmacy as $pharmacy_item): ?>
+                        <?php print_r($data); ?>
+                        <?php foreach ($data as $pharmacy_item): ?>
                             <tr>
                                 <td><?= htmlspecialchars($pharmacy_item->PharmacyID) ?></td>
-                                <td><?= htmlspecialchars($pharmacy_item->name) ?></td>
+                                <td><?= htmlspecialchars($pharmacy_item->pharmacyName) ?></td>
                                 <td><?= htmlspecialchars($pharmacy_item->pharmacistName) ?></td>
                                 <td><?= htmlspecialchars($pharmacy_item->contactNo) ?></td>
                                 <td><?= htmlspecialchars($pharmacy_item->RegNo) ?></td>
@@ -86,7 +87,7 @@
                 </table>
             <?php endif; ?>
         <?php else: ?>
-            <p>Error loading pharmacy data. Please try again later.</p>
+            <p>Error loading data data. Please try again later.</p>
         <?php endif; ?>
     </div>
 

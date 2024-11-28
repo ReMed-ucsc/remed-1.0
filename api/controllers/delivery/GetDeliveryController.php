@@ -29,6 +29,8 @@ class GetDeliveryController
 
         $delivery = $deliveryModel->getDeliveryInfo($orderId);
 
+        //echo json_encode($delivery);
+
         if (!$delivery) {
             $response['error'] = true;
             $response['message'] = 'No order found';

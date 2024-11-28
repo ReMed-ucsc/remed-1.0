@@ -45,14 +45,14 @@ class CreateCommentController
                 try {
                     $res = $deliveryModel->first($data);
 
-                    $driverId = $res['driverId'];
+                    $driverId = $res->driverId;
 
-                    echo json_encode($res);
+                    //echo json_encode($res);
                     // echo json_encode(['deliveryId' => $res['DeliveryID']]);
 
                     //$response['data'] = $res;
 
-                    if ($res['driverId'] != null && $res['DeliveryID'] != null) {
+                    if ($res->driverId != null && $res->DeliveryID != null) {
 
                         $data = [
                             "comment" => $comment
@@ -61,7 +61,7 @@ class CreateCommentController
                         $commentModel->createComment($driverId, $deliveryId, $comment);
 
                         $result->setErrorStatus(false);
-                        $result->setMessage("");
+                        $result->setMessage("success");
                     } else {
                         $result->setErrorStatus(true);
                         $result->setMessage("Invalid CommentID");

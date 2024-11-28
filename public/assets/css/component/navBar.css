@@ -283,3 +283,9 @@
     padding-top: 20px;
   }
   
+  .user{
+    display: flex;
+    flex-direction: row;
+    width: 100px;
+    background-color: red;
+  }

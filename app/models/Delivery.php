@@ -13,4 +13,11 @@ class Delivery
 
         return $this->first($data);
     }
+
+    public function getAllDeliveriesOfADriver($driverId)
+    {
+        $data = ["DriverID" => $driverId];
+
+        return $this->where($data);
+    }
 }

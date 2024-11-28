@@ -64,7 +64,7 @@
             <div class="data">
               <p>Check/Update</p>
             </div>
-            <a href="#">View details</a>
+            <a href="<?= ROOT ?>/inventoryMain">View details</a>
           </div>
           <div class="card green-card">
             <img src="<?= ROOT ?>/assets/images/revenue.jpg" class="card-icon">
@@ -72,7 +72,7 @@
             <div class="data">
               <p>Rs.10,000</p>
             </div>
-            <a href="#">View details</a>
+            <a href="<?= ROOT ?>/income">View details</a>
           </div>
           <div class="card blue-card">
             <img src="<?= ROOT ?>/assets/images/storage.jpg" class="card-icon">
@@ -82,7 +82,7 @@
               <p>515-15</p>
             </div>
             <!-- <div class="resolve"><a href="#">Resolve - 15</a></div> -->
-            <a href="#">View details</a>
+            <a href="<?= ROOT ?>/medicine">View details</a>
           </div>
         </div>
       </div>

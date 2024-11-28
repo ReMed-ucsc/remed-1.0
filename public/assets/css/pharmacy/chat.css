@@ -1,0 +1,221 @@
+body{
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+#hide-chat{
+    width:40px;
+    height: auto;
+}
+#hide-chat:hover{
+    cursor: pointer;
+    border: 3px solid #06000093;
+    border-radius: 50%;
+}
+
+#chat-container {
+    display: flex;
+    flex-direction: row;
+    height: 80vh;
+    width: 70vh;
+    border: 2px solid #060000;
+    border-radius: 10px;
+}
+
+.user-list {
+    width: 35%;
+    background: #ffffff;
+    border: 2px solid #0a0000;
+    padding: 10px;
+    border-radius: 10px 0px 0px 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 5px;
+}
+/* Style the list items */
+.user-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.patient-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.patient-item:hover {
+    background-color: #e0e0e0;
+}
+
+/* Profile picture styling */
+.patient-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover; /* Ensures the image is fully contained within the circle */
+    border: 1px solid #ccc;
+}
+
+/* Patient name styling */
+.patient-name {
+    font-size: 16px;
+    color: #333;
+    flex: 1;
+}
+
+
+.user-list .list-header {
+    position: sticky;
+    top: -10px;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #02224c;
+    padding: 10px;
+    margin:-10px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ddd;
+    border-radius: 10px 0 0 0;
+}
+.list-header img{
+    width: 25%;
+    height: auto;
+}
+.user-list p {
+    margin-top: 0;
+    color: #ffffff;
+    font-weight: 550;
+}
+
+.user-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.user-list li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.user-list li:hover {
+    background: #f0f0f0;
+}
+.user-list li:active{
+    background: #ddd;
+}
+.chat-section {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border-radius: 0 10px 10px 0;
+}
+
+.chat-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background: #ffffff;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    border-bottom: 2px solid #000000;
+}
+
+.chat-header h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.chat-header img {
+    width: 8%;
+    height: auto;
+    padding: 5px;
+}
+
+.messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    border-bottom: 1px solid #000105;
+}
+
+.message {
+    padding: 10px;
+    margin-bottom: 5px;
+    max-width: 70%;
+}
+
+.message.sent {
+    background: #0ee4eccf;
+    margin-left: auto;
+    border-radius: 15px 15px 0 15px;
+}
+
+.message.received {
+    background: #c6c6c6ee;
+    border-radius: 15px 15px 15px 0;
+}
+
+#message-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+
+}
+
+#message-form input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+/* Emoji and File Button Styles */
+/* #emoji-button, #file-label {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 0 5px;
+} */
+/* 
+#emoji-button:hover, #file-label:hover {
+    color: #007bff; 
+} */
+
+/* Hide file input */
+#file-input {
+    display: none;
+}
+
+
+#message-form button {
+    padding: 0;
+    width: 10%;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+#btn {
+    width: 50%;    padding: 10px 20px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+#btn:hover {
+    transform: scale(1.1);
+}

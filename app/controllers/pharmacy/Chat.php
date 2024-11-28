@@ -1,6 +1,6 @@
 <?php
 
-class InventoryMain
+class Chat
 {
     use Controller;
     public function index()
@@ -19,15 +19,8 @@ class InventoryMain
         // $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
 
         $data['username'] = [];
-        $this->view('pharmacy/inventoryMain', $data);
+        $this->view('pharmacy/chat', $data);
     }
-    public function read()
-    {
-        $orderModel = new MedicineOrder();
-        $orders = $orderModel->getOrderDetails();
 
-        // Pass the data to the view
-        $this->View('pharmacy/orderMain', ['orders' => $orders]);
-    }
     // add other methods like edit, update, delete, etc.
 }

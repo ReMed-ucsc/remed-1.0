@@ -25,7 +25,7 @@
   
   
   .main-content {
-    margin: 30px;
+    margin: 30px 30px 30px 130px;
     position: relative;
     top: 89.6px;
     flex: 12;
@@ -44,6 +44,7 @@
   
   .search-container {
     margin: 20px 0;
+    display: flex;
   }
   
   .search-bar {

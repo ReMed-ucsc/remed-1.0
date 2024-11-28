@@ -32,9 +32,9 @@ class Login
             }
 
 
-            $admin->errors['email'] = "Wrong email or password";
+            $user->errors['email'] = "Wrong email or password";
 
-            $data['errors'] = $admin->errors;
+            $data['errors'] = $user->errors;
         }
 
         $this->view('admin/login', $data);

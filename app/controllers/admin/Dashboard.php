@@ -3,7 +3,7 @@
 class Dashboard
 {
     use Controller;
-    
+
     public function index()
     {
         // Protect the route

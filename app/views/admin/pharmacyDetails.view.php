@@ -64,7 +64,7 @@
                         <?php foreach ($pharmacy as $pharmacy_item): ?>
                             <tr>
                                 <td><?= htmlspecialchars($pharmacy_item->PharmacyID) ?></td>
-                                <td><?= htmlspecialchars($pharmacy_item->pharmacyName) ?></td>
+                                <td><?= htmlspecialchars($pharmacy_item->name) ?></td>
                                 <td><?= htmlspecialchars($pharmacy_item->pharmacistName) ?></td>
                                 <td><?= htmlspecialchars($pharmacy_item->contactNo) ?></td>
                                 <td><?= htmlspecialchars($pharmacy_item->license) ?></td>
@@ -96,4 +96,4 @@
 
     <script src="<?= ROOT ?>/assets/js/admin/pharmacyDetails.js"></script>
 
-    <?php require_once BASE_PATH . '/app/views/inc/footer.view.php' ?>app
+    <?php require_once BASE_PATH . '/app/views/inc/footer.view.php' ?>

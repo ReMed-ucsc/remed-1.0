@@ -26,6 +26,7 @@ class Login
                     $this->setSession('user_id', $row->PharmacyID);
                     $this->setSession('auth_token', $authToken);
                     $this->setSession('isAdmin', false);
+                    $this->setSession('last_activity', time());
 
                     redirect('dashboardPage');
                     exit();

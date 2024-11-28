@@ -11,13 +11,12 @@ class Pharmacy extends User
         'RegNo',
         'contactNo',
         'address',
-        'pharmacyName',
         'pharmacistName',
         'license',
         'approvedDate',
         'email',
-        'password', 
-        'token', 
+        'password',
+        'token',
         'name',
         'status',
         'document',
@@ -97,7 +96,7 @@ class Pharmacy extends User
     public function registerPharmacy($pharmacyName, $pharmacistName, $license, $contactNo, $email, $address, $document)
     {
         $data = [
-            'pharmacyName' => $pharmacyName,
+            'name' => $pharmacyName,
             'pharmacistName' => $pharmacistName,
             'email' => $email,
             'address' => $address,

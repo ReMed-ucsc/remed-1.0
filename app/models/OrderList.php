@@ -20,4 +20,6 @@ class OrderList
         }
         $this->insertBatch($orderList);
     }
+
+    public function changeQuantity($orderID, $productIDs, $quantities) {}
 }

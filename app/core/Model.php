@@ -8,7 +8,7 @@ trait Model
     protected $limit = 10;
     protected $offset = 0;
     protected $order_type     = "desc";
-    // protected $order_column = "id";
+    //protected $order_column = "id";
     public $errors         = [];
 
     // ------------usage example-------------------
@@ -64,11 +64,31 @@ trait Model
             }
         }
 
-        $query = rtrim($query, "  AND ");
-        $query .= " order by $this->order_column $this->order_type limit $this->limit offset $this->offset";
+        //echo "Query before trimming: " . $query . PHP_EOL;
+
+        $query = rtrim($query);
+        if (substr($query, -3) === "AND") {
+            $query = substr($query, 0, -4); // Remove the last " AND"
+        }
+        if ($this->order_column && $this->order_type) {
+            $query .= " order by $this->order_column $this->order_type";
+        }
+
+        // Add limit and offset only if they are set
+        if ($this->limit > 0) {
+            $query .= " limit $this->limit";
+        }
+        if ($this->offset > 0) {
+            $query .= " offset $this->offset";
+        }
 
         show($query);
         $data = array_merge($data, $data_not);
+
+        //for query debugging
+        // echo "Generated Query From model: " . $query . PHP_EOL;
+        // echo "Data Parameters: ";
+        // print_r($data);
 
         return $this->query($query, $data);
     }
@@ -78,12 +98,13 @@ trait Model
         $keys = array_keys($data);
         $keys_not = array_keys($data_not);
 
-        $query = "select * from $this->table ";
+        $query = "SELECT * FROM $this->table ";
 
         if (!(empty($data) && empty($data_not))) {
-            $query .= "where ";
+            $query .= "WHERE ";
 
             foreach ($keys as $key) {
+                //echo "Key: " . $key . PHP_EOL;
                 $query .= $key . " = :" . $key . " AND ";
             }
 
@@ -91,15 +112,31 @@ trait Model
             foreach ($keys_not as $key) {
                 $query .= $key . " != :" . $key . " AND ";
             }
+
+            // foreach ($keys as $key) {
+            //     echo "Key: $key, Placeholder: :" . $key . PHP_EOL;
+            // }
         }
 
-        $query = rtrim($query, "  AND ");
-        $query .= " limit $this->limit offset $this->offset";
+        //echo "Query before trimming: " . $query . PHP_EOL;
 
-        // show($query);
+        $query = rtrim($query);
+        if (substr($query, -3) === "AND") {
+            $query = substr($query, 0, -4); // Remove the last " AND"
+        }
+        $query .= " LIMIT $this->limit OFFSET $this->offset";
+
+        // $query = "SELECT * FROM driver WHERE DriverID = :DriverID LIMIT 10 OFFSET 0";
+
+        // echo "Generated Query From model: " . $query . PHP_EOL;
+        // echo "Data Parameters: ";
+        // print_r($data);
+
+        //show($query);
         $data = array_merge($data, $data_not);
         $result = $this->query($query, $data);
         if ($result) {
+            //var_dump($result[0]);
             return $result[0];
         }
         return false;
@@ -246,6 +283,42 @@ trait Model
         return false;
     }
 
+    public function updateWithConditions($data, $conditions)
+    {
+        // Check if allowed columns are only updated and remove unwanted data
+        if (!empty($this->allowedColumns)) {
+            foreach ($data as $key => $value) {
+                if (!in_array($key, $this->allowedColumns)) {
+                    unset($data[$key]);
+                }
+            }
+        }
+
+        $keys = array_keys($data);
+        $query = "UPDATE $this->table SET ";
+
+        foreach ($keys as $key) {
+            $query .= $key . " = :" . $key . ", ";
+        }
+
+        $query = rtrim($query, ", ");
+        $query .= " WHERE ";
+
+        $conditionKeys = array_keys($conditions);
+        foreach ($conditionKeys as $key) {
+            $query .= $key . " = :" . $key . " AND ";
+        }
+
+        $query = rtrim($query, " AND ");
+
+        // Merge data and conditions for binding
+        $params = array_merge($data, $conditions);
+
+        // Execute the query
+        $this->query($query, $params);
+        return true;
+    }
+
     public function delete($id, $id_column = 'id')
     {
         $data[$id_column] = $id;
@@ -255,23 +328,65 @@ trait Model
         return false;
     }
 
+    public function deleteWithConditions($conditions)
+    {
+        $query = "DELETE FROM $this->table WHERE ";
+
+        $conditionKeys = array_keys($conditions);
+        foreach ($conditionKeys as $key) {
+            $query .= $key . " = :" . $key . " AND ";
+        }
+
+        $query = rtrim($query, " AND ");
+
+        // Execute the query
+        $this->query($query, $conditions);
+        return true;
+    }
+
     public function join($table, $joinCondition, $data = [], $data_not = [], $columns = '*', $order_column = 'id', $order_type = 'ASC', $limit = 10, $offset = 0)
     {
         $keys = array_keys($data);
         $keys_not = array_keys($data_not);
 
+        if (is_array($columns)) {
+            $columns = implode(', ', $columns);
+        } else if (empty($columns)) {
+            $columns = '*'; // Default to all columns
+        }
+
         $query = "SELECT $columns FROM $this->table JOIN $table ON $joinCondition WHERE ";
 
+        $mappedParams = []; // Holds the parameter mapping
         foreach ($keys as $key) {
             $query .= $key . " = :" . $key . " AND ";
+            $mappedParams[$key] = $data[$key]; // Map directly to the key
         }
 
         foreach ($keys_not as $key) {
             $query .= $key . " != :" . $key . " AND ";
+            $mappedParams[$key] = $data_not[$key]; // Map directly to the key
         }
 
-        $query = rtrim($query, " AND ");
-        $query .= " ORDER BY $order_column $order_type LIMIT $limit OFFSET $offset";
+        //echo "Query before trimming: " . $query . PHP_EOL;
+
+        $query = rtrim($query);
+        if (substr($query, -3) === "AND") {
+            $query = substr($query, 0, -4); // Remove the last " AND"
+        }
+        if ($this->order_column && $this->order_type) {
+            $query .= " order by $this->order_column $this->order_type";
+        }
+        if ($this->limit > 0) {
+            $query .= " limit $this->limit";
+        }
+        if ($this->offset > 0) {
+            $query .= " offset $this->offset";
+        }
+
+        // echo "Generated Query From model: " . $query . PHP_EOL;
+        // echo "Data Parameters: ";
+        // print_r($mappedParams);
 
         $data = array_merge($data, $data_not);
 

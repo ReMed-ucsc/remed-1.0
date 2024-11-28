@@ -22,6 +22,7 @@
 require_once BASE_PATH . '/app/views/inc/header.view.php';
 require_once BASE_PATH . '/app/views/inc/navBar.view.php';
 ?>
+
 <body>
     <?php if (!empty($errors)) { ?>
         <div class="error-messages">
@@ -46,15 +47,6 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                     <label for="licenseNumber">Vehicle License Number:</label>
                     <input class="Input" type="text" id="licenseNumber" name="licenseNumber" placeholder="Enter license" required>
                 </div>
-                <div>
-                    <label for="deliveryTime">Delivery Time:</label>
-                    <select class="Input" id="deliveryTime" name="deliveryTime" required>
-                        <option value="" disabled selected>Select Delivery Time</option>
-                        <option value="morning">Morning (8:00 AM - 12:00 PM)</option>
-                        <option value="afternoon">Afternoon (12:00 PM - 4:00 PM)</option>
-                        <option value="evening">Evening (4:00 PM - 8:00 PM)</option>
-                    </select>
-                </div>
             </div>
             <div class="Form">
                 <div>
@@ -70,6 +62,15 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                 <div>
                     <label for="document">Document:</label>
                     <input class="Input" type="file" id="document" name="document">
+                </div>
+                <div>
+                    <label for="deliveryTime">Delivery Time:</label>
+                    <select class="Input" id="deliveryTime" name="deliveryTime" required>
+                        <option value="" disabled selected>Select Delivery Time</option>
+                        <option value="morning">Morning (8:00 AM - 12:00 PM)</option>
+                        <option value="afternoon">Afternoon (12:00 PM - 4:00 PM)</option>
+                        <option value="evening">Evening (4:00 PM - 8:00 PM)</option>
+                    </select>
                 </div>
             </div>
         </form>

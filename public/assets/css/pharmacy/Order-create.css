@@ -414,7 +414,10 @@ table th {
 }
 
 .order-management{
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
   /* overflow-y: scroll;
   scrollbar-width: none; */
 }
@@ -452,11 +455,11 @@ th {
 }
 
 th:first-child {
-  border-radius: 10px 0 0 0; /* Top-left corner */
+  border-radius: 0 0 0 0; /* Top-left corner */
 }
 
 th:last-child {
-  border-radius: 0 10px 0 0; /* Top-right corner */
+  border-radius: 0 0 0 0; /* Top-right corner */
 }
 
 tr:nth-child(even) {
@@ -472,8 +475,8 @@ tr:nth-child(odd) .custom-select{
 }
 
 .status.success {
-  background: radial-gradient(circle, rgba(40, 167, 69, 0.8) 0%, rgba(31, 135, 55, 0.686) 70%, rgba(40, 167, 70, 0.736) 100%); /* Green background */
-  color: #ffffff;           /* White text */
+  background-color: #d4edda;
+  color: #155724;           /* White text */
   padding: 5px 10px;        /* Space inside the bubble */
   border-radius: 15px;      /* Makes it circular/oval */
   font-size: 14px;          /* Adjust font size */
@@ -483,8 +486,8 @@ tr:nth-child(odd) .custom-select{
 }
 
 .status.pending{
-  background: radial-gradient(circle, rgba(0, 123, 255, 0.8) 0%, rgba(0, 123, 255, 0.6) 70%, rgba(0, 4, 255, 0.559) 100%); /* Green background */
-  color: #ffffff;           /* White text */
+  background-color: #fff3cd;
+  color: #856404;          /* White text */
   padding: 5px 10px;        /* Space inside the bubble */
   border-radius: 15px;      /* Makes it circular/oval */
   font-size: 14px;          /* Adjust font size */
@@ -494,8 +497,8 @@ tr:nth-child(odd) .custom-select{
 }
 
 .status.canceled{
-  background: radial-gradient(circle, rgba(220, 53, 69, 0.8) 0%, rgba(220, 53, 69, 0.6) 70%, rgba(220, 53, 70, 0.762) 100%); /* Green background */
-  color: #ffffff;           /* White text */
+  background-color: #f8d7da;
+  color: #721c24;           /* White text */
   padding: 5px 10px;        /* Space inside the bubble */
   border-radius: 15px;      /* Makes it circular/oval */
   font-size: 14px;          /* Adjust font size */
@@ -550,3 +553,73 @@ tr:nth-child(odd) .custom-select{
   overflow: scroll;
   scrollbar-width: thin;
 } */
+
+
+.chat-box li {
+  list-style: none;
+  position: relative;
+}
+
+.chat-box li > a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #757575;
+  text-decoration: none;
+  padding: 12px 8px;
+  border-radius: 8px;
+  background-color: #f6f6f6;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.chat-box li > a:hover {
+  background-color: #e0e7ff;
+  color: #000;
+}
+
+/* For the dropdown arrow */
+.chat-box li > a .arrow {
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+/* Rotate arrow on active */
+.chat-box li.active > a .arrow {
+  transform: rotate(180deg);
+}
+
+/* Hide sub-menu by default */
+.chat-box .sub-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+  z-index: 10;
+}
+
+/* Show sub-menu on parent hover */
+.chat-box li.active .sub-menu {
+  display: block;
+}
+
+/* Styling sub-menu items */
+.chat-box .sub-menu li {
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #333333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.chat-box .sub-menu li:hover {
+  background-color: #e0e7ff;
+  color: #000;
+}

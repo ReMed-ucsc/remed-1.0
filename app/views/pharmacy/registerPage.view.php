@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multi-Step Form</title>
-    <link rel="stylesheet" href="Register-page.css">
-    <link rel="stylesheet" href="../Navbar/navbar.css">
+    <link rel="stylesheet" href="<?=ROOT?>/assets/css/pharmacy/Register-page.css">
+    <link rel="stylesheet" href="<?=ROOT?>/assets/css/pharmacy/navbar.css">
     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <?php include '../Navbar/non-reg-navbar.php';
+    <?php 
+            include BASE_PATH . '/app/views/inc/pharmacy/nonRegNavbar.php';
             // include 'Database.php';
     ?>
 
@@ -22,7 +23,7 @@
                 <p>Follow the steps to complete your registration.</p>
             </div>
             <div class="form-right">
-                <form id="registration-form" action="register.php" method="POST" enctype="multipart/form-data">
+                <form id="registration-form" action="<?= BASE_PATH ?>/app/views/inc/pharmacy/success.php" method="POST" enctype="multipart/form-data">
                     <!-- Step 1: Email -->
                     <div id="step1" class="step">
                         <div class="form-row">
@@ -92,12 +93,21 @@
                         <button type="button" id="back-button" style="display: none;">Back</button>
                         
                     </div>
+
+                    <!-- <div id="step6" class="overlay" id="overlay">
+                        <div class="overlay-content">
+                            <div id="overlay-message"> 
+                                 hii
+                            </div>
+                            <button id="close-overlay">Close</button>
+                        </div>
+                    </div> -->
+
                 </form>
             </div>
         </div>
     </div>
     </div>
 
-    <script src="Registration-page.js"></script>
-</body>
+    <script src="<?=ROOT?>/assets/js/pharmacy/registrationPage.js"></script></body>
 </html>

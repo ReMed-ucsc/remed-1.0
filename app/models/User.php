@@ -55,6 +55,12 @@ class User
         $this->update($email, $data, 'email');
     }
 
+    public function updateFcmToken($email, $fcmToken)
+    {
+        $data = ['fcmToken' => $fcmToken];
+        $this->update($email, $data, 'email');
+    }
+
     public function registerUser($name, $email, $password)
     {
         $data = [

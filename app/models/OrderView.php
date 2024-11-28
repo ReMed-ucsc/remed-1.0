@@ -1,5 +1,6 @@
 <?php
 
+
 class OrderView
 {
     use Model;
@@ -28,7 +29,7 @@ class OrderView
     {
         $where = ['orderId' => $orderID];
         // return $this->where($where, []);
-        return $this->selectWhere(['ProductID', 'ProductName'], $where, [], 'ProductID ASC');
+        return $this->selectWhere(['ProductID', 'ProductName', 'genericName', 'ManufactureName', 'strength', 'unitPrice', 'quantity'], $where, [], 'ProductID ASC');
     }
 
     // public function getOrderMedicines($orderID)

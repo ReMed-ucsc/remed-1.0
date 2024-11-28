@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <link rel="stylesheet" href="Login-page.css">
-    <link rel="stylesheet" href="../Navbar/navbar.css">
+    <link rel="stylesheet" href="<?=ROOT?>/assets/css/pharmacy/Login-page.css">
+    <link rel="stylesheet" href="<?=ROOT?>/assets/css/pharmacy/navbar.css">
     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<?php include '../Navbar/non-reg-navbar.php';
-        
-
-?>
+<?php 
+            include BASE_PATH . '/app/views/inc/pharmacy/nonRegNavbar.php';
+            // include 'Database.php';
+    ?>
 <div class="fullpage">
 <div class="container">
     <div class="box-left">
-        <h2>Log in to Remed</h2>
+        <h2>Log in to ReMed</h2>
         <p>Welcome back! Log in to access your pharmacy's dashboard, where you can manage inventory, process customer orders, and update your pharmacy's details. Stay connected with your customers, track deliveries, and ensure your pharmacy runs smoothly. Enter your credentials to continue.</p>
     </div>
     <div class="box-right">

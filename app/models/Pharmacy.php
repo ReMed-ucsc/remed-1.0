@@ -9,9 +9,8 @@ class Pharmacy
         'RegNo',
         'contactNo',
         'address',
-        'pharmacyName',
+        'name',
         'pharmacistName',
-        'license',
         'approvedDate',
         'email',
         'status',
@@ -67,8 +66,8 @@ class Pharmacy
         $this->errors = []; // Reset errors
 
         // Validate pharmacy name
-        if (empty($data['pharmacyName'])) {
-            $this->errors['pharmacyName'] = "Pharmacy name is required.";
+        if (empty($data['name'])) {
+            $this->errors['name'] = "Pharmacy name is required.";
         }
 
         // Validate email
@@ -89,18 +88,19 @@ class Pharmacy
         return empty($this->errors); // Pass if no errors
     }
 
-    public function registerPharmacy($pharmacyName, $pharmacistName, $license, $contactNo, $email, $address, $document)
+    public function registerPharmacy($name, $pharmacistName, $RegNo, $contactNo, $email, $address, $status = 'APPROVED', $document = null)
     {
         $data = [
-            'pharmacyName' => $pharmacyName,
+            'name' => $name,
             'pharmacistName' => $pharmacistName,
+            'RegNo' => $RegNo,
+            'contactNo' => $contactNo,
             'email' => $email,
             'address' => $address,
-            'contactNo' => $contactNo,
-            'license' => $license,
-            'document' => $document,
-            'status' => 'APPROVED'
+            'status' => $status,
+            'document' => $document ?? 'N/A' // Default to 'N/A' if no document
         ];
+    
         return $this->insert($data);
     }
 }

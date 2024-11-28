@@ -1,3 +1,5 @@
 /.env
 uploads/
 vendor/
+
+/api/controllers/utilis/serviceaccount.json

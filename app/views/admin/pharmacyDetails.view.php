@@ -41,9 +41,9 @@
 
 
     <div class="details-container">
-        <?php if (is_array($pharmacy) || is_object($pharmacy)): ?>
-            <?php if (empty($pharmacy)): ?>
-                <p>No pharmacy records found.</p>
+        <?php if (is_array($data) || is_object($data)): ?>
+            <?php if (empty($data)): ?>
+                <p>No data records found.</p>
             <?php else: ?>
                 <table>
                     <thead>
@@ -61,13 +61,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($pharmacy as $pharmacy_item): ?>
+                        <?php print_r($data); ?>
+                        <?php foreach ($data as $pharmacy_item): ?>
                             <tr>
                                 <td><?= htmlspecialchars($pharmacy_item->PharmacyID) ?></td>
                                 <td><?= htmlspecialchars($pharmacy_item->pharmacyName) ?></td>
                                 <td><?= htmlspecialchars($pharmacy_item->pharmacistName) ?></td>
                                 <td><?= htmlspecialchars($pharmacy_item->contactNo) ?></td>
-                                <td><?= htmlspecialchars($pharmacy_item->license) ?></td>
+                                <td><?= htmlspecialchars($pharmacy_item->RegNo) ?></td>
                                 <td><?= htmlspecialchars($pharmacy_item->approvedDate) ?></td>
                                 <td><?= htmlspecialchars($pharmacy_item->email) ?></td>
                                 <td><?= htmlspecialchars($pharmacy_item->address) ?></td>
@@ -86,7 +87,7 @@
                 </table>
             <?php endif; ?>
         <?php else: ?>
-            <p>Error loading pharmacy data. Please try again later.</p>
+            <p>Error loading data data. Please try again later.</p>
         <?php endif; ?>
     </div>
 
@@ -96,4 +97,4 @@
 
     <script src="<?= ROOT ?>/assets/js/admin/pharmacyDetails.js"></script>
 
-    <?php require_once BASE_PATH . '/app/views/inc/footer.view.php' ?>app
+    <?php require_once BASE_PATH . '/app/views/inc/footer.view.php' ?>

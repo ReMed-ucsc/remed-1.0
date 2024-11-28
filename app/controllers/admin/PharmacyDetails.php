@@ -11,7 +11,7 @@ class PharmacyDetails
 
         // Get session data
         $PharmacyID = $this->getSession('pharmacy_id');
-        $pharmacyName = $this->getSession('pharmacy_name');
+        $name = $this->getSession('pharmacy_name');
         $authToken = $this->getSession('auth_token');
 
         // Get all pharmacies
@@ -25,7 +25,7 @@ class PharmacyDetails
         }
         // Pass session data to the view
         $data = [
-            'pharmacyName' => $pharmacyName,
+            'pharmacyName' => $name,
             'PharmacyID' => $PharmacyID,
             'authToken' => $authToken,
             'pharmacy' => $pharmacy
@@ -44,7 +44,7 @@ class PharmacyDetails
         $this->protectRoute();
 
         $pharmacyModel = new Pharmacy();
-        $pharmacy = $pharmacyModel->first(['PharmacyID' => $id]);
+        $pharmacy = $pharmacyModel->first(['PharmacyId' => $id]);
 
         if (!$pharmacy) {
             redirect('admin/PharmacyDetails');
@@ -55,9 +55,9 @@ class PharmacyDetails
 
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $data = [
-                'pharmacyName' => $_POST['pharmacyName'],
+                'name' => $_POST['name'],
                 'pharmacistName' => $_POST['pharmacistName'],
-                'license' => $_POST['license'],
+                'RegNo' => $_POST['RegNo'],
                 'contactNo' => $_POST['contactNo'],
                 'email' => $_POST['email'],
                 'address' => $_POST['address'],
@@ -87,45 +87,58 @@ class PharmacyDetails
 
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $pharmacy = new Pharmacy();
+
+            // Prepare basic data
             $data = [
-                'pharmacyName' => $_POST['pharmacyName'],
-                'pharmacistName' => $_POST['pharmacistName'],
-                'license' => $_POST['license'],
-                'contactNo' => $_POST['contactNo'],
-                'address' => $_POST['address'],
-                'email' => $_POST['email'],
-                'document' => $_FILES['document'] ?? null,
+                'pharmacyName' => $_POST['name'] ?? '',
+                'pharmacistName' => $_POST['pharmacistName'] ?? '',
+                'RegNo' => $_POST['RegNo'] ?? '',
+                'contactNo' => $_POST['contactNo'] ?? '',
+                'address' => $_POST['address'] ?? '',
+                'email' => $_POST['email'] ?? '',
+                'status' => 'APPROVED',
+                'document' => ''
             ];
 
-            // Handle file upload
-            $document = 'N/A';
-            if (isset($_FILES['prescription']) && $_FILES['prescription']['error'] === UPLOAD_ERR_OK) {
-                $targetDir = BASE_PATH . '/uploads/license/';
-                $fileName = uniqid() . '_' . basename($_FILES['prescription']['name']);
-                $targetFile = $targetDir . $fileName;
+            // File upload handling
+            if (isset($_FILES['document']) && $_FILES['document']['error'] == UPLOAD_ERR_OK) {
+                $uploadDir = BASE_PATH . '/uploads/license/';
 
-                if (!is_dir($targetDir)) {
-                    mkdir($targetDir, 0777, true);
+                // Create directory if it doesn't exist
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
                 }
 
-                if (move_uploaded_file($_FILES['prescription']['tmp_name'], $targetFile)) {
-                    $document = $fileName;
+                // Generate unique filename
+                $filename = uniqid() . '_' . basename($_FILES['document']['name']);
+                $uploadPath = $uploadDir . $filename;
+
+                // Move uploaded file
+                if (move_uploaded_file($_FILES['document']['tmp_name'], $uploadPath)) {
+                    $data['document'] = $filename;
                 } else {
-                    $data['errors']['file'] = "Failed to upload file.";
+                    // Handle upload error
+                    $data['errors']['document'] = "File upload failed";
                 }
             }
 
+            // Validate and insert
             if ($pharmacy->validate($data)) {
-                $pharmacy->registerPharmacy($data['pharmacyName'], $data['pharmacistName'], $data['license'], $data['contactNo'], $data['email'], $data['address'], $document);
-                redirect('admin/PharmacyDetails');
+                $result = $pharmacy->insert($data);
+
+                if ($result) {
+                    redirect('admin/PharmacyDetails');
+                    exit();
+                } else {
+                    $data['errors']['general'] = "Failed to create pharmacy";
+                }
             } else {
                 $data['errors'] = $pharmacy->errors;
             }
         }
 
-        $this->view('PharmacyDetails/create', $data);
+        $this->view('admin/pharmacyDetails', $data);
     }
-
     public function delete($id)
     {
         // Protect the route
@@ -136,10 +149,4 @@ class PharmacyDetails
         redirect('admin/PharmacyDetails');
         exit();
     }
-
-    
-
-
-
 }
-

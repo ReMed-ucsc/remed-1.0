@@ -235,7 +235,13 @@ trait Model
 
         $keys = array_keys($data);
         $query = "insert into $this->table (" . implode(",", $keys) . ") values (:" . implode(" ,:", $keys) . ")";
-        $this->query($query, $data);
+        $result = $this->query($query, $data);
+
+        // show($result);
+        if ($result) {
+            // Get the last inserted ID
+            return true;
+        }
 
         return false;
     }

@@ -30,8 +30,8 @@ class DeliveryUility
         // Check if the result exists and return a valid response
         if ($deliveryData) {
             // Return the result as a JSON response
-            echo json_encode($deliveryData);
-            echo json_encode(["destination" => $deliveryData[0]['destination']]);
+            //echo json_encode($deliveryData);
+            // echo json_encode(["destination" => $deliveryData[0]->destination]);
         } else {
             // If no data found, return an error response
             echo json_encode(['error' => 'Data not found']);
@@ -41,9 +41,9 @@ class DeliveryUility
 
         $columns = ['fcmToken'];
 
-        $result = $driverModel->selectWhere($columns, [], []);
+        $result = $driverModel->selectWhere($columns, ["status" => "active"], []);
 
-        echo json_encode($result);
+        //echo json_encode(["fcm tokens" => $result]);
 
         $fcmTokens = [];
 
@@ -56,14 +56,16 @@ class DeliveryUility
                 return !empty($token);
             });
 
-            echo json_encode(["FCM tokens" => array_values($fcmTokens)]);
+            echo json_encode(["FCM tokens found" => array_values($fcmTokens)]);
         } else {
-            echo json_encode("No token found");
+            //echo json_encode("No token found");
         }
 
 
         if ($fcmTokens) {
+            //echo json_encode("Found tokens");
             foreach ($fcmTokens as $token) {
+                //echo json_encode(["current token " => $token]);
                 $payload = [
                     'message' => [
                         'token' => $token, // Send each token as a string
@@ -71,13 +73,12 @@ class DeliveryUility
                             'title' => 'New delivery Request',
                             'body' => 'You have a new delivery',
                             'action' => 'popup',
-                            'pharmacyAddress' => $deliveryData[0]['destination'],
-                            'deliveryAddress' => $deliveryData[0]['address'],
+                            'pharmacyAddress' => $deliveryData[0]->destination,
+                            'deliveryAddress' => $deliveryData[0]->address,
                             'orderId' => strval($orderId),
                         ],
                     ],
                 ];
-
                 // Send the payload to FCM
                 $this->fcmSender($payload);
             }

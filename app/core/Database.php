@@ -34,12 +34,6 @@ trait Database
 
             // For INSERT, UPDATE, DELETE, or other queries, just return true
             return true;
-        $debug = false;
-
-        if ($debug) {
-            echo "Generated Query from db file: " . $query . PHP_EOL;
-            echo "Data Parameters: ";
-            print_r($data);
         }
 
         $con = $this->connect();
@@ -58,11 +52,11 @@ trait Database
             // Set HTTP response code and log error
             http_response_code(500);
 
-            if ($debug) {
-                echo "SQL Error: " . $e->getMessage() . PHP_EOL;
-            } else {
-                echo "An internal server error occurred. Please try again later.";
-            }
+            // if ($debug) {
+            //     echo "SQL Error: " . $e->getMessage() . PHP_EOL;
+            // } else {
+            //     echo "An internal server error occurred. Please try again later.";
+            // }
 
             error_log("SQL Error: " . $e->getMessage());
             return false;

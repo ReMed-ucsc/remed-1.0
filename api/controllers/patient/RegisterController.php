@@ -19,12 +19,12 @@ class RegisterController
             $email = $data['email'];
             $password = $data['password'];
 
-            $userModel = new User();
-            $user = $userModel->getUserByEmail($email);
+            $userModel = new Patient();
+            $user = $userModel->getPatientByEmail($email);
 
             if (!$user) {
                 $passEnc = password_hash($password, PASSWORD_DEFAULT);
-                if ($userModel->registerUser($name, $email, $passEnc)) {
+                if ($userModel->registerPatient($name, $email, $passEnc)) {
                     $result->setErrorStatus(false);
                     $result->setMessage("Registered successfully, please login");
                 } else {

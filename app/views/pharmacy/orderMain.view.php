@@ -66,7 +66,7 @@
               <th style="width: 20%;">Delivery Address</th>
               <th style="width: 5%;">Date</th>
               <th style="width: 10%;">Payment</th>
-              <th style="width: 5%;">Type</th>
+              <!-- <th style="width: 5%;">Type</th> -->
               <th style="width: 5%;">Status</th>
               <th style="width: 5%;"></th>
             </tr>
@@ -77,11 +77,22 @@
                 <tr>
                   <td><?= htmlspecialchars($order->OrderID) ?></td>
                   <td><?= htmlspecialchars($order->PatientID) ?></td>
-                  <td><?= htmlspecialchars($order->destination) ?></td>
+                  <td><?php
+                      if ($order->destination != 1)
+                        echo htmlspecialchars($order->destination);
+                      else echo 'Pickup' ?></td>
                   <td><?= htmlspecialchars($order->date) ?></td>
-                  <td><?= htmlspecialchars($order->pickup) ?></td>
-                  <td><?= htmlspecialchars($order->pickup) ?></td>
-                  <td><?= htmlspecialchars($order->status) ?></td>
+                  <td><?php
+                      if ($order->pickup != 'Y')
+                        echo 'Cash on Delivery';
+                      else echo 'Online'
+                      ?></td>
+                  <!-- <td><?= htmlspecialchars($order->pickup) ?></td> -->
+                  <td><?php
+                      if ($order->status != 'W')
+                        echo 'Waiting';
+                      else if ($order->status != 'P') echo 'Processing';
+                      ?></td>
                   <td><a class="view" href="<?= ROOT ?>/order/<?= $order->OrderID ?>">View</a></td>
                 </tr>
               <?php endforeach; ?>

@@ -6,7 +6,7 @@ class Patient extends User
     // use User;
 
     protected $table = 'patient';
-    protected $allowedColumns = ['name', 'email', 'password', 'token'];
+    protected $allowedColumns = ['patientName', 'email', 'password', 'token'];
 
     public function validate($data)
     {
@@ -43,7 +43,7 @@ class Patient extends User
     public function registerPatient($name, $email, $password)
     {
         $data = [
-            'name' => $name,
+            'patientName' => $name,
             'email' => $email,
             'password' => $password
         ];

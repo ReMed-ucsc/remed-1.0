@@ -19,8 +19,7 @@
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/navbar.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/component/sidebar.css">
     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body>

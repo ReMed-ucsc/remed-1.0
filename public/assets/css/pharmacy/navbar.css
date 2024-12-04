@@ -1,113 +1,67 @@
-/* Reset and basic styles */
+@import url("https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap");
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    /* background-color: #dbe2f4; */
 }
 
-body {
-    font-family: Arial, sans-serif;
+header li,a,button{
+    font-family: "Montserrat",sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #ffffff;
+    text-decoration: none;
 }
 
-/* Navbar styles */
-.navbar {
+header{
+    background-color: #001f4d;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
-    background-color: #001F4D;
-    /* border-bottom: 1px solid white; */
-    width: 100%;
-    position: fixed;
-    z-index: 100000;
+    padding: 30px 2%;
+    width: 100vw;
 }
 
-.navbar-left {
-    display: flex;
-    flex: 1;
-}
-
-.navbar-right {
-    display: flex;
-    justify-content: space-between;
-    flex: 15;
-    align-items: center;
-}
-
-.logo {
-    color: #fff;
-    font-size: 1.5rem;
-    text-decoration: none;
-    font-family: 'Rock Salt', cursive;
-}
-
-/* Navigation links */
-.nav-links {
-    display: flex;
-    list-style: none;
-    align-items: center;
-}
-
-.nav-links img {
-    width: 50px;
-    margin: 0px 15px;
-}
-
-.image img{
-    border-radius: 50%;
-    height: 30px;
-    width: 30px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.nav-links li {
-    margin-left: 1.5rem;
-    padding: 0.75rem;
-    border: 1px solid white;
-    border-radius: 10px;
-}
-
-.nav-links li:hover {
-    border: 1px solid rgb(222, 215, 194);
-}
-
-.nav-links a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 0.8rem;
-    transition: color 0.3s ease;
-}
-
-.nav-links a:hover {
-    color: rgb(222, 215, 194);
-}
-
-/* Hamburger icon visibility */
-/* .hamburger {
-    display: none; 
-} */
-
-/* Hamburger styling */
-/* .hamburger span {
-    width: 25px;
-    height: 3px;
-    background: #ffffff;
-    display: block;
-} */
-
-/* Only show the hamburger for registered users */
-/* .is-registered .hamburger {
-    display: flex;
+.logo{
     cursor: pointer;
-    flex-direction: column;
-    gap: 4px;
-    border-radius: 15px;
-} */
+}
 
-.profile-name{
+.nav_links{
+    list-style: none;
+}
+
+.nav_links li{
+    display: inline-block;
+    padding: 0px 20px;
+
+}
+
+.nav_links li a{
+    transition: all 0.3s ease 0s;
+}
+
+.nav_links li a:hover{
+    color: aquamarine;
+}
+
+button{
+    padding: 0px 25px;
+    background-color: rgb(0 136 169 / 0%);
+    border: none;
+    border-radius: 50px;
+    cursor:pointer;
+    transition: all 0.3s ease 0s;
     display: flex;
-    justify-content: center;
     align-items: center;
+}
+
+button:hover{
+    background-color: rgba(0,136,169,0.8);
+}
+
+.cta img{
+    height: 30px;
 }

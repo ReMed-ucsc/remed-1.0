@@ -1,0 +1,246 @@
+@import url("https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background-color: #dbe2f4;
+}
+
+:root {
+    --navbar:89.6px
+}
+
+
+.fullpage{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - var(--navbar));
+}
+
+.container{
+    width: 60%;
+    height: 82%;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    display: flex;
+    overflow: hidden;
+}
+
+.left{
+    padding: 30px;
+    background-color: #001F4D;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    text-align: center;
+}
+
+.right{
+    padding: 30px;
+    background-color: #ffffff;
+    color: #001F4D;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex: 1;
+    text-align: center;
+    overflow: scroll;
+    scrollbar-width: none;
+}
+
+.left h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.left p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.right h3 {
+    font-size: 20px;
+    margin-top: 20px;
+    color: #1E88E5;
+}
+
+.right p,
+.right ul {
+    margin: 10px 0;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.right ul {
+    padding-left: 20px;
+}
+
+.right ul li {
+    margin-bottom: 8px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+input, textarea, button {
+    width: 100%;
+    padding: 10px 10px 20px 10px;
+    margin-top: 5px;
+    /* margin-bottom: 10px; */
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.right button {
+    background-color: #026c5e;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.right button:hover {
+    background-color: #024d45;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+.footer div {
+    flex: 1;
+    padding: 10px;
+    background: #f4f4f4;
+    margin: 0 5px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+.footer div p {
+    margin: 5px 0;
+}
+
+.content {    
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    padding: 0px;
+    background-image: url("http://localhost/remed-1.0/public/assets/images/background.jpg" );
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position:60% 10%;
+    color: white;
+    width: 100%;
+    height: calc(100vh - 90.6px);
+    position: absolute;
+    top: 89.6px;
+}
+
+.content .background{
+    width: 100%;
+    height: 100%;
+    padding-left: 100px;
+    background-image: linear-gradient(to right,#001f4de1 30%,transparent 100% );
+}
+
+.text-section {
+    width: 60%;
+    border-radius: 8px;
+    font-family:'Roboto', sans-serif;
+    padding-top: 100px;
+    
+}
+
+.text-section p {
+    margin-bottom: 30px;
+}
+
+.primary-button, .secondary-button {
+    width: 250px;
+    height: 62px;
+    padding: 15px;
+    border: none;
+    border-radius: 15px;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(1, 1, 1, 0.374);
+}
+
+.primary-button {
+    background-color: #FFD700;
+    color: #001F4D;
+    font-weight: bold;
+}
+
+.secondary-button {
+    background-color: #FFFFFF;
+    color: #001F4D;
+    font-weight: bold;
+}
+
+.primary-button:hover {
+    background-color:#daba03;
+}
+
+.secondary-button:hover {
+    background-color: #cacaca;
+}
+
+
+ @media (max-width: 2000px) {
+    .text-section p {
+        font-size:1.5rem;
+    }
+
+    .text-section{
+        width: 400px;
+    }
+
+}
+
+@media (min-width:768px) and (max-width: 1024px) {
+    .text-section p {
+        font-size:1.2rem;
+        padding-bottom: 20px;
+    }
+
+    .text-section {
+        width: 40%;
+    }
+
+    .background{
+        background-image: linear-gradient(to right,#001f4de6 30%,transparent 100% );
+        padding-left: 40px;
+    }
+}
+
+
+@media (max-width: 738px) {
+    .text-section p {
+        font-size:1.2rem;
+    }
+
+    .text-section {
+        width: 50%;
+    }
+
+
+    content{
+        background-image: linear-gradient(to right,#001f4de2 100%,transparent 100% );
+    }
+}

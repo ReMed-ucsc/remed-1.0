@@ -94,87 +94,107 @@ body {
     width: 100%;
 }
 
-.cards {
+/* General container styling */
+
+  
+  .cards {
     display: flex;
-    gap: 71px;
-    justify-content: center;
-    border-radius: 30px;
-    width: 97%;
-    min-width: 700px;
-    background-color: #ffffff;
+    gap: 20px;
+    width: 100%;
+    height: 350px;
+  }
+  
+  /* Profile card on the left */
+  .profilecard {
+    flex: 1; /* Takes up one portion of the space */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    background: #f4f4f4;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
-}
-
-.cards:hover {
-    transform: scale(1.02); /* Slightly scale the container on hover */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Increase shadow on hover */
-}
-
-.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Side cards on the right */
+  .sidecards {
+    flex: 2; /* Takes up two portions of the space */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .card {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: #f4f4f4;
     padding: 20px;
-    border-radius: 30px;
-    text-align: center;
-    width: 27%;
-    color: white;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* Initial shadow */
-    cursor: pointer;
-    /* height: 184px; */
-}
-
-.card:hover {
-    transform: translateY(-10px); /* Lift the card slightly */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Deepen shadow */
-}
-
-.card-icon {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 110px;
+  }
+  
+  .card img {
+    width: 50px;
     height: 50px;
-    border-radius: 50%;
-    margin-bottom: 15px;
-    transition: transform 0.3s ease; /* Add animation to the icon */
-}
-
-.card:hover .card-icon {
-    transform: scale(1.2); /* Enlarge the icon slightly on hover */
-}
-
-.card a {
-    display: flex;
-    justify-content: flex-start;
-    position: relative;
-    color: #B0BEC5;
-    transition: color 0.3s ease; /* Smooth transition for link hover */
-    padding-top: 70px;
-}
-
-.card a:hover {
-    color: #7a848a;
-}
-
-.black-card {
-    background-color: var(--color-dark-gray);
-}
-
-.green-card {
-    background-color: var(--color-dark-green);
-}
-
-.blue-card {
-    background-color: var(--color-bright-blue);
-}
-
-
-.cards .card .green-card .p{
-    position: relative;
-    top: -10;
-}
+    margin-bottom: 10px;
+  }
+  
+  .card h4 {
+    margin: 10px 0;
+  }
+  
+  .card a {
+    margin-top: auto;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+  }
+  
+  .black-card {
+    /* background: #333; */
+    background: linear-gradient(135deg, #2b1314, #893f2a75);
+    background-image: url("http://localhost/remed-1.0/public/assets/images/inventory3.jpeg" );
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position:60% 50%;
+    color: #fff;
+  }
+  
+  .green-card {
+    /* background: #4caf50; */
+    background: linear-gradient(135deg, #121f13, #23572d70);
+    background-image: url("http://localhost/remed-1.0/public/assets/images/background.jpg" );
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #fff;
+  }
+  
+  .blue-card {
+    /* background: #2196f3; */
+    background: linear-gradient(135deg, #1c1e30, #2826586b);
+    background-image: url("http://localhost/remed-1.0/public/assets/images/background.jpg" );
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #fff;
+  }
+  
 
 .resolve {
-    /* position: relative;
-    top: -20px;
-    right: -35px; */
     display: flex;
     justify-content: center;
     width: 130px;

@@ -58,31 +58,43 @@
     <div class="structure">
       <div class="top">
         <div class="cards">
-          <div class="card black-card">
-            <img src="<?= ROOT ?>/assets/images/inventory.jpg" class="card-icon">
-            <h4>Inventory status</h4>
-            <div class="data">
-              <p>Check/Update</p>
+          <div class="profilecard">
+            <div class="profile-card">
+              <img src="<?= ROOT ?>/assets/images/inventory.jpg" class="card-icon">
+              <h4>Profile</h4>
+              <div class="data">
+                <p>HealthGuard Pharmacy</p>
+              </div>
+              <a href="<?= ROOT ?>/inventoryMain">View details</a>
             </div>
-            <a href="<?= ROOT ?>/inventoryMain">View details</a>
           </div>
-          <div class="card green-card">
-            <img src="<?= ROOT ?>/assets/images/revenue.jpg" class="card-icon">
-            <h4>Income</h4>
-            <div class="data">
-              <p>Rs.10,000</p>
+          <div class="sidecards">
+            <div class="card black-card">
+              <img src="<?= ROOT ?>/assets/images/inventory.jpg" class="card-icon">
+              <h4>Inventory status</h4>
+              <div class="data">
+                <p>Check/Update</p>
+              </div>
+              <a href="<?= ROOT ?>/inventoryMain">View details</a>
             </div>
-            <a href="<?= ROOT ?>/income">View details</a>
-          </div>
-          <div class="card blue-card">
-            <img src="<?= ROOT ?>/assets/images/storage.jpg" class="card-icon">
-            <h4>Medicine Storage</h4>
+            <div class="card green-card">
+              <img src="<?= ROOT ?>/assets/images/revenue.jpg" class="card-icon">
+              <h4>Income</h4>
+              <div class="data">
+                <p>Rs.10,000</p>
+              </div>
+              <a href="<?= ROOT ?>/income">View details</a>
+            </div>
+            <div class="card blue-card">
+              <img src="<?= ROOT ?>/assets/images/storage.jpg" class="card-icon">
+              <h4>Medicine Storage</h4>
 
-            <div class="data">
-              <p>515-15</p>
+              <div class="data">
+                <p>515-15</p>
+              </div>
+              <!-- <div class="resolve"><a href="#">Resolve - 15</a></div> -->
+              <a href="<?= ROOT ?>/medicine">View details</a>
             </div>
-            <!-- <div class="resolve"><a href="#">Resolve - 15</a></div> -->
-            <a href="<?= ROOT ?>/medicine">View details</a>
           </div>
         </div>
       </div>

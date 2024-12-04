@@ -15,7 +15,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    background-color: #001F4D;
+    background-image: linear-gradient(135deg, #1d2635, #001f4d, rgb(3, 39, 93), #34415a), url(http://localhost/remed-1.0/public/assets/images/inventory5.png);
     /* border-bottom: 1px solid white; */
     width: 100%;
     position: fixed;
@@ -83,28 +83,6 @@ body {
 .nav-links a:hover {
     color: rgb(222, 215, 194);
 }
-
-/* Hamburger icon visibility */
-/* .hamburger {
-    display: none; 
-} */
-
-/* Hamburger styling */
-/* .hamburger span {
-    width: 25px;
-    height: 3px;
-    background: #ffffff;
-    display: block;
-} */
-
-/* Only show the hamburger for registered users */
-/* .is-registered .hamburger {
-    display: flex;
-    cursor: pointer;
-    flex-direction: column;
-    gap: 4px;
-    border-radius: 15px;
-} */
 
 .profile-name{
     display: flex;

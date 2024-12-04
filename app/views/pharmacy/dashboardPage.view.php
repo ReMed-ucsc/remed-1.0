@@ -60,7 +60,7 @@
         <div class="cards">
           <div class="profilecard">
             <div class="profile-card">
-              <img src="<?= ROOT ?>/assets/images/inventory.jpg" class="card-icon">
+              <img src="<?= ROOT ?>/assets/images/admin.png" class="card-icon">
               <h4>Profile</h4>
               <div class="data">
                 <p>HealthGuard Pharmacy</p>

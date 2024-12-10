@@ -24,7 +24,7 @@ require_once BASE_PATH.'/app/views/inc/navBar.view.php';
     <form class="Form" action="" method="POST">
         <div>
             <label for="name">Name:</label>
-            <input class="Input" type="text" id="name" name="name" placeholder="Enter name" required>
+            <input class="Input" type="text" id="name" name="name" placeholder="Enter name" value="" required>
         </div>
 
         <div>

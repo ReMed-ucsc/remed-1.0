@@ -9,18 +9,21 @@ class Login
         $data = [];
 
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $user = new Admin;
+            $admin = new Admin;
             $arr['email'] = $_POST['email'];
 
-            $row = $user->first($arr);
+            $row = $admin->first($arr);
 
             if ($row) {
                 if (password_verify($_POST['password'], $row->password)) {
 
                     $authToken = hash('sha384', microtime() . uniqid() . bin2hex(random_bytes(10)));
-                    $user->updateToken($arr['email'], $authToken);
+                    $admin->updateToken($arr['email'], $authToken);
 
-                    $this->setSession('user_id', $row->email);
+                    $this->setSession('ADMIN', $row);
+                    $this->setSession('id', $row->id);
+                    $this->setSession('email', $row->email);
+                    $this->setSession('username', $row->username);
                     $this->setSession('auth_token', $authToken);
                     $this->setSession('isAdmin', true);
                     $this->setSession('last_activity', time());
@@ -32,9 +35,9 @@ class Login
             }
 
 
-            $user->errors['email'] = "Wrong email or password";
+            $admin->errors['email'] = "Wrong email or password";
 
-            $data['errors'] = $user->errors;
+            $data['errors'] = $admin->errors;
         }
 
         $this->view('admin/login', $data);
@@ -47,7 +50,39 @@ class Login
 
         exit();
     }
+
+    public function edit($id){
+        $adminModel= new Admin();
+        $admin=$adminModel->first(['id'=>$id]);
+
+        if(!$admin){
+            redirect('admin/Dashboard');
+            exit();
+        }
+
+        $data = ['admin'=>$admin];
+
+        if($_SERVER['REQUEST_METHOD']=="POST"){
+            $data=[
+                'name'=> $_POST['name'],
+                'email'=>$_POST['email'],
+                'password'=>$_POST['password']
+            ];
+
+            if($adminModel->validate($data)){
+                $adminModel->update($id,$data,'id');
+                redirect('admin/Dashbord');
+                exit();
+            }
+            else{
+                $data['error']=$adminModel->errors;
+            }
+
+            $this->view('admin/accountManage',$data);
+        }
+    }
 }
+
 
 
 // admin account create

@@ -18,7 +18,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
             <div class="Form">
                 <div>
                     <label for="pharmacyName">Pharmacy Name:</label>
-                    <input class="Input" type="text" id="pharmacyName" name="pharmacyName" placeholder="Enter pharmacy name" required>
+                    <input class="Input" type="text" id="pharmacyName" name="name" placeholder="Enter pharmacy name" required>
                 </div>
 
                 <div>
@@ -55,7 +55,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                     <input class="Input" type="file" id="document" name="document">
                 </div>
 
-                <div class="buttons">
+                <div>
                     <button type="submit" class="btn-green">Save</button>
                     <button type="button" class="btn-red" onclick="window.history.back()">Cancel</button>
                 </div>

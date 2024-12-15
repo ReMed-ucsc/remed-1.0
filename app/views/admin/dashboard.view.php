@@ -1,10 +1,10 @@
 <?php
 
 // Dummy data for the dashboard
-$registeredPharmacies = 123;
-$onlineUsers = 45;
-$requestedPharmacies = 10;
-$drivers = 50;
+$registeredPharmacies = 10;
+$onlineUsers = 8;
+$requestedPharmacies = 5;
+$drivers = 5;
 $requestedDrivers = 5;
 
 $recentActivities = [

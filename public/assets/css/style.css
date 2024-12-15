@@ -83,6 +83,10 @@ textarea {
     background-color: var(--btn-green);
     color: white;
     margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
 }
 .btn-green:hover{
     background-color:var(--green-hover) ;
@@ -99,6 +103,10 @@ textarea {
     background-color: var(--btn-red);
     color: white;
     margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
 }
 .btn-red:hover{
     background-color:var(--red-hover) ;

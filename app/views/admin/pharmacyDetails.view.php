@@ -43,7 +43,7 @@
     <div class="details-container">
         <?php if (is_array($pharmacy) || is_object($pharmacy)): ?>
             <?php if (empty($pharmacy)): ?>
-                <p>No pharmacy records found.</p>
+                <p>No data records found.</p>
             <?php else: ?>
                 <table>
                     <thead>
@@ -62,31 +62,34 @@
                     </thead>
                     <tbody>
                         <?php foreach ($pharmacy as $pharmacy_item): ?>
-                            <tr>
-                                <td><?= htmlspecialchars($pharmacy_item->PharmacyID) ?></td>
-                                <td><?= htmlspecialchars($pharmacy_item->name) ?></td>
-                                <td><?= htmlspecialchars($pharmacy_item->pharmacistName) ?></td>
-                                <td><?= htmlspecialchars($pharmacy_item->contactNo) ?></td>
-                                <td><?= htmlspecialchars($pharmacy_item->license) ?></td>
-                                <td><?= htmlspecialchars($pharmacy_item->approvedDate) ?></td>
-                                <td><?= htmlspecialchars($pharmacy_item->email) ?></td>
-                                <td><?= htmlspecialchars($pharmacy_item->address) ?></td>
-                                <td class="status statusA"><?= htmlspecialchars($pharmacy_item->status) ?></td>
-                                <td>
-                                    <a href="<?= ROOT ?>/admin/PharmacyDetails/edit/<?= htmlspecialchars($pharmacy_item->PharmacyID) ?>">
-                                        <img class="action edit" src="../../public/assets/images/pencil.png" alt="Edit" />
-                                    </a>
-                                    <a href="#" onclick="confirmDelete('<?= ROOT ?>/admin/PharmacyDetails/delete/<?= $pharmacy_item->PharmacyID ?>')">
-                                        <img class="action remove" src="../../public/assets/images/bin.png" alt="Delete" />
-                                    </a>
-                                </td>
-                            </tr>
+                            <?php if ($pharmacy_item): ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($pharmacy_item->PharmacyID) ?></td>
+                                    <td><?= htmlspecialchars($pharmacy_item->name) ?></td>
+                                    <td><?= htmlspecialchars($pharmacy_item->pharmacistName) ?></td>
+                                    <td><?= htmlspecialchars($pharmacy_item->contactNo) ?></td>
+                                    <td><?= htmlspecialchars($pharmacy_item->RegNo ?? '') ?></td>
+                                    <td><?= htmlspecialchars($pharmacy_item->approvedDate ?? '') ?></td>
+                                    <td><?= htmlspecialchars($pharmacy_item->email ?? '') ?></td>
+                                    <td><?= htmlspecialchars($pharmacy_item->address) ?></td>
+                                    <td class="status statusA"><?= htmlspecialchars($pharmacy_item->status) ?></td>
+                                    <td>
+                                        <a href="<?= ROOT ?>/admin/PharmacyDetails/edit/<?= htmlspecialchars($pharmacy_item->PharmacyID) ?>">
+                                            <img class="action edit" src="../../public/assets/images/pencil.png" alt="Edit" />
+                                        </a>
+                                        <a href="#" onclick="confirmDelete('<?= ROOT ?>/admin/PharmacyDetails/delete/<?= $pharmacy_item->PharmacyID ?>')">
+                                            <img class="action remove" src="../../public/assets/images/bin.png" alt="Delete" />
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
+
                         <?php endforeach; ?>
                     </tbody>
                 </table>
             <?php endif; ?>
         <?php else: ?>
-            <p>Error loading pharmacy data. Please try again later.</p>
+            <p>Error loading data data. Please try again later.</p>
         <?php endif; ?>
     </div>
 

@@ -96,6 +96,7 @@ class Pharmacy extends User
     public function registerPharmacy($name, $pharmacistName, $RegNo, $contactNo, $email, $address, $status = 'APPROVED', $document = null)
     {
         $data = [
+
             'name' => $name,
             'pharmacistName' => $pharmacistName,
             'RegNo' => $RegNo,

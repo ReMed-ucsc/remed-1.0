@@ -66,7 +66,7 @@ trait Controller
     public function isAuthenticated()
     {
         $this->startSession();
-        return isset($_SESSION['id']);
+        return isset($_SESSION['user_id']);
     }
 
     public function isAuthorized()
@@ -79,7 +79,7 @@ trait Controller
     {
         $app = new App();
 
-        $timeoutDuration = 30; // 30 minutes
+        $timeoutDuration = 1800; // 30 minutes
 
         if ($this->getSession('last_activity') && (time() - $this->getSession('last_activity') > $timeoutDuration)) {
             // Last activity was more than $timeoutDuration ago
@@ -101,8 +101,10 @@ trait Controller
     {
         $app = new App();
 
+
         // if (!$this->isAuthenticated()) {
         //     $timeoutDuration = 30; // in seconds
+
 
         //     if ($this->getSession('last_activity') && (time() - $this->getSession('last_activity') > $timeoutDuration)) {
         //         // Last activity was more than $timeoutDuration ago

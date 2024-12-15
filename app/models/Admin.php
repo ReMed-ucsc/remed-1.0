@@ -1,11 +1,15 @@
 <?php
 
+
 class Admin extends User
+
 {
     use Model;
 
     protected $table = 'admin';
+
     protected $allowedColumns = ['id','username', 'email', 'password', 'token', 'level'];
+
 
     // Validation method
     public function validation($data)

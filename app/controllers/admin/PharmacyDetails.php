@@ -42,10 +42,12 @@ class PharmacyDetails
     public function edit($id)
     {
         // Protect the route
+
         // $this->protectRoute();
 
         $pharmacyModel = new Pharmacy();
         $pharmacy = $pharmacyModel->first(['PharmacyId' => $id]);
+
 
         if (!$pharmacy) {
             redirect('admin/PharmacyDetails');
@@ -56,6 +58,7 @@ class PharmacyDetails
 
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $data = [
+
                 'name' => $_POST['name'],
                 'pharmacistName' => $_POST['pharmacistName'],
                 'RegNo' => $_POST['RegNo'],
@@ -68,7 +71,7 @@ class PharmacyDetails
 
             if ($pharmacyModel->validate($data)) {
 
-                $pharmacyModel->update($id, $data, 'PharmacyID');
+                $pharmacyModel->update($id, $data, 'pharmacyId');
                 redirect('admin/PharmacyDetails');
                 exit();
             } else {

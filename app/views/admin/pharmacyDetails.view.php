@@ -83,6 +83,7 @@
                                     </td>
                                 </tr>
                             <?php endif; ?>
+
                         <?php endforeach; ?>
                     </tbody>
                 </table>

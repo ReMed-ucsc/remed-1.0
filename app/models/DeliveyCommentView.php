@@ -41,5 +41,10 @@ class DeliveryCommentView
         return $this->insert($data);
     }
 
-    public function deleteComment($commentID) {}
+    public function deleteComment($commentID)
+    {
+        if (is_numeric($commentID)) {
+            $this->errors['error'] = "Invalid Comment ID";
+        }
+    }
 }

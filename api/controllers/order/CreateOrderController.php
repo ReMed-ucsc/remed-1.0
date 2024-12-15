@@ -62,10 +62,10 @@ class CreateOrderController
                         $orderModel = new MedicineOrder();
                         $orderListModel = new OrderList();
 
-                        $fileName = 'N/A';
-                        if (isset($_FILES['prescription']) && $_FILES['prescription']['error'] === UPLOAD_ERR_OK) {
-                            $fileName = $patient->PatientID . '_' . time() . '.' . pathinfo($_FILES['prescription']['name'], PATHINFO_EXTENSION);
-                        }
+                        $fileName = 'https://res.cloudinary.com/dqbnwumwy/image/upload/v1732391462/prescriptions/11_1732391460.png.png';
+                        // if (isset($_FILES['prescription']) && $_FILES['prescription']['error'] === UPLOAD_ERR_OK) {
+                        //     $fileName = $patient->PatientID . '_' . time() . '.' . pathinfo($_FILES['prescription']['name'], PATHINFO_EXTENSION);
+                        // }
 
                         // Create order
                         $orderID = $orderModel->placeOrder($patient->PatientID, $pickup, $destination, $pharmacyID, $fileName);
@@ -75,58 +75,58 @@ class CreateOrderController
                             $orderListModel->setOrderList($orderID, $productIDs, $quantities);
 
                             // Handle file upload
-                            if (isset($_FILES['prescription']) && $_FILES['prescription']['error'] === UPLOAD_ERR_OK) {
-                                $targetDir = BASE_PATH . '/uploads/prescriptions/';
-                                // $fileName = $patient->PatientID . '_' . time() . '.' . pathinfo($_FILES['prescription']['name'], PATHINFO_EXTENSION);
-                                $targetFile = $targetDir . $fileName;
+                            // if (isset($_FILES['prescription']) && $_FILES['prescription']['error'] === UPLOAD_ERR_OK) {
+                            //     $targetDir = BASE_PATH . '/uploads/prescriptions/';
+                            //     // $fileName = $patient->PatientID . '_' . time() . '.' . pathinfo($_FILES['prescription']['name'], PATHINFO_EXTENSION);
+                            //     $targetFile = $targetDir . $fileName;
 
-                                // Validate file type and size
-                                $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-                                $allowedTypes = ['jpg', 'jpeg', 'png', 'pdf'];
-                                if (!in_array($fileType, $allowedTypes)) {
-                                    $result->setErrorStatus(true);
-                                    $result->setMessage("Invalid file type. Only JPG, JPEG, PNG, and PDF files are allowed.");
-                                    $response['result']['error'] = $result->isError();
-                                    $response['result']['message'] = $result->getMessage();
-                                    echo json_encode($response);
-                                    return;
-                                }
+                            //     // Validate file type and size
+                            //     $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+                            //     $allowedTypes = ['jpg', 'jpeg', 'png', 'pdf'];
+                            //     if (!in_array($fileType, $allowedTypes)) {
+                            //         $result->setErrorStatus(true);
+                            //         $result->setMessage("Invalid file type. Only JPG, JPEG, PNG, and PDF files are allowed.");
+                            //         $response['result']['error'] = $result->isError();
+                            //         $response['result']['message'] = $result->getMessage();
+                            //         echo json_encode($response);
+                            //         return;
+                            //     }
 
-                                if ($_FILES['prescription']['size'] > 5000000) { // 5MB limit
-                                    $result->setErrorStatus(true);
-                                    $result->setMessage("File size exceeds the limit of 5MB.");
-                                    $response['result']['error'] = $result->isError();
-                                    $response['result']['message'] = $result->getMessage();
-                                    echo json_encode($response);
-                                    return;
-                                }
+                            //     if ($_FILES['prescription']['size'] > 5000000) { // 5MB limit
+                            //         $result->setErrorStatus(true);
+                            //         $result->setMessage("File size exceeds the limit of 5MB.");
+                            //         $response['result']['error'] = $result->isError();
+                            //         $response['result']['message'] = $result->getMessage();
+                            //         echo json_encode($response);
+                            //         return;
+                            //     }
 
-                                if (!move_uploaded_file($_FILES['prescription']['tmp_name'], $targetFile)) {
-                                    $result->setErrorStatus(true);
-                                    $result->setMessage("Failed to upload file.");
-                                    $response['result']['error'] = $result->isError();
-                                    $response['result']['message'] = $result->getMessage();
-                                    echo json_encode($response);
-                                    return;
-                                }
+                            //     if (!move_uploaded_file($_FILES['prescription']['tmp_name'], $targetFile)) {
+                            //         $result->setErrorStatus(true);
+                            //         $result->setMessage("Failed to upload file.");
+                            //         $response['result']['error'] = $result->isError();
+                            //         $response['result']['message'] = $result->getMessage();
+                            //         echo json_encode($response);
+                            //         return;
+                            //     }
 
-                                // Start a background process to handle the file processing
-                                // $command = "php " . BASE_PATH . "/app/core/process_image.php " . escapeshellarg($targetFile) . " " . escapeshellarg($orderID) . " > /dev/null 2>&1 &";
-                                // exec($command);
+                            // Start a background process to handle the file processing
+                            // $command = "php " . BASE_PATH . "/app/core/process_image.php " . escapeshellarg($targetFile) . " " . escapeshellarg($orderID) . " > /dev/null 2>&1 &";
+                            // exec($command);
 
-                                $result->setErrorStatus(false);
-                                $result->setMessage("File upload started.");
-                                $response['result']['error'] = $result->isError();
-                                $response['result']['message'] = $result->getMessage();
-                                $response['data'] = ['orderID' => $orderID];
-                                echo json_encode($response);
-                            } else {
-                                $result->setErrorStatus(true);
-                                $result->setMessage("Prescription file is required.");
-                                $response['result']['error'] = $result->isError();
-                                $response['result']['message'] = $result->getMessage();
-                                echo json_encode($response);
-                            }
+                            $result->setErrorStatus(false);
+                            $result->setMessage("File upload started.");
+                            $response['result']['error'] = $result->isError();
+                            $response['result']['message'] = $result->getMessage();
+                            $response['data'] = ['orderID' => $orderID];
+                            echo json_encode($response);
+                            // } else {
+                            //     $result->setErrorStatus(true);
+                            //     $result->setMessage("Prescription file is required.");
+                            //     $response['result']['error'] = $result->isError();
+                            //     $response['result']['message'] = $result->getMessage();
+                            //     echo json_encode($response);
+                            // }
                         } else {
                             $result->setErrorStatus(true);
                             $result->setMessage("Failed to create order. Returned order ID : " . $orderID);

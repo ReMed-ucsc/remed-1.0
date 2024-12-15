@@ -13,13 +13,46 @@ class OrderList
         $orderList = [];
         foreach ($productIDs as $key => $productID) {
             $orderList[] = [
-                'OrderID' => $orderID,
-                'ProductID' => $productID,
+                'orderId' => $orderID,
+                'productId' => $productID,
                 'quantity' => $quantities[$key]
             ];
         }
         $this->insertBatch($orderList);
     }
 
-    public function changeQuantity($orderID, $productIDs, $quantities) {}
+    public function updateOrderList($orderID, $productIDs, $quantities, $removedProductIDs)
+    {
+        // Remove items
+        foreach ($removedProductIDs as $productID) {
+            $this->deleteWithConditions(['orderId' => $orderID, 'productId' => $productID]);
+        }
+
+        // Update or add items
+        foreach ($productIDs as $index => $productID) {
+            $data = ['quantity' => $quantities[$index]];
+            $conditions = [
+                'orderId' => $orderID,
+                'productId' => $productID
+            ];
+
+            // Check if the item already exists
+            $existingItem = $this->first(['orderId' => $orderID, 'productId' => $productID]);
+
+            // show($existingItem);
+            if ($existingItem) {
+                // Update existing item
+                $this->updateWithConditions($data, $conditions);
+            } else {
+                // Add new item
+                $data = [
+                    'OrderID' => $orderID,
+                    'ProductID' => $productID,
+                    'quantity' => $quantities[$index]
+                ];
+
+                $this->insert($data);
+            }
+        }
+    }
 }

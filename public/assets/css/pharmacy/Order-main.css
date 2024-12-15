@@ -25,7 +25,7 @@
   
   
   .main-content {
-    margin: 30px;
+    margin: 30px 30px 30px 130px;
     position: relative;
     top: 89.6px;
     flex: 12;
@@ -44,6 +44,7 @@
   
   .search-container {
     margin: 20px 0;
+    display: flex;
   }
   
   .search-bar {
@@ -332,7 +333,9 @@
   }
   
   
-  
+  .order-table{
+    border-collapse: collapse;
+  }
   /* table {
     width: 100%;
     border-collapse: collapse;
@@ -525,3 +528,14 @@
     scrollbar-width: thin;
   } */
   
+  .order-table table{
+    width: 66%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    /* border: 1px solid black; */
+    background-color: #000000;
+    height: 100px;
+    overflow: scroll;
+    scrollbar-width: thin;
+    
+  }

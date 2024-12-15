@@ -1,18 +1,4 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $password = $_POST['password'] ?? '';
-    $confirm_password = $_POST['confirm_password'] ?? '';
-
-    if ($password !== $confirm_password) {
-        echo "Passwords do not match.";
-    } else {
-        // Update logic: Here you'd implement the logic to update the admin account details in the database
-        echo "Admin account has been updated.";
-    }
-}
-
 require_once BASE_PATH.'/app/views/inc/header.view.php';
 require_once BASE_PATH.'/app/views/inc/navBar.view.php';
 ?>
@@ -24,17 +10,17 @@ require_once BASE_PATH.'/app/views/inc/navBar.view.php';
     <form class="Form" action="" method="POST">
         <div>
             <label for="name">Name:</label>
-            <input class="Input" type="text" id="name" name="name" placeholder="Enter name" value="" required>
+            <input class="Input" type="text" id="name" name="username" placeholder="Enter name" value="<?= htmlspecialchars($admin->username) ?>" required>
         </div>
 
         <div>
             <label for="email">Email:</label>
-            <input class="Input" type="email" id="email" name="email" placeholder="Enter email" required>
+            <input class="Input" type="email" id="email" name="email" placeholder="Enter email" value="<?= htmlspecialchars($admin->email) ?>" required>
         </div>
 
         <div>
             <label for="password">Password:</label>
-            <input class="Input" type="password" id="password" name="password" placeholder="Enter password" required>
+            <input class="Input" type="password" id="password" name="password" placeholder="Enter password" value="<?= htmlspecialchars($admin->password) ?>" required>
         </div>
 
         <div>

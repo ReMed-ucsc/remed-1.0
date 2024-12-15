@@ -22,7 +22,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
             <!-- <button class="search-button" onclick="performSearch()">Search</button> -->
         </div>
         <div>
-            <a class="add-btn" href="<?= ROOT ?>/admin/newDriver/"><img src="<?= ROOT ?>/assets/images/add.png" alt="" style="width:30px; height:auto; margin-right:5px;">Add Pharmacy</a>
+            <a class="add-btn" href="<?= ROOT ?>/admin/newDriver/"><img src="<?= ROOT ?>/assets/images/add.png" alt="" style="width:30px; height:auto; margin-right:5px;">Add newDriver</a>
         </div>
 
     </div>
@@ -42,15 +42,15 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($drivers as $drivers): ?>
-                    <?php if (stripos($drivers['name'], $search) !== false): ?>
+                <?php foreach ($drivers as $driver): ?>
+                    <?php if (stripos($driver['name'], $search) !== false): ?>
                         <tr>
-                            <td><?= $drivers['name'] ?></td>
-                            <td><?= $drivers['contact'] ?></td>
-                            <td><?= $drivers['delivery'] ?></td>
-                            <td><?= $drivers['email'] ?></td>
-                            <td><?= $drivers['address'] ?></td>
-                            <td><span class="status-user"><?= $drivers['status'] ?></span></td>
+                            <td><?= $driver['name'] ?></td>
+                            <td><?= $driver['contact'] ?></td>
+                            <td><?= $driver['delivery'] ?></td>
+                            <td><?= $driver['email'] ?></td>
+                            <td><?= $driver['address'] ?></td>
+                            <td><span class="status-user"><?= $driver['status'] ?></span></td>
                         </tr>
                     <?php endif; ?>
                 <?php endforeach; ?>

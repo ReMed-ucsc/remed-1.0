@@ -54,7 +54,7 @@
                                 <th>Supplier ID</th>
                                 <th>Expiration Date</th>
                                 <th>Reorder Level</th>
-                                <th>Status</th>
+                                <!-- <th>Status</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -67,7 +67,7 @@
                                 <td>SUP-456</td>
                                 <td>2025-06-15</td>
                                 <td>50</td>
-                                <td>In Stock</td>
+                                <!-- <td>In Stock</td> -->
                             </tr>
                             <tr>
                                 <td>BATCH-003</td>
@@ -78,7 +78,7 @@
                                 <td>SUP-123</td>
                                 <td>2026-02-20</td>
                                 <td>100</td>
-                                <td>In Stock</td>
+                                <!-- <td>In Stock</td> -->
                             </tr>
                             <tr>
                                 <td>BATCH-003</td>
@@ -89,7 +89,7 @@
                                 <td>SUP-123</td>
                                 <td>2026-02-20</td>
                                 <td>100</td>
-                                <td>In Stock</td>
+                                <!-- <td>In Stock</td> -->
                             </tr>
                             <tr>
                                 <td>BATCH-003</td>
@@ -100,7 +100,7 @@
                                 <td>SUP-123</td>
                                 <td>2026-02-20</td>
                                 <td>100</td>
-                                <td>In Stock</td>
+                                <!-- <td>In Stock</td> -->
                             </tr>
                             <tr>
                                 <td>BATCH-003</td>
@@ -111,7 +111,7 @@
                                 <td>SUP-123</td>
                                 <td>2026-02-20</td>
                                 <td>100</td>
-                                <td>In Stock</td>
+                                <!-- <td>In Stock</td> -->
                             </tr>
                             <tr>
                                 <td>BATCH-003</td>
@@ -122,7 +122,7 @@
                                 <td>SUP-123</td>
                                 <td>2026-02-20</td>
                                 <td>100</td>
-                                <td>In Stock</td>
+                                <!-- <td>In Stock</td> -->
                             </tr>
                         </tbody>
                     </table>
@@ -143,7 +143,7 @@
                                 <th>Supplier ID</th>
                                 <th>Expiration Date</th>
                                 <th>Reorder Level</th>
-                                <th>Status</th>
+                                <!-- <th>Status</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -156,7 +156,7 @@
                                 <td>SUP-456</td>
                                 <td>2025-08-15</td>
                                 <td>20</td>
-                                <td>Out of Stock</td>
+                                <!-- <td>Out of Stock</td> -->
                             </tr>
                             <tr>
                                 <td>BATCH-002</td>
@@ -167,7 +167,7 @@
                                 <td>SUP-789</td>
                                 <td>2024-12-10</td>
                                 <td>30</td>
-                                <td>Out of Stock</td>
+                                <!-- <td>Out of Stock</td> -->
                             </tr>
                         </tbody>
                     </table>
@@ -189,7 +189,7 @@
                                 <th style="width:5%;">Supplier ID</th>
                                 <th style="width:5%;">Expiration Date</th>
                                 <th style="width:5%;">Reorder Level</th>
-                                <th style="width:5%;">Status</th>
+                                <!-- <th style="width:5%;">Status</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -202,7 +202,7 @@
                                 <td>SUP-456</td>
                                 <td>2025-08-15</td>
                                 <td>20</td>
-                                <td>Low Stock</td>
+                                <!-- <td>Low Stock</td> -->
                             </tr>
                             <tr>
                                 <td>BATCH-002</td>
@@ -213,7 +213,7 @@
                                 <td>SUP-789</td>
                                 <td>2024-12-10</td>
                                 <td>30</td>
-                                <td>Low Stock</td>
+                                <!-- <td>Low Stock</td> -->
                             </tr>
                             <tr>
                                 <td>BATCH-004</td>
@@ -224,7 +224,7 @@
                                 <td>SUP-456</td>
                                 <td>2025-08-15</td>
                                 <td>20</td>
-                                <td>Low Stock</td>
+                                <!-- <td>Low Stock</td> -->
                             </tr>
                         </tbody>
                     </table>

@@ -15,7 +15,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ReMed Dashboard</title>
-  <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/Dashboard-page.css">
+  <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/dashboardPage.css">
   <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/navbar.css">
   <link rel="stylesheet" href="<?= ROOT ?>/assets/css/component/sidebar.css">
   <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
@@ -59,13 +59,27 @@
       <div class="top">
         <div class="cards">
           <div class="profilecard">
-            <div class="profile-card">
+            <div class="profilecard-left">
               <img src="<?= ROOT ?>/assets/images/admin.png" class="card-icon">
               <h4>Profile</h4>
               <div class="data">
                 <p>HealthGuard Pharmacy</p>
               </div>
               <a href="<?= ROOT ?>/inventoryMain">View details</a>
+            </div>
+            <div class="profilecard-right">
+              <div class="stat">
+                <h4>Total Patients</h4>
+                <p>120</p>
+              </div>
+              <div class="stat">
+                <h4>Total Orders</h4>
+                <p>45</p>
+              </div>
+              <div class="stat">
+                <h4>Current Balance</h4>
+                <p>Rs. 10,000</p>
+              </div>
             </div>
           </div>
           <div class="sidecards">
@@ -99,114 +113,110 @@
         </div>
       </div>
       <div class="middle">
-        <div class="total-sales">
-          Total Sales
-          <canvas id="myBarChart"></canvas>
-        </div>
-        <div class="inventory">
-          <div class="weekly">
-            Inventory
-            <h5>Weekly
-              <ul class="sub-menu">
-
-                <!-- <li>
-                    <a href="#">
-                      <span class="text">Daily</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="text">Weekly</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="text">Yearly</span>
-                    </a>
-                  </li> -->
-              </ul>
-
-              <i class="arrow ph-bold ph-caret-down"></i>
-            </h5>
+        <div class="middleline">
+          <div class="total-sales">
+            Total Sales
+            <canvas id="myBarChart"></canvas>
           </div>
-          <canvas id="myPieChart"></canvas>
+          <div class="inventory">
+            <div class="weekly">
+              Inventory
+              <h5>Weekly
+                <ul class="sub-menu">
+
+                </ul>
+
+                <i class="arrow ph-bold ph-caret-down"></i>
+              </h5>
+            </div>
+            <canvas id="myPieChart"></canvas>
+          </div>
         </div>
+        <div class="middleline">
+          <div class="total-sales">
+            Patient Visit
+            <canvas id="myPatientChart" width="400" height="200"></canvas>
+          </div>
+        </div>
+
       </div>
       <div class="bottom">
-        <div class="recent-payment">
-          <p>Recent payments</p>
-          <table>
-            <thead>
-              <tr>
-                <th>ORDER ID</th>
-                <th>CUSTOMER NAME</th>
-                <th>DATE</th>
-                <th>PAYMENT METHOD</th>
-                <th>PRICE</th>
-                <th>INVOICE</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>YY-953581</td>
-                <td>Mr. Jones</td>
-                <td>14-08-2022</td>
-                <td>Card</td>
-                <td>Rs. 5,000.00</td>
-                <td>Completed</td>
-              </tr>
-              <tr>
-                <td>YY-953582</td>
-                <td>Mr. Smith</td>
-                <td>15-08-2022</td>
-                <td>Cash</td>
-                <td>Rs. 2,500.00</td>
-                <td>Pending</td>
-              </tr>
-              <tr>
-                <td>YY-953582</td>
-                <td>Mr. Smith</td>
-                <td>15-08-2022</td>
-                <td>Cash</td>
-                <td>Rs. 2,500.00</td>
-                <td>Pending</td>
-              </tr>
-              <tr>
-                <td>YY-953582</td>
-                <td>Mr. Smith</td>
-                <td>15-08-2022</td>
-                <td>Cash</td>
-                <td>Rs. 2,500.00</td>
-                <td>Pending</td>
-              </tr>
-              <tr>
-                <td>YY-953582</td>
-                <td>Mr. Smith</td>
-                <td>15-08-2022</td>
-                <td>Cash</td>
-                <td>Rs. 2,500.00</td>
-                <td>Pending</td>
-              </tr>
-              <tr>
-                <td>YY-953582</td>
-                <td>Mr. Smith</td>
-                <td>15-08-2022</td>
-                <td>Cash</td>
-                <td>Rs. 2,500.00</td>
-                <td>Pending</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="total-sales">
+          <div class="recent-payment">
+            <p>Recent payments</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>ORDER ID</th>
+                  <th>CUSTOMER NAME</th>
+                  <th>DATE</th>
+                  <th>PAYMENT METHOD</th>
+                  <th>PRICE</th>
+                  <th>INVOICE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>YY-953581</td>
+                  <td>Mr. Jones</td>
+                  <td>14-08-2022</td>
+                  <td>Card</td>
+                  <td>Rs. 5,000.00</td>
+                  <td>Completed</td>
+                </tr>
+                <tr>
+                  <td>YY-953582</td>
+                  <td>Mr. Smith</td>
+                  <td>15-08-2022</td>
+                  <td>Cash</td>
+                  <td>Rs. 2,500.00</td>
+                  <td>Pending</td>
+                </tr>
+                <tr>
+                  <td>YY-953582</td>
+                  <td>Mr. Smith</td>
+                  <td>15-08-2022</td>
+                  <td>Cash</td>
+                  <td>Rs. 2,500.00</td>
+                  <td>Pending</td>
+                </tr>
+                <tr>
+                  <td>YY-953582</td>
+                  <td>Mr. Smith</td>
+                  <td>15-08-2022</td>
+                  <td>Cash</td>
+                  <td>Rs. 2,500.00</td>
+                  <td>Pending</td>
+                </tr>
+                <tr>
+                  <td>YY-953582</td>
+                  <td>Mr. Smith</td>
+                  <td>15-08-2022</td>
+                  <td>Cash</td>
+                  <td>Rs. 2,500.00</td>
+                  <td>Pending</td>
+                </tr>
+                <tr>
+                  <td>YY-953582</td>
+                  <td>Mr. Smith</td>
+                  <td>15-08-2022</td>
+                  <td>Cash</td>
+                  <td>Rs. 2,500.00</td>
+                  <td>Pending</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+          </div>
         </div>
       </div>
+
+      <script src="<?= ROOT ?>/assets/js/pharmacy/dashboardPage.js"></script>
+
+
+
     </div>
-  </div>
-
-  <script src="<?= ROOT ?>/assets/js/pharmacy/dashboardPage.js"></script>
-
-
-
-  </div>
 
 
 </body>

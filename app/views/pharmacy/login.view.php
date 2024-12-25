@@ -1,29 +1,3 @@
-<?php
-// session_start();
-
-// // Check if the form is submitted
-// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//     // Get email and password from the POST data
-//     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-//     $password = $_POST['password'];
-
-//     // Dummy credentials for demonstration, replace with your database check
-//     $valid_email = "user@example.com";
-//     $valid_password = password_hash("password123", PASSWORD_DEFAULT);  // Example hashed password
-
-//     // Check if the entered email and password match the valid credentials
-//     if ($email == $valid_email && password_verify($password, $valid_password)) {
-//         // Store session data (e.g., user is logged in)
-//         $_SESSION['user'] = $email;
-//         redirect('dashboardPage');
-//         // header("Location: ../Dashboard/Dashboard-page.php");  // Redirect to the dashboard after successful login
-//         exit();
-//     } else {
-//         $error_message = "Invalid email or password. Please try again.";
-//     }
-// }
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/Login-page.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/loginPage.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/navbar.css">
     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
 </head>
@@ -79,7 +53,10 @@
             </div>
         </div>
     </div>
-
+    <?php
+    require_once BASE_PATH . '/app/views/inc/pharmacy/footer.view.php';
+    ?>
 </body>
+
 
 </html>

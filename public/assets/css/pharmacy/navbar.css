@@ -1,4 +1,3 @@
-/* Reset and basic styles */
 * {
     margin: 0;
     padding: 0;
@@ -9,14 +8,12 @@ body {
     font-family: Arial, sans-serif;
 }
 
-/* Navbar styles */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    background-image: linear-gradient(135deg, #1d2635, #001f4d, rgb(3, 39, 93), #34415a), url(http://localhost/remed-1.0/public/assets/images/inventory5.png);
-    /* border-bottom: 1px solid white; */
+    background-image: radial-gradient(  #001f4d, rgb(3, 39, 93)), url(http://localhost/remed-1.0/public/assets/images/inventory5.png);
     width: 100%;
     position: fixed;
     z-index: 100000;
@@ -41,7 +38,6 @@ body {
     font-family: 'Rock Salt', cursive;
 }
 
-/* Navigation links */
 .nav-links {
     display: flex;
     list-style: none;

@@ -19,7 +19,6 @@ body {
 .fullpage {
   display: flex;
   flex-direction: row;
-  /* flex: 1; */
 }
 
 .main-content {
@@ -28,13 +27,10 @@ body {
   top: 89.6px;
   flex: 12;
   padding: 10px;
-  /* Adjusts based on sidebar width */
   min-height: calc(100vh - 89.6px);
-  overflow-y: auto; /* Enables vertical scrolling */
+  overflow-y: auto; 
   background-color: #dbe2f4;
-  /* transition: margin-left 0.3s, width 0.3s; */
   transition: width 0.3s ease;
-  /* flex-grow: 1; */
 }
 
 .search-container {
@@ -47,8 +43,6 @@ body {
   border: 1px solid #b0bec5;
   width: 100%;
   margin-bottom: 20px;
-  /* display: flex;
-  justify-content: space-between; */
 }
 
 .structure {
@@ -64,13 +58,6 @@ body {
   background-color: transparent;
 }
 
-/* .Order-page {
-  display: flex;
-  flex-direction: row;
-  
-} */
-
-/* Overlay container */
 .overlay {
   position: relative;
   top: 409px;
@@ -78,9 +65,7 @@ body {
   transform: translate(-50%, -50%);
   z-index: 2;
   background: #dbe2f4;
-  /* padding: 20px 10px 20px 10px; */
   border-radius: 10px;
-  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
   width: 1042px;
   height: calc(100vh - 120px);
   text-align: center;
@@ -141,14 +126,80 @@ body {
 .id {
   margin-top: 5px;
   display: flex;
+  justify-content: space-between; /* Ensures spacing between idleft and idright */
+}
+
+.idleft {
+  display: flex;
   flex-direction: column;
+  flex: 1; /* Ensures it takes space proportionally */
+}
+
+.idright {
+  display: flex;
+  justify-content: flex-end; /* Aligns content to the right within idright */
+  align-items: center;
+  flex: 0; /* Keeps idright content compact */
+}
+
+.chaticon {
+  background-color: #007bff; /* Soft blue background */
+  color: white; /* White icon color */
+  padding: 10px; /* Add padding for better touch target */
+  border-radius: 50%; /* Circular button */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  cursor: pointer; /* Pointer cursor for interactivity */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth animations */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px; /* Fixed width for consistent size */
+  height: 40px; /* Fixed height for consistent size */
+  position: relative;
+  top: -9px;
+  left: 7px;
+}
+
+.chaticon i {
+  font-size: 16px; /* Icon size */
+}
+
+.chaticon:hover {
+  background-color: #0056b3; 
+  transform: translateY(-2px); 
+}
+
+.chaticon:active {
+  background-color: #004494; 
+  transform: translateY(0); 
+}
+
+.notification-badge {
+  position: relative;
+  top: -21px;
+  right: 1px;
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 3px 6px;
+  line-height: 1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  pointer-events: none; /* Prevents interaction */
+}
+
+.notification-badge:hover {
+  background-color: rgb(141, 8, 8); 
+  transform: translateY(-2px); 
 }
 
 .input-group {
   margin-bottom: 15px;
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  /* gap: 10px; */
   align-items: center;
 }
 
@@ -164,8 +215,8 @@ body {
 
 .input-group input {
   position: absolute;
-  right: 40px;
-  width: 60%;
+  right: 78px;
+  width: 49%;
   padding: 8px;
   border: 1px solid #ddd;
   background-color: white;
@@ -228,16 +279,6 @@ body {
 }
 
 .details {
-  /* background: #f0f0f0;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 15px;
-  height: 200px;
-  width: 60%;
-  font-size: 14px;
-  display: grid;
-  text-align: left;
-  flex-direction: column; */
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust column width */
   gap: 1px; 
@@ -285,10 +326,6 @@ body {
 
 }
 
-/* .right{
-  display: flex;
-  flex-direction: row;
-} */
 
 .gallery {
   display: flex;
@@ -302,7 +339,7 @@ body {
   transition: transform 0.3s;
 }
 .gallery img:hover {
-  transform: scale(1.6); /* Small zoom on hover */
+  transform: scale(1.6); 
 }
 
 .display-area {
@@ -363,12 +400,6 @@ body {
 }
 
 
-/* .search-bar {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-  align-items: center;
-} */
 
 .search-bar input {
   flex: 1;
@@ -430,21 +461,6 @@ body {
   border-color: #0056b3;
 }
 
-/* table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-table th, table td {
-  text-align: left;
-  padding: 10px;
-  border: 1px solid #ddd;
-}
-
-table th {
-  background: #007bff;
-  color: white;
-} */
 
 .price{
   display: flex;
@@ -760,3 +776,4 @@ tr:nth-child(odd) .custom-select {
 .search-result-item:hover {
   background-color: #f0f0f0;
 }
+

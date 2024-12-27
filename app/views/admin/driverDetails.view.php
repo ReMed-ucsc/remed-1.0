@@ -1,14 +1,5 @@
 <?php
 // Sample data for demonstration (replace with your own data source or database)
-$drivers = [
-    ["name" => "Ruwan kumara", "contact" => "+94 11 223 4455", "delivery" => "5pm - 8pm", "email" => "info@medicodrivers.lk", "address" => "45 Galle Road, Colombo 03, Colombo District", "status" => "online"],
-    ["name" => "Sachintha Pranandu", "contact" => "+94 81 238 5523", "delivery" => "Full time", "email" => "contact@healthplus.lk", "address" => "12 Kandy Road, Peradeniya, Kandy District", "status" => "online"],
-    ["name" => "Alex david",  "contact" => "+94 21 221 3344", "delivery" => "5pm - 8pm", "email" => "support@wellmed.lk", "address" => "25 Station Road, Jaffna, Jaffna District", "status" => "online"],
-    ["name" => "Achindu Hewage", "contact" => "+94 91 224 5566", "delivery" => "5pm - 8pm", "email" => "citymed@galle.lk", "address" => "34 Matara Road, Galle, Galle District", "status" => "online"],
-    ["name" => "Upali", "contact" => "+94 52 222 1188", "delivery" => "delivery", "email" => "lifecare@drivers.lk", "address" => "89 Main Street, Nuwara Eliya, Nuwara Eliya District", "status" => "online"]
-];
-$search = $_GET['search'] ?? '';
-
 require_once BASE_PATH . '/app/views/inc/header.view.php';
 require_once BASE_PATH . '/app/views/inc/navBar.view.php';
 ?>
@@ -33,24 +24,24 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
         <table>
             <thead>
                 <tr>
+                    <th>Driver ID</th>
                     <th>Driver Name</th>
                     <th>Contact Number</th>
                     <th>Delivery Time</th>
                     <th>Email</th>
-                    <th>Address</th>
                     <th>Status</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($drivers as $driver): ?>
-                    <?php if (stripos($driver['name'], $search) !== false): ?>
+                <?php foreach ($driver as $drivers): ?>
+                    <?php if ($drivers): ?>
                         <tr>
-                            <td><?= $driver['name'] ?></td>
-                            <td><?= $driver['contact'] ?></td>
-                            <td><?= $driver['delivery'] ?></td>
-                            <td><?= $driver['email'] ?></td>
-                            <td><?= $driver['address'] ?></td>
-                            <td><span class="status-user"><?= $driver['status'] ?></span></td>
+                            <td><?=htmlspecialchars($drivers->driverID)?></td>
+                            <td><?= htmlspecialchars($drivers->driverName) ?></td>
+                            <td><?= htmlspecialchars($drivers->telNo)  ?></td>
+                            <td><?= htmlspecialchars($drivers->deliveryTime) ?></td>
+                            <td><?= htmlspecialchars($drivers->email) ?></td>
+                            <td><span class="status-user"><?= htmlspecialchars($drivers->status) ?></span></td>
                         </tr>
                     <?php endif; ?>
                 <?php endforeach; ?>

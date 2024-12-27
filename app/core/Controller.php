@@ -66,7 +66,7 @@ trait Controller
     public function isAuthenticated()
     {
         $this->startSession();
-        return isset($_SESSION['user_id']);
+        return isset($_SESSION['id']);
     }
 
     public function isAuthorized()

@@ -18,14 +18,7 @@ class PharmacyDetails
         $PharmacyModel = new Pharmacy();
         $pharmacy = $PharmacyModel->getPharmacies();
 
-        // show($pharmacy);
 
-        // if ($pharmacy === false) {
-        //     $data['error_message'] = 'Error loading pharmacy data. Please try again later.';
-        // } else {
-        //     $data['pharmacy'] = $pharmacy;
-        // }
-        // Pass session data to the view
         $data = [
             'pharmacyName' => $name,
             'PharmacyID' => $PharmacyID,
@@ -33,8 +26,7 @@ class PharmacyDetails
             'pharmacy' => $pharmacy
         ];
 
-        // $this->unsetSession('error_message');
-        // $this->unsetSession('success_message');
+
 
         $this->view('admin/pharmacyDetails', $data);
     }
@@ -108,22 +100,15 @@ class PharmacyDetails
             // File upload handling
             if (isset($_FILES['document']) && $_FILES['document']['error'] == UPLOAD_ERR_OK) {
                 $uploadDir = BASE_PATH . '/uploads/license/';
-
-                // Create directory if it doesn't exist
                 if (!is_dir($uploadDir)) {
                     mkdir($uploadDir, 0777, true);
                 }
-
-                // Generate unique filename
                 $filename = uniqid() . '_' . basename($_FILES['document']['name']);
                 $uploadPath = $uploadDir . $filename;
-
-                // Move uploaded file
                 if (move_uploaded_file($_FILES['document']['tmp_name'], $uploadPath)) {
                     $data['document'] = $filename;
                 } else {
-                    // Handle upload error
-                    $data['errors']['document'] = "File upload failed";
+                    $data['errors']['document'] = 'File upload failed';
                 }
             }
 

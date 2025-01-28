@@ -55,10 +55,9 @@ class Driver extends User
 
         return $this->first($data, []);
     }
-    public function getDrivers()
-    {
-        $sql = "Select * FROM $this->table";
-        return $this->query($sql);
+    public function getDrivers($status){
+        $sql = "Select * FROM $this->table WHERE status= :status";
+        return $this->query($sql,['status'=>$status]);
     }
 
     // public function getLastInsertedId()

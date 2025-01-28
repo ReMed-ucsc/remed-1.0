@@ -5,7 +5,7 @@ class DriverDetails
     public function index()
     {
         $driverDetails = new Driver();
-        $driver = $driverDetails->getDrivers();
+        $driver = $driverDetails->getDrivers("APPROVED  ");
 
         $data = [
             "driver" => $driver,

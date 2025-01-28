@@ -13,7 +13,13 @@ class PendingDriver
         // $result = $user->findAll();
         // show($result);
         // $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
-        $data['username'] = [];
+        $driverModel=new Driver();
+        $drivers=$driverModel->getDrivers("PENDING");
+
+        $data = [
+            'drivers'=>$drivers
+        ];
+        
         $this->view('admin/pendingDriver', $data);
     }
     // add other methods like edit, update, delete, etc.

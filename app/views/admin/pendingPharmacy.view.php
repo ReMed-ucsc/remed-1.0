@@ -46,10 +46,10 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                             <td><?= htmlspecialchars($pharmacy_items->email ?? '') ?></td>
                             <td><?= htmlspecialchars($pharmacy_items->address) ?></td>
                             <td class="status-mark">
-                                <span class="status Pending"><?= htmlspecialchars($pharmacy_items->status)?></span>
+                                <span class="status pending"><?= htmlspecialchars($pharmacy_items->status)?></span>
                             </td>
                             <td>
-                                <a href="<?=ROOT?>/admin/PendingPharmacy/onbordPharmacy/<?= htmlspecialchars($pharmacy_items->PharmacyID) ?>">onboard</a>
+                                <a class="onboard" href="<?=ROOT?>/admin/PendingPharmacy/onbordPharmacy/<?= htmlspecialchars($pharmacy_items->PharmacyID) ?>">onboard</a>
                             </td>
                         </tr>
                     <?php endif; ?>

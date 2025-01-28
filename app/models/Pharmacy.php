@@ -1,6 +1,5 @@
 <?php
 class Pharmacy extends User
-
 {
     use Model;
 
@@ -110,17 +109,23 @@ class Pharmacy extends User
         return $this->insert($data);
     }
 
-    public function getPharmacies($status="APPROVED")
+    public function getPharmacies($status = "APPROVED")
     {
         $sql = "Select * FROM $this->table where status = :status";
-        return $this->query($sql,['status'=> $status]);
+        return $this->query($sql, ['status' => $status]);
     }
 
-    public function pendingPharmacy()
-    {
-        $sql = "SELECT * FROM $this->table WHREE status='Pending'";
-        $pendingPharmacies = $this->table->query($sql)->fetchAll();
+    // public function pendingPharmacy()
+    // {
+    //     $sql = "SELECT * FROM $this->table WHREE status='Pending'";
+    //     $pendingPharmacies = $this->table->query($sql)->fetchAll();
 
-        require_once BASE_PATH ."/app/views/admin/pendingPharmacy.view.php";
+    //     require_once BASE_PATH ."/app/views/admin/pendingPharmacy.view.php";
+    // }
+    public function getlastId()
+    {
+        $sql = "SELECT MAX(PharmacyId) AS last_id FROM $this->table WHERE  status = 'APPROVED'";
+        return $this->query($sql);
+
     }
 }

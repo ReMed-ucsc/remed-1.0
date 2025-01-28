@@ -13,6 +13,10 @@ class Dashboard
         $AdminID = $this->getSession('id');
         $adminEmail = $this->getSession('email');
         $authToken = $this->getSession('auth_token');
+        $pharmacy = new pharmacy();
+        $lastId = $pharmacy->getlastId();
+         // Debugging step
+        // die();
 
         // Get all pharmacies
         $AdminModel = new Admin();
@@ -28,7 +32,8 @@ class Dashboard
             'email' => $adminEmail,
             'id' => $AdminID,
             'authToken' => $authToken,
-            'admin' => $admin
+            'admin' => $admin,
+            'last_Id' => isset($lastId[0]->last_id) ? $lastId[0]->last_id : null
         ];
 
         $this->unsetSession('error_message');

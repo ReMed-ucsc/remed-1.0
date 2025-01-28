@@ -16,7 +16,7 @@ class PharmacyDetails
 
         // Get all pharmacies
         $PharmacyModel = new Pharmacy();
-        $pharmacy = $PharmacyModel->getPharmacies();
+        $pharmacy = $PharmacyModel->getPharmacies('APPROVED');
 
 
         $data = [

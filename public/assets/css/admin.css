@@ -77,6 +77,8 @@ table tbody tr:hover {
 .status.Pending {
   background-color: #e9cd7b;
   color: #ddb02a;
+  margin-top: 13px;
+  margin-bottom: auto;
 }
 
 .status.Rejected {
@@ -167,48 +169,48 @@ tbody tr:hover {
   padding-top: 0;
   font-family: Arial, sans-serif;
 }
-.profile-container-out{
-    background-color: #B0BEC5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+.profile-container-out {
+  background-color: #b0bec5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .profile-container {
-    display:flex;
-    position:relative;
-    top: 80px;
-    margin-bottom: 50px;
-    width: 800px;
-    height: 500px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
+  display: flex;
+  position: relative;
+  top: 80px;
+  margin-bottom: 50px;
+  width: 800px;
+  height: 500px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .profile-left {
-    background-color: #02224C;
-    color: white;
-    padding: 40px;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  background-color: #02224c;
+  color: white;
+  padding: 40px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.profile-left .details{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.profile-left .details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .profile-right {
-    background-color: #eceff1;
-    padding: 40px;
-    width: 50%;
-    display: flex;
-    flex-direction:column;
-    justify-content: center;
+  background-color: #eceff1;
+  padding: 40px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

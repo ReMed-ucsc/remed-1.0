@@ -104,7 +104,7 @@ class DriverDetails
                 'email' => $_POST['email'] ?? '',
                 'deliveryTime' => $_POST['deliveryTime'] ?? '',
                 'vehicalLicenseNo' => $_POST['vehicalLicenseNo'] ?? '',
-                'document' => '',
+                'status'=>"APPROVED",
                 'token' => md5(uniqid()),
                 'fcmToken' => md5(uniqid())
             ];

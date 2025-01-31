@@ -28,7 +28,6 @@ class PendingPharmacy
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data = [
-
                 'name' => $_POST['name'],
                 'pharmacistName' => $_POST['pharmacistName'],
                 'RegNo' => $_POST['RegNo'],

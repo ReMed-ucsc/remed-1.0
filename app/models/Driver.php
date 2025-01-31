@@ -5,7 +5,7 @@ class Driver extends User
     use Model;
 
     protected $table = 'driver';
-    protected $allowedColumns = ['driverID','vehicalLicenseNo','document', 'driverName', 'email', 'password', 'token', 'telNo', 'deliveryTime', 'fcmToken'];
+    protected $allowedColumns = ['driverID','vehicalLicenseNo','document', 'driverName', 'email', 'password', 'token', 'telNo', 'deliveryTime', 'fcmToken','status'];
 
     public function validate($data)
     {

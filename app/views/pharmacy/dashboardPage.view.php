@@ -236,7 +236,6 @@
       </div>
 
     </section>
-    <!-- </div> -->
 
     <script src="<?= ROOT ?>/assets/js/pharmacy/dashboardPage.js"></script>
 

@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/loginPage.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/navbar.css">
     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/js/pharmacy/loginPage.js">
+
 </head>
 
 <body>

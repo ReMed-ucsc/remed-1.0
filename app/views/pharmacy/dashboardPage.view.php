@@ -16,6 +16,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ReMed Dashboard</title>
   <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/dashboardPage.css">
+  <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/table.css">
+
   <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/navbar.css">
   <link rel="stylesheet" href="<?= ROOT ?>/assets/css/component/sidebar.css">
   <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
@@ -65,7 +67,7 @@
               <div class="data">
                 <p>HealthGuard Pharmacy</p>
               </div>
-              <a href="<?= ROOT ?>/inventoryMain">View details</a>
+              <a href="<?= ROOT ?>/profilePage">View details</a>
             </div>
             <div class="profilecard-right">
               <div class="stat">
@@ -101,10 +103,10 @@
             </div>
             <div class="card blue-card">
               <img src="<?= ROOT ?>/assets/images/storage.jpg" class="card-icon">
-              <h4>Medicine Storage</h4>
+              <h4>Orders</h4>
 
               <div class="data">
-                <p>515-15</p>
+                <p>515-<span style="color:white;background-color:maroon;padding:5px;border-radius:50%;">15</span></p>
               </div>
               <!-- <div class="resolve"><a href="#">Resolve - 15</a></div> -->
               <a href="<?= ROOT ?>/medicine">View details</a>
@@ -135,88 +137,112 @@
         <div class="middleline">
           <div class="total-sales">
             Patient Visit
-            <canvas id="myPatientChart" width="400" height="200"></canvas>
+            <canvas id="myPatientChart" width="500" height="200"></canvas>
+          </div>
+          <div class="total-sales">
+            Patient Visit
+            <canvas id="myPatientChart" width="200" height="200"></canvas>
+          </div>
+          <div class="total-sales">
+            Patient Visit
+            <canvas id="myPatientChart" width="300" height="200"></canvas>
           </div>
         </div>
 
       </div>
-      <div class="bottom">
-        <div class="total-sales">
-          <div class="recent-payment">
-            <p>Recent payments</p>
-            <table>
-              <thead>
-                <tr>
-                  <th>ORDER ID</th>
-                  <th>CUSTOMER NAME</th>
-                  <th>DATE</th>
-                  <th>PAYMENT METHOD</th>
-                  <th>PRICE</th>
-                  <th>INVOICE</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>YY-953581</td>
-                  <td>Mr. Jones</td>
-                  <td>14-08-2022</td>
-                  <td>Card</td>
-                  <td>Rs. 5,000.00</td>
-                  <td>Completed</td>
-                </tr>
-                <tr>
-                  <td>YY-953582</td>
-                  <td>Mr. Smith</td>
-                  <td>15-08-2022</td>
-                  <td>Cash</td>
-                  <td>Rs. 2,500.00</td>
-                  <td>Pending</td>
-                </tr>
-                <tr>
-                  <td>YY-953582</td>
-                  <td>Mr. Smith</td>
-                  <td>15-08-2022</td>
-                  <td>Cash</td>
-                  <td>Rs. 2,500.00</td>
-                  <td>Pending</td>
-                </tr>
-                <tr>
-                  <td>YY-953582</td>
-                  <td>Mr. Smith</td>
-                  <td>15-08-2022</td>
-                  <td>Cash</td>
-                  <td>Rs. 2,500.00</td>
-                  <td>Pending</td>
-                </tr>
-                <tr>
-                  <td>YY-953582</td>
-                  <td>Mr. Smith</td>
-                  <td>15-08-2022</td>
-                  <td>Cash</td>
-                  <td>Rs. 2,500.00</td>
-                  <td>Pending</td>
-                </tr>
-                <tr>
-                  <td>YY-953582</td>
-                  <td>Mr. Smith</td>
-                  <td>15-08-2022</td>
-                  <td>Cash</td>
-                  <td>Rs. 2,500.00</td>
-                  <td>Pending</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div>
-          </div>
-        </div>
-      </div>
-
-      <script src="<?= ROOT ?>/assets/js/pharmacy/dashboardPage.js"></script>
-
-
-
     </div>
+    <!-- <div class="bottom"> -->
+    <section class="table-management">
+      <div class="table">
+        <p>Recent payments</p>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 12%;">ORDER ID</th>
+              <th style="width: 40%;">CUSTOMER NAME</th>
+              <th style="width: 10%;">DATE</th>
+              <th style="width: 20%;">PAYMENT METHOD</th>
+              <th style="width: 15%;">PAYMENT</th>
+              <th style="width: 13%;">INVOICE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>YY-953581</td>
+              <td>Mr. Jones</td>
+              <td>14-08-2022</td>
+              <td>Card</td>
+              <td>Rs. 5,000.00</td>
+              <td>Completed</td>
+            </tr>
+            <tr>
+              <td>YY-953582</td>
+              <td>Mr. Smith</td>
+              <td>15-08-2022</td>
+              <td>Cash</td>
+              <td>Rs. 2,500.00</td>
+              <td>Pending</td>
+            </tr>
+            <tr>
+              <td>YY-953582</td>
+              <td>Mr. Smith</td>
+              <td>15-08-2022</td>
+              <td>Cash</td>
+              <td>Rs. 2,500.00</td>
+              <td>Pending</td>
+            </tr>
+            <tr>
+              <td>YY-953582</td>
+              <td>Mr. Smith</td>
+              <td>15-08-2022</td>
+              <td>Cash</td>
+              <td>Rs. 2,500.00</td>
+              <td>Pending</td>
+            </tr>
+            <tr>
+              <td>YY-953582</td>
+              <td>Mr. Smith</td>
+              <td>15-08-2022</td>
+              <td>Cash</td>
+              <td>Rs. 2,500.00</td>
+              <td>Pending</td>
+            </tr>
+            <tr>
+              <td>YY-953582</td>
+              <td>Mr. Smith</td>
+              <td>15-08-2022</td>
+              <td>Cash</td>
+              <td>Rs. 2,500.00</td>
+              <td>Pending</td>
+            </tr>
+            <tr>
+              <td>YY-953582</td>
+              <td>Mr. Smith</td>
+              <td>15-08-2022</td>
+              <td>Cash</td>
+              <td>Rs. 2,500.00</td>
+              <td>Pending</td>
+            </tr>
+            <tr>
+              <td>YY-953582</td>
+              <td>Mr. Smith</td>
+              <td>15-08-2022</td>
+              <td>Cash</td>
+              <td>Rs. 2,500.00</td>
+              <td>Pending</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+    <!-- </div> -->
+
+    <script src="<?= ROOT ?>/assets/js/pharmacy/dashboardPage.js"></script>
+
+
+
+
 
 
 </body>

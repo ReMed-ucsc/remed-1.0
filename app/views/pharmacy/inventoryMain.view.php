@@ -17,6 +17,7 @@
   <title>ReMed Dashboard</title>
   <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/Order-main.css">
   <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/navbar.css">
+  <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/table.css">
   <link rel="stylesheet" href="<?= ROOT ?>/assets/css/component/sidebar.css">
   <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -56,10 +57,10 @@
 
       <div class="ongoing">Current Stock</div>
 
-      <section class="order-management">
+      <section class="table-management">
 
 
-        <table class="order-table">
+        <table class="table">
           <thead>
             <tr>
               <th style="width: 7%;">Batch ID</th>

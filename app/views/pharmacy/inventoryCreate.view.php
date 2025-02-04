@@ -114,64 +114,64 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>BATCH-001</td> <!-- Batch ID -->
-                    <td>Paracetamol</td> <!-- Generic Name -->
-                    <td>Panadol</td> <!-- Medicine Name -->
-                    <td>ITEM-12345</td> <!-- Item Code -->
-                    <td>Pain Relief</td> <!-- Category -->
-                    <td>$10.00</td> <!-- Unit Price -->
-                    <td>SUP-456</td> <!-- Supplier ID -->
-                    <td>2025-06-15</td> <!-- Expiration Date -->
-                    <td>50</td> <!-- Reorder Level -->
-                    <td>In Stock</td> <!-- Status -->
+                    <td>BATCH-001</td>
+                    <td>Paracetamol</td>
+                    <td>Panadol</td>
+                    <td>ITEM-12345</td>
+                    <td>Pain Relief</td>
+                    <td>$10.00</td>
+                    <td>SUP-456</td>
+                    <td>2025-06-15</td>
+                    <td>50</td>
+                    <td>In Stock</td>
                   </tr>
                   <tr>
-                    <td>BATCH-002</td> <!-- Batch ID -->
-                    <td>Ibuprofen</td> <!-- Generic Name -->
-                    <td>Advil</td> <!-- Medicine Name -->
-                    <td>ITEM-67890</td> <!-- Item Code -->
-                    <td>Pain Relief</td> <!-- Category -->
-                    <td>$12.50</td> <!-- Unit Price -->
-                    <td>SUP-789</td> <!-- Supplier ID -->
-                    <td>2024-12-10</td> <!-- Expiration Date -->
-                    <td>30</td> <!-- Reorder Level -->
-                    <td>Low Stock</td> <!-- Status -->
+                    <td>BATCH-002</td>
+                    <td>Ibuprofen</td>
+                    <td>Advil</td>
+                    <td>ITEM-67890</td>
+                    <td>Pain Relief</td>
+                    <td>$12.50</td>
+                    <td>SUP-789</td>
+                    <td>2024-12-10</td>
+                    <td>30</td>
+                    <td>Low Stock</td>
                   </tr>
                   <tr>
-                    <td>BATCH-003</td> <!-- Batch ID -->
-                    <td>Vitamin C</td> <!-- Generic Name -->
-                    <td>Citrohealth</td> <!-- Medicine Name -->
-                    <td>ITEM-54321</td> <!-- Item Code -->
-                    <td>Supplements</td> <!-- Category -->
-                    <td>$5.00</td> <!-- Unit Price -->
-                    <td>SUP-123</td> <!-- Supplier ID -->
-                    <td>2026-02-20</td> <!-- Expiration Date -->
-                    <td>100</td> <!-- Reorder Level -->
-                    <td>In Stock</td> <!-- Status -->
+                    <td>BATCH-003</td>
+                    <td>Vitamin C</td>
+                    <td>Citrohealth</td>
+                    <td>ITEM-54321</td>
+                    <td>Supplements</td>
+                    <td>$5.00</td>
+                    <td>SUP-123</td>
+                    <td>2026-02-20</td>
+                    <td>100</td>
+                    <td>In Stock</td>
                   </tr>
                   <tr>
-                    <td>BATCH-004</td> <!-- Batch ID -->
-                    <td>Amoxicillin</td> <!-- Generic Name -->
-                    <td>Amoxil</td> <!-- Medicine Name -->
-                    <td>ITEM-98765</td> <!-- Item Code -->
-                    <td>Antibiotics</td> <!-- Category -->
-                    <td>$8.00</td> <!-- Unit Price -->
-                    <td>SUP-456</td> <!-- Supplier ID -->
-                    <td>2025-08-15</td> <!-- Expiration Date -->
-                    <td>20</td> <!-- Reorder Level -->
-                    <td>Out of Stock</td> <!-- Status -->
+                    <td>BATCH-004</td>
+                    <td>Amoxicillin</td>
+                    <td>Amoxil</td>
+                    <td>ITEM-98765</td>
+                    <td>Antibiotics</td>
+                    <td>$8.00</td>
+                    <td>SUP-456</td>
+                    <td>2025-08-15</td>
+                    <td>20</td>
+                    <td>Out of Stock</td>
                   </tr>
                   <tr>
-                    <td>BATCH-005</td> <!-- Batch ID -->
-                    <td>Calcium</td> <!-- Generic Name -->
-                    <td>Caltrate</td> <!-- Medicine Name -->
-                    <td>ITEM-24680</td> <!-- Item Code -->
-                    <td>Supplements</td> <!-- Category -->
-                    <td>$15.00</td> <!-- Unit Price -->
-                    <td>SUP-789</td> <!-- Supplier ID -->
-                    <td>2026-07-01</td> <!-- Expiration Date -->
-                    <td>60</td> <!-- Reorder Level -->
-                    <td>In Stock</td> <!-- Status -->
+                    <td>BATCH-005</td>
+                    <td>Calcium</td>
+                    <td>Caltrate</td>
+                    <td>ITEM-24680</td>
+                    <td>Supplements</td>
+                    <td>$15.00</td>
+                    <td>SUP-789</td>
+                    <td>2026-07-01</td>
+                    <td>60</td>
+                    <td>In Stock</td>
                   </tr>
 
                 </tbody>
@@ -185,17 +185,6 @@
         </div>
       </div>
 
-      <!-- <div class="right-section">
-                <div class="chat-box">
-                    <h3>Messages</h3>
-                    
-                    <div class="chat-messages">
-                        <div class="display-area" id="displayArea">
-                          <p>Click an image to enlarge it here</p>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
 
 
     </div>

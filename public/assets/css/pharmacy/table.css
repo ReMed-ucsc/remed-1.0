@@ -22,7 +22,7 @@ section.table-management {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   height: 400px;
-  width: 85vw;
+  width: 100%;
   overflow-x: scroll;
   scrollbar-width: none;
 }
@@ -85,4 +85,69 @@ a.view {
 
 a.view:hover {
   text-decoration: underline;
+}
+
+.ongoing {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #0056b3;
+}
+
+.search-container {
+  margin: 10px 0;
+  display: flex;
+}
+
+.search-bar {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #b0bec5;
+  width: 100%;
+  margin-bottom: 20px;
+  /* display: flex;
+  justify-content: space-between; */
+}
+
+.search {
+  padding: 7px 10px;
+  border: none;
+  position: relative;
+  left: -45px;
+  background-color: transparent;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 40%;
+}
+
+.search-bar button {
+  padding: 8px 15px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-results {
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  position: absolute;
+  background: white;
+  width: 60%;
+  z-index: 1000;
+}
+
+.search-result-item {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.search-result-item:hover {
+  background-color: #f0f0f0;
 }

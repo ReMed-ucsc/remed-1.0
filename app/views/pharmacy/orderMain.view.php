@@ -52,6 +52,7 @@
         <input type="text" placeholder="Search here" class="search-bar">
         <button class="search"><i class="icon ph-bold ph-magnifying-glass"></i>
         </button>
+        <div id="search-results" class="search-results"></div>
       </div>
 
       <div class="ongoing">Ongoing Orders</div>

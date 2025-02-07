@@ -122,10 +122,23 @@ class Pharmacy extends User
 
     //     require_once BASE_PATH ."/app/views/admin/pendingPharmacy.view.php";
     // }
-    public function getlastId()
-    {
-        $sql = "SELECT MAX(PharmacyId) AS last_id FROM $this->table WHERE  status = 'APPROVED'";
-        return $this->query($sql);
 
+    public function getlastId($status="APPROVED")
+    {
+        $sql = "SELECT COUNT(*) AS approved_count FROM $this->table WHERE status = :status";
+        $result = $this->query($sql, ['status' => $status]);
+
+        // echo '<pre>';
+        // print_r($result);
+        // echo '</pre>';
+        // die();
+        // If the result is an object, access the property using ->
+        if (is_array($result) && isset($result[0])) {
+            return $result[0]->approved_count; // Access the property as an object
+        }
+
+        // Default return value if no result is found
+        return 0;
     }
+
 }

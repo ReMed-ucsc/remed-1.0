@@ -1,7 +1,6 @@
 <?php
 
 // Dummy data for the dashboard
-$registeredPharmacies = 10;
 $onlineUsers = 8;
 $requestedPharmacies = 5;
 $drivers = 5;
@@ -25,28 +24,28 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php' ?>
         <div class="card greenA">
             <img src="<?= ROOT ?>/assets/images/statistics.png" alt="" />
             <p>Registered Pharmacy</p>
-            <h2 id="count"><?= htmlspecialchars($last_Id) ?></h2>
+            <h2 id="count"><?= htmlspecialchars((string)$approved_pharmacy) ?></h2>
         </div>
         <div class="card blue">
             <img src="<?= ROOT ?>/assets/images/computer.png" alt="" />
             <p>Online Users</p>
-            <h2 id="count"><?= $onlineUsers ?></h2>
+            <h2 id="count"><?= $onlineUsers?></h2>
         </div>
         <div class="card red">
             <img src="<?= ROOT ?>/assets/images/time-left.png" alt="" />
             <p>Requested Pharmacy</p>
-            <h2 id="count"><?= $requestedPharmacies ?></h2>
+            <h2 id="count"><?= htmlspecialchars((string)$pending_pharmacy) ?></h2>
         </div>
 
         <div class="card yellow">
             <img src="<?= ROOT ?>/assets/images/driver.png" alt="" />
             <p>Total Drivers</p>
-            <h2 id="count"><?= $drivers ?></h2>
+            <h2 id="count"><?= htmlspecialchars((string)$approved_drivers)  ?></h2>
         </div>
         <div class="card black">
             <img src="<?= ROOT ?>/assets/images/time-left.png" alt="" />
             <p>Requested Drivers</p>
-            <h2 id="count"><?= $requestedDrivers ?></h2>
+            <h2 id="count"><?= htmlspecialchars((string)$pending_drivers)  ?></h2>
         </div>
     </div>
 

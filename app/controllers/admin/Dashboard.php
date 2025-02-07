@@ -13,8 +13,14 @@ class Dashboard
         $AdminID = $this->getSession('id');
         $adminEmail = $this->getSession('email');
         $authToken = $this->getSession('auth_token');
+
         $pharmacy = new pharmacy();
-        $lastId = $pharmacy->getlastId();
+        $approvedPharmacy = $pharmacy->getlastId("APPROVED");
+        $pendingPharmacy=$pharmacy->getlastId("PENDING");
+
+        $driver = new Driver();
+        $approvedDrivers = $driver->getlastId("APPROVED");
+        $pendingDrivers=$driver->getlastId("PENDING");
          // Debugging step
         // die();
 
@@ -33,7 +39,10 @@ class Dashboard
             'id' => $AdminID,
             'authToken' => $authToken,
             'admin' => $admin,
-            'last_Id' => isset($lastId[0]->last_id) ? $lastId[0]->last_id : null
+            'approved_pharmacy' => $approvedPharmacy,
+            'pending_pharmacy'=>$pendingPharmacy,
+            'approved_drivers' => $approvedDrivers,
+            'pending_drivers' => $pendingDrivers
         ];
 
         $this->unsetSession('error_message');

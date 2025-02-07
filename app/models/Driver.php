@@ -59,6 +59,23 @@ class Driver extends User
         $sql = "Select * FROM $this->table WHERE status= :status";
         return $this->query($sql,['status'=>$status]);
     }
+    public function getlastId($status="APPROVED")
+    {
+        $sql = "SELECT COUNT(*) AS row_count FROM $this->table WHERE status = :status";
+        $result = $this->query($sql, ['status' => $status]);
+
+        // echo '<pre>';
+        // print_r($result);
+        // echo '</pre>';
+        // die();
+        // If the result is an object, access the property using ->
+        if (is_array($result) && isset($result[0])) {
+            return $result[0]->row_count; // Access the property as an object
+        }
+
+        // Default return value if no result is found
+        return 0;
+    }
 
     // public function getLastInsertedId()
     // {

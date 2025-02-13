@@ -19,7 +19,7 @@ class RemovePharmacy
         // $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
 
         $data['username'] = [];
-        $this->view('admin/removePharmacy', $data);
+        $this->view('admin/pharmacyDetails', $data);
     }
 
     // add other methods like edit, update, delete, etc.

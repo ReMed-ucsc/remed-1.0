@@ -74,4 +74,6 @@ class Driver extends User
 
         return $this->first($data, []);
     }
+
 }
+

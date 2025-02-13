@@ -20,9 +20,10 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php' ?>
 
 <body>
 
-    <!-- dashbordBody start -->
+
+    <!-- dashboardBody start -->
     <div class="dashboard">
-        <div class="card green">
+        <div class="card greenA">
             <img src="<?= ROOT ?>/assets/images/statistics.png" alt="" />
             <p>Registered Pharmacy</p>
             <h2 id="count"><?= $registeredPharmacies ?></h2>
@@ -39,12 +40,11 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php' ?>
         </div>
 
         <div class="card yellow">
-            <img src="<?= ROOT ?>/assets/images/deliveryMan.png" alt="" />
+            <img src="<?= ROOT ?>/assets/images/driver.png" alt="" />
             <p>Total Drivers</p>
             <h2 id="count"><?= $drivers ?></h2>
         </div>
-
-        <div class="card red">
+        <div class="card black">
             <img src="<?= ROOT ?>/assets/images/time-left.png" alt="" />
             <p>Requested Drivers</p>
             <h2 id="count"><?= $requestedDrivers ?></h2>
@@ -86,6 +86,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php' ?>
                 }, interval);
             });
         });
+
     </script>
     <script src="<?= ROOT ?>/assets/js/admin/dashboard.js"></script>
 

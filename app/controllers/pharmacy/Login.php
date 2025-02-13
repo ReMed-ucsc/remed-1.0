@@ -5,22 +5,60 @@ class Login
     use Controller;
     public function index()
     {
-        // $user = new User;
-        // $arr['email'] = "name@example.com";
+        $data = [];
 
-        // $result = $model->where(data_for_filtering, data_not_for_filtering);
-        // $result = $model->insert(insert_data);
-        // $result = $model->update(filtering_data updating_data, id_column_for_filtering);
-        // $result = $model->delete(id, id_column);
-        // $result = $user->findAll();
+        if ($_SERVER['REQUEST_METHOD'] == "GET" && isset($_GET['registered'])) {
+            $data['success'] = "Pharmacy has registered successfully.";
+        }
 
-        // show($result);
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $user = new Pharmacy;
+            $arr['email'] = $_POST['email'];
 
-        // $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
+            $row = $user->first($arr);
 
-        $data['username'] = [];
+            if ($row) {
+                if (password_verify($_POST['password'], $row->password)) {
+
+                    $authToken = hash('sha384', microtime() . uniqid() . bin2hex(random_bytes(10)));
+                    $user->updateToken($arr['email'], $authToken);
+
+                    $this->setSession('user_id', $row->PharmacyID);
+                    $this->setSession('auth_token', $authToken);
+                    $this->setSession('isAdmin', false);
+                    $this->setSession('last_activity', time());
+
+                    redirect('dashboardPage');
+                    exit();
+                }
+            }
+
+            $user->errors['email'] = "Wrong email or password";
+
+            $data['errors'] = $user->errors;
+        }
         $this->view('pharmacy/login', $data);
     }
 
-    // add other methods like edit, update, delete, etc.
+    public function logout()
+    {
+        $this->destroySession();
+        redirect('login');
+        exit();
+    }
 }
+
+
+// $data = [
+//     'email' => $_POST['email'],
+//     'password' => $_POST['password'],
+//     'level' => 1
+// ];
+
+// if ($user->validate($data)) {
+//     $user->registerUser($data['name'], $data['email'], $data['password']);
+//     redirect('login');
+//     exit();
+// } else {
+//     $data['errors'] = $user->errors;
+// }

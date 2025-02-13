@@ -82,6 +82,7 @@ textarea {
     cursor: pointer;
     background-color: var(--btn-green);
     color: white;
+    margin: 5px;
 }
 .btn-green:hover{
     background-color:var(--green-hover) ;
@@ -97,6 +98,7 @@ textarea {
     cursor: pointer;
     background-color: var(--btn-red);
     color: white;
+    margin: 5px;
 }
 .btn-red:hover{
     background-color:var(--red-hover) ;
@@ -128,7 +130,7 @@ textarea {
 
 .action{
   padding-left: 10px;
-  width: 20px;
+  width: 23.5px;
   height: auto;
 }
 

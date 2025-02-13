@@ -2,16 +2,20 @@
 
 trait Database
 {
+    private $pdoInstance;
+
     private function connect()
     {
-        $string = "mysql:host=" . DBHOST . ";dbname=" . DBNAME;
-        try {
-            $con = new PDO($string, DBUSER, DBPASS);
-            $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $con;
-        } catch (PDOException $e) {
-            die("Database connection failed: " . $e->getMessage());
+        if ($this->pdoInstance === null) {
+            $string = "mysql:host=" . DBHOST . ";dbname=" . DBNAME;
+            try {
+                $this->pdoInstance = new PDO($string, DBUSER, DBPASS);
+                $this->pdoInstance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $e) {
+                die("Database connection failed: " . $e->getMessage());
+            }
         }
+        return $this->pdoInstance;
     }
 
     public function query($query, $data = [])
@@ -65,5 +69,11 @@ trait Database
         }
 
         return false;
+    }
+
+    public function lastInsertId()
+    {
+        $con = $this->connect();
+        return $con->lastInsertId();
     }
 }

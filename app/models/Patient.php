@@ -8,29 +8,45 @@ class Patient extends User
     protected $table = 'patient';
     protected $allowedColumns = ['name', 'email', 'password', 'token'];
 
-    public function getOrderHistory($patientID)
+    public function validate($data)
     {
-        $query = "SELECT * FROM medicineOrder WHERE PatientID = :patientID";
-        $data = ['patientID' => $patientID];
-        return $this->query($query, $data);
+        $this->errors = [];
+
+        if (empty($data['email'])) {
+            $this->errors['email'] = "Email is required";
+        } else if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            $this->errors['email'] = "Invalid email address";
+        }
+
+        if (empty($data['password'])) {
+            $this->errors['password'] = "Password is required";
+        }
+
+        if (empty($this->errors)) {
+            return true;
+        }
+        return false;
     }
 
-    public function getOrderMedicines($orderID, $patientID)
+    public function getPatientByEmail($email)
     {
-        $query = "SELECT * FROM OrderView WHERE OrderID = :orderID AND PatientID = :patientID";
-        $data = ['orderID' => $orderID, 'patientID' => $patientID];
-        return $this->query($query, $data);
+        $data = ['email' => $email];
+        return $this->first($data);
     }
 
-    public function searchPharmaciesWithMedicines($latitude, $longitude, $productIDs, $range = 10)
+    public function updateToken($email, $token)
     {
-        $orderModel = new OrderView();
-        return $orderModel->searchPharmaciesWithMedicines($latitude, $longitude, $productIDs, $range);
+        $data = ['token' => $token];
+        $this->update($email, $data, 'email');
     }
 
-    public function searchNearbyPharmacy($latitude, $longitude, $range = 10)
+    public function registerPatient($name, $email, $password)
     {
-        $orderModel = new OrderView();
-        return $orderModel->searchNearbyPharmacy($latitude, $longitude, $range);
+        $data = [
+            'name' => $name,
+            'email' => $email,
+            'password' => $password
+        ];
+        return $this->insert($data);
     }
 }

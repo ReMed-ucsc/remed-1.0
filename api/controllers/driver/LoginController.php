@@ -8,10 +8,10 @@ class LoginController
 {
     public function index()
     {
-        $response = array();
+        $response = [];
         $result = new Result();
 
-        // get data sent using post method and store
+        // Get data sent via POST and decode JSON
         $input = file_get_contents('php://input');
         $data = json_decode($input, true);
 
@@ -24,6 +24,7 @@ class LoginController
             $user = $userModel->getDriverByEmail($email);
 
             if ($user) {
+                // Access password as an object property
                 if (password_verify($password, $user->password)) {
                     $authToken = hash('sha384', microtime() . uniqid() . bin2hex(random_bytes(10)));
                     $userModel->updateToken($email, $authToken);

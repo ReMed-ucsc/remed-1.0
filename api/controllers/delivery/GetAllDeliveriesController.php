@@ -1,11 +1,11 @@
 <?php
 
-require_once BASE_PATH . '/app/models/DeliveryView.php';
+require_once BASE_PATH . '/app/models/Delivery.php';
 require_once BASE_PATH . '/app/models/Driver.php';
 require_once BASE_PATH . '/app/core/init.php';
 require_once BASE_PATH . '/app/core/helper_classes.php';
 
-class GetDeliveryController
+class GetAllDeliveriesController
 {
     public function index()
     {
@@ -23,28 +23,21 @@ class GetDeliveryController
             //echo json_encode($data);
         }
 
-        $orderId = $data['orderId'];
+        $driverId = $data['driverId'];
 
-        $deliveryModel = new DeliveryView();
+        $deliveryModel = new Delivery();
 
-        $delivery = $deliveryModel->getDeliveryInfo($orderId);
-
-        //echo json_encode($delivery);
+        $delivery = $deliveryModel->getAllDeliveriesOfADriver($driverId);
 
         if (!$delivery) {
             $response['error'] = true;
-            $response['message'] = 'No order found';
+            $response['message'] = 'No delivery found';
         } else {
-            if ($delivery['status'] == 'P') {
-                $response['data'] = $delivery;
-            } else {
-                $response['error'] = true;
-                $response['message'] = 'Order already Confirmed';
-            }
+            $response['alldeliveryInfo']['data'] = $delivery;
         }
 
-        $response['result']['error'] = $result->isError();
-        $response['result']['message'] = $result->getMessage();
+        $response['alldeliveryInfo']['error'] = $result->isError();
+        $response['alldeliveryInfo']['message'] = $result->getMessage();
         echo json_encode($response);
     }
 }

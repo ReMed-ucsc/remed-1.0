@@ -82,7 +82,7 @@ trait Model
             $query .= " offset $this->offset";
         }
 
-        show($query);
+        //show($query);
         $data = array_merge($data, $data_not);
 
         //for query debugging
@@ -242,7 +242,7 @@ trait Model
         // show($result);
         if ($result) {
             // Get the last inserted ID
-            return $this->lastInsertId();
+            return true;
         }
 
         return false;

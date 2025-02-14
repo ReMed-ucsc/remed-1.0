@@ -6,7 +6,7 @@ require_once BASE_PATH . '/app/models/Driver.php';
 require_once BASE_PATH . '/app/core/init.php';
 require_once BASE_PATH . '/app/core/helper_classes.php';
 
-class UpdateCommentController
+class GetOneCommentController
 {
     public function index()
     {
@@ -15,6 +15,8 @@ class UpdateCommentController
 
         $input = file_get_contents('php://input');
         $data = json_decode($input, true);
+
+        //echo json_encode($data);
 
         if (!$data) {
             http_response_code(400);
@@ -29,34 +31,12 @@ class UpdateCommentController
         //$driverModel = new Driver();
 
         $commentId = $data['commentId'];
-        $comment = $data['comment'];
 
         if ($commentId) {
 
-            $data = ['CommentID' => $commentId];
-
             try {
-                $res = $commentModel->first($data);
-
-                //echo json_encode($res);
-                //echo json_encode(['CommentID' => $res['CommentID']]);
-
-                //$response['data'] = $res;
-
-                if ($res['CommentID'] != null) {
-
-                    $data = [
-                        "comment" => $comment
-                    ];
-
-                    $commentModel->updateComments($commentId, $comment);
-
-                    $result->setErrorStatus(false);
-                    $result->setMessage("");
-                } else {
-                    $result->setErrorStatus(true);
-                    $result->setMessage("Invalid CommentID");
-                }
+                $commentList = $commentModel->getOneComment($commentId);
+                $response['data'] = $commentList;
             } catch (Exception $e) {
                 $result->setErrorStatus(true);
                 $result->setMessage("error happend " . $e->getMessage());

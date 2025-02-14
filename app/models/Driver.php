@@ -5,7 +5,22 @@ class Driver extends User
     use Model;
 
     protected $table = 'driver';
-    protected $allowedColumns = ['driverID','vehicalLicenseNo','document', 'driverName', 'email', 'password', 'token', 'telNo', 'deliveryTime', 'fcmToken','status'];
+
+    protected $allowedColumns = [
+        'DriverID',
+        'driverName',
+        'email',
+        'password',
+        'token',
+        'dob',
+        'address',
+        'fcmToken',
+        'telNo',
+        'NIC',
+        'deliveryTime',
+        'status'
+    ];
+
 
     public function validate($data)
     {
@@ -34,16 +49,23 @@ class Driver extends User
 
     public function getDriverByEmail($email)
     {
-        $data = ['email' => $email];
-        return $this->first($data);
+        $query = "SELECT * FROM driver WHERE email = :email LIMIT 1";
+        $result = $this->query($query, ['email' => $email]);
+
+        return $result ? $result[0] : null; // Return the first object or null
     }
 
-    public function registerDriver($name, $email, $password)
+    public function registerDriver($name, $email, $password, $dob, $tellNo, $NIC, $deliveryTime)
     {
         $data = [
             'driverName' => $name,
             'email' => $email,
-            'password' => password_hash($password, PASSWORD_DEFAULT)
+            'password' => password_hash($password, PASSWORD_DEFAULT),
+            'dob' => $dob,
+            'telNo' => $tellNo,
+            'NIC' => $NIC,
+            'deliveryTime' => $deliveryTime,
+            'status' => 'pending'
         ];
 
         return $this->insert($data);

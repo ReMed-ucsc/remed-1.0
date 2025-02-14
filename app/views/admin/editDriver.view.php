@@ -13,39 +13,31 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
     <?php } ?>
     <h2 class="page-title">Onboard New Driver</h2>
     <div class="details-container">
-        <form class="form-container" action="<?= ROOT ?>/admin/DriverDetails/create" method="POST" enctype="multipart/form-data">
+        <form class="form-container" action="" method="POST" enctype="multipart/form-data">
             <div class="Form">
-                <!-- <div>
-                    <label for="driverID">ReMed Driver Id:</label>
-                    <input class="Input" type="text" id="remedId" name="driverID"
-                        value="<?= htmlspecialchars($driverID ?? '') ?>" readonly>
-                </div> -->
                 <div>
                     <label for="driverName">Driver Name:</label>
-                    <input class="Input" type="text" id="driverName" name="driverName" placeholder="Enter Driver name"
-                        required>
+                    <input class="Input" type="text" id="driverName" name="driverName" placeholder="Enter Driver name" value="<?=htmlspecialchars($driver->driverName) ?>"  required>
                 </div>
                 <div>
                     <label for="vehicalLicenseNo">Vehicle License Number:</label>
-                    <input class="Input" type="text" id="lecenseNumber" name="vehicalLicenseNo"
-                        placeholder="Enter license" required>
+                    <input class="Input" type="text" id="lecenseNumber" name="vehicalLicenseNo" placeholder="Enter license" value="<?=htmlspecialchars($driver->vehicalLicenseNo) ?>" required>
                 </div>
             </div>
             <div class="Form">
                 <div>
                     <label for="email">Email:</label>
-                    <input class="Input" type="email" id="email" name="email" placeholder="Enter email" required>
+                    <input class="Input" type="email" id="email" name="email" placeholder="Enter email" value="<?=htmlspecialchars($driver->email)?>" required>
                 </div>
                 <div>
                     <label for="telNo">Contact Number:</label>
-                    <input class="Input" type="text" id="contactNumber" name="telNo" placeholder="Enter contact number"
-                        required>
+                    <input class="Input" type="text" id="contactNumber" name="telNo" placeholder="Enter contact number" value="<?= htmlspecialchars($driver->telNo)?>" required>
                 </div>
             </div>
             <div class="Form">
                 <div>
                     <label for="document">Document:</label>
-                    <input class="Input" type="file" id="document" name="document">
+                    <input class="Input" type="file" id="document" name="document" >
                 </div>
                 <div>
                     <label for="deliveryTime">Delivery Time:</label>

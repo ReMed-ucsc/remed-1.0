@@ -93,6 +93,7 @@
           <!-- Table Section -->
           <div class="table-section">
 
+            <?php $tot = 0; ?>
             <div class="table">
               <table class="order-table">
                 <thead>
@@ -123,8 +124,9 @@
                       </td>
                       <td>
                         <?php
-                        $quantity = $_POST['quantity'][$medicine->ProductID] ?? 0;
+                        $quantity = $medicine->unitPrice ?? 0;
                         $price = $quantity * $medicine->unitPrice;
+                        $tot = $tot + $price;
                         echo number_format($price, 2);
                         ?>
                       </td>
@@ -151,7 +153,8 @@
               </table>
               <div class="price">
                 <p class="total-price">Total price = </p>
-                <p class="total-price">Rs.1250.00</p>
+                <p class="total-price"><?php echo number_format($tot, 2);
+                                        ?></p>
               </div>
             </div>
           </div>
@@ -170,7 +173,7 @@
           <label for="status">Order Status:</label>
           <div class="selectWrapper">
             <select id="status" class="statusSelect">
-              <option value="pending">Pending</option>
+              <option value="waiting">Waiting</option>
               <option value="processing">Processing</option>
               <option value="shipped">Shipped</option>
               <option value="delivered">Delivered</option>
@@ -205,7 +208,7 @@
             </a>
           </button>
           </form>
-          <button class="delete-order">Delete Order</button>
+          <button class="delete-order">Confirm Order</button>
         <?php } else {  ?>
           <button class="delete-order">
             <a href="<?= ROOT ?>/order/<?= $order->OrderID ?>" style="text-decoration: none; color:white;">

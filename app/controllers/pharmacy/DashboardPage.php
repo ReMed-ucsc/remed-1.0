@@ -6,7 +6,7 @@ class DashboardPage
     public function index()
     {
         // Protect the route
-        $this->protectRoute();
+        // $this->protectRoute();
 
         // Get session data
         $username = $this->getSession('isAdmin');

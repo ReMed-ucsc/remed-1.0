@@ -1,10 +1,10 @@
 <?php
 
 // Dummy data for the dashboard
-$registeredPharmacies = 123;
-$onlineUsers = 45;
-$requestedPharmacies = 10;
-$drivers = 50;
+$registeredPharmacies = 10;
+$onlineUsers = 8;
+$requestedPharmacies = 5;
+$drivers = 5;
 $requestedDrivers = 5;
 
 $recentActivities = [
@@ -20,13 +20,12 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php' ?>
 
 <body>
 
-
     <!-- dashboardBody start -->
     <div class="dashboard">
         <div class="card greenA">
             <img src="<?= ROOT ?>/assets/images/statistics.png" alt="" />
             <p>Registered Pharmacy</p>
-            <h2 id="count"><?= $registeredPharmacies ?></h2>
+            <h2 id="count"><?= htmlspecialchars($last_Id) ?></h2>
         </div>
         <div class="card blue">
             <img src="<?= ROOT ?>/assets/images/computer.png" alt="" />
@@ -66,7 +65,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php' ?>
         var ROOT = '<?= ROOT ?>';
 
         //Animation for card number counting
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const cards = document.querySelectorAll('.card h2');
 
             cards.forEach((card) => {
@@ -90,4 +89,4 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php' ?>
     </script>
     <script src="<?= ROOT ?>/assets/js/admin/dashboard.js"></script>
 
-    <?php require_once  BASE_PATH . '/app/views/inc/footer.view.php' ?>
+    <?php require_once BASE_PATH . '/app/views/inc/footer.view.php' ?>

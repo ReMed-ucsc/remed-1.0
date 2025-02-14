@@ -8,7 +8,8 @@
 
     <div class="navbar-right">
         <img class="bell" src="<?= ROOT ?>/assets/images/bell-icon.png" alt="notification" />
-        <img class="user" src="<?= ROOT ?>/assets/images/TestAccount.png" alt="user" />
+        
+        <a href="<?=ROOT?>/admin/Profile"><img class="user" src="<?= ROOT ?>/assets/images/TestAccount.png" alt="user" /></a>
 </header>
 <!-- Navbar end-->
 
@@ -78,23 +79,23 @@
 </div>
 <!-- Dropdown menu end-->
 
-<div id="profile" class="profile">
+<!-- <div id="profile" class="profile">
     <div class="profile-item">
-        <img src="<?= ROOT ?>/assets/images/admin.png" alt="" />
+        <a href="<?=ROOT?>/admin/Profile"><img src="<?= ROOT ?>/assets/images/admin.png" alt="" /></a>
         <div class="details">
             <h4>ADMINISTRATOR</h4>
             <p>admin@gmail.com</p>
         </div>
         <div class="tab">
             <img src="<?= ROOT ?>/assets/images/setting.png" alt="" />
-            <a href="<?= ROOT ?>/admin/general">Setting</a>
+            <a href="<?= ROOT ?>/admin/login/edit/">Setting</a>
         </div>
         <div class="tab">
             <img src="<?= ROOT ?>/assets/images/logout.png" alt="" />
             <a href="<?= ROOT ?>/admin/login/logout">Logout</a>
         </div>
     </div>
-</div>
+</div> -->
 <!-- profile end -->
 
 <!-- notification start -->

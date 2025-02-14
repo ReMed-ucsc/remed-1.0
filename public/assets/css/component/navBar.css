@@ -80,7 +80,7 @@
 .profile {
   display: none;
   position: fixed; /* Changed from absolute to fixed */
-  top: 110px; /* Adjust as needed */
+  top: 70px; /* Adjust as needed */
   right: 10px;
   background-color: #000000;
   width: 200px;
@@ -92,7 +92,7 @@
 .notification {
   display: none;
   position: fixed; /* Changed from absolute to fixed */
-  top: 110px; /* Adjust as needed */
+  top: 70px; /* Adjust as needed */
   right: 50px;
   background-color: #000000;
   width: 280px;
@@ -287,9 +287,9 @@
     padding-top: 20px;
   }
   
-  .user{
+  /* .user{
     display: flex;
     flex-direction: row;
     width: 100px;
     background-color: red;
-  }
+  } */

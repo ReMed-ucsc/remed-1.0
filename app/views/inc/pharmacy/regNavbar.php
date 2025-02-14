@@ -8,7 +8,7 @@
 
                     <div class="image">
                         <div class="user"><img src="<?= ROOT ?>/assets/images/admin.png" alt="Profile Icon">
-                            <p class="profile-name">userexample123</p>
+                            <!-- <p class="profile-name">userexample123</p> -->
                         </div>
                     </div>
                 </a>

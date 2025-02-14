@@ -66,7 +66,7 @@ trait Controller
     public function isAuthenticated()
     {
         $this->startSession();
-        return isset($_SESSION['user_id']);
+        return isset($_SESSION['id']);
     }
 
     public function isAuthorized()
@@ -101,20 +101,22 @@ trait Controller
     {
         $app = new App();
 
-        if (!$this->isAuthenticated()) {
-            $timeoutDuration = 1800; // in seconds
 
-            if ($this->getSession('last_activity') && (time() - $this->getSession('last_activity') > $timeoutDuration)) {
-                // Last activity was more than $timeoutDuration ago
-                $this->destroySession();
-                if ($app->checkAdmin()) {
-                    redirect('admin/login');
-                } else {
-                    redirect('login');
-                }
-                exit();
-            }
-        }
+        // if (!$this->isAuthenticated()) {
+        //     $timeoutDuration = 30; // in seconds
+
+
+        //     if ($this->getSession('last_activity') && (time() - $this->getSession('last_activity') > $timeoutDuration)) {
+        //         // Last activity was more than $timeoutDuration ago
+        //         $this->destroySession();
+        //         if ($app->checkAdmin()) {
+        //             redirect('admin/login');
+        //         } else {
+        //             redirect('login');
+        //         }
+        //         exit();
+        //     }
+        // }
 
         if (!$this->isAuthenticated()) {
             if ($app->checkAdmin()) {
@@ -133,4 +135,5 @@ trait Controller
             }
         }
     }
+    
 }

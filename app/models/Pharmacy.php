@@ -1,6 +1,5 @@
 <?php
 class Pharmacy extends User
-
 {
     use Model;
 
@@ -11,8 +10,8 @@ class Pharmacy extends User
         'RegNo',
         'contactNo',
         'address',
+        'name',
         'pharmacistName',
-        'license',
         'approvedDate',
         'email',
         'password',
@@ -71,8 +70,8 @@ class Pharmacy extends User
         $this->errors = []; // Reset errors
 
         // Validate pharmacy name
-        if (empty($data['pharmacyName'])) {
-            $this->errors['pharmacyName'] = "Pharmacy name is required.";
+        if (empty($data['name'])) {
+            $this->errors['name'] = "Pharmacy name is required.";
         }
 
         // Validate email
@@ -93,18 +92,40 @@ class Pharmacy extends User
         return empty($this->errors); // Pass if no errors
     }
 
-    public function registerPharmacy($pharmacyName, $pharmacistName, $license, $contactNo, $email, $address, $document)
+    public function registerPharmacy($name, $pharmacistName, $RegNo, $contactNo, $email, $address, $status = 'APPROVED', $document = null)
     {
         $data = [
-            'name' => $pharmacyName,
+
+            'name' => $name,
             'pharmacistName' => $pharmacistName,
+            'RegNo' => $RegNo,
+            'contactNo' => $contactNo,
             'email' => $email,
             'address' => $address,
-            'contactNo' => $contactNo,
-            'license' => $license,
-            'document' => $document,
-            'status' => 'APPROVED'
+            'status' => $status,
+            'document' => $document ?? 'N/A' // Default to 'N/A' if no document
         ];
+
         return $this->insert($data);
+    }
+
+    public function getPharmacies($status = "APPROVED")
+    {
+        $sql = "Select * FROM $this->table where status = :status";
+        return $this->query($sql, ['status' => $status]);
+    }
+
+    // public function pendingPharmacy()
+    // {
+    //     $sql = "SELECT * FROM $this->table WHREE status='Pending'";
+    //     $pendingPharmacies = $this->table->query($sql)->fetchAll();
+
+    //     require_once BASE_PATH ."/app/views/admin/pendingPharmacy.view.php";
+    // }
+    public function getlastId()
+    {
+        $sql = "SELECT MAX(PharmacyId) AS last_id FROM $this->table WHERE  status = 'APPROVED'";
+        return $this->query($sql);
+
     }
 }

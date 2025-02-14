@@ -2,10 +2,6 @@
 
 // Dummy data for the dashboard
 $onlineUsers = 8;
-$requestedPharmacies = 5;
-$drivers = 5;
-$requestedDrivers = 5;
-
 $recentActivities = [
     ["time" => "05:38am", "activity" => "Update pharmacy details - Amarasinghe pharmacy"],
     ["time" => "06:03am", "activity" => "Verify pharmacy - Nilmini Pharmacy"],

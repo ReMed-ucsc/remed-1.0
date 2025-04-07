@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ReMed Dashboard</title>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/medicine.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/table.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/navbar.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/component/sidebar.css">
     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
@@ -42,8 +43,8 @@
             <!-- Available Medicines Table -->
 
             <section id="available" class="tab-content active">
-                <div class="table-section">
-                    <table class="order-table">
+                <section class="table-management">
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th>Item ID</th>
@@ -126,13 +127,13 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
+                </section>
             </section>
 
             <!-- Non-Available Medicines Table -->
             <section id="non-available" class="tab-content">
-                <div class="table-section">
-                    <table class="order-table">
+                <section class="table-management">
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th>Item ID</th>
@@ -171,14 +172,14 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
+                </section>
             </section>
             <!-- <section id="low-stock" class="tab-content">
                 <p class="hero">There are no Low Stock Medicines</p>
             </section> -->
             <section id="low-stock" class="tab-content">
-                <div class="table-section">
-                    <table class="order-table">
+                <section class="table-management">
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th style="width:5%;">Item ID</th>
@@ -228,7 +229,7 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
+                </section>
             </section>
         </div>
     </div>

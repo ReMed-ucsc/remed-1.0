@@ -25,7 +25,7 @@ body {
   transition: width 0.3s ease;
 }
 
-.search-bar {
+/* .search-bar {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #B0BEC5;
@@ -35,11 +35,12 @@ body {
   position: absolute;
   top: 10px;
   left: 31%;
-}
+} */
 
 .structure {
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
 }
 
 .search{
@@ -59,9 +60,8 @@ body {
 .middle {
   display: flex;
   flex-direction: column;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
   margin-top: 50px;
-  
 }
 
 .middleline{
@@ -189,31 +189,31 @@ body {
 .card a {
   margin-top: auto;
   text-decoration: none;
-  color: #007bff;
+  color: #abd4ff;
   font-weight: bold;
 }
 
 .black-card {
-  background-image: linear-gradient(135deg, #2b1314b0, #893f2aa8), url(http://localhost/remed-1.0/public/assets/images/INVENTORY.png);
-  background-size: contain;
+  background-image: linear-gradient(135deg, #2b1314b0, #893f2aa8), url(http://localhost/remed-1.0/public/assets/images/inventorymain.jpg);
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: 100% 70%;
   color: #fff;
 }
 
 .green-card {
-  background-image: linear-gradient(135deg, #121f138c, #23572dad), url(http://localhost/remed-1.0/public/assets/images/REVENUE.png);
-  background-size: contain;
+  background-image: linear-gradient(135deg, #121f138c, #23572dad), url(http://localhost/remed-1.0/public/assets/images/revenuemain.jpg);
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: 100% 70%;
   color: #fff;
 }
 
 .blue-card {
-  background-image: linear-gradient(135deg, #1c1e30b3, #162c5cc2), url(http://localhost/remed-1.0/public/assets/images/ORDERS.png);
-  background-size: contain;
+  background-image: linear-gradient(135deg, #1c1e30b3, #162c5cc2), url(http://localhost/remed-1.0/public/assets/images/ordersmain.jpg);
+  background-size: cover;
   background-repeat: no-repeat;
-  background-position: 100% 70%;
+  background-position: 30% 70%;
   color: #fff;
 }
 

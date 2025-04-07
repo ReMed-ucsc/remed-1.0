@@ -15,10 +15,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ReMed Dashboard</title>
-  <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/orderView.css">
+  <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/OrderView.css">
+  <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/table.css">
   <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/navbar.css">
   <link rel="stylesheet" href="<?= ROOT ?>/assets/css/component/sidebar.css">
   <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -45,339 +48,70 @@
 
     <?php include(BASE_PATH . '/app/views/inc/pharmacy/sidebar.php'); ?>
 
-    <div class="Order-page">
-      <div class="overlay">
-        <div class="order-container">
-          <div class="order-header">
-            <h1>Inventory Management &nbsp; &#8250; &nbsp; Add Inventory</h1>
-          </div>
-          <div class="order-body">
-            <div class="order-content">
-              <!-- Left Section -->
-              <div class="left-section">
-                <!-- <div class="id">
-                  <div class="input-group">
-                    <label>Stock ID</label>
-                    <input type="text" placeholder="Value">
-                  </div>
-                  <div class="input-group">
-                    <label>Supplier ID</label>
-                    <input type="text" placeholder="Value">
-                  </div>
-                </div> -->
-                <div class="prescription">
-
-                  <p>Special notes</p>
-                  <input type="text" class="specialNotes">
-
-
-                  <!-- <div class="image-preview">
-                    <input type="file">
-                  </div> -->
-
-                </div>
-              </div>
-
-              <!-- Right Section -->
-
-            </div>
-
-            <!-- <?php if (!$viewOnly) { ?> -->
-            <div class="search-bar">
-              <form action="<?= ROOT ?>/order/addItem/">
-                <input type="hidden" id="medicine-id" name="medicineId" value="" />
-                <input type="text" id="medicine-search" placeholder="Search by medicine or generic name..." />
-                <input type="text" id="medicine-quantity" name="quantity" placeholder="Quantity" />
-                <button id="add-medicine">Add</button>
-              </form>
-            </div>
-            <div id="search-results" class="search-results"></div>
-          <?php } ?>
-          <!-- Table Section -->
-          <div class="table-section">
-            <!-- <div class="search-bar">
-                <input type="text" placeholder="Search by medicine or generic name...">
-                <button>Add</button>
-              </div> -->
-            <table class="order-table">
-              <thead>
-                <tr>
-                  <th style="width: 5%;">Item ID</th>
-                  <th style="width: 5%;">Brand Name</th>
-                  <th style="width: 5%;">Generic Name</th>
-                  <th style="width: 1%;">Medicine Name</th>
-                  <th style="width: 1%;">Batch Number</th>
-                  <th style="width: 5%;">Unit Price</th>
-                  <th style="width: 5%;">Supplier ID</th>
-                  <th style="width: 5%;">Expiration Date</th>
-                  <th style="width: 5%;">Reorder Level</th>
-                  <th style="width: 5%;">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>BATCH-001</td> <!-- Batch ID -->
-                  <td>Paracetamol</td> <!-- Generic Name -->
-                  <td>Panadol</td> <!-- Medicine Name -->
-                  <td>ITEM-12345</td> <!-- Item Code -->
-                  <td>Pain Relief</td> <!-- Category -->
-                  <td>$10.00</td> <!-- Unit Price -->
-                  <td>SUP-456</td> <!-- Supplier ID -->
-                  <td>2025-06-15</td> <!-- Expiration Date -->
-                  <td>50</td> <!-- Reorder Level -->
-                  <td>In Stock</td> <!-- Status -->
-                </tr>
-                <tr>
-                  <td>BATCH-002</td> <!-- Batch ID -->
-                  <td>Ibuprofen</td> <!-- Generic Name -->
-                  <td>Advil</td> <!-- Medicine Name -->
-                  <td>ITEM-67890</td> <!-- Item Code -->
-                  <td>Pain Relief</td> <!-- Category -->
-                  <td>$12.50</td> <!-- Unit Price -->
-                  <td>SUP-789</td> <!-- Supplier ID -->
-                  <td>2024-12-10</td> <!-- Expiration Date -->
-                  <td>30</td> <!-- Reorder Level -->
-                  <td>Low Stock</td> <!-- Status -->
-                </tr>
-                <tr>
-                  <td>BATCH-003</td> <!-- Batch ID -->
-                  <td>Vitamin C</td> <!-- Generic Name -->
-                  <td>Citrohealth</td> <!-- Medicine Name -->
-                  <td>ITEM-54321</td> <!-- Item Code -->
-                  <td>Supplements</td> <!-- Category -->
-                  <td>$5.00</td> <!-- Unit Price -->
-                  <td>SUP-123</td> <!-- Supplier ID -->
-                  <td>2026-02-20</td> <!-- Expiration Date -->
-                  <td>100</td> <!-- Reorder Level -->
-                  <td>In Stock</td> <!-- Status -->
-                </tr>
-                <tr>
-                  <td>BATCH-004</td> <!-- Batch ID -->
-                  <td>Amoxicillin</td> <!-- Generic Name -->
-                  <td>Amoxil</td> <!-- Medicine Name -->
-                  <td>ITEM-98765</td> <!-- Item Code -->
-                  <td>Antibiotics</td> <!-- Category -->
-                  <td>$8.00</td> <!-- Unit Price -->
-                  <td>SUP-456</td> <!-- Supplier ID -->
-                  <td>2025-08-15</td> <!-- Expiration Date -->
-                  <td>20</td> <!-- Reorder Level -->
-                  <td>Out of Stock</td> <!-- Status -->
-                </tr>
-                <tr>
-                  <td>BATCH-005</td> <!-- Batch ID -->
-                  <td>Calcium</td> <!-- Generic Name -->
-                  <td>Caltrate</td> <!-- Medicine Name -->
-                  <td>ITEM-24680</td> <!-- Item Code -->
-                  <td>Supplements</td> <!-- Category -->
-                  <td>$15.00</td> <!-- Unit Price -->
-                  <td>SUP-789</td> <!-- Supplier ID -->
-                  <td>2026-07-01</td> <!-- Expiration Date -->
-                  <td>60</td> <!-- Reorder Level -->
-                  <td>In Stock</td> <!-- Status -->
-                </tr>
-
-              </tbody>
-            </table>
-            <p class="total-price">Total price</p>
-          </div>
-
-          <!-- Submit Button -->
-          <!-- <div class="submit-section">
-              <button class="edit-order">Edit Order</button>
-              <button class="delete-order">Delete Order</button>
-            </div> -->
-          </div>
-        </div>
-
-        <!-- <div class="right-section">
-                <div class="chat-box">
-                    <h3>Messages</h3>
-                    
-                    <div class="chat-messages">
-                        <div class="display-area" id="displayArea">
-                          <p>Click an image to enlarge it here</p>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
-
+    <!-- <div class="Order-page"> -->
+    <!-- <div class="right"> -->
+    <div class="main-content">
+      <h2>Order Management &nbsp; &#8250; &nbsp;</h2>
+      <div class="ongoing">
+        Create Order
       </div>
 
-      <!-- <div class="background">
-        <div class="main-content">
-          <h2>Orders</h2>
-          <div class="search-container">
-            <input type="text" placeholder="Search here" class="search-bar">
-            <button class="search"><i class="icon ph-bold ph-magnifying-glass"></i>
-            </button>
+      <div class="order-body">
+        <div class="order-content">
+          <!-- Left Section -->
+          <div class="left-section">
+            <p class="patient">Requested Medicines</p>
+            <div class="prescription">
+              <div class="details">
+
+
+
+
+
+              </div>
+              <!-- <div class="image-preview">
+                  <img src="<?= ROOT ?>/assets/images/prescription2.jpg" alt="Prescription Image" onclick="showImage(this)">
+                </div> -->
+            </div>
           </div>
 
-          <div class="ongoing">Ongoing Orders</div>
+          <!-- Right Section -->
 
-          <section class="order-management">
+        </div>
 
 
-            <table class="order-table">
-              <thead>
-                <tr>
-                  <th style="width: 7%;">Order ID</th>
-                  <th style="width: 7%;">Patient ID</th>
-                  <th style="width: 20%;">Delivery Address</th>
-                  <th style="width: 5%;">Date</th>
-                  <th style="width: 10%;">Payment</th>
-                  <th style="width: 5%;">Type</th>
-                  <th style="width: 5%;">Status</th>
-                  <th style="width: 5%;"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>#342342</td>
-                  <td>ABC123</td>
-                  <td>432 Park Ave, NY</td>
-                  <td>01/09/2024</td>
-                  <td>$45.00</td>
-                  <td>PayPal</td>
-                  <td><span class="status success">Delivered</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-                <tr>
-                  <td>#564564</td>
-                  <td>DEF456</td>
-                  <td>250 River Dr, TX</td>
-                  <td>31/08/2024</td>
-                  <td>$67.99</td>
-                  <td>Cash on Delivery</td>
-                  <td><span class="status pending">Pending</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-                <tr>
-                  <td>#324562</td>
-                  <td>XYZ789</td>
-                  <td>123 Oak St, FL</td>
-                  <td>25/08/2024</td>
-                  <td>$100.99</td>
-                  <td>Transfer</td>
-                  <td><span class="status canceled">Canceled</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-                <tr>
-                  <td>#564564</td>
-                  <td>DEF456</td>
-                  <td>250 River Dr, TX</td>
-                  <td>31/08/2024</td>
-                  <td>$67.99</td>
-                  <td>Cash on Delivery</td>
-                  <td><span class="status pending">Pending</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-                <tr>
-                  <td>#342342</td>
-                  <td>ABC123</td>
-                  <td>432 Park Ave, NY</td>
-                  <td>01/09/2024</td>
-                  <td>$45.00</td>
-                  <td>PayPal</td>
-                  <td><span class="status success">Delivered</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-                <tr>
-                  <td>#564564</td>
-                  <td>DEF456</td>
-                  <td>250 River Dr, TX</td>
-                  <td>31/08/2024</td>
-                  <td>$67.99</td>
-                  <td>Cash on Delivery</td>
-                  <td><span class="status pending">Pending</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-                <tr>
-                  <td>#324562</td>
-                  <td>XYZ789</td>
-                  <td>123 Oak St, FL</td>
-                  <td>25/08/2024</td>
-                  <td>$100.99</td>
-                  <td>Transfer</td>
-                  <td><span class="status canceled">Canceled</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-                <tr>
-                  <td>#342342</td>
-                  <td>ABC123</td>
-                  <td>432 Park Ave, NY</td>
-                  <td>01/09/2024</td>
-                  <td>$45.00</td>
-                  <td>PayPal</td>
-                  <td><span class="status success">Delivered</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-                <tr>
-                  <td>#342342</td>
-                  <td>ABC123</td>
-                  <td>432 Park Ave, NY</td>
-                  <td>01/09/2024</td>
-                  <td>$45.00</td>
-                  <td>PayPal</td>
-                  <td><span class="status success">Delivered</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-                <tr>
-                  <td>#342342</td>
-                  <td>ABC123</td>
-                  <td>432 Park Ave, NY</td>
-                  <td>01/09/2024</td>
-                  <td>$45.00</td>
-                  <td>PayPal</td>
-                  <td><span class="status success">Delivered</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-                <tr>
-                  <td>#342342</td>
-                  <td>ABC123</td>
-                  <td>432 Park Ave, NY</td>
-                  <td>01/09/2024</td>
-                  <td>$45.00</td>
-                  <td>PayPal</td>
-                  <td><span class="status success">Delivered</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-                <tr>
-                  <td>#342342</td>
-                  <td>ABC123</td>
-                  <td>432 Park Ave, NY</td>
-                  <td>01/09/2024</td>
-                  <td>$45.00</td>
-                  <td>PayPal</td>
-                  <td><span class="status success">Delivered</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-                <tr>
-                  <td>#342342</td>
-                  <td>ABC123</td>
-                  <td>432 Park Ave, NY</td>
-                  <td>01/09/2024</td>
-                  <td>$45.00</td>
-                  <td>PayPal</td>
-                  <td><span class="status success">Delivered</span></td>
-                  <td><a class="view" href="#">View</a></td>
-                </tr>
-              </tbody>
-            </table>
 
-            <button class="new-order-btn"><i class="ph-bold ph-plus"></i>
-              <p class="new-order">New Order</p>
-            </button>
-
-          </section>
+        <!-- Table Section -->
+        <div class="table-section">
 
 
         </div>
-      </div> -->
+      </div>
 
-      <div class="right-section">
-        <div class="chat-box">
-          <div class="id">
+
+
+
+
+    </div>
+    <!-- </div> -->
+
+    <div class="right-section">
+      <div class="chat-box">
+        <div class="orderStatus">
+          <label for="status">Order Status:</label>
+          <div class="selectWrapper">
+            <select id="status" class="statusSelect">
+              <option value="waiting">Waiting</option>
+              <option value="processing">Processing</option>
+              <option value="shipped">Shipped</option>
+              <option value="delivered">Delivered</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="id">
+          <div class="idleft">
             <div class="input-group">
               <label>Patient ID</label>
               <input type="text" placeholder="Value" value="" disabled>
@@ -387,27 +121,52 @@
               <input type="text" placeholder="Value" value="" disabled>
             </div>
           </div>
-          <!-- Sample chat messages -->
-          <div class="chat-messages">
-            <div class="display-area" id="displayArea">
-              <!-- <p>Click an image to enlarge it here</p> -->
-              <img src="<?= ROOT ?>/assets/images/prescription2.jpg" alt="">
+          <div class="idright">
+            <div class="chaticon">
+              <i class="fas fa-comment-alt"></i>
+
             </div>
+            <span class="notification-badge">1</span>
           </div>
         </div>
-        <div class="submit-section">
-          <button class="delete-order">Delete Order</button>
-
+        <!-- Sample chat messages -->
+        <div class="chat-messages">
+          <div class="display-area" id="displayArea">
+            <!-- <p>Click an image to enlarge it here</p> -->
+            <img src="<?= ROOT ?>/assets/images/prescription2.jpg" alt="">
+          </div>
         </div>
       </div>
+      <div class="submit-section">
+        <?php if ($viewOnly) { ?>
+          <button class="edit-order">
+            <a href="<?= ROOT ?>/order/edit/" style="text-decoration: none; color:black;">
+              Edit Order
+            </a>
+          </button>
+          </form>
+          <button class="delete-order">Confirm Order</button>
+        <?php } else {  ?>
+          <button class="delete-order">
+            <a href="<?= ROOT ?>/order/<?= $order->OrderID ?>" style="text-decoration: none; color:white;">
+              Cancel
+            </a>
+          </button>
 
-      <script src="<?= ROOT ?>/assets/js/pharmacy/orderCreate.js"></script>
-      <script src="<?= ROOT ?>/assets/js/pharmacy/orderMain.js"></script>
+        <?php } ?>
 
-
-
-
+      </div>
     </div>
+    <!-- </div> -->
+
+    <script src="<?= ROOT ?>/assets/js/pharmacy/orderCreate.js"></script>
+    <script src="<?= ROOT ?>/assets/js/pharmacy/orderMain.js"></script>
+    <script src="<?= ROOT ?>/assets/js/pharmacy/orderView.js"></script>
+
+
+
+
+
 
 
 </body>

@@ -1,83 +1,83 @@
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #F5F7FA;
-    display: flex;
-    flex: 1;
-  }
-  
-  .fullpage{
-    display: flex;
-    flex-direction: row;
-  }
-  
-  
-  
-  .main-content {
-    margin: 30px 30px 30px 130px;
-    position: relative;
-    top: 89.6px;
-    flex: 12;
-    padding: 10px;
-    min-height: calc(100vh - 89.6px);
-    overflow-y: auto; 
-    background-color: #dbe2f4;
-    transition: width 0.3s ease;
-  }
-  
-  
-  
-  
-  .search-container {
-    margin: 20px 0;
-    display: flex;
-  }
-  
-  .search-bar {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #B0BEC5;
-    width: 100%;
-    max-width: 500px;
-    margin-bottom: 20px;
-  }
-  
-  .structure {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .search{
-    padding: 7px 10px;
-    border: none;
-    position: relative;
-    left: -45px;
-    background-color: transparent;
-  }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #F5F7FA;
+  display: flex;
+  flex: 1;
+}
 
-  
-  
-  .new-order-btn {
-    justify-content: center;
-    padding: 20px;
-    margin: 20px;
-    position: fixed;
-    left: 1180px;
-    bottom: 20px;
-    border: none;
-    background-color: darkgreen;
-    color: white;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: row;
-    width: 160px;
-    gap: 10px;
-    font-size: 16px;
-  }
- 
-  
-  .new-order{
-    display: flex;
-  }
-  
- 
+.fullpage{
+  display: flex;
+  flex-direction: row;
+}
+
+
+
+.main-content {
+  margin: 30px 30px 30px 130px;
+  position: relative;
+  top: 89.6px;
+  flex: 12;
+  padding: 10px;
+  min-height: calc(100% - 89.6px);
+  overflow-y: auto;
+  scrollbar-width: none;
+  background-color: #dbe2f4;
+  transition: width 0.3s ease;
+}
+
+
+
+
+.search-container {
+  margin: 20px 0;
+  display: flex;
+}
+
+.search-bar {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #B0BEC5;
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 20px;
+}
+
+.structure {
+  display: flex;
+  flex-direction: column;
+}
+
+.search{
+  padding: 7px 10px;
+  border: none;
+  position: relative;
+  left: -45px;
+  background-color: transparent;
+}
+
+
+
+.new-order-btn {
+  justify-content: center;
+  padding: 20px;
+  margin: 20px;
+  position: fixed;
+  left: 1180px;
+  bottom: 20px;
+  border: none;
+  background-color: darkgreen;
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  width: 160px;
+  gap: 10px;
+  font-size: 16px;
+}
+
+
+.new-order{
+  display: flex;
+}
+

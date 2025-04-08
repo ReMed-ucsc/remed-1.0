@@ -8,6 +8,7 @@ class Driver extends User
 
     protected $allowedColumns = [
         'DriverID',
+        'vehicleLicneseNo',
         'driverName',
         'email',
         'password',

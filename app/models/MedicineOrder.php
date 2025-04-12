@@ -32,7 +32,7 @@ class MedicineOrder
 
     public function getOrdersByPatient($patientID)
     {
-        $query = "SELECT * FROM $this->table WHERE PatientID = :patientID order by date DESC";
+        $query = "SELECT * FROM $this->table WHERE PatientID = :patientID and OrderID in (select DISTINCT(OrderID) FROM OrderView WHERE PatientID = :patientID) order by date DESC";
         $data = ['patientID' => $patientID];
         return $this->query($query, $data);
     }

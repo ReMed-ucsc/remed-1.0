@@ -23,11 +23,6 @@ class OrderList
 
     public function updateOrderList($orderID, $productIDs, $quantities, $removedProductIDs)
     {
-        // Remove items
-        foreach ($removedProductIDs as $productID) {
-            $this->deleteWithConditions(['orderId' => $orderID, 'productId' => $productID]);
-        }
-
         // Update or add items
         foreach ($productIDs as $index => $productID) {
             $data = ['quantity' => $quantities[$index]];
@@ -54,5 +49,17 @@ class OrderList
                 $this->insert($data);
             }
         }
+
+        // Remove items
+        // Check if the order list will empty after deletion
+        if ($this->count('orderID', ['orderId' => $orderID]) > sizeof($removedProductIDs)) {
+            foreach ($removedProductIDs as $productID) {
+                $this->deleteWithConditions(['orderId' => $orderID, 'productId' => $productID]);
+            }
+        } else {
+            return ['error' => true, 'message' => 'Order list will empty'];
+        }
+
+        return ['error' => false, 'message' => 'Order list updated successfully'];
     }
 }

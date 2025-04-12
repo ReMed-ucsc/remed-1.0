@@ -43,6 +43,22 @@ trait Model
         return $this->query($query);
     }
 
+    public function count($column = '*', $conditions = [])
+    {
+        $query = "SELECT COUNT($column) as count FROM $this->table";
+
+        if (!empty($conditions)) {
+            $query .= " WHERE ";
+            $conditionKeys = array_keys($conditions);
+            foreach ($conditionKeys as $key) {
+                $query .= "$key = :$key AND ";
+            }
+            $query = rtrim($query, " AND ");
+        }
+
+        $result = $this->query($query, $conditions);
+        return $result[0]->count ?? 0;
+    }
 
     public function where($data, $data_not = [])
     {

@@ -267,8 +267,11 @@ trait Model
     public function insertBatch($data)
     {
         foreach ($data as $row) {
-            $this->insert($row);
+            if (!$this->insert($row)) {
+                return false;
+            }
         }
+        return true;
     }
 
     public function update($id, $data, $id_column = 'id')

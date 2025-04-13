@@ -13,12 +13,13 @@ class OrderList
         $orderList = [];
         foreach ($productIDs as $key => $productID) {
             $orderList[] = [
-                'orderId' => $orderID,
-                'productId' => $productID,
+                'orderID' => $orderID,
+                'ProductID' => $productID,
                 'quantity' => $quantities[$key]
             ];
         }
-        $this->insertBatch($orderList);
+        // show($orderList);
+        return $this->insertBatch($orderList);
     }
 
     public function updateOrderList($orderID, $productIDs, $quantities, $removedProductIDs)

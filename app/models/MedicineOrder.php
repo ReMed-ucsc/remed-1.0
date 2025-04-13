@@ -49,7 +49,15 @@ class MedicineOrder
             'DeliveryID' => 0, // unassigned
             'prescription' => $prescription
         ];
-        return $this->insert($data);
+        $success = $this->insert($data);
+
+        // If the insertion was successful, retrieve the last inserted ID
+        if ($success) {
+            return $this->lastInsertId();
+        }
+
+        // Return false if the insertion failed
+        return false;
     }
 
     public function updateOrderStatus($orderID, $status)

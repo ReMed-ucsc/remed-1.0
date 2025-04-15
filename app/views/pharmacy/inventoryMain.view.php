@@ -74,76 +74,33 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>BATCH-001</td>
-              <td>Paracetamol</td>
-              <td>50</td>
-              <td>Medicines</td>
-              <td>2024-12-15</td>
-              <td>20</td>
-              <td>In Stock</td>
-              <td><a class="view" href="<?= ROOT ?>/inventoryView">View</a></td>
-            </tr>
-            <tr>
-              <td>BATCH-002</td>
-              <td>Ibuprofen</td>
-              <td>30</td>
-              <td>Medicines</td>
-              <td>2025-01-10</td>
-              <td>15</td>
-              <td>Low Stock</td>
-              <td><a class="view" href="#">View</a></td>
-            </tr>
-            <tr>
-              <td>BATCH-003</td>
-              <td>Vitamin C</td>
-              <td>100</td>
-              <td>Supplements</td>
-              <td>2025-05-20</td>
-              <td>25</td>
-              <td>In Stock</td>
-              <td><a class="view" href="#">View</a></td>
-            </tr>
-            <tr>
-              <td>BATCH-004</td>
-              <td>Amoxicillin</td>
-              <td>10</td>
-              <td>Medicines</td>
-              <td>2024-11-30</td>
-              <td>10</td>
-              <td>Critical</td>
-              <td><a class="view" href="#">View</a></td>
-            </tr>
-            <tr>
-              <td>BATCH-005</td>
-              <td>Calcium Tablets</td>
-              <td>75</td>
-              <td>Supplements</td>
-              <td>2026-06-12</td>
-              <td>30</td>
-              <td>In Stock</td>
-              <td><a class="view" href="#">View</a></td>
-            </tr>
-            <tr>
-              <td>BATCH-006</td>
-              <td>Insulin</td>
-              <td>20</td>
-              <td>Medicines</td>
-              <td>2024-12-01</td>
-              <td>5</td>
-              <td>Low Stock</td>
-              <td><a class="view" href="#">View</a></td>
-            </tr>
-            <tr>
-              <td>BATCH-007</td>
-              <td>Aspirin</td>
-              <td>40</td>
-              <td>Medicines</td>
-              <td>2024-12-31</td>
-              <td>20</td>
-              <td>In Stock</td>
-              <td><a class="view" href="#">View</a></td>
-            </tr>
+            <?php if (!empty($inventories)): ?>
+              <?php foreach ($inventories as $inventory): ?>
+                <tr>
+                  <td><?= htmlspecialchars($inventory->batchID) ?></td>
+                  <td><?= htmlspecialchars($inventory->genericName) ?></td>
+                  <td><?= htmlspecialchars($inventory->stockQuantity) ?></td>
+                  <td><?= htmlspecialchars($inventory->category) ?></td>
+                  <td><?= htmlspecialchars($inventory->expiryDate) ?></td>
+                  <td><?= htmlspecialchars($inventory->reorderLevel) ?></td>
+                  <td><?php
+                      if ($inventory->stockQuantity == 0)
+                        echo 'Out of Stock';
+                      elseif (($inventory->stockQuantity - $inventory->reorderLevel) > 0)
+                        echo 'In Stock';
+                      else
+                        echo 'Low Stock';
+                      ?></td>
+                  <td><a class="view" href="<?= ROOT ?>/inventoryView/<?= $inventory->batchID ?>">View</a></td>
+
+                </tr>
+              <?php endforeach; ?>
+            <?php else: ?>
+              <tr>
+                <td colspan="8">No Orders Found</td>
+              </tr>
+            <?php endif; ?>
+
           </tbody>
         </table>
 

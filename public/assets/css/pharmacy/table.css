@@ -88,9 +88,10 @@ a.view:hover {
 }
 
 .ongoing {
-  font-size: 25px;
+  font-size: 23px;
   font-weight: bold;
   color: #0056b3;
+  margin: 5px 0px 0px 19px;
 }
 
 .search-container {
@@ -113,10 +114,11 @@ a.view:hover {
 }
 
 .search {
-  padding: 7px 10px;
+  padding: 0px 0px;
   border: none;
   position: relative;
-  left: -45px;
+  left: -30px;
+  top: -8px;
   background-color: transparent;
 }
 

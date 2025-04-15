@@ -18,4 +18,11 @@ class PharmacyInventory
     {
         return $this->first(['batchID' => $batchID]);
     }
+
+    public function getInventoryMedicines($batchID)
+    {
+        $where = ['batchID' => $batchID];
+        // return $this->where($where, []);
+        return $this->selectWhere(['medicineName', 'brandName', 'genericName', 'category', 'supplierID', 'batchID', 'stockQuantity', 'reorderLevel', 'storageLocation', 'manufacturingDate', 'expiryDate', 'storageConditions', 'purchasePrice', 'sellingPrice', 'offers'], $where, [], 'batchID ASC');
+    }
 }

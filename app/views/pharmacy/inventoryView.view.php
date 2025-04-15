@@ -118,25 +118,27 @@
 
         <div class="right">
           <ul>
-            <li><input type="text" placeholder="Auto" disabled></li>
-            <li><input type="text" placeholder="Auto" disabled></li>
-            <li><input type="text" placeholder="Auto" disabled></li>
-            <li><input type="text" placeholder="Auto" disabled></li>
+
+            <li><input type="text" placeholder="Auto" value="<?= htmlspecialchars($inventory->medicineName) ?>" disabled></li>
+            <li><input type="text" placeholder="Auto" value="<?= htmlspecialchars($inventory->brandName) ?>" disabled></li>
+            <li><input type="text" placeholder="Auto" value="<?= htmlspecialchars($inventory->genericName) ?>" disabled></li>
+            <li><input type="text" placeholder="Auto" value="<?= htmlspecialchars($inventory->category) ?>" disabled></li>
             <li>
               <select>
-                <option>Select</option>
+                <option selected><?= htmlspecialchars($inventory->supplierID) ?></option>
               </select>
             </li>
-            <li><input type="text" placeholder="Auto" disabled></li>
-            <li><input type="number" placeholder="Enter quantity"></li>
-            <li><input type="text" placeholder="Suggest"></li>
-            <li><input type="text" placeholder="Search and Select"></li>
-            <li><input type="date"></li>
-            <li><input type="date"></li>
-            <li><input type="text" placeholder="Optional"></li>
-            <li><input type="number"></li>
-            <li><input type="number"></li>
-            <li><input type="text"></li>
+            <li><input type="text" value="<?= htmlspecialchars($inventory->batchID) ?>" placeholder=" Auto" disabled></li>
+            <li><input type="number" value="<?= htmlspecialchars($inventory->stockQuantity) ?>" placeholder=" Enter quantity"></li>
+            <li><input type="text" value="<?= htmlspecialchars($inventory->reorderLevel) ?>" placeholder="Suggest"></li>
+            <li><input type="text" value="<?= htmlspecialchars($inventory->storageLocation) ?>" placeholder="Search and Select"></li>
+            <li><input type="date" value="<?= date('Y-m-d', strtotime($inventory->manufacturingDate)) ?>"></li>
+            <li><input type="date" value="<?= date('Y-m-d', strtotime($inventory->expiryDate)) ?>"></li>
+            <li><input type="text" value="<?= htmlspecialchars($inventory->storageConditions) ?>" placeholder="Optional"></li>
+            <li><input type="number" value="<?= htmlspecialchars($inventory->purchasePrice) ?>"></li>
+            <li><input type="number" value="<?= htmlspecialchars($inventory->sellingPrice) ?>"></li>
+            <li><input type="number" value="<?= htmlspecialchars($inventory->offers) ?>"></li>
+
           </ul>
         </div>
       </div>
@@ -180,9 +182,10 @@
 
         <button class="proceed">
           <a href="<?= ROOT ?>/order/edit" style="text-decoration: none; color:black;">
-            Proceed
+            Edit
           </a>
         </button>
+
 
       </div>
     </div>

@@ -126,7 +126,7 @@
                       </td>
                       <td>
                         <?php
-                        $quantity = $medicine->unitPrice ?? 0;
+                        $quantity = $medicine->quantity ?? 0; //changed unitPrice to qunatity here
                         $price = $quantity * $medicine->unitPrice;
                         $tot = $tot + $price;
                         echo number_format($price, 2);

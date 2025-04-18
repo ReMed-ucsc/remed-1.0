@@ -31,6 +31,25 @@ class MedicineProductView
         return $medicines;
     }
 
+    public function getPharmacyMedicineList($productIDs, $searchQuery = '', $limit = 10, $offset = 0)
+    {
+        $this->setLimit($limit);
+        $this->setOffset($offset);
+
+        $where = [
+            'ProductID' => ['in' => $productIDs]
+        ];
+
+        if (!empty($searchQuery)) {
+            $where = [
+                'ProductName' => ['operator' => 'LIKE', 'value' => '%' . $searchQuery . '%'],
+                'ProductID' => ['in' => $productIDs]
+            ];
+        }
+
+        return $this->selectWhere(['ProductID', 'ProductName'], $where);
+    }
+
     public function getMedicineName($productId)
     {
         $result =  $this->selectWhere(['ProductName'], ['productId' => $productId]);

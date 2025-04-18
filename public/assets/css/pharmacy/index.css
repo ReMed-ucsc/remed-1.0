@@ -1,4 +1,4 @@
-/* .content {    
+.content {    
     display: flex;
     align-items: center;
     justify-content: center; 
@@ -109,4 +109,4 @@
         background-image: linear-gradient(to right,#001f4de2 100%,transparent 100% );
     }
 } 
- */
+

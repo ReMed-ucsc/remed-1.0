@@ -95,7 +95,7 @@
           </div>
         </div>
       </section> -->
-      <div class="inventoryDetails">
+      <!-- <div class="inventoryDetails">
         <div class="left">
           <ul>
             <li>Medicine Name</li>
@@ -139,7 +139,64 @@
             <li><input type="text"></li>
           </ul>
         </div>
-      </div>
+      </div> -->
+      <form method="POST" action="<?= ROOT ?>/inventoryCreate/addItem">
+        <div class="inventoryDetails">
+          <div class="left">
+            <ul>
+              <li>Medicine Name</li>
+              <li>Brand Name</li>
+              <li>Generic Name</li>
+              <li>Category</li>
+              <li>Supplier ID</li>
+              <li>Batch No</li>
+              <li>Stock Quantity</li>
+              <li>Reorder Level</li>
+              <li>Storage Location</li>
+              <li>Manufacturing Date</li>
+              <li>Expiry Date</li>
+              <li>Storage Conditions</li>
+              <li>Purchase Price</li>
+              <li>Selling Price</li>
+              <li>Discounts & Offers</li>
+            </ul>
+          </div>
+
+          <div class="right">
+            <ul>
+              <li><input type="text" name="medicineName" placeholder="Auto"></li>
+              <li><input type="text" name="brandName" placeholder="Auto"></li>
+              <li><input type="text" name="genericName" placeholder="Auto"></li>
+              <li><input type="text" name="category" placeholder="Auto"></li>
+              <li>
+                <select name="supplierID">
+                  <option>Select</option>
+                  <!-- Fill options with PHP -->
+                  <?php foreach ($suppliers as $supplier): ?>
+                    <option value="<?= $supplier['id'] ?>"><?= $supplier['name'] ?></option>
+                  <?php endforeach; ?>
+
+                </select>
+              </li>
+              <li><input type="text" name="batchID" placeholder="Auto"></li>
+              <li><input type="number" name="stockQuantity" placeholder="Enter quantity"></li>
+              <li><input type="text" name="reorderLevel" placeholder="Suggest"></li>
+              <li><input type="text" name="storageLocation" placeholder="Search and Select"></li>
+              <li><input type="date" name="manufacturingDate"></li>
+              <li><input type="date" name="expiryDate"></li>
+              <li><input type="text" name="storageCondition" placeholder="Optional"></li>
+              <li><input type="number" name="purchasePrice"></li>
+              <li><input type="number" name="sellingPrice"></li>
+              <li><input type="text" name="offers"></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- <div class="submit-section">
+          <button type="submit">Add to Inventory</button>
+        </div> -->
+      </form>
+
 
 
 
@@ -178,9 +235,9 @@
       <div class="submit-section">
 
 
-        <button class="proceed">
+        <button class="proceed" type="submit">
           <a href="<?= ROOT ?>/order/edit" style="text-decoration: none; color:black;">
-            Proceed
+            Add to Inventory
           </a>
         </button>
 

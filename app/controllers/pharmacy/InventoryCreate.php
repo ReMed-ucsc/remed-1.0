@@ -22,5 +22,31 @@ class InventoryCreate
         $this->view('pharmacy/inventoryCreate', $data);
     }
 
+    public function addItem()
+    {
+        $inventoryModel = new StockInventoryDetails();
+
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $inventoryModel->addInventory(
+                $_POST['ProducteName'],
+                $_POST['Manufacturer'],
+                $_POST['genericName'],
+                $_POST['category'],
+                $_POST['batchNumber'],
+                $_POST['LatestStockQuantity'],
+                $_POST['thresholdLimit'],
+                $_POST['storageLocation'],
+                $_POST['manufacturingDate'],
+                $_POST['expiryDate'],
+                $_POST['storageConditions'],
+                $_POST['purchaseCost'],
+                $_POST['sellingPrice'],
+
+            );
+            redirect('inventoryCreate');
+        }
+        $this->view('pharmacy/InventoryCreate');
+    }
+
     // add other methods like edit, update, delete, etc.
 }

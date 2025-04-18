@@ -56,6 +56,9 @@
     <?php
     require_once BASE_PATH . '/app/views/inc/pharmacy/footer.view.php';
     ?>
+
+
+
 </body>
 
 

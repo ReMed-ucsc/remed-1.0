@@ -21,7 +21,7 @@ class InventoryMain
         // $data['username'] = [];
         // $this->view('pharmacy/inventoryMain', $data);
 
-        $inventoryModel = new PharmacyInventory();
+        $inventoryModel = new StockInventoryDetails();
         $inventory = $inventoryModel->getInventoryDetails();
 
         //pass the data to the view
@@ -29,7 +29,7 @@ class InventoryMain
     }
     public function read()
     {
-        $inventoryModel = new PharmacyInventory();
+        $inventoryModel = new StockInventoryDetails();
         $inventory = $inventoryModel->getInventoryDetails();
 
         // Pass the data to the view

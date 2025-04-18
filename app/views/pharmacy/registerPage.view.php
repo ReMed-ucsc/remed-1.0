@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multi-Step Form</title>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/registerPage.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/navbar.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/registerPage.css">
     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
 </head>
 
@@ -91,7 +91,7 @@
 
                         <div class="submit-buttons">
                             <button type="button" id="next-button">Next</button>
-                            <button type="submit" id="submit-button" style="display: none;">Submit</button>
+                            <button type="submit" id="submit-button" style="display: none;" href="pharmacy/index.view">Submit</button>
                             <button type="button" id="back-button" style="display: none;">Back</button>
 
                         </div>

@@ -63,11 +63,11 @@
         <table class="table">
           <thead>
             <tr>
-              <th style="width: 7%;">Batch ID</th>
+              <th style="width: 7%;">Inventory ID</th>
               <th style="width: 20%;">Item Name</th>
               <th style="width: 7%;">Quantity</th>
               <th style="width: 5%;">Category</th>
-              <th style="width: 10%;">Expiration Date</th>
+              <th style="width: 10%;">Expiry Date</th>
               <th style="width: 5%;">Reorder Level</th>
               <th style="width: 5%;">Status</th>
               <th style="width: 5%;"></th>
@@ -77,21 +77,21 @@
             <?php if (!empty($inventories)): ?>
               <?php foreach ($inventories as $inventory): ?>
                 <tr>
-                  <td><?= htmlspecialchars($inventory->batchID) ?></td>
+                  <td><?= htmlspecialchars($inventory->InventoryId) ?></td>
                   <td><?= htmlspecialchars($inventory->genericName) ?></td>
-                  <td><?= htmlspecialchars($inventory->stockQuantity) ?></td>
+                  <td><?= htmlspecialchars($inventory->availableCount) ?></td>
                   <td><?= htmlspecialchars($inventory->category) ?></td>
                   <td><?= htmlspecialchars($inventory->expiryDate) ?></td>
-                  <td><?= htmlspecialchars($inventory->reorderLevel) ?></td>
+                  <td><?= htmlspecialchars($inventory->thresholdLimit) ?></td>
                   <td><?php
-                      if ($inventory->stockQuantity == 0)
+                      if ($inventory->availableCount == 0)
                         echo 'Out of Stock';
-                      elseif (($inventory->stockQuantity - $inventory->reorderLevel) > 0)
+                      elseif (($inventory->availableCount - $inventory->thresholdLimit) > 0)
                         echo 'In Stock';
                       else
                         echo 'Low Stock';
                       ?></td>
-                  <td><a class="view" href="<?= ROOT ?>/inventoryView/<?= $inventory->batchID ?>">View</a></td>
+                  <td><a class="view" href="<?= ROOT ?>/inventoryView/<?= $inventory->InventoryId ?>">View</a></td>
 
                 </tr>
               <?php endforeach; ?>

@@ -11,12 +11,17 @@ class MedicineOrder
     // order status categories
     private $WAITING = 'W';
     private $PROCESSING = 'P';
+    private $ACCEPT_QUOTATION = 'Q';
     private $DELIVERED = 'D';
     private $USER_PICKED_UP = 'U';
     private $CANCELED = 'C';
     private $REJECTED = 'R';
     private $PICKED_UP = 'P';
     private $DELIVERY_FAILED = 'F';
+    private $ACCEPTED = 'A';
+    private $DELIVERY_IN_PROGRESS = 'I';
+    private $DELIVERY_COMPLETED = 'C';
+    private $WAITING_FOR_PICKUP = 'WP';
 
     public function getOrderDetails()
     {
@@ -32,7 +37,7 @@ class MedicineOrder
 
     public function getOrdersByPatient($patientID)
     {
-        $query = "SELECT * FROM $this->table WHERE PatientID = :patientID order by date DESC";
+        $query = "SELECT * FROM $this->table WHERE PatientID = :patientID and OrderID in (select DISTINCT(OrderID) FROM OrderView WHERE PatientID = :patientID) order by date DESC";
         $data = ['patientID' => $patientID];
         return $this->query($query, $data);
     }
@@ -49,7 +54,15 @@ class MedicineOrder
             'DeliveryID' => 0, // unassigned
             'prescription' => $prescription
         ];
-        return $this->insert($data);
+        $success = $this->insert($data);
+
+        // If the insertion was successful, retrieve the last inserted ID
+        if ($success) {
+            return $this->lastInsertId();
+        }
+
+        // Return false if the insertion failed
+        return false;
     }
 
     public function updateOrderStatus($orderID, $status)
@@ -70,12 +83,17 @@ class MedicineOrder
         $statusMap = [
             $this->WAITING => 'WAITING',
             $this->PROCESSING => 'PROCESSING',
+            $this->ACCEPT_QUOTATION => 'ACCEPT_QUOTATION',
             $this->DELIVERED => 'DELIVERED',
             $this->USER_PICKED_UP => 'USER_PICKED_UP',
             $this->CANCELED => 'CANCELED',
             $this->REJECTED => 'REJECTED',
             $this->PICKED_UP => 'PICKED_UP',
-            $this->DELIVERY_FAILED => 'DELIVERY_FAILED'
+            $this->DELIVERY_FAILED => 'DELIVERY_FAILED',
+            $this->ACCEPTED => 'ACCEPTED',
+            $this->DELIVERY_IN_PROGRESS => 'DELIVERY_IN_PROGRESS',
+            $this->DELIVERY_COMPLETED => 'DELIVERY_COMPLETED',
+            $this->WAITING_FOR_PICKUP => 'WAITING_FOR_PICKUP'
         ];
 
         return $statusMap[$status] ?? 'UNKNOWN';

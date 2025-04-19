@@ -58,13 +58,18 @@ class UpdateOrderController
                         $orderListModel = new OrderList();
 
                         // Update order items
-                        $orderListModel->updateOrderList($orderID, $productIDs, $quantities, $removedProductIDs);
+                        $updateResult = $orderListModel->updateOrderList($orderID, $productIDs, $quantities, $removedProductIDs);
 
-                        $result->setErrorStatus(false);
-                        $result->setMessage("Order updated successfully.");
-                        $response['result']['error'] = $result->isError();
-                        $response['result']['message'] = $result->getMessage();
-                        $response['data'] = ['orderID' => $orderID];
+                        if (!$updateResult['error']) {
+                            $result->setErrorStatus(false);
+                            $result->setMessage("Order updated successfully.");
+                            $response['result']['error'] = $result->isError();
+                            $response['result']['message'] = $result->getMessage();
+                            $response['data'] = ['orderID' => $orderID];
+                        } else {
+                            $result->setErrorStatus(true);
+                            $result->setMessage($updateResult['message']);
+                        }
                     } else {
                         $result->setErrorStatus(true);
                         $result->setMessage("Mismatch between product IDs and quantities");

@@ -50,13 +50,16 @@ class GetOrderController
                         ];
 
                         $productDetails = [];
-                        foreach ($orderList as $order) {
-                            $productDetails[] = [
-                                'ProductID' => $order->ProductID,
-                                'ProductName' => $order->ProductName,
-                                'UnitPrice' => $order->unitPrice,
-                                'Quantity' => $order->quantity
-                            ];
+                        // check if atlease one order has a product
+                        if ($orderList[0]->ProductID != null) {
+                            foreach ($orderList as $order) {
+                                $productDetails[] = [
+                                    'ProductID' => $order->ProductID,
+                                    'ProductName' => $order->ProductName,
+                                    'UnitPrice' => $order->unitPrice,
+                                    'Quantity' => $order->quantity
+                                ];
+                            }
                         }
 
                         $orderCommentModel = new OrderComment();

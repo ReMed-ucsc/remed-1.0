@@ -19,9 +19,9 @@ class Drug
         $query = "SELECT COUNT(*) as count FROM $this->table WHERE DrugID IN ($placeholders) AND overTheCounter = 'N'";
         $result = $this->query($query, $drugIDs);
 
-        if ($result && $result[0]->count > 0) {
-            return false;
+        if ($result) {
+            return $result[0]->count;
         }
-        return true;
+        return null;
     }
 }

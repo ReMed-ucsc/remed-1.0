@@ -22,8 +22,9 @@ class CheckForOverTheCounterController
             // show($drugIDs);
             $drugModel = new Drug();
             $overTheCounterbility = $drugModel->checkForOverTheCounter($drugIDs);
+            $response['data'] = $overTheCounterbility;
 
-            if ($overTheCounterbility) {
+            if ($overTheCounterbility == 0) {
                 $result->setErrorStatus(false);
                 $result->setMessage("All drugs are over the counter");
             } else {

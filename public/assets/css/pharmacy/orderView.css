@@ -777,3 +777,55 @@ tr:nth-child(odd) .custom-select {
   background-color: #f0f0f0;
 }
 
+.chat-input {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.chat-input button {
+  padding: 6px 12px;
+  border: none;
+  background-color: #28a745;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#chatMessages{
+  height: 100%;
+  width: 100%;
+  /* overflow-y: auto; */
+  
+}
+
+#chatView{
+  height: 100%;
+  width: 100%;
+}
+
+.message {
+  padding: 8px 12px;
+  margin: 6px;
+  border-radius: 12px;
+  max-width: 80%;
+  font-size: 14px;
+}
+
+.message.pharmacy {
+  background-color: #d4f1f4;
+  align-self: flex-start;
+}
+
+.message.patient {
+  background-color: #fcd5ce;
+  align-self: flex-end;
+  text-align: right;
+}

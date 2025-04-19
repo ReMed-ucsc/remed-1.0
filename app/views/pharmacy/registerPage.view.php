@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/navbar.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/registerPage.css">
     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
+
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=<?= MAPAPI ?>&libraries=places&callback=initMap">
+    </script>
+
 </head>
 
 <body>
@@ -23,6 +28,7 @@
                 <div class="form-left">
                     <h2>Register</h2>
                     <p>Follow the steps to complete your registration.</p>
+
                 </div>
                 <div class="form-right">
                     <form id="registration-form" action="<?= BASE_PATH ?>/app/views/inc/pharmacy/success.php" method="POST" enctype="multipart/form-data">
@@ -56,6 +62,8 @@
                                 <div class="form-group">
                                     <label for="pharmacy-address">Pharmacy Address</label>
                                     <input type="text" id="pharmacy-address" name="pharmacy-address" placeholder="Enter pharmacy address">
+                                    <input type="hidden" id="latitude" name="latitude">
+                                    <input type="hidden" id="longitude" name="longitude">
                                 </div>
                                 <div class="form-group">
                                     <label for="contact-number">Contact Number</label>
@@ -91,7 +99,7 @@
 
                         <div class="submit-buttons">
                             <button type="button" id="next-button">Next</button>
-                            <button type="submit" id="submit-button" style="display: none;" href="pharmacy/index.view">Submit</button>
+                            <button type="submit" id="submit-button" style="display: none;">Submit</button>
                             <button type="button" id="back-button" style="display: none;">Back</button>
 
                         </div>
@@ -112,6 +120,33 @@
     </div>
 
     <script src="<?= ROOT ?>/assets/js/pharmacy/registrationPage.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registration-form');
+
+            // Prevent form submission on Enter key
+            form.addEventListener('keydown', function(e) {
+                // If Enter is pressed and the focused element is not a textarea or submit button
+                if (e.key === 'Enter' && e.target.type !== 'textarea') {
+                    e.preventDefault();
+                }
+            });
+
+            // Your existing Submit button click event...
+            const submitBtn = document.getElementById('submit-button');
+
+            submitBtn.addEventListener('click', function() {
+                if (form.checkValidity()) {
+                    alert("Your registration was successful! You will now be redirected to the login page.");
+                    window.location.href = "<?= ROOT ?>/pharmacy/login";
+                } else {
+                    form.reportValidity();
+                }
+            });
+        });
+    </script>
+
 </body>
 
 </html>

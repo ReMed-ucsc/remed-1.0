@@ -19,7 +19,15 @@
         <div class="container">
             <div class="box-left">
                 <h2>Log in to Remed</h2>
-                <p>Welcome back! Log in to access your pharmacy’s dashboard, where you can manage inventory, process customer orders, and update your pharmacy's details. Stay connected with your customers, track deliveries, and ensure your pharmacy runs smoothly. Enter your credentials to continue.</p>
+
+                <?php if (!empty($success)) {  ?>
+                    <div>
+                        <?= $success ?>
+                    </div>
+                <?php } else { ?>
+                    <p>Welcome back! Log in to access your pharmacy’s dashboard, where you can manage inventory, process customer orders, and update your pharmacy's details. Stay connected with your customers, track deliveries, and ensure your pharmacy runs smoothly. Enter your credentials to continue.</p>
+                    <?= $registerResult ?>
+                <?php } ?>
             </div>
             <div class="box-right">
                 <?php if (!empty($errors)): ?>
@@ -28,11 +36,11 @@
                     </div>
                 <?php endif; ?>
 
-                <?php if (!empty($success)): ?>
+                <!-- <?php if (!empty($success)): ?>
                     <div class="success-message">
                         <?= $success ?>
                     </div>
-                <?php endif; ?>
+                <?php endif; ?> -->
 
                 <form id="login-form" action="" method="POST">
                     <label for="email">Email:</label>

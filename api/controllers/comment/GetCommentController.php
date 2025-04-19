@@ -16,6 +16,8 @@ class GetCommentController
         $input = file_get_contents('php://input');
         $data = json_decode($input, true);
 
+        //echo json_encode($data);
+
         if (!$data) {
             http_response_code(400);
             echo json_encode(['error' => 'Invalid JSON input']);
@@ -28,27 +30,15 @@ class GetCommentController
         $deliveryModel = new Delivery();
         //$driverModel = new Driver();
 
-        $driverId = $data['DeliveryID'];
+        $deliveryId = $data['deliveryId'];
 
-        if ($driverId) {
+        if ($deliveryId) {
 
-            $data = ['DeliveryID' => $driverId];
+            $data = ['DeliveryID' => $deliveryId];
 
             try {
-                $res = $deliveryModel->first($data);
-
-                // echo json_encode($res);
-                // echo json_encode(['driverId' => $res['driverId']]);
-
-                //$response['data'] = $res;
-
-                if ($res['driverId'] != null) {
-                    $commentList = $commentModel->getComments($driverId);
-                    $response['data'] = $commentList;
-                } else {
-                    $result->setErrorStatus(true);
-                    $result->setMessage("Invalid DeliveryID");
-                }
+                $commentList = $commentModel->getComments($deliveryId);
+                $response['data'] = $commentList;
             } catch (Exception $e) {
                 $result->setErrorStatus(true);
                 $result->setMessage("error happend " . $e->getMessage());

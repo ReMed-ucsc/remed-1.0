@@ -1,6 +1,5 @@
 <?php
 class Pharmacy extends User
-
 {
     use Model;
 
@@ -11,8 +10,8 @@ class Pharmacy extends User
         'RegNo',
         'contactNo',
         'address',
+        'name',
         'pharmacistName',
-        'license',
         'approvedDate',
         'email',
         'password',
@@ -71,8 +70,8 @@ class Pharmacy extends User
         $this->errors = []; // Reset errors
 
         // Validate pharmacy name
-        if (empty($data['pharmacyName'])) {
-            $this->errors['pharmacyName'] = "Pharmacy name is required.";
+        if (empty($data['name'])) {
+            $this->errors['name'] = "Pharmacy name is required.";
         }
 
         // Validate email
@@ -92,6 +91,7 @@ class Pharmacy extends User
 
         return empty($this->errors); // Pass if no errors
     }
+
 
     public function registerPharmacy($pharmacyName, $pharmacistName, $license, $contactNo, $email, $address, $document, $latitude, $longitude)
     {
@@ -118,5 +118,55 @@ class Pharmacy extends User
     {
         $data = ['email' => $email];
         return $this->first($data);
+    }
+
+    public function getPharmacies($status = "APPROVED")
+    {
+        $sql = "Select * FROM $this->table where status = :status";
+        return $this->query($sql, ['status' => $status]);
+    }
+
+    // public function pendingPharmacy()
+    // {
+    //     $sql = "SELECT * FROM $this->table WHREE status='Pending'";
+    //     $pendingPharmacies = $this->table->query($sql)->fetchAll();
+
+    //     require_once BASE_PATH ."/app/views/admin/pendingPharmacy.view.php";
+    // }
+    public function getlastId()
+    {
+        $sql = "SELECT MAX(PharmacyId) AS last_id FROM $this->table WHERE  status = 'APPROVED'";
+        return $this->query($sql);
+    }
+
+
+    public function searchNearbyPharmacy($latitude, $longitude, $range = 10)
+    {
+        $rangeInMeters = $range * 1000;
+
+        // Define columns to select
+        $columns = [
+            'PharmacyID',
+            'name',
+            'contactNo',
+            'address',
+            'latitude',
+            'longitude',
+            'ST_Distance_Sphere(POINT(longitude, latitude), POINT(:longitude, :latitude)) AS distance'
+        ];
+
+        // Define conditions
+        $conditions = [
+            'raw' => "ST_Distance_Sphere(POINT(longitude, latitude), POINT(:longitude, :latitude)) <= :rangeInMeters"
+        ];
+
+        // Bind additional parameters for raw SQL conditions
+        $additionalData = [
+            'longitude' => $longitude,
+            'latitude' => $latitude,
+            'rangeInMeters' => $rangeInMeters
+        ];
+
+        return $this->selectWhere($columns, $conditions, $additionalData, 'distance ASC');
     }
 }

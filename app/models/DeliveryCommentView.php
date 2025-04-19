@@ -4,16 +4,16 @@ class DeliveryCommentView
 {
     use Model;
 
-    protected $table = 'comments';
-    protected $allowed = ['CommentID', 'OrderID', 'DeliveryID', 'DriverID'];
+    protected $table = 'comment';
+    protected $allowed = ['CommentID', 'OrderID', 'DeliveryID', 'driverId'];
 
-    public function getComments($driverID)
+    public function getComments($deliveryID)
     {
-        $data = ['DriverID' => $driverID];
+        $data = ['DeliveryID' => $deliveryID];
         $this->setLimit(null);
         $this->setOffset(null);
 
-        return $this->where($data, []);
+        return $this->where($data);
     }
 
     public function updateComments($commentID, $comment)
@@ -33,7 +33,7 @@ class DeliveryCommentView
     public function createComment($DriverID, $DeliveryID, $comment)
     {
         $data = [
-            'DeliverID' => $DeliveryID,
+            'DeliveryID' => $DeliveryID,
             'DriverID' => $DriverID,
             'comment' => $comment
         ];
@@ -43,8 +43,13 @@ class DeliveryCommentView
 
     public function deleteComment($commentID)
     {
-        if (is_numeric($commentID)) {
-            $this->errors['error'] = "Invalid Comment ID";
-        }
+        return $this->delete($commentID, 'CommentID');
+    }
+
+    public function getOneComment($commentID)
+    {
+        $data = ["commentId" => $commentID];
+
+        return $this->first($data);
     }
 }

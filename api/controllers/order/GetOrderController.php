@@ -50,18 +50,41 @@ class GetOrderController
                         ];
 
                         $productDetails = [];
-                        foreach ($orderList as $order) {
-                            $productDetails[] = [
-                                'ProductID' => $order->ProductID,
-                                'ProductName' => $order->ProductName,
-                                'UnitPrice' => $order->unitPrice,
-                                'Quantity' => $order->quantity
+                        // check if atlease one order has a product
+                        if ($orderList[0]->ProductID != null) {
+                            foreach ($orderList as $order) {
+                                $productDetails[] = [
+                                    'ProductID' => $order->ProductID,
+                                    'ProductName' => $order->ProductName,
+                                    'UnitPrice' => $order->unitPrice,
+                                    'Quantity' => $order->quantity
+                                ];
+                            }
+                        }
+
+                        $orderCommentModel = new OrderComment();
+                        $comments = $orderCommentModel->getCommentsByOrder($orderID);
+
+                        if ($comments) {
+                            // Map sender types
+                            $senderMap = [
+                                'u' => 'user',
+                                'p' => 'pharmacy',
+                                'd' => 'driver'
                             ];
+
+                            foreach ($comments as &$comment) {
+                                $comment->sender = $senderMap[$comment->sender] ?? 'unknown';
+                            }
+                        } else {
+                            $result->setErrorStatus(true);
+                            $result->setMessage("No comments found for this order");
                         }
 
                         $response['data'] = [
                             'orderDetails' => $orderDetails,
-                            'productDetails' => $productDetails
+                            'productDetails' => $productDetails,
+                            'comments' => $comments
                         ];
 
                         $result->setErrorStatus(false);

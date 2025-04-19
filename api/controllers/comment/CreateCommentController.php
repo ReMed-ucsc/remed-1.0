@@ -28,28 +28,31 @@ class CreateCommentController
         $deliveryModel = new Delivery();
         //$driverModel = new Driver();
 
-        if (empty($data['DeliveryID']) || empty($data['DriverID']) || empty($data['Comment'])) {
+        if (empty($data['deliveryId']) || empty($data['comment'])) {
             $result->setErrorStatus(true);
             $result->setMessage("All the fields are required");
         } else {
 
-            $deliveryId = $data['DeliveryID'];
-            $driverId = $data['DriverID'];
-            $comment = $data['Comment'];
+            $deliveryId = $data['deliveryId'];
+            $comment = $data['comment'];
 
-            if ($deliveryId) {
+            $deliveryData = $deliveryModel->first(["DeliveryId" => $deliveryId]);
+
+            if ($deliveryData) {
 
                 $data = ['DeliveryID' => $deliveryId];
 
                 try {
-                    $res = $commentModel->first($data);
+                    $res = $deliveryModel->first($data);
+
+                    $driverId = $res->driverId;
 
                     //echo json_encode($res);
-                    //echo json_encode(['CommentID' => $res['CommentID']]);
+                    // echo json_encode(['deliveryId' => $res['DeliveryID']]);
 
                     //$response['data'] = $res;
 
-                    if ($res['DriverID'] != null && $res['DeliveryID'] != null) {
+                    if ($res->driverId != null && $res->DeliveryID != null) {
 
                         $data = [
                             "comment" => $comment
@@ -58,7 +61,7 @@ class CreateCommentController
                         $commentModel->createComment($driverId, $deliveryId, $comment);
 
                         $result->setErrorStatus(false);
-                        $result->setMessage("");
+                        $result->setMessage("success");
                     } else {
                         $result->setErrorStatus(true);
                         $result->setMessage("Invalid CommentID");
@@ -69,7 +72,7 @@ class CreateCommentController
                 }
             } else {
                 $result->setErrorStatus(true);
-                $result->setMessage("no driverId found");
+                $result->setMessage("no Delivery found");
             }
         }
         $response['result']['error'] = $result->isError();

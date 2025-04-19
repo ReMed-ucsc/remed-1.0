@@ -245,6 +245,16 @@
     </div>
     <!-- </div> -->
 
+    <script>
+      const orderData = <?= json_encode([
+                          'order' => $data['order'],
+                          'medicineList' => $data['medicineList'],
+                          'comments' => $data['comments'],
+                          'viewOnly' => $data['viewOnly'] ?? false,
+                          'authToken' => $_SESSION['auth_token'] ?? ''
+                        ]) ?>;
+    </script>
+
     <script src="<?= ROOT ?>/assets/js/pharmacy/orderCreate.js"></script>
     <script src="<?= ROOT ?>/assets/js/pharmacy/orderMain.js"></script>
     <script src="<?= ROOT ?>/assets/js/pharmacy/orderView.js"></script>

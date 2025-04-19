@@ -141,7 +141,7 @@
         </div>
       </div> -->
       <form method="POST" action="<?= ROOT ?>/inventoryCreate/addItem">
-        <div class="inventoryDetails">
+        <div class="inventoryDetails size2">
           <div class="left">
             <ul>
               <li>Medicine Name</li>

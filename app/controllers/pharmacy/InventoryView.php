@@ -21,5 +21,10 @@ class InventoryView
         $this->View('pharmacy/inventoryView', ['inventoryID' => $inventoryId, 'inventory' => $inventory, 'viewOnly' => true]);
     }
 
+    public function edit($inventoryId)
+    {
+        $inventoryModel = new StockInventoryDetails();
+    }
+
     // add other methods like edit, update, delete, etc.
 }

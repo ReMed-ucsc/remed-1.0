@@ -1,13 +1,3 @@
-:root {
-  --color-dark-blue: #001f4d;
-  --color-dark-green: rgb(0, 80, 67);
-  --color-bright-blue: rgb(3, 39, 93);
-  --color-dark-gray: rgb(30, 30, 30);
-  --color-light-gray: #b0bec5;
-  --color-dark-red: rgb(183, 28, 28);
-  --color-white: #ffffff;
-}
-
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -21,21 +11,7 @@ body {
   flex-direction: row;
 }
 
-.main-content {
-  margin: 30px 30px 30px 130px;
-  position: relative;
-  top: 89.6px;
-  flex: 12;
-  padding: 10px;
-  min-height: calc(100vh - 89.6px);
-  overflow-y: auto; 
-  background-color: #dbe2f4;
-  transition: width 0.3s ease;
-}
 
-.search-container {
-  margin: 10px 0;
-}
 
 .search-bar {
   padding: 10px;
@@ -45,18 +21,6 @@ body {
   margin-bottom: 20px;
 }
 
-.structure {
-  display: flex;
-  flex-direction: column;
-}
-
-.search {
-  padding: 7px 10px;
-  border: none;
-  position: relative;
-  left: -45px;
-  background-color: transparent;
-}
 
 .overlay {
   position: relative;
@@ -77,12 +41,7 @@ body {
   align-items: center;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f5f5f5;
-}
+
 
 .order-container {
   max-width: 1200px;
@@ -146,7 +105,7 @@ body {
   background-color: #007bff; /* Soft blue background */
   color: white; /* White icon color */
   padding: 10px; /* Add padding for better touch target */
-  border-radius: 50%; /* Circular button */
+  border-radius: 5%; /* Circular button */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
   cursor: pointer; /* Pointer cursor for interactivity */
   transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth animations */
@@ -240,10 +199,7 @@ body {
   outline: none;
 }
 
-/* .details text{
-  width: 100px;
-  height: 30px;
-} */
+
 
 .prescription p {
   font-size: 18px;
@@ -255,22 +211,7 @@ body {
 }
 
 
-.specialNotes {
-  width: 78%;
-  height: 115px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-  box-sizing: border-box; /* Ensures padding doesn't exceed 100% width */
-  outline: none;
-  display: flex;
-}
 
-.specialNotes:focus {
-  border-color: #007bff; /* Highlight border on focus */
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
 
 .prescription {
 
@@ -293,20 +234,7 @@ body {
 }
 
 
-.image-preview {
-  width: 39%;
-  background: #f0f0f0;
-  height: 200px;
-  overflow: hidden;
-}
 
-.image-preview img {
-  object-fit: contain;
-  max-width: 100%;
-  height: 100%;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 
 /* Right Section */
 .right-section {
@@ -327,20 +255,6 @@ body {
 }
 
 
-.gallery {
-  display: flex;
-  gap: 10px;
-}
-.gallery img {
-  width: 100px;
-  height: 100px;
-  cursor: pointer;
-  object-fit: cover;
-  transition: transform 0.3s;
-}
-.gallery img:hover {
-  transform: scale(1.6); 
-}
 
 .display-area {
   margin-top: 3px;
@@ -425,41 +339,7 @@ body {
   display: inline-block;
 }
 
-/* Select dropdown */
-.custom-select {
-  width: 100%;
-  padding: 10px 40px 10px 10px; /* Add space for the icon */
-  font-size: 12px;
-  border: none;
-  /* border: 2px solid #007BFF; */
-  border-radius: 5px;
-  background-color: #f9f9f9;
-  color: #333;
-  appearance: none; /* Remove default styles */
-  cursor: pointer;
-}
 
-/* Placeholder style */
-.custom-select option:first-child {
-  color: #aaa; /* Light grey for placeholder */
-}
-
-/* Dropdown icon */
-.dropdown-icon {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  pointer-events: none; /* Allow clicks on the select element */
-  font-size: 14px;
-  color: #000000;
-}
-
-/* Focus state */
-.custom-select:focus {
-  outline: none;
-  border-color: #0056b3;
-}
 
 
 .price{
@@ -542,20 +422,7 @@ button {
   width: 150px;
 }
 
-.ongoing {
-  padding-bottom: 20px;
-  font-size: 16px;
-  font-weight: 500;
-}
 
-.order-management {
-  background-color: rgb(255, 255, 255);
-  padding: 20px;
-  margin: 20px;
-  border-radius: 10px;
-  /* overflow-y: scroll;
-  scrollbar-width: none; */
-}
 
 /* Table styles */
 .table-section table {
@@ -582,8 +449,8 @@ td {
 }
 
 th {
-  background-color: var(--color-dark-blue);
-  color: var(--color-white);
+  background-color: #022354;
+  color: white;
 }
 
 th:first-child {
@@ -721,38 +588,7 @@ tr:nth-child(odd) .custom-select {
   text-align: center; /* Centers the text inside */
 }
 
-/* .bottom{
-  background-color: white;
-  width: 100vw;
-} */
 
-.new-order-btn {
-  justify-content: center;
-  padding: 20px;
-  margin: 20px;
-  position: fixed;
-  left: 1180px;
-  bottom: 20px;
-  border: none;
-  background-color: darkgreen;
-  color: white;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: row;
-  width: 160px;
-  gap: 10px;
-  font-size: 16px;
-}
-
-.new-order {
-  display: flex;
-}
-
-/* .order-table{
-  height: 100px;
-  overflow: scroll;
-  scrollbar-width: thin;
-} */
 
 .submit-section button{
   display: flex;

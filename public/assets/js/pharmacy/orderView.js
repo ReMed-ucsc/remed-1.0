@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
+
+  // console.log(orderData); // Your PHP data is available here
+
   const searchInput = document.getElementById("medicine-search");
   const searchResults = document.getElementById("search-results");
   const hiddenInput = document.getElementById("medicine-id");
@@ -78,19 +81,30 @@ document.addEventListener("DOMContentLoaded", function () {
     const chatInput = document.getElementById("chatInput");
   
     let isChatOpen = false;
+
+
+      console.log(orderData); // Your PHP data is available here
+      
+      const orderId = orderData.order.OrderID;
+      const medicines = orderData.medicineList;
+      const comments = orderData.comments;
+      const isViewOnly = orderData.viewOnly;
+      
   
-    // Dummy messages
-    const dummyMessages = [
-      { sender: "pharmacy", message: "Hello, we received your prescription." },
-      { sender: "patient", message: "Thank you! How long will it take?" },
-      { sender: "pharmacy", message: "About 30 minutes. We’ll notify you once ready." }
-    ];
-  
+      comments.sort((a, b) => {
+        // Convert createdAt strings to Date objects for comparison
+        const dateA = new Date(a.createdAt);
+        const dateB = new Date(b.createdAt);
+        return dateA - dateB; // Ascending order (oldest first)
+      });
+      
+
     // Populate dummy chat
-    dummyMessages.forEach(msg => {
+    comments.forEach(msg => {
+      const sender = msg.sender == 'p' ? 'pharmacy' : 'patient';
       const msgDiv = document.createElement("div");
-      msgDiv.classList.add("message", msg.sender);
-      msgDiv.textContent = msg.message;
+      msgDiv.classList.add("message", sender);
+      msgDiv.textContent = msg.comments;
       chatMessages.appendChild(msgDiv);
     });
   
@@ -115,4 +129,70 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
   
+// Function to send a new message
+function sendMessage(text) {
+  const token = orderData.authToken;
 
+  
+  // Get the order ID from your order data
+  const orderId = orderData.order.OrderID; // assuming you have orderData available
+  
+  // Create the request payload
+  const payload = {
+    OrderID: orderId,
+    comments: text,
+    sender: 'p' // 'p' for pharmacy, assuming that's your convention
+  };
+  
+  // Make the API call
+  fetch('http://localhost/remed-1.0/api/order/commentOrder', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify(payload)
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log('Message sent successfully:', data);
+    
+    // // Add the message to the UI
+    // const msgDiv = document.createElement("div");
+    // msgDiv.classList.add("message", "pharmacy");
+    // msgDiv.textContent = text;
+    // chatMessages.appendChild(msgDiv);
+    
+    // Scroll to bottom of chat
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  })
+  .catch(error => {
+    console.error('Error sending message:', error);
+    alert('Failed to send message. Please try again.');
+  });
+}
+
+// Update the send button event listener
+sendBtn.addEventListener("click", () => {
+  const text = chatInput.value.trim();
+  if (text !== "") {
+    sendMessage(text);
+    chatInput.value = "";
+  }
+});
+
+// Also update the Enter key press on input field
+chatInput.addEventListener("keypress", (event) => {
+  if (event.key === "Enter") {
+    const text = chatInput.value.trim();
+    if (text !== "") {
+      sendMessage(text);
+      chatInput.value = "";
+    }
+  }
+});

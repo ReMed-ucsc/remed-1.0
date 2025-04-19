@@ -25,17 +25,6 @@ body {
   transition: width 0.3s ease;
 }
 
-/* .search-bar {
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #B0BEC5;
-  width: 100%;
-  max-width: 500px;
-  margin-bottom: 20px;
-  position: absolute;
-  top: 10px;
-  left: 31%;
-} */
 
 .structure {
   display: flex;
@@ -259,4 +248,9 @@ body {
   width: 100%;
 }
 
-
+.style{
+  color:white;
+  background-color:maroon;
+  padding:5px;
+  border-radius:15%;
+}

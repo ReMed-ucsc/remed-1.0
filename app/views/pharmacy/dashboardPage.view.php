@@ -106,7 +106,7 @@
               <h4>Orders</h4>
 
               <div class="data">
-                <p>515-<span style="color:white;background-color:maroon;padding:5px;border-radius:50%;">15</span></p>
+                <p>515-<span class="style">15</span></p>
               </div>
               <!-- <div class="resolve"><a href="#">Resolve - 15</a></div> -->
               <a href="<?= ROOT ?>/medicine">View details</a>

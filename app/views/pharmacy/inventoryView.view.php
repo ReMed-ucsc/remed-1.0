@@ -29,18 +29,8 @@
 
   <header>
     <?php
-    // $isRegisteredUser = isset($_SESSION['user']);  // Check if user is logged in
-
     include BASE_PATH . '/app/views/inc/pharmacy/regNavbar.php';
-
     ?>
-
-
-
-    <!-- Sidebar (initially hidden) -->
-
-
-
   </header>
 
   <div class="fullpage">
@@ -55,89 +45,48 @@
         View Inventory
       </div>
       <div class="order-body">
-        <!-- <?php if (!$viewOnly) { ?> -->
-        <div class="search-bar">
-          <form action="<?= ROOT ?>/order/addItem" method="post">
-            <input type="hidden" id="medicine-id" name="medicineId" value="" />
-            <input type="text" id="medicine-search" placeholder="Search by medicine or generic name..." />
-            <input type="text" id="medicine-quantity" name="quantity" placeholder="Quantity" />
-            <button id="add-medicine">Add</button>
-          </form>
-        </div>
-        <div id="search-results" class="search-results"></div>
-      <?php } ?>
-
-      <!-- Table Section -->
-      <!-- <section class="table-management">
-
-        <div class="table">
-          <table>
-            <thead>
-              <tr>
-                <th style="width: 5%;">Medicine Name</th>
-                <th style="width: 5%;">Generic Name</th>
-                <th style="width: 5%;">Brand Name</th>
-                <th style="width: 1%;">Dosage</th>
-                <th style="width: 1%;">Quantity</th>
-                <th style="width: 5%;">Price</th>
-                <th style="width: 5%; ">Action</th>
-              </tr>
-            </thead>
-            <tbody>
 
 
 
-            </tbody>
-          </table>
-          <div class="price">
-            <p class="total-price">Total price = </p>
-            <p class="total-price">Rs.0.00</p>
+        <div class="inventoryDetails size1">
+          <div class="left">
+            <ul>
+              <li>Medicine Name</li>
+              <li>Brand Name</li>
+              <li>Generic Name</li>
+              <li>Category</li>
+              <li>Batch No</li>
+              <li>Stock Quantity</li>
+              <li>Reorder Level</li>
+              <li>Storage Location</li>
+              <li>Manufacturing Date</li>
+              <li>Expiry Date</li>
+              <li>Storage Conditions</li>
+              <li>Purchase Price</li>
+              <li>Selling Price</li>
+            </ul>
+          </div>
+
+          <div class="right">
+            <ul>
+
+              <li><input type="text" placeholder="Auto" value="<?= htmlspecialchars($inventory->ProductName) ?>" disabled></li>
+              <li><input type="text" placeholder="Auto" value="<?= htmlspecialchars($inventory->Manufacturer) ?>" disabled></li>
+              <li><input type="text" placeholder="Auto" value="<?= htmlspecialchars($inventory->genericName) ?>" disabled></li>
+              <li><input type="text" placeholder="Auto" value="<?= htmlspecialchars($inventory->category) ?>" disabled></li>
+              <li><input type="text" value="<?= htmlspecialchars($inventory->batchNumber) ?>" placeholder=" Auto" disabled></li>
+              <li><input type="number" value="<?= htmlspecialchars($inventory->availableCount) ?>" placeholder=" Enter quantity"></li>
+              <li><input type="text" value="<?= htmlspecialchars($inventory->thresholdLimit) ?>" placeholder="Suggest"></li>
+              <li><input type="text" value="<?= htmlspecialchars($inventory->storageLocation) ?>" placeholder="Search and Select"></li>
+              <li><input type="date" value="<?= date('Y-m-d', strtotime($inventory->manufacturingDate)) ?>"></li>
+              <li><input type="date" value="<?= date('Y-m-d', strtotime($inventory->expiryDate)) ?>"></li>
+              <li><input type="text" value="<?= htmlspecialchars($inventory->storageConditions) ?>" placeholder="Optional" disabled></li>
+              <li><input type="number" value="<?= htmlspecialchars($inventory->purchaseCost) ?>" disabled></li>
+              <li><input type="number" value="<?= htmlspecialchars($inventory->SellingPrice) ?>"></li>
+
+            </ul>
           </div>
         </div>
-      </section> -->
-      <div class="inventoryDetails">
-        <div class="left">
-          <ul>
-            <li>Medicine Name</li>
-            <li>Brand Name</li>
-            <li>Generic Name</li>
-            <li>Category</li>
-            <li>Batch No</li>
-            <li>Stock Quantity</li>
-            <li>Reorder Level</li>
-            <li>Storage Location</li>
-            <li>Manufacturing Date</li>
-            <li>Expiry Date</li>
-            <li>Storage Conditions</li>
-            <li>Purchase Price</li>
-            <li>Selling Price</li>
-          </ul>
-        </div>
-
-        <div class="right">
-          <ul>
-
-            <li><input type="text" placeholder="Auto" value="<?= htmlspecialchars($inventory->ProductName) ?>" disabled></li>
-            <li><input type="text" placeholder="Auto" value="<?= htmlspecialchars($inventory->Manufacturer) ?>" disabled></li>
-            <li><input type="text" placeholder="Auto" value="<?= htmlspecialchars($inventory->genericName) ?>" disabled></li>
-            <li><input type="text" placeholder="Auto" value="<?= htmlspecialchars($inventory->category) ?>" disabled></li>
-            <li><input type="text" value="<?= htmlspecialchars($inventory->batchNumber) ?>" placeholder=" Auto" disabled></li>
-            <li><input type="number" value="<?= htmlspecialchars($inventory->availableCount) ?>" placeholder=" Enter quantity"></li>
-            <li><input type="text" value="<?= htmlspecialchars($inventory->thresholdLimit) ?>" placeholder="Suggest"></li>
-            <li><input type="text" value="<?= htmlspecialchars($inventory->storageLocation) ?>" placeholder="Search and Select"></li>
-            <li><input type="date" value="<?= date('Y-m-d', strtotime($inventory->manufacturingDate)) ?>"></li>
-            <li><input type="date" value="<?= date('Y-m-d', strtotime($inventory->expiryDate)) ?>"></li>
-            <li><input type="text" value="<?= htmlspecialchars($inventory->storageConditions) ?>" placeholder="Optional" disabled></li>
-            <li><input type="number" value="<?= htmlspecialchars($inventory->purchaseCost) ?>" disabled></li>
-            <li><input type="number" value="<?= htmlspecialchars($inventory->SellingPrice) ?>"></li>
-
-          </ul>
-        </div>
-      </div>
-
-
-
-
       </div>
     </div>
 
@@ -152,10 +101,8 @@
           </div>
 
         </div>
-        <!-- Sample chat messages -->
         <div class="chat-messages">
           <div class="display-area" id="displayArea">
-            <!-- <p>Click an image to enlarge it here</p> -->
             <!-- <img src="<?= ROOT ?>/assets/images/prescription2.jpg" alt=""> -->
             <div class="upload">
               <label for="fileUpload" class="customUpload">Upload Invoice</label>

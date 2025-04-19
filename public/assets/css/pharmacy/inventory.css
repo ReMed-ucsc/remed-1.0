@@ -5,7 +5,6 @@
     display: flex;
     flex-direction: row;
     padding: 20px;
-    max-height: 400px;
     overflow-y: scroll;
     scrollbar-width: none;
 }
@@ -53,4 +52,10 @@
     font-size: 14px;
 }
 
+.size1{
+    max-height: 500px;
+}
 
+.size2{
+    max-height: 400px;
+}

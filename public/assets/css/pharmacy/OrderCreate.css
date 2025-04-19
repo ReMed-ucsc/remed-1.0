@@ -93,7 +93,7 @@ body {
 
 .input-group input {
   position: absolute;
-  right: 40px;
+  right: 5%;
   width: 60%;
   padding: 8px;
   border: 1px solid #ddd;

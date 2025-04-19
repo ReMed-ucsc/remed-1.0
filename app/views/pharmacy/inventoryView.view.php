@@ -127,9 +127,9 @@
             <li><input type="text" value="<?= htmlspecialchars($inventory->storageLocation) ?>" placeholder="Search and Select"></li>
             <li><input type="date" value="<?= date('Y-m-d', strtotime($inventory->manufacturingDate)) ?>"></li>
             <li><input type="date" value="<?= date('Y-m-d', strtotime($inventory->expiryDate)) ?>"></li>
-            <li><input type="text" value="<?= htmlspecialchars($inventory->storageConditions) ?>" placeholder="Optional"></li>
-            <li><input type="number" value="<?= htmlspecialchars($inventory->purchaseCost) ?>"></li>
-            <li><input type="number" value="<?= htmlspecialchars($inventory->sellingPrice) ?>"></li>
+            <li><input type="text" value="<?= htmlspecialchars($inventory->storageConditions) ?>" placeholder="Optional" disabled></li>
+            <li><input type="number" value="<?= htmlspecialchars($inventory->purchaseCost) ?>" disabled></li>
+            <li><input type="number" value="<?= htmlspecialchars($inventory->SellingPrice) ?>"></li>
 
           </ul>
         </div>
@@ -147,13 +147,10 @@
       <div class="chat-box">
         <div class="id">
           <div class="input-group">
-            <label>Stock ID</label>
-            <input type="text" placeholder="Value" value="" disabled>
+            <label>Batch ID</label>
+            <input type="text" placeholder="Value" value="<?= htmlspecialchars($inventory->batchNumber) ?>" disabled>
           </div>
-          <div class="input-group">
-            <label>Invoice ID</label>
-            <input type="text" placeholder="Value" value="" disabled>
-          </div>
+
         </div>
         <!-- Sample chat messages -->
         <div class="chat-messages">

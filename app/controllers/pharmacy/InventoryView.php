@@ -18,7 +18,7 @@ class InventoryView
         $inventory = $inventoryModel->getMedicineInventory($inventoryId);
 
         //pass the data to the view
-        $this->View('pharmacy/inventoryView', ['batchID' => $inventoryId, 'inventory' => $inventory, 'viewOnly' => true]);
+        $this->View('pharmacy/inventoryView', ['inventoryID' => $inventoryId, 'inventory' => $inventory, 'viewOnly' => true]);
     }
 
     // add other methods like edit, update, delete, etc.

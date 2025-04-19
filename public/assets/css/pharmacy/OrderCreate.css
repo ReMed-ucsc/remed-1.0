@@ -1,13 +1,3 @@
-:root {
-  --color-dark-blue: #001f4d;
-  --color-dark-green: rgb(0, 80, 67);
-  --color-bright-blue: rgb(3, 39, 93);
-  --color-dark-gray: rgb(30, 30, 30);
-  --color-light-gray: #b0bec5;
-  --color-dark-red: rgb(183, 28, 28);
-  --color-white: #ffffff;
-}
-
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -28,42 +18,20 @@ body {
   top: 89.6px;
   flex: 12;
   padding: 10px;
-  /* Adjusts based on sidebar width */
-  min-height: calc(100vh - 89.6px);
-  overflow-y: auto; /* Enables vertical scrolling */
+  min-height: calc(100% - 89.6px);
+  overflow-y: auto;
   background-color: #dbe2f4;
-  /* transition: margin-left 0.3s, width 0.3s; */
   transition: width 0.3s ease;
-  /* flex-grow: 1; */
 }
 
-.search-container {
-  margin: 10px 0;
-  display: flex;
-}
 
-.search-bar {
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #b0bec5;
-  width: 100%;
-  margin-bottom: 20px;
-  /* display: flex;
-  justify-content: space-between; */
-}
 
 .structure {
   display: flex;
   flex-direction: column;
 }
 
-.search {
-  padding: 7px 10px;
-  border: none;
-  position: relative;
-  left: -45px;
-  background-color: transparent;
-}
+
 
 /* .Order-page {
   display: flex;
@@ -71,48 +39,7 @@ body {
   
 } */
 
-/* Overlay container */
-.overlay {
-  position: relative;
-  top: 409px;
-  left: 645px;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  background: #dbe2f4;
-  /* padding: 20px 10px 20px 10px; */
-  border-radius: 10px;
-  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
-  width: 1042px;
-  height: calc(100vh - 120px);
-  text-align: center;
-  overflow: scroll;
-  scrollbar-width: none;
-  display: flex
-;
-  justify-content: center;
-  align-items: center;
-}
 
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f5f5f5;
-}
-
-.order-container {
-  max-width: 1200px;
-  /* margin: 20px auto; */
-  background: #dbe2f4;
-  border-radius: 10px;
-  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
-  padding: 30px;
-  /* overflow: scroll; */
-
-  width: 1180px;
-  height: calc(100vh - 120px);
-  border: none;
-}
 
 .order-header h1 {
   font-size: 24px;
@@ -140,7 +67,8 @@ body {
 }
 
 .id {
-  margin-top: 5px;
+  padding-top: 5px;
+  padding-left: 6px;
   display: flex;
   flex-direction: column;
 }
@@ -165,7 +93,7 @@ body {
 
 .input-group input {
   position: absolute;
-  right: 40px;
+  right: 5%;
   width: 60%;
   padding: 8px;
   border: 1px solid #ddd;
@@ -245,7 +173,9 @@ body {
   border-radius: 30px 0px 0px 30px;
   margin-right: 20 0 20 20;
   /* z-index: 200000; */
-  position: fixed;
+  /* position: fixed; */
+  position: relative;
+
   top: 89.6px;
   right: 0px;
   box-shadow: 4px 4px 14px rgb(0, 0, 0);
@@ -308,50 +238,8 @@ body {
   /* text-decoration: underline; */
 }
 
-.table{
-  display: flex;
-  flex-direction: column;
-  display: flex;
-  justify-content: center; /* Centers the table horizontally */
-  align-items: center; /* Centers the table vertically */
-}
-
-/* Table Section */
-.table-section {
-  margin-bottom: 20px;
-  overflow: auto;
-  scrollbar-width: none;
-  height: 400px;
-  padding: 10px;
-  background-color: white;
-  border-radius: 30px;
-  
-}
 
 
-/* .search-bar {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-  align-items: center;
-} */
-
-.search-bar input {
-  flex: 1;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  width: 40%;
-}
-
-.search-bar button {
-  padding: 8px 15px;
-  background: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
 .submit-section button{
   width: 100%;
 }
@@ -398,21 +286,7 @@ body {
   border-color: #0056b3;
 }
 
-/* table {
-  width: 100%;
-  border-collapse: collapse;
-}
 
-table th, table td {
-  text-align: left;
-  padding: 10px;
-  border: 1px solid #ddd;
-}
-
-table th {
-  background: #007bff;
-  color: white;
-} */
 
 .price{
   display: flex;
@@ -503,118 +377,8 @@ button {
   width: 150px;
 }
 
-.ongoing {
-  padding-bottom: 20px;
-  font-size: 16px;
-  font-weight: 500;
-}
 
-.order-management {
-  background-color: rgb(255, 255, 255);
-  padding: 20px;
-  margin: 20px;
-  border-radius: 10px;
-  /* overflow-y: scroll;
-  scrollbar-width: none; */
-}
 
-/* Table styles */
-.table-section table {
-  width: 95%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  /* border: 1px solid black; */
-  background-color: #ffffff;
-  height: 100px;
-  overflow: scroll;
-  scrollbar-width: thin;
-  border-bottom: 1px solid black;
-  /* display: flex
-; */
-}
-
-th,
-td {
-  padding: 10px;
-  text-align: center;
-  width: 200px;
-  font-size: 14px;
-  overflow: scroll;
-  scrollbar-width: none;
-}
-
-th {
-  background-color: var(--color-dark-blue);
-  color: var(--color-white);
-}
-
-th:first-child {
-  border-radius: 0 0 0 0; /* Top-left corner */
-}
-
-th:last-child {
-  border-radius: 0 0 0 0; /* Top-right corner */
-}
-
-tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-tr:nth-child(odd) {
-  background-color: #e2e5e8;
-}
-
-tr:nth-child(odd) .custom-select {
-  background-color: #e2e5e8;
-}
-
-.status.success {
-  background: radial-gradient(
-    circle,
-    rgba(40, 167, 69, 0.8) 0%,
-    rgba(31, 135, 55, 0.686) 70%,
-    rgba(40, 167, 70, 0.736) 100%
-  ); /* Green background */
-  color: #ffffff; /* White text */
-  padding: 5px 10px; /* Space inside the bubble */
-  border-radius: 15px; /* Makes it circular/oval */
-  font-size: 14px; /* Adjust font size */
-  font-weight: bold; /* Optional for emphasis */
-  display: inline-block; /* Ensures it behaves like a bubble */
-  text-align: center; /* Centers the text inside */
-}
-
-.status.pending {
-  background: radial-gradient(
-    circle,
-    rgba(0, 123, 255, 0.8) 0%,
-    rgba(0, 123, 255, 0.6) 70%,
-    rgba(0, 4, 255, 0.559) 100%
-  ); /* Green background */
-  color: #ffffff; /* White text */
-  padding: 5px 10px; /* Space inside the bubble */
-  border-radius: 15px; /* Makes it circular/oval */
-  font-size: 14px; /* Adjust font size */
-  font-weight: bold; /* Optional for emphasis */
-  display: inline-block; /* Ensures it behaves like a bubble */
-  text-align: center;
-}
-
-.status.canceled {
-  background: radial-gradient(
-    circle,
-    rgba(220, 53, 69, 0.8) 0%,
-    rgba(220, 53, 69, 0.6) 70%,
-    rgba(220, 53, 70, 0.762) 100%
-  ); /* Green background */
-  color: #ffffff; /* White text */
-  padding: 5px 10px; /* Space inside the bubble */
-  border-radius: 15px; /* Makes it circular/oval */
-  font-size: 14px; /* Adjust font size */
-  font-weight: bold; /* Optional for emphasis */
-  display: inline-block; /* Ensures it behaves like a bubble */
-  text-align: center;
-}
 
 .view {
   background-color: #cadcf6; /* Green background */
@@ -627,32 +391,8 @@ tr:nth-child(odd) .custom-select {
   text-align: center; /* Centers the text inside */
 }
 
-/* .bottom{
-  background-color: white;
-  width: 100vw;
-} */
 
-.new-order-btn {
-  justify-content: center;
-  padding: 20px;
-  margin: 20px;
-  position: fixed;
-  left: 1180px;
-  bottom: 20px;
-  border: none;
-  background-color: darkgreen;
-  color: white;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: row;
-  width: 160px;
-  gap: 10px;
-  font-size: 16px;
-}
 
-.new-order {
-  display: flex;
-}
 
 .upload {
   position: relative;
@@ -703,21 +443,4 @@ tr:nth-child(odd) .custom-select {
   scrollbar-width: thin;
 } */
 
-.search-results {
-  border: 1px solid #ccc;
-  max-height: 200px;
-  overflow-y: auto;
-  position: absolute;
-  background: white;
-  width: 100%;
-  z-index: 1000;
-}
 
-.search-result-item {
-  padding: 8px;
-  cursor: pointer;
-}
-
-.search-result-item:hover {
-  background-color: #f0f0f0;
-}

@@ -19,6 +19,8 @@
   <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/navbar.css">
   <link rel="stylesheet" href="<?= ROOT ?>/assets/css/component/sidebar.css">
   <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -124,7 +126,7 @@
                       </td>
                       <td>
                         <?php
-                        $quantity = $medicine->unitPrice ?? 0;
+                        $quantity = $medicine->quantity ?? 0; //changed unitPrice to qunatity here
                         $price = $quantity * $medicine->unitPrice;
                         $tot = $tot + $price;
                         echo number_format($price, 2);
@@ -183,21 +185,42 @@
         </div>
 
         <div class="id">
-          <div class="input-group">
-            <label>Patient ID</label>
-            <input type="text" placeholder="Value" value="<?= htmlspecialchars($order->PatientID) ?>" disabled>
+          <div class="idleft">
+            <div class="input-group">
+              <label>Patient ID</label>
+              <input type="text" placeholder="Value" value="<?= htmlspecialchars($order->PatientID) ?>" disabled>
+            </div>
+            <div class="input-group">
+              <label>Order ID</label>
+              <input type="text" placeholder="Value" value="<?= htmlspecialchars($order->OrderID) ?>" disabled>
+            </div>
           </div>
-          <div class="input-group">
-            <label>Order ID</label>
-            <input type="text" placeholder="Value" value="<?= htmlspecialchars($order->OrderID) ?>" disabled>
+          <div class="idright">
+            <div class="chaticon" id="chatIcon">
+              <i class="fas fa-comment-alt"></i>
+
+            </div>
+            <span class="notification-badge">1</span>
           </div>
         </div>
         <!-- Sample chat messages -->
         <div class="chat-messages">
           <div class="display-area" id="displayArea">
-            <!-- <p>Click an image to enlarge it here</p> -->
-            <img src="<?= ROOT ?>/assets/images/prescription2.jpg" alt="">
+            <div id="prescriptionView">
+              <img src="<?= ROOT ?>/assets/images/prescription2.jpg" alt="">
+            </div>
+
+            <div id="chatView" style="display: none;">
+              <div class="chat-box-content" id="chatMessages">
+                <!-- Chat messages will appear here -->
+              </div>
+              <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Type your message...">
+                <button id="sendBtn">Send</button>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
       <div class="submit-section">

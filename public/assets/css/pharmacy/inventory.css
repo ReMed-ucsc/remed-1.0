@@ -1,0 +1,56 @@
+.inventoryDetails {
+    height: auto;
+    background-color: white;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    max-height: 400px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+.left {
+    flex: 1;
+    padding: 20px;
+}
+
+.right {
+    flex: 4;
+    padding: 20px;
+}
+
+
+
+.left {
+    background-color: #012253;
+    color: white;
+    height: 100%;
+    border-radius: 15px 0px 0px 15px;
+}
+
+.left ul, .right ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.left li {
+    padding-top: 5px;
+    margin-bottom: 26px;
+}
+
+.right li {
+    margin-bottom: 15px;
+}
+
+.right input,
+.right select {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+

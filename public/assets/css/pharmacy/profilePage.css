@@ -1,0 +1,108 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #a9bdcc;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 70%;
+  height: 80%;
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Left: Profile box */
+.profile-panel {
+  background-color: #001f4d;
+  color: white;
+  width: 35%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid white;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.profile-panel h2 {
+  font-size: 22px;
+  margin: 10px 0 5px;
+}
+
+.profile-panel p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.rating {
+  color: gold;
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+/* Right: Info form */
+.form-panel {
+  background-color: #f0f4f8;
+  padding: 30px;
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+  color: #000;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.button-container {
+  grid-column: span 2;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007b5e;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005e48;
+}

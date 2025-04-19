@@ -3,10 +3,22 @@
 class InventoryView
 {
     use Controller;
-    public function index()
+    public function index($inventoryId)
     {
-        $data['viewOnly'] = [true];
-        $this->view('pharmacy/inventoryView', $data);
+        $inventoryModel = new StockInventoryDetails();
+        $inventory = $inventoryModel->getMedicineInventory($inventoryId);
+
+        //pass the data to the view
+        $this->View('pharmacy/inventoryView', ['InventoryId' => $inventoryId, 'inventory' => $inventory]);
+    }
+
+    public function read($inventoryId)
+    {
+        $inventoryModel = new StockInventoryDetails();
+        $inventory = $inventoryModel->getMedicineInventory($inventoryId);
+
+        //pass the data to the view
+        $this->View('pharmacy/inventoryView', ['inventoryID' => $inventoryId, 'inventory' => $inventory, 'viewOnly' => true]);
     }
 
     // add other methods like edit, update, delete, etc.

@@ -37,6 +37,7 @@ define('DBHOST', getenv('DBHOST'));
 define('DBUSER', getenv('DBUSER'));
 define('DBPASS', getenv('DBPASS'));
 define('DBNAME', getenv('DBNAME'));
+define('MAPAPI', getenv('MAPAPI'));
 
 define('APP_NAME', "ReMed");
 define('APP_DESC', "Healthcare solution");

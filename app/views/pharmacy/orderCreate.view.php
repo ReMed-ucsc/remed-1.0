@@ -17,6 +17,7 @@
   <title>ReMed Dashboard</title>
   <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/OrderCreate.css">
   <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/navbar.css">
+  <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/table.css">
   <link rel="stylesheet" href="<?= ROOT ?>/assets/css/component/sidebar.css">
   <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -47,84 +48,59 @@
 
     <!-- <div class="Order-page"> -->
     <!-- <div class="right"> -->
-    <div class="overlay">
-      <div class="order-container">
-        <div class="order-header">
-          <h1>Order Management &nbsp; &#8250; &nbsp; Create Order</h1>
-        </div>
-        <div class="order-body">
-          <div class="order-content">
-            <!-- Left Section -->
-            <div class="left-section">
-
-              <div class="prescription">
-                <div class="details">
-
-
-
-
-                  <?php
-                  // show($medicineList) 
-                  ?>
-
-                </div>
-                <!-- <div class="image-preview">
-                  <img src="<?= ROOT ?>/assets/images/prescription2.jpg" alt="Prescription Image" onclick="showImage(this)">
-                </div> -->
-              </div>
-            </div>
-
-            <!-- Right Section -->
-
-          </div>
-
-          <!-- <?php if (!$viewOnly) { ?> -->
-          <div class="search-bar">
-            <form action="<?= ROOT ?>/order/addItem" method="post">
-              <input type="hidden" id="medicine-id" name="medicineId" value="" />
-              <input type="text" id="medicine-search" placeholder="Search by medicine or generic name..." />
-              <input type="text" id="medicine-quantity" name="quantity" placeholder="Quantity" />
-              <button id="add-medicine">Add</button>
-            </form>
-          </div>
-          <div id="search-results" class="search-results"></div>
-        <?php } ?>
-
-        <!-- Table Section -->
-        <div class="table-section">
-
-          <div class="table">
-            <table class="order-table">
-              <thead>
-                <tr>
-                  <th style="width: 5%;">Medicine Name</th>
-                  <th style="width: 5%;">Generic Name</th>
-                  <th style="width: 5%;">Brand Name</th>
-                  <th style="width: 1%;">Dosage</th>
-                  <th style="width: 1%;">Quantity</th>
-                  <th style="width: 5%;">Price</th>
-                  <th style="width: 5%; ">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-
-
-
-              </tbody>
-            </table>
-            <div class="price">
-              <p class="total-price">Total price = </p>
-              <p class="total-price">Rs.0.00</p>
-            </div>
-          </div>
-        </div>
-        </div>
+    <div class="main-content">
+      <h2>Order Management &nbsp; &#8250; &nbsp;</h2>
+      <div class="ongoing">
+        Create Order
       </div>
+      <div class="order-body">
+        <!-- <?php if (!$viewOnly) { ?> -->
+        <div class="search-bar">
+          <form action="<?= ROOT ?>/order/addItem" method="post">
+            <input type="hidden" id="medicine-id" name="medicineId" value="" />
+            <input type="text" id="medicine-search" placeholder="Search by medicine or generic name..." />
+            <input type="text" id="medicine-quantity" name="quantity" placeholder="Quantity" />
+            <button id="add-medicine">Add</button>
+          </form>
+        </div>
+        <div id="search-results" class="search-results"></div>
+      <?php } ?>
+
+      <!-- Table Section -->
+      <section class="table-management">
+
+        <div class="table">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 5%;">Medicine Name</th>
+                <th style="width: 5%;">Generic Name</th>
+                <th style="width: 5%;">Brand Name</th>
+                <th style="width: 1%;">Dosage</th>
+                <th style="width: 1%;">Quantity</th>
+                <th style="width: 5%;">Price</th>
+                <th style="width: 5%; ">Action</th>
+              </tr>
+            </thead>
+            <tbody>
 
 
 
-
+            </tbody>
+          </table>
+          <div class="price">
+            <p class="total-price">Total price = </p>
+            <p class="total-price">Rs.0.00</p>
+          </div>
+        </div>
+      </section>
+      </div>
     </div>
+
+
+
+
+
     <!-- </div> -->
 
     <div class="right-section">
@@ -189,7 +165,7 @@
 
 
 
-
+  </div>
 
 </body>
 

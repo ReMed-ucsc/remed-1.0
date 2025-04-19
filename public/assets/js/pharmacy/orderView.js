@@ -41,3 +41,78 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+
+  const chatIcon = document.querySelector('.chaticon');
+  const prescriptionView = document.getElementById('prescriptionView');
+  const chatView = document.getElementById('chatView');
+  let isChatOpen = false;
+
+  chatIcon.addEventListener('click', () => {
+    isChatOpen = !isChatOpen;
+    prescriptionView.style.display = isChatOpen ? 'none' : 'block';
+    chatView.style.display = isChatOpen ? 'block' : 'none';
+  });
+
+  // Optional: Basic message sending (no API yet)
+  document.getElementById('sendChat')?.addEventListener('click', () => {
+    const input = document.getElementById('chatInput');
+    const message = input.value.trim();
+    if (message) {
+      const log = document.getElementById('chatLog');
+      const newMsg = document.createElement('div');
+      newMsg.textContent = "You: " + message;
+      log.appendChild(newMsg);
+      input.value = "";
+    }
+  });
+
+  //message with dummy data
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const chatIcon = document.getElementById("chatIcon");
+    const prescriptionView = document.getElementById("prescriptionView");
+    const chatView = document.getElementById("chatView");
+    const chatMessages = document.getElementById("chatMessages");
+    const sendBtn = document.getElementById("sendBtn");
+    const chatInput = document.getElementById("chatInput");
+  
+    let isChatOpen = false;
+  
+    // Dummy messages
+    const dummyMessages = [
+      { sender: "pharmacy", message: "Hello, we received your prescription." },
+      { sender: "patient", message: "Thank you! How long will it take?" },
+      { sender: "pharmacy", message: "About 30 minutes. We’ll notify you once ready." }
+    ];
+  
+    // Populate dummy chat
+    dummyMessages.forEach(msg => {
+      const msgDiv = document.createElement("div");
+      msgDiv.classList.add("message", msg.sender);
+      msgDiv.textContent = msg.message;
+      chatMessages.appendChild(msgDiv);
+    });
+  
+    // Toggle chat/prescription view
+    chatIcon.addEventListener("click", () => {
+      isChatOpen = !isChatOpen;
+      prescriptionView.style.display = isChatOpen ? "none" : "block";
+      chatView.style.display = isChatOpen ? "block" : "none";
+    });
+  
+    // Send button action
+    sendBtn.addEventListener("click", () => {
+      const text = chatInput.value.trim();
+      if (text !== "") {
+        const msgDiv = document.createElement("div");
+        msgDiv.classList.add("message", "pharmacy");
+        msgDiv.textContent = text;
+        chatMessages.appendChild(msgDiv);
+        chatInput.value = "";
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+    });
+  });
+  
+

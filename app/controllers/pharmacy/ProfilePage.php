@@ -1,6 +1,6 @@
 <?php
 
-class InventoryMain
+class ProfilePage
 {
     use Controller;
     public function index()
@@ -18,22 +18,9 @@ class InventoryMain
 
         // $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
 
-        // $data['username'] = [];
-        // $this->view('pharmacy/inventoryMain', $data);
-
-        $inventoryModel = new StockInventoryDetails();
-        $inventory = $inventoryModel->getInventoryDetails();
-
-        //pass the data to the view
-        $this->view('pharmacy/inventoryMain', ['inventories' => $inventory]);
+        $data['username'] = [];
+        $this->view('pharmacy/profilePage', $data);
     }
-    public function read()
-    {
-        $inventoryModel = new StockInventoryDetails();
-        $inventory = $inventoryModel->getInventoryDetails();
 
-        // Pass the data to the view
-        $this->View('pharmacy/inventoryrMain', ['inventories' => $inventory]);
-    }
     // add other methods like edit, update, delete, etc.
 }

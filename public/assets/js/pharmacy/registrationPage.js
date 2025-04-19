@@ -112,3 +112,74 @@ document
   });
 
 showStep(1);
+
+
+  // Alternatively, you can target your input element by ID
+  // Replace querySelector('input[name="search_input"]') with getElementById('search_input') 
+    // and insert id="search_input" in your form's input field
+  // var searchInput = document.querySelector('input[name="pharmacy-address"]');
+  // document.addEventListener('DOMContentLoaded', function () {
+  //   var autocomplete = new google.maps.places.Autocomplete(searchInput, { 
+  //     types: ['geocode']
+  //   }); 
+  //   autocomplete.addListener('place_changed', function () { 
+  //     var near_place = autocomplete.getPlace(); 
+  //   });
+  // });
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Check if Google Maps API is loaded
+    if (typeof google === 'object' && typeof google.maps === 'object') {
+        initMap();
+    } else {
+        console.error('Google Maps API not loaded');
+    }
+});
+
+function initMap() {
+    var searchInput = document.getElementById('pharmacy-address');
+
+    if (!searchInput) {
+        console.error('Address input field not found');
+        return;
+    }
+
+    var latitudeField = document.getElementById('latitude');
+    var longitudeField = document.getElementById('longitude');
+
+    try {
+        // Initialize the autocomplete for Sri Lanka
+        var autocomplete = new google.maps.places.Autocomplete(searchInput, {
+            types: ['address'],
+            componentRestrictions: {
+                country: 'lk'
+            } // 'lk' is the country code for Sri Lanka
+        });
+
+        // When a place is selected, populate the lat/lng fields
+        autocomplete.addListener('place_changed', function() {
+            var place = autocomplete.getPlace();
+
+            // Verify that we got a valid place with geometry
+            if (!place.geometry) {
+                console.error("Autocomplete's returned place contains no geometry");
+                return;
+            }
+
+            // Get the location data
+            var lat = place.geometry.location.lat();
+            var lng = place.geometry.location.lng();
+
+            // Set the values in the hidden fields
+            latitudeField.value = lat;
+            longitudeField.value = lng;
+
+            console.log("Selected location:", place.formatted_address);
+            console.log("Latitude:", lat);
+            console.log("Longitude:", lng);
+        });
+    } catch (error) {
+        console.error('Error initializing Google Places Autocomplete:', error);
+    }
+}

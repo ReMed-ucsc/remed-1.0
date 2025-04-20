@@ -67,7 +67,7 @@ class MedicineOrder
 
     public function updateOrderStatus($orderID, $status)
     {
-        $data = ['status' => $this->$status];
+        $data = ['status' => $status];
         $this->update($orderID, $data, 'OrderID');
     }
 

@@ -15,6 +15,8 @@ class InventoryView
         $columns = [
             'PharmacyID',
             'name',
+            'address',
+            'contactNo',
             'latitude',
             'longitude',
             'ST_Distance_Sphere(POINT(longitude, latitude), POINT(:longitude, :latitude)) AS distance',

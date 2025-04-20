@@ -63,8 +63,11 @@ class CreateOrderController
 
             $productIDs = $data['productIDs'];
             $quantities = $data['quantities'];
-            $pickup = isset($data['pickup']) ? 1 : 0;
+            $pickup = $data['pickup'];
             $destination = isset($data['destination']) ? $data['destination'] : 'Pickup';
+            $destinationLat = isset($data['destinationLat']) ? $data['destinationLat'] : null;
+            $destinationLong = isset($data['destinationLng']) ? $data['destinationLng'] : null;
+            $comments = isset($data['comments']) ? $data['comments'] : null;
             $pharmacyID = $data['pharmacyID'];
             $prescriptionPath = '';
 
@@ -81,8 +84,9 @@ class CreateOrderController
             // Create order
             $orderModel = new MedicineOrder();
             $orderListModel = new OrderList();
+            $orderCommentModel = new OrderComment();
 
-            $orderID = $orderModel->placeOrder($patient->PatientID, $pickup, $destination, $pharmacyID, $prescriptionPath);
+            $orderID = $orderModel->placeOrder($patient->PatientID, $pickup, $destination, $destinationLat, $destinationLong, $pharmacyID, $prescriptionPath);
 
             if (!$orderID) {
                 throw new Exception("Failed to create order");
@@ -93,6 +97,11 @@ class CreateOrderController
 
             if (!$success) {
                 throw new Exception("Failed to add order items. ");
+            }
+
+            $success = $orderCommentModel->addComment($orderID,  $comments, 'u');
+            if (!$success) {
+                throw new Exception("Failed to add order comment. ");
             }
 
             // Return success response
@@ -148,6 +157,6 @@ class CreateOrderController
             throw new Exception("Failed to upload file.");
         }
 
-        return $targetFile;
+        return $fileName;
     }
 }

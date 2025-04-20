@@ -5,7 +5,7 @@ class MedicineOrder
     use Model;
 
     protected $table = 'medicineOrder';
-    protected $allowedColumns = ['OrderID', 'date', 'status', 'pickup', 'destination', 'PatientID', 'PharmacyID', 'DeliveryID', 'prescription', 'paymentMethod'];
+    protected $allowedColumns = ['OrderID', 'date', 'status', 'pickup', 'destination', 'destinationLat', 'destinationLong', 'PatientID', 'PharmacyID', 'DeliveryID', 'prescription', 'paymentMethod'];
     protected $order_column = "OrderID";
 
     // order status categories
@@ -42,13 +42,15 @@ class MedicineOrder
         return $this->query($query, $data);
     }
 
-    public function placeOrder($patientID, $pickup, $destination, $pharmacyID, $prescription)
+    public function placeOrder($patientID, $pickup, $destination, $destinationLat, $destinationLong, $pharmacyID, $prescription)
     {
         $data = [
             'date' => date('Y-m-d H:i:s'),
             'status' => $this->WAITING,
             'pickup' => $pickup,
             'destination' => $destination,
+            'destinationLat' => $destinationLat,
+            'destinationLong' => $destinationLong,
             'PatientID' => $patientID,
             'PharmacyID' => $pharmacyID,
             'DeliveryID' => 0, // unassigned

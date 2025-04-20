@@ -46,7 +46,8 @@ class GetOrderController
                             'patientName' => $orderList[0]->patientName,
                             'prescription' => $orderList[0]->prescription,
                             'PharmacyID' => $orderList[0]->PharmacyID,
-                            'pharmacyName' => $orderList[0]->name
+                            'pharmacyName' => $orderList[0]->name,
+                            'paymentMethod' => $orderList[0]->paymentMethod
                         ];
 
                         $productDetails = [];

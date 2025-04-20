@@ -56,17 +56,17 @@ class OrderView
         $statusMap = [
             $this->WAITING => 'WAITING',
             $this->PROCESSING => 'PROCESSING',
-            $this->ACCEPT_QUOTATION => 'ACCEPT_QUOTATION',
+            $this->ACCEPT_QUOTATION => 'ACCEPT QUOTATION',
             $this->DELIVERED => 'DELIVERED',
-            $this->USER_PICKED_UP => 'USER_PICKED_UP',
+            $this->USER_PICKED_UP => 'USER PICKED UP',
             $this->CANCELED => 'CANCELED',
             $this->REJECTED => 'REJECTED',
-            $this->PICKED_UP => 'PICKED_UP',
-            $this->DELIVERY_FAILED => 'DELIVERY_FAILED',
+            $this->PICKED_UP => 'PICKED UP',
+            $this->DELIVERY_FAILED => 'DELIVERY FAILED',
             $this->ACCEPTED => 'ACCEPTED',
-            $this->DELIVERY_IN_PROGRESS => 'DELIVERY_IN_PROGRESS',
-            $this->DELIVERY_COMPLETED => 'DELIVERY_COMPLETED',
-            $this->WAITING_FOR_PICKUP => 'WAITING_FOR_PICKUP'
+            $this->DELIVERY_IN_PROGRESS => 'DELIVERY IN PROGRESS',
+            $this->DELIVERY_COMPLETED => 'DELIVERY COMPLETED',
+            $this->WAITING_FOR_PICKUP => 'WAITING FOR PICKUP'
         ];
 
         return $statusMap[$status] ?? 'UNKNOWN';

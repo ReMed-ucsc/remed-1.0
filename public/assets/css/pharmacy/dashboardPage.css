@@ -1,0 +1,256 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #F5F7FA;
+  display: flex;
+  flex: 1;
+}
+
+.fullpage{
+  display: flex;
+  flex-direction: row;
+}
+
+
+
+.main-content {
+  margin: 30px 30px 30px 130px;
+  position: relative;
+  top: 89.6px;
+  flex: 12;
+  padding: 10px;
+  min-height: calc(100vh - 89.6px);
+  overflow-y: auto; 
+  background-color: #dbe2f4;
+  transition: width 0.3s ease;
+}
+
+
+.structure {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.search{
+  padding: 7px 10px;
+  border: none;
+  position: relative;
+  left: -45px;
+  background-color: transparent;
+}
+
+.top {
+  display: flex;
+  justify-content: center;
+
+}
+
+.middle {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  margin-top: 50px;
+}
+
+.middleline{
+  display: flex;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  gap: 20px;
+  padding-bottom: 20px;
+}
+
+.bottom {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+
+
+.cards {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  height: 350px;
+}
+
+
+
+.profilecard {
+  flex: 1; 
+  display: flex;
+  flex-direction: row;
+}
+
+.profilecard-left{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100%;
+  background: #f4f4f4;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  border-right: 1px solid rgb(36 33 33 / 51%);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.profilecard-right{
+  display: grid;
+  height: 100%;
+  background: #a4adc4;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  flex: 2;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  text-align: center;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.stat {
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stat h4 {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.stat p {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.sidecards {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+
+.card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: #f4f4f4;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 350px;
+}
+
+.card:hover {
+  outline: 2px solid #142814; 
+  outline-offset: 4px; 
+  box-shadow: 0 4px 10px rgba(0, 128, 0, 0.3), 0 0 10px rgba(0, 128, 0, 0.5); 
+  transform: scale(1.02); 
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+.card img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+}
+
+.card h4 {
+  margin: 10px 0;
+}
+
+.card a {
+  margin-top: auto;
+  text-decoration: none;
+  color: #abd4ff;
+  font-weight: bold;
+}
+
+.black-card {
+  background-image: linear-gradient(135deg, #2b1314b0, #893f2aa8), url(http://localhost/remed-1.0/public/assets/images/inventorymain.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 100% 70%;
+  color: #fff;
+}
+
+.green-card {
+  background-image: linear-gradient(135deg, #121f138c, #23572dad), url(http://localhost/remed-1.0/public/assets/images/revenuemain.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 100% 70%;
+  color: #fff;
+}
+
+.blue-card {
+  background-image: linear-gradient(135deg, #1c1e30b3, #162c5cc2), url(http://localhost/remed-1.0/public/assets/images/ordersmain.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 30% 70%;
+  color: #fff;
+}
+
+
+.resolve {
+  display: flex;
+  justify-content: center;
+  width: 130px;
+  background-color: transparent;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.total-sales{
+  flex: 1;
+  background-color: white;
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  width: 600px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.inventory{
+ 
+  flex: 1;
+  max-width: 300px;
+  background-color: white;
+  border-radius: 30px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.weekly{
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+
+.recent-payment{
+  width: 100%;
+}
+
+.style{
+  color:white;
+  background-color:maroon;
+  padding:5px;
+  border-radius:15%;
+}

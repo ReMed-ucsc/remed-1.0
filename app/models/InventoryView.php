@@ -41,4 +41,14 @@ class InventoryView
         // Call the selectWhere method
         return $this->selectWhere($columns, $conditions, $additionalData, 'distance ASC', 'PharmacyID');
     }
+
+    public function getPhramcyInventoryMedicines($pharmacyID)
+    {
+        $conditions = [
+            'PharmacyID' => $pharmacyID,
+            'availableCount' => ['operator' => '>', 'value' => 0]
+        ];
+
+        return $this->selectWhere(['ProductID'], $conditions);
+    }
 }

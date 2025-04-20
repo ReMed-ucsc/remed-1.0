@@ -92,21 +92,32 @@ class Pharmacy extends User
         return empty($this->errors); // Pass if no errors
     }
 
-    public function registerPharmacy($name, $pharmacistName, $RegNo, $contactNo, $email, $address, $status = 'APPROVED', $document = null)
+
+    public function registerPharmacy($pharmacyName, $pharmacistName, $license, $contactNo, $email, $address, $document, $latitude, $longitude)
     {
-        $data = [
+        if ($this->getPharmacyByEmail($email)) {
+            return false;
+        } else {
+            $data = [
+                'name' => $pharmacyName,
+                'pharmacistName' => $pharmacistName,
+                'email' => $email,
+                'address' => $address,
+                'contactNo' => $contactNo,
+                'license' => $license,
+                'document' => $document,
+                'status' => 'APPROVED',
+                'latitude' => $latitude,
+                'longitude' => $longitude
+            ];
+            return $this->insert($data);
+        }
+    }
 
-            'name' => $name,
-            'pharmacistName' => $pharmacistName,
-            'RegNo' => $RegNo,
-            'contactNo' => $contactNo,
-            'email' => $email,
-            'address' => $address,
-            'status' => $status,
-            'document' => $document ?? 'N/A' // Default to 'N/A' if no document
-        ];
-
-        return $this->insert($data);
+    public function getPharmacyByEmail($email)
+    {
+        $data = ['email' => $email];
+        return $this->first($data);
     }
 
     public function getPharmacies($status = "APPROVED")

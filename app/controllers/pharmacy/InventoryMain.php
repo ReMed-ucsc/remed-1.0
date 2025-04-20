@@ -18,16 +18,22 @@ class InventoryMain
 
         // $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
 
-        $data['username'] = [];
-        $this->view('pharmacy/inventoryMain', $data);
+        // $data['username'] = [];
+        // $this->view('pharmacy/inventoryMain', $data);
+
+        $inventoryModel = new StockInventoryDetails();
+        $inventory = $inventoryModel->getInventoryDetails();
+
+        //pass the data to the view
+        $this->view('pharmacy/inventoryMain', ['inventories' => $inventory]);
     }
     public function read()
     {
-        $orderModel = new MedicineOrder();
-        $orders = $orderModel->getOrderDetails();
+        $inventoryModel = new StockInventoryDetails();
+        $inventory = $inventoryModel->getInventoryDetails();
 
         // Pass the data to the view
-        $this->View('pharmacy/orderMain', ['orders' => $orders]);
+        $this->View('pharmacy/inventoryrMain', ['inventories' => $inventory]);
     }
     // add other methods like edit, update, delete, etc.
 }

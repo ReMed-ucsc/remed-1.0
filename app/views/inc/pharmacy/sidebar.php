@@ -63,10 +63,10 @@ $pharmacyName = isset($_SESSION['pharmacy_name']) ? $_SESSION['pharmacy_name'] :
           </li>
           <li>
 
-            <!-- <a href="<?= ROOT ?>/login/logout">
-              <i class="icon ph-bold ph-sign-out"></i>
-              <span class="text">Logout</span>
-            </a> -->
+            <a href="<?= ROOT ?>/income">
+              <i class="icon ph-bold ph-currency-dollar"></i>
+              <span class="text">Income</span>
+            </a>
             <ul class="sub-menu">
               <li>
                 <a href="#">

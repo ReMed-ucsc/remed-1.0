@@ -19,12 +19,23 @@ class CommentOrderController
         if (preg_match('/Bearer\s(\S+)/', $authHeader, $matches)) {
             $authToken = $matches[1];
 
-            $patientModel = new Patient();
-            $patient = $patientModel->first(['token' => $authToken]);
 
-            if ($patient) {
-                $input = file_get_contents('php://input');
-                $data = json_decode($input, true);
+            $input = file_get_contents('php://input');
+            $data = json_decode($input, true);
+
+            $sender = $data['sender'];
+            $user = '';
+
+            if ($sender == 'u') {
+                $patientModel = new Patient();
+                $user = $patientModel->first(['token' => $authToken]);
+            } else {
+                $pharmacyModel = new Pharmacy();
+                $user = $pharmacyModel->first(['token' => $authToken]);
+            }
+
+
+            if ($user) {
 
                 if (json_last_error() !== JSON_ERROR_NONE) {
                     $result->setErrorStatus(true);

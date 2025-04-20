@@ -69,16 +69,19 @@ class RegisterPage
                 'contactNo' => $_POST['contact-number'],
                 'name' => $_POST['pharmacy-name'],
                 'pharmacistName' => $_POST['pharmacist-name'],
-                'license' => $_FILES['license-photo']['name']
+                'license' => $_FILES['license-photo']['name'],
+                'latitude' => $_POST['latitude'],
+                'longitude' => $_POST['longitude']
             ];
 
             // Save the license photo to the server
             move_uploaded_file($_FILES['license-photo']['tmp_name'], BASE_PATH . "/uploads/license/" . $_FILES['license-photo']['name']);
 
-            $pharmacy->insert($pharmacyData);
+            $registerResult = $pharmacy->insert($pharmacyData);
+
 
             // Return success response
-            $response['success'] = true;
+            $response['success'] = $registerResult;
             echo json_encode($response);
         }
     }

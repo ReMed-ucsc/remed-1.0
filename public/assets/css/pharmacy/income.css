@@ -1,181 +1,79 @@
-:root {
-    --color-dark-blue: #001F4D;
-    --color-dark-green: rgb(0, 80, 67);
-    --color-bright-blue: rgb(3, 39, 93);
-    --color-dark-gray: rgb(30, 30, 30);
-    --color-light-gray: #B0BEC5;
-    --color-dark-red: rgb(183, 28, 28);
-    --color-white: #FFFFFF;
-  }
-  
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #F5F7FA;
-    display: flex;
-    flex: 1;
-  }
-  
-  .fullpage{
-    display: flex;
-    flex-direction: row;
-    /* flex: 1; */
-  }
-  
-  
-  
-  .main-content {
-    margin: 30px 30px 30px 130px;
-    position: relative;
-    top: 89.6px;
-    flex: 12;
-    padding: 10px;
-    /* Adjusts based on sidebar width */
-    min-height: calc(100vh - 89.6px);
-    overflow-y: auto; /* Enables vertical scrolling */
-    background-color: #dbe2f4;
-    /* transition: margin-left 0.3s, width 0.3s; */
-    transition: width 0.3s ease;
-    /* flex-grow: 1; */
-  }
-  
-  
-  
-  
-  .search-container {
-    margin: 20px 0;
-    display: flex;
-  }
-  
-  .search-bar {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #B0BEC5;
-    width: 100%;
-    max-width: 500px;
-    margin-bottom: 20px;
-  }
-  
-  .structure {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .search{
-    padding: 7px 10px;
-    border: none;
-    position: relative;
-    left: -45px;
-    background-color: transparent;
-  }
-  
- /* General Styles */
+
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
-  padding: 0;
-  background-color: #f9f9f9;
-  color: #333;
+  font-family: Arial, sans-serif;
+  background-color: #F5F7FA;
+  display: flex;
+  flex: 1;
+}
+
+.fullpage{
+  display: flex;
+  flex-direction: row;
+  /* flex: 1; */
+}
+
+
+
+.main-content {
+  margin: 30px 30px 30px 130px;
+  position: relative;
+  top: 89.6px;
+  flex: 12;
+  padding: 10px;
+  /* Adjusts based on sidebar width */
+  min-height: calc(100% - 89.6px);
+  overflow-y: auto; /* Enables vertical scrolling */
+  background-color: #dbe2f4;
+  /* transition: margin-left 0.3s, width 0.3s; */
+  transition: width 0.3s ease;
+  /* flex-grow: 1; */
+}
+
+
+
+
+.search-container {
+  margin: 20px 0;
+  display: flex;
+}
+
+.search-bar {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #B0BEC5;
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 20px;
+}
+
+.structure {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+/* General Styles */
+body {
+font-family: Arial, sans-serif;
+margin: 0;
+padding: 0;
+background-color: #f9f9f9;
+color: #333;
 }
 
 .ongoing-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 20px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+/* margin: 20px; */
 }
 
 .ongoing {
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #0056b3;
+font-size: 1.4rem;
+font-weight: bold;
+color: #0056b3;
 }
 
-.filter {
-  font-size: 1rem;
-}
 
-.filter label {
-  font-weight: bold;
-  margin-right: 10px;
-}
-
-.filter select {
-  padding: 5px 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1rem;
-}
-
-section.income-management {
-  background: #fff;
-  margin: 20px;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  height: 400px;
-  overflow-x: scroll;
-  scrollbar-width: none;
-  
-}
-
-/* Table Styles */
-.income-table {
-  width: 100%;
-  border-collapse: collapse;
-  
-}
-
-.income-table thead tr {
-  background-color: #001F4D;
-  color: #fff;
-}
-
-.income-table th,
-.income-table td {
-  text-align: left;
-  padding: 12px;
-  border-bottom: 1px solid #ddd;
-}
-
-.income-table tbody tr:nth-child(even) {
-  background-color: #f4f4f4;
-}
-
-.income-table tbody tr:hover {
-  background-color: #e9f5ff;
-}
-
-.status {
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-weight: bold;
-  text-transform: capitalize;
-}
-
-/* Status Colors */
-.status.success {
-  background-color: #d4edda;
-  color: #155724;
-}
-
-.status.pending {
-  background-color: #fff3cd;
-  color: #856404;
-}
-
-.status.canceled {
-  background-color: #f8d7da;
-  color: #721c24;
-}
-
-/* Links */
-a.view {
-  color: #0056b3;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-a.view:hover {
-  text-decoration: underline;
-}

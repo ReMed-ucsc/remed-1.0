@@ -9,9 +9,13 @@ class Order
 
         $orderModel = new MedicineOrder();
         $orderMedicineModel = new OrderView();
+        $orderCommentModel = new OrderComment();
+
         $order = $orderModel->getMedicineOrder($orderId);
         $orderMedicine = $orderMedicineModel->getOrderMedicines($orderId);
-        $this->view('pharmacy/orderView', ['order' => $order, 'medicineList' => $orderMedicine, 'viewOnly' => true]);
+        $orderComments = $orderCommentModel->getCommentsByOrder($orderId);
+
+        $this->view('pharmacy/orderView', ['order' => $order, 'medicineList' => $orderMedicine, 'comments' => $orderComments, 'viewOnly' => true]);
     }
 
     public function edit($orderId)
@@ -19,9 +23,13 @@ class Order
         $orderModel = new MedicineOrder();
         $orderMedicineModel = new OrderView();
         $medicineListModel = new OrderList();
+        $orderCommentModel = new OrderComment();
+
 
         $order = $orderModel->getMedicineOrder($orderId);
         $orderMedicine = $orderMedicineModel->getOrderMedicines($orderId);
+        $orderComments = $orderCommentModel->getCommentsByOrder($orderId);
+
 
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $productId = $_POST['productId'];
@@ -38,7 +46,7 @@ class Order
             redirect("order/edit/$orderId");
             exit;
         } else {
-            $this->view('pharmacy/orderView', ['order' => $order, 'medicineList' => $orderMedicine, 'viewOnly' => false]);
+            $this->view('pharmacy/orderView', ['order' => $order, 'medicineList' => $orderMedicine, 'comments' => $orderComments,  'viewOnly' => false]);
         }
     }
 

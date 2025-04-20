@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/Order-main.css">
   <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/navbar.css">
   <link rel="stylesheet" href="<?= ROOT ?>/assets/css/component/sidebar.css">
+  <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/table.css">
   <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -51,14 +52,15 @@
         <input type="text" placeholder="Search here" class="search-bar">
         <button class="search"><i class="icon ph-bold ph-magnifying-glass"></i>
         </button>
+        <div id="search-results" class="search-results"></div>
       </div>
 
       <div class="ongoing">Ongoing Orders</div>
 
-      <section class="order-management">
+      <section class="table-management">
 
 
-        <table class="order-table">
+        <table class="table">
           <thead>
             <tr>
               <th style="width: 7%;">Order ID</th>

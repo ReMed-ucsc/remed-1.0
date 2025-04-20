@@ -69,5 +69,31 @@ function toggleSidebar() {
     sidebar.classList.toggle('open');  // Toggle the 'open' class to show or hide sidebar
 }
 
-
+const ctx = document.getElementById('myPatientChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+      type: 'line', // Use 'line' for curved charts
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June'], // X-axis labels
+        datasets: [{
+          label: 'Sales',
+          data: [30, 50, 40, 60, 70, 90], // Data points
+          backgroundColor: 'rgba(108, 160, 220, 0.7)', // Area fill color
+          borderColor: 'rgba(108, 160, 220, 0.9)', // Line color
+          borderWidth: 2, // Line width
+          tension: 0.4, // Adds curve to the line
+          fill: true // Enables area coloring
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          x: { // X-axis customization
+            beginAtZero: true
+          },
+          y: { // Y-axis customization
+            beginAtZero: true
+          }
+        }
+      }
+    });
   

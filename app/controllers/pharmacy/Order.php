@@ -1,5 +1,7 @@
 <?php
 
+require_once BASE_PATH . '/api/controllers/utilis/DeliveryUtility.php';
+
 class Order
 {
     use Controller;
@@ -14,8 +16,10 @@ class Order
         $order = $orderModel->getMedicineOrder($orderId);
         $orderMedicine = $orderMedicineModel->getOrderMedicines($orderId);
         $orderComments = $orderCommentModel->getCommentsByOrder($orderId);
+        $stateList = $orderMedicineModel->getStatusOptions();
+      
+        $this->view('pharmacy/orderView', ['order' => $order, 'medicineList' => $orderMedicine, 'statusList' => $stateList, 'comments' => $orderComments, 'viewOnly' => true]);
 
-        $this->view('pharmacy/orderView', ['order' => $order, 'medicineList' => $orderMedicine, 'comments' => $orderComments, 'viewOnly' => true]);
     }
 
     public function edit($orderId)
@@ -29,6 +33,7 @@ class Order
         $order = $orderModel->getMedicineOrder($orderId);
         $orderMedicine = $orderMedicineModel->getOrderMedicines($orderId);
         $orderComments = $orderCommentModel->getCommentsByOrder($orderId);
+        $stateList = $orderMedicineModel->getStatusOptions();
 
 
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -46,7 +51,8 @@ class Order
             redirect("order/edit/$orderId");
             exit;
         } else {
-            $this->view('pharmacy/orderView', ['order' => $order, 'medicineList' => $orderMedicine, 'comments' => $orderComments,  'viewOnly' => false]);
+
+            $this->view('pharmacy/orderView', ['order' => $order, 'medicineList' => $orderMedicine, 'statusList' => $stateList, 'comments' => $orderComments, 'viewOnly' => false]);
         }
     }
 
@@ -101,5 +107,31 @@ class Order
         } else {
             $this->view('pharmacy/orderView', ['order' => $order, 'medicineList' => $orderMedicine, 'viewOnly' => true]);
         }
+    }
+
+    public function confirmOrder($orderId)
+    {
+        $orderModel = new MedicineOrder();
+        $utilityModel = new DeliveryUility();
+
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $orderId = $_POST['orderId'];
+            $status = 'W';
+
+            $status = $orderModel->getStatusName('Q');
+
+            $orderModel->updateOrderStatus($orderId, $status);
+
+            //add the logic to only execute if the order is to be delivered
+            //check if the order is store pickup
+            $utilityModel->sendDetailstoDriver($orderId);
+
+            //redirect to all orderes viewwing page 
+            //change to appropiate redirection
+            redirect("orderMain");
+            exit;
+        }
+
+        redirect("orderMain");
     }
 }

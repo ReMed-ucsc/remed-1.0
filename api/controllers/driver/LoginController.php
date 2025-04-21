@@ -24,6 +24,7 @@ class LoginController
             $user = $userModel->getDriverByEmail($email);
 
             if ($user) {
+                //show($user);
                 // Access password as an object property
                 if (password_verify($password, $user->password)) {
                     $authToken = hash('sha384', microtime() . uniqid() . bin2hex(random_bytes(10)));
@@ -33,18 +34,22 @@ class LoginController
                     $response['user']['name'] = $user->driverName;
                     $response['user']['email'] = $email;
                     $response['user']['auth_token'] = $authToken;
+                    $response['user']['driverId'] = $user->driverId;
 
                     $result->setErrorStatus(false);
                     $result->setMessage("Login successful");
                 } else {
+                    http_response_code(401);
                     $result->setErrorStatus(true);
                     $result->setMessage("Invalid credentials");
                 }
             } else {
+                http_response_code(404);
                 $result->setErrorStatus(true);
                 $result->setMessage("User not found");
             }
         } else {
+            http_response_code(400);
             $result->setErrorStatus(true);
             $result->setMessage("Email and password are required");
         }

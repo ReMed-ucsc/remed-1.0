@@ -297,7 +297,7 @@ trait Model
 
         $data[$id_column] = $id;
 
-        // show($query);
+        //show($query);
         $this->query($query, $data);
         return false;
     }
@@ -368,10 +368,15 @@ trait Model
         $keys = array_keys($data);
         $keys_not = array_keys($data_not);
 
+        //print_r($columns);
+
         if (is_array($columns)) {
+            $columns = array_map(function ($col) {
+                return trim($col); // Avoid any weird whitespace issues
+            }, $columns);
             $columns = implode(', ', $columns);
-        } else if (empty($columns)) {
-            $columns = '*'; // Default to all columns
+        } elseif (empty($columns)) {
+            $columns = '*';
         }
 
         $query = "SELECT $columns FROM $this->table JOIN $table ON $joinCondition WHERE ";

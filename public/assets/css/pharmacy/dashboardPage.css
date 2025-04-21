@@ -19,7 +19,7 @@ body {
   top: 89.6px;
   flex: 12;
   padding: 10px;
-  min-height: calc(100vh - 89.6px);
+  min-height: calc(100% - 89.6px);
   overflow-y: auto; 
   background-color: #dbe2f4;
   transition: width 0.3s ease;
@@ -222,7 +222,7 @@ body {
   border-radius: 15px;
   padding: 40px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  width: 600px;
+  width: 545px;
   height: 400px;
   display: flex;
   flex-direction: column;

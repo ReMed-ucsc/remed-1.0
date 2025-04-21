@@ -97,3 +97,85 @@ const ctx = document.getElementById('myPatientChart').getContext('2d');
       }
     });
   
+
+    //new part from here
+
+    // Revenue Trend - Line Chart
+const ctxLine = document.getElementById('myLineChart').getContext('2d');
+const myLineChart = new Chart(ctxLine, {
+  type: 'line',
+  data: {
+    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+    datasets: [{
+      label: 'Revenue',
+      data: [50000, 70000, 65000, 80000],
+      backgroundColor: 'rgba(3, 39, 93, 0.2)',
+      borderColor: 'rgb(3, 39, 93)',
+      borderWidth: 2,
+      tension: 0.4,
+      fill: true
+    }]
+  },
+  options: {
+    responsive: true,
+    scales: {
+      x: {
+        beginAtZero: true
+      },
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+
+// Sales by Category - Doughnut Chart
+const ctxDoughnut = document.getElementById('myDoughnutChart').getContext('2d');
+
+// Solid-glow gradient slices (strong contrast, no alpha)
+const gradient1 = ctxDoughnut.createLinearGradient(0, 0, 200, 200);
+gradient1.addColorStop(0, '#00796B'); // darker green
+gradient1.addColorStop(1, '#26A69A'); // lighter green
+
+const gradient2 = ctxDoughnut.createLinearGradient(0, 0, 200, 200);
+gradient2.addColorStop(0, '#1A237E'); // darker blue
+gradient2.addColorStop(1, '#3F51B5'); // lighter blue
+
+const gradient3 = ctxDoughnut.createLinearGradient(0, 0, 200, 200);
+gradient3.addColorStop(0, '#B71C1C'); // dark red
+gradient3.addColorStop(1, '#E53935'); // bright red
+
+const gradient4 = ctxDoughnut.createLinearGradient(0, 0, 200, 200);
+gradient4.addColorStop(0, '#FF6F00'); // dark amber
+gradient4.addColorStop(1, '#FFC107'); // bright amber
+
+const myDoughnutChart = new Chart(ctxDoughnut, {
+  type: 'doughnut',
+  data: {
+    labels: ['Painkillers', 'Antibiotics', 'Vitamins', 'Others'],
+    datasets: [{
+      label: 'Sales by Category',
+      data: [35, 25, 20, 20],
+      backgroundColor: [gradient1, gradient2, gradient3, gradient4],
+      borderColor: '#f0f0f0', // subtle inner glow-like separation
+      borderWidth: 2,
+      hoverOffset: 10
+    }]
+  },
+  options: {
+    responsive: true,
+    cutout: '60%',
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          color: '#333',
+          font: {
+            size: 12,
+            weight: 'bold'
+          }
+        }
+      }
+    }
+  }
+});

@@ -24,22 +24,49 @@ class GetDeliveryController
         }
 
         $orderId = $data['orderId'];
+        $token = $data['auth_token'];
+        $driverId = $data['driverId'];
 
-        $deliveryModel = new DeliveryView();
-
-        $delivery = $deliveryModel->getDeliveryInfo($orderId);
-
-        //echo json_encode($delivery);
-
-        if (!$delivery) {
-            $response['error'] = true;
-            $response['message'] = 'No order found';
+        if (empty($orderId) || empty($token) || empty($driverId)) {
+            http_response_code(400);
+            $result->setErrorStatus(true);
+            $result->setMessage("Order ID and token are required");
         } else {
-            if ($delivery['status'] == 'P') {
-                $response['data'] = $delivery;
+
+            $driverModel = new Driver();
+            $tokenStatus = $driverModel->verifyToken($driverId, $token);
+
+            if (!$tokenStatus) {
+                http_response_code(401);
+                $result->setErrorStatus(true);
+                $result->setMessage("Invalid token");
             } else {
-                $response['error'] = true;
-                $response['message'] = 'Order already Confirmed';
+                $deliveryModel = new DeliveryView();
+
+                $delivery = $deliveryModel->getDeliveryInfo($orderId, $driverId);
+
+                //echo json_encode($delivery);
+
+                if (!$delivery) {
+                    $response['error'] = true;
+                    $response['message'] = 'No order found';
+                } else {
+                    if ($delivery['status'] == 'Q') {
+
+                        $delivery['pharmacyLatitude'] = number_format($delivery['pharmacyLatitude'], 6, '.', '');
+                        $delivery['pharmacyLongitude'] = number_format($delivery['pharmacyLongitude'], 6, '.', '');
+                        $delivery['destinationLatitude'] = number_format($delivery['destinationLatitude'], 6, '.', '');
+                        $delivery['destinationLongitude'] = number_format($delivery['destinationLongitude'], 6, '.', '');
+
+                        $response['data'] = $delivery;
+                        $result->setErrorStatus(false);
+                        $result->setMessage("Order found");
+                    } else {
+                        $result->setErrorStatus(true);
+                        $response['error'] = true;
+                        $response['message'] = 'Order already Confirmed';
+                    }
+                }
             }
         }
 

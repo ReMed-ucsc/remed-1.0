@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ReMed Dashboard</title>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/OrderCreate.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/incomeView.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/navbar.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/table.css">
@@ -29,7 +28,7 @@
     <div class="fullpage">
         <div class="main-content">
             <div class="structure">
-                <div class="card">
+                <div class="search-bar">
                     <form method="GET" style="margin: 20px 0;">
                         <div>
                             <label for="month">Month:</label>

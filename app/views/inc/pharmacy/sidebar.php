@@ -62,8 +62,7 @@ $pharmacyName = isset($_SESSION['pharmacy_name']) ? $_SESSION['pharmacy_name'] :
             </a>
           </li>
           <li>
-
-            <a href="<?= ROOT ?>/income">
+            <a href="<?= ROOT ?>/IncomeView">
               <i class="icon ph-bold ph-currency-dollar"></i>
               <span class="text">Income</span>
             </a>

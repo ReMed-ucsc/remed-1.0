@@ -51,6 +51,8 @@ class IncomeView
             'year' => $year
         ];
 
+        //show($data);
+
         $this->view('pharmacy/incomeView', $data);
     }
 }

@@ -6,15 +6,25 @@ class PendingPharmacy
     public function index()
     {
         $pharmacy = new Pharmacy;
-        $pharmacyModel = $pharmacy->getPharmacies("PENDING");
+        $driver = new Driver();
+
+        $MsgDriver = $driver->notificationDriver('pending');
+        $Msg = $pharmacy->notification('pending');
+        $pharmacyModel = $pharmacy->getPharmacies("pending");
         $data = [
-            'pharmacy' => $pharmacyModel
+            'pharmacy' => $pharmacyModel,
+            'notification' => $Msg,
+            'notificationDriver' => $MsgDriver
         ];
         $this->view('admin/pendingPharmacy', $data);
     }
     public function onbordPharmacy($id)
     {
         $pharmacyModel = new Pharmacy();
+        $driver = new Driver();
+
+        $MsgDriver = $driver->notificationDriver('pending');
+        $Msg = $pharmacyModel->notification('pending');
         $pharmacy = $pharmacyModel->getPharmacyById($id);
 
         if (!$pharmacy) {
@@ -23,7 +33,9 @@ class PendingPharmacy
         }
 
         $data = [
-            'pharmacy' => $pharmacy
+            'pharmacy' => $pharmacy,
+            'notification' => $Msg,
+            'notificationDriver' => $MsgDriver
         ];
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -35,9 +47,11 @@ class PendingPharmacy
                 'email' => $_POST['email'],
                 'address' => $_POST['address'],
                 'status' => 'APPROVED',
+                'notification' => $Msg,
+                'notificationDriver' => $MsgDriver,
                 'document' => $_FILES['document'] ?? null
             ];
-            show($data);
+            // show($data);
             // File upload handling
             if (isset($_FILES['document']) && $_FILES['document']['error'] == UPLOAD_ERR_OK) {
                 $uploadDir = BASE_PATH . '/uploads/license/';

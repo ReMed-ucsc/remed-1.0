@@ -8,15 +8,24 @@ class Profile
         $id =$this-> getSession("id");
         $username = $this->getSession("username");
         $email = $this->getSession("email");
+        $contactNo = $this->getSession("contactNo");
 
         $adminMOdel = new Admin();
+        $msg = new Pharmacy();
+        $driver = new Driver();
+
+        $MsgDriver = $driver->notificationDriver('pending');
+        $Msg = $msg->notification('pending');
         $admin= $adminMOdel->get_admin();
         
         $data=[
             'id'=> $id,
             'username'=> $username,
             'email'=> $email,
-            'admin'=> $admin
+            'admin'=> $admin,
+            'contactNo' => $contactNo,
+            'notification'=> $Msg,
+            'notificationDriver'=> $MsgDriver
         ];
 
 
@@ -26,6 +35,11 @@ class Profile
         $this->protectRoute();
 
         $adminModel = new Admin();
+        $msg = new Pharmacy();
+        $driver = new Driver();
+
+        $MsgDriver = $driver->notificationDriver('pending');
+        $Msg = $msg->notification('pending');
         $admin = $adminModel->first(['id' => $id]);
 
         if (!$admin) {
@@ -33,17 +47,23 @@ class Profile
             exit();
         }
 
-        $data = ['admin' => $admin];
+        $data = [
+            'admin' => $admin,
+            'notification'=> $Msg,
+            'notificationDriver'=> $MsgDriver
+        ];
 
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $data = [
                 'username' => $_POST['username'],
-                'email' => $_POST['email']
+                'email' => $_POST['email'],
+                'contactNo' => $_POST['contactNo']
             ];
 
             if (!empty($_POST['password'])) {
                 $data['password'] = $_POST['password'];
             }
+          
 
             if ($adminModel->validate($data)) {
                 if (!empty($data['password'])) {

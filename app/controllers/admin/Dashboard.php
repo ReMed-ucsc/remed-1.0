@@ -6,26 +6,37 @@ class Dashboard
 
     public function index()
     {
-        // Protect the route
-        // $this->protectRoute();
+
 
         // Get session data
         $AdminID = $this->getSession('id');
         $adminEmail = $this->getSession('email');
         $authToken = $this->getSession('auth_token');
+
         $pharmacy = new pharmacy();
-        $lastId = $pharmacy->getlastId();
-         // Debugging step
-        // die();
+        $approvedPharmacy = $pharmacy->getlastId("APPROVED");
+        $pendingPharmacy=$pharmacy->getlastId("pending");
+
+        $driver = new Driver();
+        $approvedDrivers = $driver->getlastId("APPROVED");
+        $pendingDrivers=$driver->getlastId("pending");
+
 
         // Get all pharmacies
         $AdminModel = new Admin();
-        $admin = $AdminModel->findAll();
+        
 
+        $Msg = $pharmacy->notification('pending');
+        $MsgDriver = $driver->notificationDriver('pending');
+        $admin = $AdminModel->findAll();
+        
         if ($admin === false) {
             $data['error_message'] = 'Error loading pharmacy data. Please try again later.';
         } else {
-            $data['admin'] = $admin;
+            $data=[
+                'admin'=>$admin,
+                'notification'=>$Msg,
+                'notificationDriver'=> $MsgDriver            ];
         }
         // Pass session data to the view
         $data = [
@@ -33,7 +44,12 @@ class Dashboard
             'id' => $AdminID,
             'authToken' => $authToken,
             'admin' => $admin,
-            'last_Id' => isset($lastId[0]->last_id) ? $lastId[0]->last_id : null
+            'approved_pharmacy' => $approvedPharmacy,
+            'pending_pharmacy'=>$pendingPharmacy,
+            'approved_drivers' => $approvedDrivers,
+            'pending_drivers' => $pendingDrivers,
+            'notification'=>$Msg,
+            'notificationDriver'=> $MsgDriver   
         ];
 
         $this->unsetSession('error_message');
@@ -41,5 +57,6 @@ class Dashboard
 
         $this->view('admin/dashboard', $data);
     }
+   
     // add other methods like edit, update, delete, etc.
 }

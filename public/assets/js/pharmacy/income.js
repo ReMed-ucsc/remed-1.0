@@ -1,4 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const incomeCard = document.querySelector(".black-card");
+    const expensesCard = document.querySelector(".green-card");
+    const incomeTable = document.querySelector(".income-table");
+    const expensesTable = document.querySelector(".expenses-table");
+
+    expensesCard.addEventListener("click", function () {
+        incomeTable.style.display = "none";
+        expensesTable.style.display = "block";
+    })
+
+    incomeCard.addEventListener("click", function () {
+        incomeTable.style.display = "block";
+        expensesTable.style.display = "none";
+    })
+
     animateIncome();
     animateExpenses();
 });

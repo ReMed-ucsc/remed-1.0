@@ -29,6 +29,10 @@ loadEnv(__DIR__ . '/../../.env');
 
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
 
+if (str_contains($_SERVER['SERVER_NAME'], 'ngrok-free.app')) {
+    $protocol = 'https';
+}
+
 if ($_SERVER['SERVER_NAME'] == 'localhost') {
     define('ROOT', $protocol . '://localhost/remed-1.0/public');
 } else {

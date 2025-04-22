@@ -8,19 +8,22 @@
 ?>
 
 
-<!DOCTYPE html>
+
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ReMed Dashboard</title>
-  <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/OrderView.css">
+  <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/orderView.css">
   <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/navbar.css">
   <link rel="stylesheet" href="<?= ROOT ?>/assets/css/component/sidebar.css">
   <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+  <script>
+    const statusOptions = <?= json_encode($statusOptions) ?>;
+  </script>
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -175,11 +178,11 @@
           <label for="status">Order Status:</label>
           <div class="selectWrapper">
             <select id="status" class="statusSelect">
-              <option value="waiting">Waiting</option>
-              <option value="processing">Processing</option>
-              <option value="shipped">Shipped</option>
-              <option value="delivered">Delivered</option>
-              <option value="cancelled">Cancelled</option>
+              <?php foreach ($statusList as $key => $value): ?>
+                <option value="<?= htmlspecialchars($key) ?>" <?= ($key == $order->status) ? 'selected' : '' ?>>
+                  <?= htmlspecialchars($value) ?>
+                </option>
+              <?php endforeach; ?>
             </select>
           </div>
         </div>
@@ -236,7 +239,22 @@
             </a>
           </button>
           </form>
-          <button class="delete-order">Confirm Order</button>
+          <button class="delete-order" onclick=handleOrderConfirm()>
+            Confirm Order
+          </button>
+
+          <form id="confirmForm" method="POST" action="<?= ROOT ?>/Order/confirmOrder/<?= $order->OrderID ?>" style="display:none;">
+            <input type="hidden" name="orderId" , value="<?= $order->OrderID ?>">
+          </form>
+
+          <script>
+            function handleOrderConfirm() {
+              if (confirm("Are you sure you want to confirm the order")) {
+                document.getElementById("confirmForm").submit();
+              }
+            }
+          </script>
+
         <?php } else {  ?>
           <button class="delete-order">
             <a href="<?= ROOT ?>/order/<?= $order->OrderID ?>" style="text-decoration: none; color:white;">
@@ -264,13 +282,6 @@
     <script src="<?= ROOT ?>/assets/js/pharmacy/orderCreate.js"></script>
     <script src="<?= ROOT ?>/assets/js/pharmacy/orderMain.js"></script>
     <script src="<?= ROOT ?>/assets/js/pharmacy/orderView.js"></script>
-
-
-
-
-
-
-
 </body>
 
 </html>

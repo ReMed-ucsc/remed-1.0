@@ -27,10 +27,12 @@ function loadEnv($path)
 // Load environment variables from .env file
 loadEnv(__DIR__ . '/../../.env');
 
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
+
 if ($_SERVER['SERVER_NAME'] == 'localhost') {
-    define('ROOT', 'http://localhost/remed-1.0/public');
+    define('ROOT', $protocol . '://localhost/remed-1.0/public');
 } else {
-    define('ROOT', 'http://example.com');
+    define('ROOT', $protocol . '://' . $_SERVER['SERVER_NAME'] . '/remed-1.0/public');
 }
 
 define('DBHOST', getenv('DBHOST'));

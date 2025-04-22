@@ -7,7 +7,8 @@ class Driver extends User
     protected $table = 'driver';
 
     protected $allowedColumns = [
-        'DriverID',
+        'driverID',
+        'vehicleLicneseNo',
         'driverName',
         'email',
         'password',
@@ -18,7 +19,9 @@ class Driver extends User
         'telNo',
         'NIC',
         'deliveryTime',
-        'status'
+        'status',
+        'otp',
+        'otpExpireTime',
     ];
 
 
@@ -28,7 +31,7 @@ class Driver extends User
 
         if (empty($data['driverName'])) {
             $this->errors['driverName'] = 'name is required';
-        } 
+        }
         if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             $$this->errors['email'] = 'Invalid email address';
         }
@@ -77,9 +80,19 @@ class Driver extends User
 
         return $this->first($data, []);
     }
-    public function getDrivers($status){
+    public function getDrivers($status)
+    {
         $sql = "Select * FROM $this->table WHERE status= :status";
-        return $this->query($sql,['status'=>$status]);
+        return $this->query($sql, ['status' => $status]);
+    }
+
+    public function resetPassword($driverID, $password)
+    {
+        $data = [
+            'password' => password_hash($password, PASSWORD_DEFAULT)
+        ];
+
+        return $this->update($driverID, $data, 'DriverID');
     }
 
     // public function getLastInsertedId()
@@ -92,5 +105,29 @@ class Driver extends User
     //     // Return the last ID or 0 if the table is empty
     //     return $result[0]['last_id'] ?? 0;
     // }
-}
 
+    public function otpAdd($driverID, $otp, $expireTime)
+    {
+        $data = [
+            'otp' => $otp,
+            'otpExpireTime' => $expireTime
+        ];
+
+        return $this->update($driverID, $data, 'DriverID');
+    }
+
+    public function verifyToken($driverID, $token)
+    {
+        $query = "SELECT * FROM driver WHERE driverID = :driverId";
+        $result = $this->query(($query), ['driverId' => $driverID]);
+
+        if ($result) {
+            $result = $result[0];
+            if ($result->token == $token) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}

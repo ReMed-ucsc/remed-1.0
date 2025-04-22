@@ -84,7 +84,8 @@
                 </div>
 
                 <div class="middle">
-                    <section class="table-management">
+                    <section class="table-management income-table">
+                        <h3>Income</h3>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -110,6 +111,36 @@
                                             <h2>No data to show</h2>
                                         </td>
                                     </tr>
+                                <?php endif ?>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <section class="table-management expenses-table" style="display: none;">
+                        <h3>Expenses</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 20%;">Stock ID</th>
+                                    <th style="width: 20%">Inventory ID</th>
+                                    <th style="width: 30%;">Stock Quantity</th>
+                                    <th style="width: 30%;">Purchase Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (!empty($expenses)): ?>
+                                    <?php foreach ($expenses as $expense): ?>
+                                        <tr>
+                                            <td><?= htmlspecialchars($expense->stockId) ?></td>
+                                            <td><?= htmlspecialchars($expense->InventoryId) ?></td>
+                                            <td><?= htmlspecialchars($expense->stockQuantity) ?></td>
+                                            <td><?= htmlspecialchars($expense->purchaseCost) ?></td>
+                                        </tr>
+                                    <?php endforeach ?>
+                                <?php else: ?>
+                                    <td colspan="4">
+                                        <h4>No data to show</h4>
+                                    </td>
                                 <?php endif ?>
                             </tbody>
                         </table>

@@ -11,7 +11,7 @@ class StockDataView
     public function getMedicineStockPurchaseDetails($pharmacyId, $month, $year)
     {
         $query = "
-            SELECT stockPurchase.purchaseCost, stockPurchase.stockQuantity, stockPurchase.InventoryId
+            SELECT stockPurchase.purchaseCost, stockPurchase.stockQuantity, stockPurchase.InventoryId, stockPurchase.stockId
             FROM stockPurchase
             JOIN drugInventory ON stockPurchase.InventoryID = drugInventory.InventoryId
             JOIN pharmacy ON drugInventory.PharmacyID = pharmacy.PharmacyID

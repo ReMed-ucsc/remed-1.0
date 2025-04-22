@@ -3,6 +3,7 @@
 class InventoryView
 {
     use Controller;
+
     public function index($inventoryId)
     {
         $inventoryModel = new StockInventoryDetails();
@@ -23,8 +24,21 @@ class InventoryView
 
     public function edit($inventoryId)
     {
-        $inventoryModel = new StockInventoryDetails();
-        $InventoryMedicineModel = new OrderView();
+        $drug = new DrugInventory();
+
+        $result = $drug->updateInventory(
+            $inventoryId,
+            $_POST['thresholdLimit'],
+            $_POST['storageLocation'],
+            $_POST['storageConditions'],
+            $_POST['sellingPrice']
+        );
+
+        if ($result) {
+            redirect('inventoryView/' . $inventoryId);
+        } else {
+            redirect('inventoryView/' . $inventoryId . '/fail');
+        }
     }
 
     // add other methods like edit, update, delete, etc.

@@ -47,46 +47,52 @@
       <div class="order-body">
 
 
+        <form id="inventoryForm" method="POST" action="<?= ROOT ?>/inventoryView/edit/<?= $inventory->InventoryId ?>">
+          <div class="inventoryDetails size1">
+            <div class="left">
+              <ul>
+                <li>Medicine Name</li>
+                <li>Brand Name</li>
+                <li>Generic Name</li>
+                <li>Category</li>
+                <li>Batch No</li>
+                <li>Stock Quantity</li>
+                <li>Reorder Level</li>
+                <li>Storage Location</li>
+                <li>Manufacturing Date</li>
+                <li>Expiry Date</li>
+                <li>Storage Conditions</li>
+                <li>Purchase Price</li>
+                <li>Selling Price</li>
+              </ul>
+            </div>
 
-        <div class="inventoryDetails size1">
-          <div class="left">
-            <ul>
-              <li>Medicine Name</li>
-              <li>Brand Name</li>
-              <li>Generic Name</li>
-              <li>Category</li>
-              <li>Batch No</li>
-              <li>Stock Quantity</li>
-              <li>Reorder Level</li>
-              <li>Storage Location</li>
-              <li>Manufacturing Date</li>
-              <li>Expiry Date</li>
-              <li>Storage Conditions</li>
-              <li>Purchase Price</li>
-              <li>Selling Price</li>
-            </ul>
+            <div class="right">
+              <ul>
+
+                <li><input type="text" name="productName" placeholder="Auto" value="<?= htmlspecialchars($inventory->ProductName) ?>" disabled></li>
+                <li><input type="text" name="manufacturer" placeholder="Auto" value="<?= htmlspecialchars($inventory->Manufacturer) ?>" disabled></li>
+                <li><input type="text" name="genericName" placeholder="Auto" value="<?= htmlspecialchars($inventory->genericName) ?>" disabled></li>
+                <li><input type="text" name="category" placeholder="Auto" value="<?= htmlspecialchars($inventory->category) ?>" disabled></li>
+                <li><input type="text" name="batchNumber" value="<?= htmlspecialchars($inventory->batchNumber) ?>" placeholder="Auto" disabled></li>
+                <li><input type="number" name="availableCount" value="<?= htmlspecialchars($inventory->availableCount) ?>" placeholder="" disabled></li>
+                <li><input type="text" name="thresholdLimit" value="<?= htmlspecialchars($inventory->thresholdLimit) ?>" placeholder="20"></li>
+                <li><input type="text" name="storageLocation" value="<?= htmlspecialchars($inventory->storageLocation) ?>" placeholder=""></li>
+                <li><input type="date" name="manufacturingDate" value="<?= date('Y-m-d', strtotime($inventory->manufacturingDate)) ?>" disabled></li>
+                <li><input type="date" name="expiryDate" value="<?= date('Y-m-d', strtotime($inventory->expiryDate)) ?>" disabled></li>
+                <li><input type="text" name="storageConditions" value="<?= htmlspecialchars($inventory->storageConditions) ?>" placeholder="Optional"></li>
+                <?php
+                $unitCost = (($inventory->availableCount) - ($inventory->LastStockQuantity)) > 0
+                  ? $inventory->purchaseCost / ($inventory->availableCount - $inventory->LastStockQuantity)
+                  : 0;
+                ?>
+                <li><input type="number" name="purchaseCost" value="<?= htmlspecialchars($unitCost) ?>" disabled></li>
+                <li><input type="number" name="sellingPrice" value="<?= htmlspecialchars($inventory->SellingPrice) ?>"></li>
+
+              </ul>
+            </div>
           </div>
-
-          <div class="right">
-            <ul>
-
-              <li><input type="text" placeholder="Auto" value="<?= htmlspecialchars($inventory->ProductName) ?>" disabled></li>
-              <li><input type="text" placeholder="Auto" value="<?= htmlspecialchars($inventory->Manufacturer) ?>" disabled></li>
-              <li><input type="text" placeholder="Auto" value="<?= htmlspecialchars($inventory->genericName) ?>" disabled></li>
-              <li><input type="text" placeholder="Auto" value="<?= htmlspecialchars($inventory->category) ?>" disabled></li>
-              <li><input type="text" value="<?= htmlspecialchars($inventory->batchNumber) ?>" placeholder=" Auto" disabled></li>
-              <li><input type="number" value="<?= htmlspecialchars($inventory->availableCount) ?>" placeholder=" Enter quantity"></li>
-              <li><input type="text" value="<?= htmlspecialchars($inventory->thresholdLimit) ?>" placeholder="Suggest"></li>
-              <li><input type="text" value="<?= htmlspecialchars($inventory->storageLocation) ?>" placeholder="Search and Select"></li>
-              <li><input type="date" value="<?= date('Y-m-d', strtotime($inventory->manufacturingDate)) ?>"></li>
-              <li><input type="date" value="<?= date('Y-m-d', strtotime($inventory->expiryDate)) ?>"></li>
-              <li><input type="text" value="<?= htmlspecialchars($inventory->storageConditions) ?>" placeholder="Optional" disabled></li>
-              <li><input type="number" value="<?= htmlspecialchars($inventory->purchaseCost) ?>" disabled></li>
-              <li><input type="number" value="<?= htmlspecialchars($inventory->SellingPrice) ?>"></li>
-
-            </ul>
-          </div>
-        </div>
+          <!-- </form> -->
       </div>
     </div>
 
@@ -99,30 +105,49 @@
             <label>Batch ID</label>
             <input type="text" placeholder="Value" value="<?= htmlspecialchars($inventory->batchNumber) ?>" disabled>
           </div>
-
         </div>
         <div class="chat-messages">
           <div class="display-area" id="displayArea">
-            <!-- <img src="<?= ROOT ?>/assets/images/prescription2.jpg" alt=""> -->
-            <div class="upload">
-              <label for="fileUpload" class="customUpload">Upload Invoice</label>
-              <input type="file" id="fileUpload">
-            </div>
-
-
+            <h3>Stock Purchase History</h3>
+            <table class="stock-history-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <!-- <th>Medicine</th>
+                  <th>Quantity</th>
+                  <th>Unit Price</th>
+                  <th>Total</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <?php if (!empty($history)): ?>
+                  <?php foreach ($history as $row): ?>
+                    <tr>
+                      <td><?= htmlspecialchars($row->purchaseDate) ?></td>
+                      <!-- <td><?= htmlspecialchars($row->medicineName) ?></td>
+                      <td><?= htmlspecialchars($row->quantity) ?></td>
+                      <td><?= htmlspecialchars($row->unitPrice) ?></td>
+                      <td><?= htmlspecialchars($row->total) ?></td> -->
+                    </tr>
+                  <?php endforeach; ?>
+                <?php else: ?>
+                  <tr>
+                    <td colspan="1">No purchase history found.</td>
+                  </tr>
+                <?php endif; ?>
+              </tbody>
+            </table>
           </div>
         </div>
+
       </div>
       <div class="submit-section">
-
-
-        <button class="proceed">
-          <a href="<?= ROOT ?>/order/edit" style="text-decoration: none; color:black;">
-            Edit
+        <button type="submit" form="inventoryForm" class="proceed">
+          <a href="<?= ROOT ?>/inventoryView" style="text-decoration: none; color:black;">
+            Update
           </a>
         </button>
-
-
+        </form>
       </div>
     </div>
     <!-- </div> -->

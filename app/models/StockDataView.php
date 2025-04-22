@@ -53,9 +53,15 @@ class StockDataView
         return $result;
     }
 
-    public function getPurchaseHistory()
+    public function getPurchaseHistory($inventoryID)
     {
-        $data = "SELECT purchaseDate FROM stockPurchase ORDER BY purchaseDate DESC";
-        return $this->query($data);
+        $data = "SELECT purchaseDate FROM stockPurchase WHERE inventoryID = ? ORDER BY purchaseDate DESC";
+        return $this->query($data, [$inventoryID]);
+    }
+
+    public function getStockDetails($inventoryID)
+    {
+        $data = "SELECT * FROM stockPurchase WHERE inventoryID = ?";
+        return $this->query($data, [$inventoryID]);
     }
 }

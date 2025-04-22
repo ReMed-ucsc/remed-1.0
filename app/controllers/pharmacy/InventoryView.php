@@ -7,20 +7,24 @@ class InventoryView
     public function index($inventoryId)
     {
         $inventoryModel = new StockInventoryDetails();
+        $stock = new StockDataView();
+
         $inventory = $inventoryModel->getMedicineInventory($inventoryId);
+        $inventoryList = $inventoryModel->getInventoryDetails($inventoryId);
+        $historyList = $stock->getPurchaseHistory($inventoryId);
 
         //pass the data to the view
-        $this->View('pharmacy/inventoryView', ['InventoryId' => $inventoryId, 'inventory' => $inventory]);
+        $this->View('pharmacy/inventoryView', ['InventoryId' => $inventoryId, 'inventory' => $inventory, 'inventoryList' => $inventoryList, 'historyList' => $historyList]);
     }
 
-    public function read($inventoryId)
-    {
-        $inventoryModel = new StockInventoryDetails();
-        $inventory = $inventoryModel->getMedicineInventory($inventoryId);
+    // public function read($inventoryId)
+    // {
+    //     $inventoryModel = new StockInventoryDetails();
+    //     $inventory = $inventoryModel->getMedicineInventory($inventoryId);
 
-        //pass the data to the view
-        $this->View('pharmacy/inventoryView', ['inventoryID' => $inventoryId, 'inventory' => $inventory, 'viewOnly' => true]);
-    }
+    //     //pass the data to the view
+    //     $this->View('pharmacy/inventoryView', ['inventoryID' => $inventoryId, 'inventory' => $inventory, 'viewOnly' => true]);
+    // }
 
     public function edit($inventoryId)
     {

@@ -102,41 +102,29 @@
       <div class="chat-box">
         <div class="id">
           <div class="input-group">
-            <label>Batch ID</label>
-            <input type="text" placeholder="Value" value="<?= htmlspecialchars($inventory->batchNumber) ?>" disabled>
+            <label>Inventory ID</label>
+            <input type="text" placeholder="Value" value="<?= htmlspecialchars($inventory->InventoryId) ?>" disabled>
           </div>
         </div>
         <div class="chat-messages">
           <div class="display-area" id="displayArea">
             <h3>Stock Purchase History</h3>
-            <table class="stock-history-table">
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <!-- <th>Medicine</th>
-                  <th>Quantity</th>
-                  <th>Unit Price</th>
-                  <th>Total</th> -->
-                </tr>
-              </thead>
-              <tbody>
-                <?php if (!empty($history)): ?>
-                  <?php foreach ($history as $row): ?>
-                    <tr>
-                      <td><?= htmlspecialchars($row->purchaseDate) ?></td>
-                      <!-- <td><?= htmlspecialchars($row->medicineName) ?></td>
-                      <td><?= htmlspecialchars($row->quantity) ?></td>
-                      <td><?= htmlspecialchars($row->unitPrice) ?></td>
-                      <td><?= htmlspecialchars($row->total) ?></td> -->
-                    </tr>
-                  <?php endforeach; ?>
-                <?php else: ?>
-                  <tr>
-                    <td colspan="1">No purchase history found.</td>
-                  </tr>
-                <?php endif; ?>
-              </tbody>
-            </table>
+            <div class="stock-history">
+              <?php if (!empty($historyList)): ?>
+                <?php foreach ($historyList as $row): ?>
+                  <!-- <pre><?php print_r($List); ?></pre> -->
+
+
+                  <p><?= htmlspecialchars($row->purchaseDate) ?></p>
+
+
+                <?php endforeach; ?>
+              <?php else: ?>
+
+                No purchase history found.
+
+              <?php endif; ?>
+            </div>
           </div>
         </div>
 

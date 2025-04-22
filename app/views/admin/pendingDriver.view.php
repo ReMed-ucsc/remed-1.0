@@ -9,18 +9,22 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
 <body>
     <!-- Search Box Form -->
     <div class="search-container">
-        <input type="text" id="searchInput" class="search-box" placeholder="Search here...">
-        <img src="<?= ROOT ?>/assets/images/search.png" alt="icon">
+        <form id="search-form">
+            <input type="text" id="searchInput" name="search" class="search-box" placeholder="Search here..." value="<?php if (isset($_GET['search'])) {echo htmlspecialchars($_GET['search']);} ?>">
+            <button type="submit" class="search-button" onclick="performSearch()">Search</button>
+        </form>
+        
+        
     </div>
     <!-- Table Structure -->
     <div class="details-container">
-        <table>
+        <table class="table-container">
             <thead>
                 <tr>
                     <th>Driver Name</th>
                     <th>Contact Number</th>
                     <th>Delivery Time</th>
-                    <th>Email</th>
+                    <!-- <th>Email</th> -->
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -33,13 +37,13 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                             <td><?= htmlspecialchars($driver_details->driverName) ?></td>
                             <td><?= htmlspecialchars($driver_details->telNo) ?></td>
                             <td><?= htmlspecialchars($driver_details->deliveryTime) ?></td>
-                            <td><?= htmlspecialchars($driver_details->email) ?></td>
+                            <!-- <td><?= htmlspecialchars($driver_details->email) ?></td> -->
                             <td class="status-mark">
                                 <span class="status pending">
                                     <?= htmlspecialchars($driver_details->status) ?>
                                 </span>
                             </td>
-                            <td><a class="onboard" href="<?=ROOT?>/admin/PendingDriver/OnboardDrivers/<?= htmlspecialchars($driver_details->driverID) ?>">OnBoard</a></td>
+                            <td><a class="onboard" href="<?=ROOT?>/admin/PendingDriver/OnboardDrivers/<?= htmlspecialchars($driver_details->driverId) ?>">OnBoard</a></td>
                         </tr>
                     <?php endif; ?>
                 <?php endforeach; ?>

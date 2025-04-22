@@ -1,28 +1,4 @@
-/* pendingPharmacy css */
-
-.thead {
-  background-color: #002b5c;
-  color: white;
-}
-th,
-td {
-  padding: 15px;
-  text-align: left;
-  font-size: 14px;
-  border-bottom: 1px solid #ddd;
-}
-
-tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-tbody tr:hover {
-  background-color: #f1f1f1;
-}
 .status {
-  padding: 5px 10px;
-  border-radius: 15px;
-  /* color: white; */
   display: inline-block;
   margin-left: 10px;
   margin-bottom: 10px;
@@ -46,32 +22,9 @@ tbody tr:hover {
   text-decoration: none;
 }
 
-/* pharmacyDetails css */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 30px;
-}
-
-table th,
-table td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-table th {
-  background-color: #2e3a59;
-  color: white;
-}
-
-table tbody tr:hover {
-  background-color: #f5f5f5;
-}
-
 .statusA {
-  background-color: #9df5b2;
-  color: #1cbd42;
+  background-color: none;
+  color: #2e7d32;
   margin-top: 13px;
   margin-bottom: auto;
 }
@@ -88,7 +41,6 @@ table tbody tr:hover {
   color: #db1515;
 }
 
-/* removePharmacy css */
 select {
   padding: 10px;
   margin: 10px 0;
@@ -96,27 +48,6 @@ select {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-}
-
-/* user css */
-thead {
-  background-color: #002b5c;
-  color: white;
-}
-th,
-td {
-  padding: 15px;
-  text-align: left;
-  font-size: 14px;
-  border-bottom: 1px solid #ddd;
-}
-
-tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-tbody tr:hover {
-  background-color: #f1f1f1;
 }
 
 .status-user {
@@ -216,3 +147,103 @@ tbody tr:hover {
   flex-direction: column;
   justify-content: center;
 }
+/* 
+@media screen and (max-width: 1200px) {
+  tr{
+    width:80%
+  }
+  th{
+    width:80%
+  }
+}
+
+@media screen and (max-width: 992px) {
+  tr{
+    width:80%
+  }
+  th{
+    width:80%
+  }
+}
+
+@media screen and (max-width: 768px) {
+  tr{
+    width:80%
+  }
+  th{
+    width:80%
+  }
+}
+
+@media screen and (max-width: 576px) {
+  tr{
+    width:80%
+  }
+  th{
+    width:80%
+  }
+}
+ */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin: 20px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+   min-width: 600px;/* Ensures table doesn't get too squeezed */
+}
+
+thead {
+  background-color: #002b5c;
+  color: white;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+  width: auto;
+  max-width: 20px;
+  break-inside: avoid;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .table-container {
+    margin: 15px 0;
+  }
+  
+  th, td {
+    padding: 10px;
+    font-size: 13px;
+    column-count: 2;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .table-container {
+    margin: 10px 0;
+  }
+  
+  th, td {
+    padding: 8px;
+    font-size: 12px;
+    column-count: 3;
+  }
+}
+
+
+
+

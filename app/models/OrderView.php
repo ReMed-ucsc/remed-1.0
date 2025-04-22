@@ -19,6 +19,7 @@ class OrderView
     private $REJECTED = 'R';
     private $DELIVERY_FAILED = 'F';
     private $ACCEPTED = 'A';
+    private $DELIVERY_CANCEL = 'DC';
     private $DELIVERY_IN_PROGRESS = 'I';
     private $DELIVERY_COMPLETED = 'C';
     private $WAITING_FOR_PICKUP = 'WP';
@@ -60,6 +61,7 @@ class OrderView
             $this->REJECTED => 'REJECTED',
             $this->DELIVERY_FAILED => 'DELIVERY FAILED',
             $this->ACCEPTED => 'ACCEPTED',
+            $this->DELIVERY_CANCEL => 'DELIVERY CANCEL',
             $this->DELIVERY_IN_PROGRESS => 'DELIVERY IN PROGRESS',
             $this->DELIVERY_COMPLETED => 'DELIVERY COMPLETED',
             $this->WAITING_FOR_PICKUP => 'WAITING FOR PICKUP'

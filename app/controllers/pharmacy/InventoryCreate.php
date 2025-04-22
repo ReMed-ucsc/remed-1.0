@@ -27,26 +27,30 @@ class InventoryCreate
         $inventoryModel = new StockInventoryDetails();
 
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $inventoryModel->addInventory(
-                $_POST['ProducteName'],
-                $_POST['Manufacturer'],
-                $_POST['genericName'],
-                $_POST['category'],
-                $_POST['batchNumber'],
-                $_POST['LatestStockQuantity'],
-                $_POST['thresholdLimit'],
-                $_POST['storageLocation'],
-                $_POST['manufacturingDate'],
-                $_POST['expiryDate'],
-                $_POST['storageConditions'],
-                $_POST['purchaseCost'],
-                $_POST['sellingPrice'],
 
-            );
-            redirect('inventoryCreate');
+            $data = [
+                'ProducteName'        => $_POST['ProducteName'],
+                'Manufacturer'       => $_POST['Manufacturer'],
+                'genericName'        => $_POST['genericName'],
+                'category'           => $_POST['category'],
+                'batchNumber'        => $_POST['batchNumber'],
+                'LatestStockQuantity' => $_POST['LatestStockQuantity'],
+                'thresholdLimit'     => $_POST['thresholdLimit'],
+                'storageLocation'    => $_POST['storageLocation'],
+                'manufacturingDate'  => $_POST['manufacturingDate'],
+                'expiryDate'         => $_POST['expiryDate'],
+                'storageConditions'  => $_POST['storageConditions'],
+                'purchaseCost'       => $_POST['purchaseCost'],
+                'sellingPrice'       => $_POST['sellingPrice']
+            ];
+
+            $inventoryModel->addInventory($data);
+            // redirect('pharmacy/inventoryCreate');
         }
-        $this->view('pharmacy/InventoryCreate');
+
+        $this->view('pharmacy/InventoryCreate', ['inventory' => $inventoryModel]);
     }
+
 
     // add other methods like edit, update, delete, etc.
 }

@@ -16,10 +16,10 @@ class Order
         $order = $orderModel->getMedicineOrder($orderId);
         $orderMedicine = $orderMedicineModel->getOrderMedicines($orderId);
         $orderComments = $orderCommentModel->getCommentsByOrder($orderId);
-        $stateList = $orderMedicineModel->getStatusOptions();
-      
-        $this->view('pharmacy/orderView', ['order' => $order, 'medicineList' => $orderMedicine, 'statusList' => $stateList, 'comments' => $orderComments, 'viewOnly' => true]);
 
+        $orderPrescription = $orderModel->getPrescription($orderId);
+
+        $this->view('pharmacy/orderView', ['order' => $order, 'medicineList' => $orderMedicine, 'statusList' => $stateList, 'comments' => $orderComments, 'prescription' => $orderPrescription, 'viewOnly' => true]);
     }
 
     public function edit($orderId)

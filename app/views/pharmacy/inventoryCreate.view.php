@@ -55,9 +55,9 @@
         Add to Inventory
       </div>
       <div class="order-body">
-        <!-- <?php if (!$viewOnly) { ?> -->
+
         <div class="search-bar">
-          <form action="<?= ROOT ?>/order/addItem" method="post">
+          <form action="<?= ROOT ?>/inventoryCreate" method="post">
             <input type="hidden" id="medicine-id" name="medicineId" value="" />
             <input type="text" id="medicine-search" placeholder="Search by medicine or generic name..." />
             <input type="text" id="medicine-quantity" name="quantity" placeholder="Quantity" />
@@ -65,137 +65,58 @@
           </form>
         </div>
         <div id="search-results" class="search-results"></div>
-      <?php } ?>
-
-      <!-- Table Section -->
-      <!-- <section class="table-management">
-
-        <div class="table">
-          <table>
-            <thead>
-              <tr>
-                <th style="width: 5%;">Medicine Name</th>
-                <th style="width: 5%;">Generic Name</th>
-                <th style="width: 5%;">Brand Name</th>
-                <th style="width: 1%;">Dosage</th>
-                <th style="width: 1%;">Quantity</th>
-                <th style="width: 5%;">Price</th>
-                <th style="width: 5%; ">Action</th>
-              </tr>
-            </thead>
-            <tbody>
 
 
 
-            </tbody>
-          </table>
-          <div class="price">
-            <p class="total-price">Total price = </p>
-            <p class="total-price">Rs.0.00</p>
-          </div>
-        </div>
-      </section> -->
-      <!-- <div class="inventoryDetails">
-        <div class="left">
-          <ul>
-            <li>Medicine Name</li>
-            <li>Brand Name</li>
-            <li>Generic Name</li>
-            <li>Category</li>
-            <li>Supplier ID</li>
-            <li>Batch No</li>
-            <li>Stock Quantity</li>
-            <li>Reorder Level</li>
-            <li>Storage Location</li>
-            <li>Manufacturing Date</li>
-            <li>Expiry Date</li>
-            <li>Storage Conditions</li>
-            <li>Purchase Price</li>
-            <li>Selling Price</li>
-            <li>Discounts & Offers</li>
-          </ul>
-        </div>
+        <form id="inventoryForm" method="POST" action="<?= ROOT ?>/inventoryCreate">
+          <div class="inventoryDetails size2">
+            <div class="left">
+              <ul>
+                <li>Medicine Name</li>
+                <li>Brand Name</li>
+                <li>Generic Name</li>
+                <li>Category</li>
+                <li>Batch No</li>
+                <li>Stock Quantity</li>
+                <li>Reorder Level</li>
+                <li>Storage Location</li>
+                <li>Manufacturing Date</li>
+                <li>Expiry Date</li>
+                <li>Storage Conditions</li>
+                <li>Purchase Price</li>
+                <li>Selling Price</li>
+              </ul>
+            </div>
 
-        <div class="right">
-          <ul>
-            <li><input type="text" placeholder="Auto" disabled></li>
-            <li><input type="text" placeholder="Auto" disabled></li>
-            <li><input type="text" placeholder="Auto" disabled></li>
-            <li><input type="text" placeholder="Auto" disabled></li>
-            <li>
-              <select>
-                <option>Select</option>
-              </select>
-            </li>
-            <li><input type="text" placeholder="Auto" disabled></li>
-            <li><input type="number" placeholder="Enter quantity"></li>
-            <li><input type="text" placeholder="Suggest"></li>
-            <li><input type="text" placeholder="Search and Select"></li>
-            <li><input type="date"></li>
-            <li><input type="date"></li>
-            <li><input type="text" placeholder="Optional"></li>
-            <li><input type="number"></li>
-            <li><input type="number"></li>
-            <li><input type="text"></li>
-          </ul>
-        </div>
-      </div> -->
-      <form method="POST" action="<?= ROOT ?>/inventoryCreate/addItem">
-        <div class="inventoryDetails size2">
-          <div class="left">
-            <ul>
-              <li>Medicine Name</li>
-              <li>Brand Name</li>
-              <li>Generic Name</li>
-              <li>Category</li>
-              <li>Supplier ID</li>
-              <li>Batch No</li>
-              <li>Stock Quantity</li>
-              <li>Reorder Level</li>
-              <li>Storage Location</li>
-              <li>Manufacturing Date</li>
-              <li>Expiry Date</li>
-              <li>Storage Conditions</li>
-              <li>Purchase Price</li>
-              <li>Selling Price</li>
-              <li>Discounts & Offers</li>
-            </ul>
+            <div class="right">
+              <ul>
+                <li><input type="text" name="ProductName" placeholder="Auto"></li>
+                <li><input type="text" name="Manufacturer" placeholder="Auto"></li>
+                <li><input type="text" name="genericName" placeholder="Auto"></li>
+                <li>
+                  <select name="category">
+                    <option value="Over the Counter">Over the Counter</option>
+                    <option value="Prescription">Prescription</option>
+                    <option value="Supplement">Supplement</option>
+                  </select>
+                </li>
+                <li><input type="text" name="batchID" placeholder="Auto"></li>
+                <li><input type="number" name="stockQuantity" placeholder="Enter quantity"></li>
+                <li><input type="text" name="reorderLevel" placeholder="Suggest"></li>
+                <li><input type="text" name="storageLocation" placeholder="Search and Select"></li>
+                <li><input type="date" name="manufacturingDate"></li>
+                <li><input type="date" name="expiryDate"></li>
+                <li><input type="text" name="storageCondition" placeholder="Optional"></li>
+                <li><input type="number" name="purchasePrice"></li>
+                <li><input type="number" name="sellingPrice"></li>
+              </ul>
+            </div>
           </div>
 
-          <div class="right">
-            <ul>
-              <li><input type="text" name="medicineName" placeholder="Auto"></li>
-              <li><input type="text" name="brandName" placeholder="Auto"></li>
-              <li><input type="text" name="genericName" placeholder="Auto"></li>
-              <li><input type="text" name="category" placeholder="Auto"></li>
-              <li>
-                <select name="supplierID">
-                  <option>Select</option>
-                  <!-- Fill options with PHP -->
-                  <?php foreach ($suppliers as $supplier): ?>
-                    <option value="<?= $supplier['id'] ?>"><?= $supplier['name'] ?></option>
-                  <?php endforeach; ?>
-
-                </select>
-              </li>
-              <li><input type="text" name="batchID" placeholder="Auto"></li>
-              <li><input type="number" name="stockQuantity" placeholder="Enter quantity"></li>
-              <li><input type="text" name="reorderLevel" placeholder="Suggest"></li>
-              <li><input type="text" name="storageLocation" placeholder="Search and Select"></li>
-              <li><input type="date" name="manufacturingDate"></li>
-              <li><input type="date" name="expiryDate"></li>
-              <li><input type="text" name="storageCondition" placeholder="Optional"></li>
-              <li><input type="number" name="purchasePrice"></li>
-              <li><input type="number" name="sellingPrice"></li>
-              <li><input type="text" name="offers"></li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- <div class="submit-section">
+          <!-- <div class="submit-section">
           <button type="submit">Add to Inventory</button>
         </div> -->
-      </form>
+        </form>
 
 
 
@@ -235,7 +156,7 @@
       <div class="submit-section">
 
 
-        <button class="proceed" type="submit">
+        <button id="addInventoryBtn" class="proceed" type="submit">
           <a href="<?= ROOT ?>/order/edit" style="text-decoration: none; color:black;">
             Add to Inventory
           </a>
@@ -248,6 +169,7 @@
     <script src="<?= ROOT ?>/assets/js/pharmacy/orderCreate.js"></script>
     <script src="<?= ROOT ?>/assets/js/pharmacy/orderMain.js"></script>
     <script src="<?= ROOT ?>/assets/js/pharmacy/orderView.js"></script>
+    <script src="<?= ROOT ?>/assets/js/pharmacy/inventory.js"></script>
 
 
 

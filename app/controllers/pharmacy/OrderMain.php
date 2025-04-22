@@ -21,8 +21,16 @@ class OrderMain
 
         // $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
 
+        if (!isset($_SESSION['user_id'])) {
+            redirect('login'); // or show an unauthorized message
+            exit();
+        }
+
+        $pharmacyID = $_SESSION['user_id'];
+
         $orderModel = new MedicineOrder();
-        $orders = $orderModel->getOrderDetails();
+        $orders = $orderModel->getOrdersByPharmacy($pharmacyID);
+        // $orders = $orderModel->getOrderDetails();
 
         // Pass the data to the view
         $this->View('pharmacy/orderMain', ['orders' => $orders]);

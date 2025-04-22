@@ -47,7 +47,7 @@ trait Database
             if ($debug) {
                 echo "SQL Error: " . $e->getMessage() . PHP_EOL;
             } else {
-                echo "An internal server error occurred. Please try again later.";
+                echo "An internal server error occurred. Please try again later." . $e->getMessage() . PHP_EOL;
             }
 
             error_log("SQL Error: " . $e->getMessage());

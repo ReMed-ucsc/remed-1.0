@@ -21,19 +21,26 @@ class InventoryMain
         // $data['username'] = [];
         // $this->view('pharmacy/inventoryMain', $data);
 
+        if (!isset($_SESSION['user_id'])) {
+            redirect('login'); // or show an unauthorized message
+            exit();
+        }
+
+        $pharmacyID = $_SESSION['user_id'];
+
         $inventoryModel = new StockInventoryDetails();
-        $inventory = $inventoryModel->getInventoryDetails();
+        $inventory = $inventoryModel->getInventoryByPharmacy($pharmacyID);
 
         //pass the data to the view
         $this->view('pharmacy/inventoryMain', ['inventories' => $inventory]);
     }
-    public function read()
-    {
-        $inventoryModel = new StockInventoryDetails();
-        $inventory = $inventoryModel->getInventoryDetails();
+    // public function read()
+    // {
+    //     $inventoryModel = new StockInventoryDetails();
+    //     $inventory = $inventoryModel->getInventoryDetails();
 
-        // Pass the data to the view
-        $this->View('pharmacy/inventoryrMain', ['inventories' => $inventory]);
-    }
+    //     // Pass the data to the view
+    //     $this->View('pharmacy/inventoryrMain', ['inventories' => $inventory]);
+    // }
     // add other methods like edit, update, delete, etc.
 }

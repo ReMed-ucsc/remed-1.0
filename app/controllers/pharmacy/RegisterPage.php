@@ -79,10 +79,13 @@ class RegisterPage
 
             $registerResult = $pharmacy->insert($pharmacyData);
 
-
-            // Return success response
-            $response['success'] = $registerResult;
-            echo json_encode($response);
+            if (!($registerResult)) {
+                return null;
+            } else {
+                // Return success response
+                $response['success'] = $registerResult;
+                echo json_encode($response);
+            }
         }
     }
 }

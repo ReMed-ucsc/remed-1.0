@@ -14,3 +14,15 @@ $(".menu > ul > li").click(function (e) {
   $(".menu-btn").click(function () {
     $(".sidebar").toggleClass("active");
   });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const logoutLink = document.getElementById("logout-link");
+    logoutLink.addEventListener("click", function (event) {
+      event.preventDefault(); // Stop the default action
+      const confirmLogout = confirm("Are you sure you want to logout?");
+      if (confirmLogout) {
+        window.location.href = logoutLink.href; // Proceed with logout
+      }
+    });
+  });
+  

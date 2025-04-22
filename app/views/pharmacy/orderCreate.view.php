@@ -56,11 +56,11 @@
       <div class="order-body">
         <!-- <?php if (!$viewOnly) { ?> -->
         <div class="search-bar">
-          <form action="<?= ROOT ?>/order/addItem" method="post">
+          <form action="<?= ROOT ?>/orderCreate/create" method="post">
             <input type="hidden" id="medicine-id" name="medicineId" value="" />
             <input type="text" id="medicine-search" placeholder="Search by medicine or generic name..." />
             <input type="text" id="medicine-quantity" name="quantity" placeholder="Quantity" />
-            <button id="add-medicine">Add</button>
+            <button id="add-medicine" name="add-medicine">Add</button>
           </form>
         </div>
         <div id="search-results" class="search-results"></div>
@@ -112,7 +112,7 @@
           </div>
           <div class="input-group">
             <label>Order ID</label>
-            <input type="text" placeholder="Value" value="" disabled>
+            <input type="text" placeholder="Value" value="<?= $data['OrderID'] ?>" disabled>
           </div>
         </div>
         <!-- Sample chat messages -->
@@ -157,9 +157,13 @@
     </div>
     <!-- </div> -->
 
+    <script>
+      const pharmacyId = <?= $_SESSION['user_id'] ?>;
+    </script>
+
+    <script src="<?= ROOT ?>/assets/js/pharmacy/orderView.js"></script>
     <script src="<?= ROOT ?>/assets/js/pharmacy/orderCreate.js"></script>
     <script src="<?= ROOT ?>/assets/js/pharmacy/orderMain.js"></script>
-    <script src="<?= ROOT ?>/assets/js/pharmacy/orderView.js"></script>
 
 
 

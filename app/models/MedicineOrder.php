@@ -98,4 +98,22 @@ class MedicineOrder
 
         return $statusMap[$status] ?? 'UNKNOWN';
     }
+
+    public function getOrdersByPharmacy($pharmacyID)
+    {
+        $query = "SELECT * FROM $this->table WHERE PharmacyID = :PharmacyID";
+        return $this->query($query, ['PharmacyID' => $pharmacyID]);
+    }
+
+    public function getPrescription($orderId)
+    {
+        $sql = "SELECT prescription FROM $this->table WHERE OrderID = :OrderID";
+        $result = $this->query($sql, ['OrderID' => $orderId]);
+
+        if (!empty($result)) {
+            return 'uploads/prescriptions/' . $result[0]->prescription;
+        }
+
+        return null;
+    }
 }

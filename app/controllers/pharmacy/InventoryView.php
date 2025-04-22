@@ -24,6 +24,7 @@ class InventoryView
     public function edit($inventoryId)
     {
         $inventoryModel = new StockInventoryDetails();
+        $InventoryMedicineModel = new OrderView();
     }
 
     // add other methods like edit, update, delete, etc.

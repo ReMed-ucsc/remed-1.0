@@ -114,7 +114,7 @@
           </div>
         </div>
       </div>
-      <div class="middle">
+      <!-- <div class="middle">
         <div class="middleline">
           <div class="total-sales">
             Total Sales
@@ -149,7 +149,55 @@
           </div>
         </div>
 
+      </div> -->
+
+      <div class="middle">
+        <div class="middleline">
+          <div class="total-sales">
+            Total Sales
+            <canvas id="myBarChart"></canvas>
+          </div>
+          <div class="inventory">
+            <div class="weekly">
+              Inventory
+              <h5>Weekly
+                <ul class="sub-menu"></ul>
+                <i class="arrow ph-bold ph-caret-down"></i>
+              </h5>
+            </div>
+            <canvas id="myPieChart"></canvas>
+          </div>
+        </div>
+
+        <div class="middleline">
+          <div class="total-sales">
+            Patient Visit
+            <canvas id="myPatientChart" width="500" height="200"></canvas>
+          </div>
+          <div class="total-sales">
+            Revenue Trend
+            <canvas id="myLineChart" width="300" height="200"></canvas>
+          </div>
+          <div class="total-sales">
+            Sales by Category
+            <canvas id="myDoughnutChart" width="300" height="200"></canvas>
+          </div>
+        </div>
+
+
+        <!-- <div class="middleline">
+          <div class="total-sales">
+            Revenue Trend
+            <canvas id="myLineChart" width="400" height="200"></canvas>
+          </div>
+          <div class="total-sales">
+            Sales by Category
+            <canvas id="myDoughnutChart" width="400" height="200"></canvas>
+          </div>
+        </div> -->
       </div>
+
+
     </div>
     <!-- <div class="bottom"> -->
     <section class="table-management">

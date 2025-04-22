@@ -210,8 +210,13 @@
         <div class="chat-messages">
           <div class="display-area" id="displayArea">
             <div id="prescriptionView">
-              <img src="<?= ROOT ?>/assets/images/prescription2.jpg" alt="">
+              <?php if (!empty($prescription)) : ?>
+                <img src="<?= ROOT . '/' . $prescription ?>" alt="Prescription">
+              <?php else : ?>
+                <p>No prescription uploaded.</p>
+              <?php endif; ?>
             </div>
+
 
             <div id="chatView" style="display: none;">
               <div class="chat-box-content" id="chatMessages">
@@ -264,6 +269,7 @@
     <!-- </div> -->
 
     <script>
+      const pharmacyId = <?= isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 'null' ?>;
       const orderData = <?= json_encode([
                           'order' => $data['order'],
                           'medicineList' => $data['medicineList'],

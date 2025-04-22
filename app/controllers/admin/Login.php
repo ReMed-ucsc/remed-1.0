@@ -51,51 +51,94 @@ class Login
         exit();
     }
 
-    public function edit($id){
-        $adminModel= new Admin();
-        $admin=$adminModel->first(['id'=>$id]);
+    public function edit($id)
+    {
+        $adminModel = new Admin();
+        $admin = $adminModel->first(['id' => $id]);
 
-        if(!$admin){
+        if (!$admin) {
             redirect('admin/Dashboard');
             exit();
         }
 
-        $data = ['admin'=>$admin];
+        $data = ['admin' => $admin];
 
-        if($_SERVER['REQUEST_METHOD']=="POST"){
-            $data=[
-                'name'=> $_POST['name'],
-                'email'=>$_POST['email'],
-                'password'=>$_POST['password']
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $data = [
+                $name = $_POST['name'],
+                $email = $_POST['email'],
+                $token = $_POST['token'],
+                $password = $_POST['password'],
+                $confirm = $_POST['confirm']
             ];
-
-            if($adminModel->validate($data)){
-                $adminModel->update($id,$data,'id');
+            
+            if ($password !== $confirm) {
+                $error = "Passwords do not match.";
+                $token = htmlspecialchars($token);
+                redirect('admin/AccountManage');
+                return;
+            }
+            if ($adminModel->validate($data)) {
+                $adminModel->update($id, $data, 'id');
                 redirect('admin/Dashbord');
                 exit();
-            }
-            else{
-                $data['error']=$adminModel->errors;
+            } else {
+                $data['error'] = $adminModel->errors;
             }
 
-            $this->view('admin/accountManage',$data);
+            $this->view('admin/dashboard', $data);
         }
     }
+    // public function forgetPassword(){
+    //     $admin=new Admin();
+
+    //     $this->view('admin/forgetPassword');
+    // }
+    // public function forgetPasswordReset(){
+    //     $admin=new Admin();
+
+    //     $this->view('admin/forgetPasswordReset');
+    // }
+    // public function showResetForm()
+    // {
+    //     $admin = new Admin;
+    //     $token = $_GET['token'] ?? '';
+        
+    //     if (!$token || !$admin->isValidResetToken($token)) {
+    //         echo "Invalid or expired token.";
+    //         return;
+    //     }
+
+    //     require BASE_PATH . '/app/views/admin/forgetPasswordReset.view.php';
+    // }
+
+
+    // public function handleReset()
+    // {
+    //     $admin = new Admin;
+    //     $token = $_POST['token'] ?? '';
+    //     $password = $_POST['password'] ?? '';
+    //     $confirm = $_POST['confirm_password'] ?? '';
+
+
+    //     if ($password !== $confirm) {
+    //         $error = "Passwords do not match.";
+    //         $token = htmlspecialchars($token);
+    //         require BASE_PATH . '/app/views/admin/forgetPasswordReset.view.php';
+    //         return;
+    //     }
+
+    //     $user = $admin->findByResetToken($token);
+    //     if (!$user) {
+    //         echo "Invalid or expired token.";
+    //         return;
+    //     }
+
+    //     $admin->updatePassword($user->id, password_hash($password, PASSWORD_DEFAULT));
+    //     $admin->clearResetToken($user->id);
+
+    //     redirect('admin/login?reset=success');
+
+    // }
+
 }
-
-
-
-// admin account create
- // $data = [
-//     'email' => $_POST['email'],
-//     'password' => $_POST['password'],
-//     'level' => 1
-// ];
-
-// if ($user->validate($data)) {
-//     $user->registerUser($data['name'], $data['email'], $data['password']);
-//     redirect('login');
-//     exit();
-// } else {
-//     $data['errors'] = $user->errors;
-// }

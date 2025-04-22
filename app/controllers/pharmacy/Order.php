@@ -14,8 +14,9 @@ class Order
         $order = $orderModel->getMedicineOrder($orderId);
         $orderMedicine = $orderMedicineModel->getOrderMedicines($orderId);
         $orderComments = $orderCommentModel->getCommentsByOrder($orderId);
+        $orderPrescription = $orderModel->getPrescription($orderId);
 
-        $this->view('pharmacy/orderView', ['order' => $order, 'medicineList' => $orderMedicine, 'comments' => $orderComments, 'viewOnly' => true]);
+        $this->view('pharmacy/orderView', ['order' => $order, 'medicineList' => $orderMedicine, 'comments' => $orderComments, 'prescription' => $orderPrescription, 'viewOnly' => true]);
     }
 
     public function edit($orderId)

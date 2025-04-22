@@ -78,7 +78,7 @@
               <?php foreach ($inventories as $inventory): ?>
                 <tr>
                   <td><?= htmlspecialchars($inventory->InventoryId) ?></td>
-                  <td><?= htmlspecialchars($inventory->genericName) ?></td>
+                  <td><?= htmlspecialchars($inventory->ProductName) ?></td>
                   <td><?= htmlspecialchars($inventory->availableCount) ?></td>
                   <td><?= htmlspecialchars($inventory->category) ?></td>
                   <td><?= htmlspecialchars($inventory->expiryDate) ?></td>

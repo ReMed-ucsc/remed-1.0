@@ -26,7 +26,7 @@
                     </div>
                 <?php } else { ?>
                     <p>Welcome back! Log in to access your pharmacy’s dashboard, where you can manage inventory, process customer orders, and update your pharmacy's details. Stay connected with your customers, track deliveries, and ensure your pharmacy runs smoothly. Enter your credentials to continue.</p>
-                    <?= $registerResult ?>
+
                 <?php } ?>
             </div>
             <div class="box-right">

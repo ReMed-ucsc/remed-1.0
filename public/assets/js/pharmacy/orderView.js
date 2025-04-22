@@ -1,3 +1,4 @@
+console.log("P:", pharmacyId)
 document.addEventListener("DOMContentLoaded", function () {
 
   // console.log(orderData); // Your PHP data is available here
@@ -11,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (query.length > 2) {
       // Start searching after 3 characters
       fetch(
-        `http://localhost/remed-1.0/api/medicine/getMedicines?search=${query}`
+        `http://localhost/remed-1.0/api/medicine/getPharmacyMedicines?search=${query}&pharmacyID=${pharmacyId}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -30,19 +31,47 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  // searchResults.addEventListener("click", function (event) {
+  //   if (event.target.classList.contains("search-result-item")) {
+  //     const medicineId = event.target.dataset.medicineId;
+  //     const medicineName = event.target.textContent;
+  //     // Update the input element with the selected medicine's details
+  //     searchInput.value = medicineName;
+  //     searchInput.dataset.medicineId = medicineId;
+  //     // Set the hidden input field's value
+  //     hiddenInput.value = medicineId;
+  //     // Clear the search results
+  //     searchResults.innerHTML = "";
+  //   }
+  // });
+
   searchResults.addEventListener("click", function (event) {
     if (event.target.classList.contains("search-result-item")) {
       const medicineId = event.target.dataset.medicineId;
-      const medicineName = event.target.textContent;
-      // Update the input element with the selected medicine's details
-      searchInput.value = medicineName;
+      searchInput.value = event.target.textContent;
       searchInput.dataset.medicineId = medicineId;
-      // Set the hidden input field's value
       hiddenInput.value = medicineId;
-      // Clear the search results
       searchResults.innerHTML = "";
+  
+      // Fetch full medicine details
+      fetch(`http://localhost/remed-1.0/api/medicine/getMedicineById?id=${medicineId}`)
+        .then((response) => response.json())
+        .then((data) => {
+          const medicine = data.data;
+  
+          // Fill form fields here
+          document.getElementById("ProductName").value = medicine.ProductName;
+          document.getElementById("Manufacturer").value = medicine.Manufacturer;
+          document.getElementById("genericName").value = medicine.GenericName;
+          document.getElementById("category").value = medicine.CategoryID;
+          document.getElementById("unitPrice").value = medicine.SellingPrice;
+          // etc...
+  
+        })
+        .catch((error) => console.error("Error fetching medicine details:", error));
     }
   });
+  
 });
 
 
@@ -57,7 +86,6 @@ document.addEventListener("DOMContentLoaded", function () {
     chatView.style.display = isChatOpen ? 'block' : 'none';
   });
 
-  // Optional: Basic message sending (no API yet)
   document.getElementById('sendChat')?.addEventListener('click', () => {
     const input = document.getElementById('chatInput');
     const message = input.value.trim();

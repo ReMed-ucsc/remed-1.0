@@ -10,7 +10,7 @@ class Login
         if ($_SERVER['REQUEST_METHOD'] == "GET" && isset($_GET['registered'])) {
             $data['success'] = "Thank you for registering with Remed!<br><br>
 
- We’ve received your form details, and your account will be processed within the next 14 days. Please check your email or WhatsApp for a confirmation message.<br><br>
+ We’ve received your form details, and your account will be processed within the next 3 days. Please check your email or WhatsApp for a confirmation message.<br><br>
 
 We appreciate your patience and look forward to having you with us! ";
         }

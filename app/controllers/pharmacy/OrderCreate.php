@@ -3,72 +3,120 @@
 class OrderCreate
 {
     use Controller;
+
     public function index()
     {
         $data['OrderID'] = isset($_GET['OrderID']) ? $_GET['OrderID'] : null;
-        $data['error'] = '';
+
+        // If we have an order ID, fetch the order items
+        if ($data['OrderID']) {
+            $orderListModel = new OrderView();
+            $data['orderItems'] = $orderListModel->getOrderMedicines($data['OrderID']);
+            $data['totalPrice'] = $this->calculateTotalPrice($data['orderItems']);
+        } else {
+            $data['orderItems'] = [];
+            $data['totalPrice'] = 0;
+        }
 
         $this->view('pharmacy/orderCreate', $data);
     }
 
-    public function create()
+    public function createOrder()
     {
+        if ($_SERVER['REQUEST_METHOD'] != "POST" || !isset($_POST['medicineId']) || !isset($_POST['quantity'])) {
+            redirect("orderCreate");
+            return;
+        }
+
+        $productId = $_POST['medicineId'];
+        $quantity = $_POST['quantity'];
         $pharmacyId = $_SESSION['user_id'];
-        $data['OrderID'] = isset($_GET['OrderID']) ? $_GET['OrderID'] : null;
-        $data['error'] = '';
 
+        // Create a new order for unregistered patient
+        $orderModel = new MedicineOrder();
+
+        $patientId = 0; // Unregistered patient
+        $destination = null;
+        $pickup = 1;
+        $prescription = null;
+        $destinationLat = null;
+        $destinationLong = null;
+
+        $orderId = $orderModel->placeOrder(
+            $patientId,
+            $pickup,
+            $destination,
+            $destinationLat,
+            $destinationLong,
+            $pharmacyId,
+            $prescription
+        );
+
+        if (!$orderId) {
+            // Handle error
+            redirect("orderCreate");
+            return;
+        }
+
+        // Add medicine to order list
         $medicineListModel = new OrderList();
+        $result = $medicineListModel->insert([
+            'OrderID' => $orderId,
+            'ProductID' => $productId,
+            'quantity' => $quantity
+        ]);
 
-        if (isset($_GET['OrderID'])) {
-            $orderId = $_GET['OrderID'];
+        redirect("orderCreate/?OrderID=$orderId");
+    }
 
-            if ($_SERVER['REQUEST_METHOD'] == "POST") {
-                $productId = $_POST['medicineId'];
-                $quantity = $_POST['quantity'];
+    public function addToOrder()
+    {
+        if (
+            $_SERVER['REQUEST_METHOD'] != "POST" ||
+            !isset($_POST['medicineId']) ||
+            !isset($_POST['quantity']) ||
+            !isset($_POST['orderId'])
+        ) {
+            redirect("orderCreate");
+            return;
+        }
 
-                $data = [
-                    'OrderID' => $orderId,
-                    'ProductID' => $productId,
-                    'quantity' => $quantity
-                ];
+        $productId = $_POST['medicineId'];
+        $quantity = $_POST['quantity'];
+        $orderId = $_POST['orderId'];
 
-                $medicineListModel->insert($data);
-                redirect("orderCreate/?OrderID=$orderId", $data);
-                exit;
-            }
-            redirect("orderCreate/?OrderID=$orderId", $data);
+        // Add medicine to order list
+        $medicineListModel = new OrderList();
+        $result = $medicineListModel->insert([
+            'OrderID' => $orderId,
+            'ProductID' => $productId,
+            'quantity' => $quantity
+        ]);
+
+        redirect("orderCreate/?OrderID=$orderId");
+    }
+
+    private function calculateTotalPrice($items)
+    {
+        $total = 0;
+        foreach ($items as $item) {
+            $total += $item->unitPrice * $item->quantity;
+        }
+        return $total;
+    }
+
+    public function removeItem()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['itemId']) && isset($_POST['orderId'])) {
+            $itemId = $_POST['itemId'];
+            $orderId = $_POST['orderId'];
+
+            $medicineListModel = new OrderList();
+            $medicineListModel->deleteItem($orderId, $itemId);
+
+            redirect("orderCreate/?OrderID=$orderId");
         } else {
-            $orderModel = new MedicineOrder();
-
-            $patientId = 0; // unregistered patient
-            $destination = null;
-            $pickup = 1;
-            $prescription = null;
-            $destinationLat = null;
-            $destinationLong =  null;
-
-            $orderId = $orderModel->placeOrder($patientId, $pickup, $destination, $destinationLat, $destinationLong, $pharmacyId, $prescription);
-
-            if ($orderId) {
-                if ($_SERVER['REQUEST_METHOD'] == "POST") {
-                    $productId = $_POST['medicineId'];
-                    $quantity = $_POST['quantity'];
-
-                    $data = [
-                        'OrderID' => $orderId,
-                        'ProductID' => $productId,
-                        'quantity' => $quantity
-                    ];
-
-                    $medicineListModel->insert($data);
-
-                    redirect("orderCreate/?OrderID=$orderId");
-                    exit;
-                }
-            } else {
-                $data['error'] = "Failed to create order.";
-                $this->view('pharmacy/orderCreate', $data);
-            }
+            redirect("orderCreate");
         }
     }
 }

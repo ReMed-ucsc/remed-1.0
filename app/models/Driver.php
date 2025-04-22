@@ -8,7 +8,7 @@ class Driver extends User
 
     protected $allowedColumns = [
         'driverID',
-        'vehicleLicneseNo',
+        'vehicalLicenseNo',
         'driverName',
         'email',
         'password',
@@ -58,7 +58,7 @@ class Driver extends User
         return $result ? $result[0] : null; // Return the first object or null
     }
 
-    public function registerDriver($name, $email, $password, $dob, $tellNo, $NIC, $deliveryTime)
+    public function registerDriver($name, $email, $password, $dob, $tellNo, $NIC, $deliveryTime, $vehicalNumber)
     {
         $data = [
             'driverName' => $name,
@@ -68,7 +68,8 @@ class Driver extends User
             'telNo' => $tellNo,
             'NIC' => $NIC,
             'deliveryTime' => $deliveryTime,
-            'status' => 'pending'
+            'status' => 'pending',
+            'vehicalLicenseNo' => $vehicalNumber
         ];
 
         return $this->insert($data);

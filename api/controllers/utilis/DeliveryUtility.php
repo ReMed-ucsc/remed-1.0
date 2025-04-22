@@ -3,25 +3,29 @@
 require_once BASE_PATH . '/app/models/DeliveryView.php';
 require_once BASE_PATH . '/app/models/Driver.php';
 
-$serviceAccountPath = BASE_PATH . '/api/controllers/utilis/serviceaccount.json';
-
 class DeliveryUility
 {
     private $accessToken;
-    private $fcmUrl = 'https://fcm.googleapis.com/v1/projects/remednotification/messages:send';
+    private $fcmUrl = 'https://fcm.googleapis.com/v1/projects/remed-notification/messages:send';
+    private $serviceAccountPath;
+
+    public function __construct()
+    {
+        $this->serviceAccountPath = BASE_PATH . '/api/controllers/utilis/serviceaccount.json';
+    }
 
     public function sendDetailstoDriver($orderId)
     {
         $orderModel = new OrderView();
 
-        $columns = ['orderview.destination', 'pharmacy.address'];
+        $columns = ['OrderView.destination', 'pharmacy.address'];
         $data = ['OrderID' => $orderId];
 
         $orderModel->setLimit(1);
 
         $deliveryData = $orderModel->join(
             'pharmacy',
-            'orderview.PharmacyID = pharmacy.PharmacyID',
+            'OrderView.PharmacyID = pharmacy.PharmacyID',
             $data,
             [],
             $columns
@@ -34,7 +38,9 @@ class DeliveryUility
             // echo json_encode(["destination" => $deliveryData[0]->destination]);
         } else {
             // If no data found, return an error response
+            http_response_code(404);
             echo json_encode(['error' => 'Data not found']);
+            return;
         }
 
         $driverModel = new Driver();
@@ -56,9 +62,15 @@ class DeliveryUility
                 return !empty($token);
             });
 
-            echo json_encode(["FCM tokens found" => array_values($fcmTokens)]);
+            if (empty($fcmTokens)) {
+                http_response_code(404);
+                echo json_encode("No tokens found");
+            } else {
+                echo json_encode(["FCM tokens found" => array_values($fcmTokens)]);
+            }
         } else {
-            //echo json_encode("No token found");
+            http_response_code(404);
+            echo json_encode("No token found");
         }
 
 
@@ -85,6 +97,7 @@ class DeliveryUility
 
             return "New delivery request sent";
         } else {
+            http_response_code(404);
             return [
                 "status" => "error",
                 "message" => "No driver found"
@@ -157,7 +170,7 @@ class DeliveryUility
     function generateAccessToken()
     {
         // Read the service account JSON file
-        $serviceAccount = json_decode(file_get_contents($GLOBALS['serviceAccountPath']), true);
+        $serviceAccount = json_decode(file_get_contents($this->serviceAccountPath), true);
 
         // Extract required fields
         $privateKey = $serviceAccount['private_key'];

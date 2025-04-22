@@ -44,8 +44,10 @@ class OrderCreate
             $destination = null;
             $pickup = 1;
             $prescription = null;
+            $destinationLat = null;
+            $destinationLong =  null;
 
-            $orderId = $orderModel->placeOrder($patientId, $pickup, $destination, $pharmacyId, $prescription);
+            $orderId = $orderModel->placeOrder($patientId, $pickup, $destination, $destinationLat, $destinationLong, $pharmacyId, $prescription);
 
             if ($orderId) {
                 if ($_SERVER['REQUEST_METHOD'] == "POST") {

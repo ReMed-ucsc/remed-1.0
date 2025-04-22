@@ -19,7 +19,7 @@ class Order
 
         $orderPrescription = $orderModel->getPrescription($orderId);
 
-        $this->view('pharmacy/orderView', ['order' => $order, 'medicineList' => $orderMedicine, 'statusList' => $stateList, 'comments' => $orderComments, 'prescription' => $orderPrescription, 'viewOnly' => true]);
+        $this->view('pharmacy/orderView', ['order' => $order, 'medicineList' => $orderMedicine, 'comments' => $orderComments, 'prescription' => $orderPrescription, 'viewOnly' => true]);
     }
 
     public function edit($orderId)
@@ -33,7 +33,6 @@ class Order
         $order = $orderModel->getMedicineOrder($orderId);
         $orderMedicine = $orderMedicineModel->getOrderMedicines($orderId);
         $orderComments = $orderCommentModel->getCommentsByOrder($orderId);
-        $stateList = $orderMedicineModel->getStatusOptions();
 
 
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -52,7 +51,7 @@ class Order
             exit;
         } else {
 
-            $this->view('pharmacy/orderView', ['order' => $order, 'medicineList' => $orderMedicine, 'statusList' => $stateList, 'comments' => $orderComments, 'viewOnly' => false]);
+            $this->view('pharmacy/orderView', ['order' => $order, 'medicineList' => $orderMedicine, 'comments' => $orderComments, 'viewOnly' => false]);
         }
     }
 

@@ -56,6 +56,9 @@
       <div class="order-container">
         <div class="order-header">
           <h1>Order Management &nbsp; &#8250; &nbsp; View order</h1>
+
+          <!-- <?php show(ROOT . '/uploads/prescriptions/' . $order->prescription) ?> -->
+
         </div>
         <div class="order-body">
           <div class="order-content">
@@ -210,8 +213,8 @@
         <div class="chat-messages">
           <div class="display-area" id="displayArea">
             <div id="prescriptionView">
-              <?php if (!empty($prescription)) : ?>
-                <img src="<?= ROOT . '/' . $prescription ?>" alt="Prescription">
+              <?php if (!empty($order->prescription)) : ?>
+                <img src="<?= ROOT . '/uploads/prescriptions/' . $order->prescription ?>" alt="Prescription">
               <?php else : ?>
                 <p>No prescription uploaded.</p>
               <?php endif; ?>

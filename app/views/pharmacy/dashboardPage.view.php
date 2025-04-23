@@ -72,15 +72,15 @@
             <div class="profilecard-right">
               <div class="stat">
                 <h4>Total Patients</h4>
-                <p>120</p>
+                <p><?= $patientCount[0]->patientCount ?? 0 ?></p>
               </div>
               <div class="stat">
                 <h4>Total Orders</h4>
-                <p>45</p>
+                <p><?= $orderCount[0]->orderCount ?? 0 ?></p>
               </div>
               <div class="stat">
                 <h4>Current Balance</h4>
-                <p>Rs. 10,000</p>
+                <p><?= $monthlyIncome[0]->currentBalance ?? 0 ?></p>
               </div>
             </div>
           </div>

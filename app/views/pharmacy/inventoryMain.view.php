@@ -91,7 +91,7 @@
                       else
                         echo 'Low Stock';
                       ?></td>
-                  <td><a class="view" href="<?= ROOT ?>/inventoryView/<?= $inventory->InventoryId ?>">View</a></td>
+                  <td><a class="view" href="<?= ROOT ?>/inventoryView/<?= $inventory->InventoryId ?>">Update</a></td>
 
                 </tr>
               <?php endforeach; ?>

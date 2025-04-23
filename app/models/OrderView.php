@@ -68,4 +68,27 @@ class OrderView
 
         return $statusMap[$status] ?? 'UNKNOWN';
     }
+
+    public function patientCount($pharmacyID)
+    {
+        $query = "SELECT COUNT(Distinct PatientID) AS patientCount FROM $this->table WHERE PharmacyID = ?";
+        return $this->query($query, [$pharmacyID]);
+    }
+
+    public function orderCount($pharmacyID)
+    {
+        $query = "SELECT COUNT(DISTINCT OrderID) AS orderCount FROM $this->table WHERE PharmacyID = ?";
+        return $this->query($query, [$pharmacyID]);
+    }
+
+    public function monthlyIncome($pharmacyID)
+    {
+        $query = "SELECT SUM(totalBill) AS currentBalance 
+              FROM $this->table 
+              WHERE PharmacyID = ? 
+              AND date >= DATE_FORMAT(CURDATE() - INTERVAL 1 MONTH, '%Y-%m-01') 
+              AND date < DATE_FORMAT(CURDATE() + INTERVAL 1 MONTH, '%Y-%m-01')";
+
+        return $this->query($query, [$pharmacyID]);
+    }
 }

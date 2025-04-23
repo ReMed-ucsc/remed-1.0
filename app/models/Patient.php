@@ -49,4 +49,10 @@ class Patient extends User
         ];
         return $this->insert($data);
     }
+
+    // public function patientCount($pharmacyID)
+    // {
+    //     $query = "SELECT COUNT(PatientID) AS total FROM orderview WHERE PharmacyID = ?";
+    //     return $this->query($query, [$pharmacyID]);
+    // }
 }

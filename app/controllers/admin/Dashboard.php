@@ -21,6 +21,8 @@ class Dashboard
         $approvedDrivers = $driver->getlastId("APPROVED");
         $pendingDrivers=$driver->getlastId("pending");
 
+        $petient = new Patient();
+        $patientCount = $petient->getlastId();
 
         // Get all pharmacies
         $AdminModel = new Admin();
@@ -48,6 +50,7 @@ class Dashboard
             'pending_pharmacy'=>$pendingPharmacy,
             'approved_drivers' => $approvedDrivers,
             'pending_drivers' => $pendingDrivers,
+            'patientCount' => $patientCount,
             'notification'=>$Msg,
             'notificationDriver'=> $MsgDriver   
         ];

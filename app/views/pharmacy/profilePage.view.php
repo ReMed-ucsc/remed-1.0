@@ -12,26 +12,29 @@
     <div class="container">
         <!-- Profile panel -->
         <div class="profile-panel">
-            <img src="<?= ROOT ?>/assets/images/pharmacy logo.png" alt="Pharmacy Profile" class="profile-pic" />
-            <h2>Remed Pharmacy</h2>
-            <p>Colombo Branch</p>
-            <div class="rating">★★★★☆</div>
+            <label for="profilePicInput">
+                <img src="<?= ROOT ?>/assets/images/pharmacy logo.png" alt="Pharmacy Profile" class="profile-pic" id="profilePicPreview" />
+            </label>
+            <input type="file" id="profilePicInput" accept="image/*" style="display: none;" />
+            <h2><?= $pharmacyData->name ?></h2>
+            <p><?= $pharmacyData->email ?></p>
         </div>
+
 
         <!-- Form panel -->
         <div class="form-panel">
-            <form id="profile-form">
+            <form id="profile-form" method="POST" action="<?= ROOT ?>/pharmacy/updateProfilePic" enctype="multipart/form-data">
+                <div>
+                    <label>Pharmacy Name</label>
+                    <input type="text" value=<?= $pharmacyData->name ?> disabled />
+                </div>
+                <div>
+                    <label>Pharmacy ID</label>
+                    <input type="text" value=<?= $pharmacyData->PharmacyID ?> disabled />
+                </div>
                 <div>
                     <label>Pharmacist Name</label>
-                    <input type="text" value="Dr. Nimal Perera" disabled />
-                </div>
-                <div>
-                    <label>License Number</label>
-                    <input type="text" value="PH123456" disabled />
-                </div>
-                <div>
-                    <label>Issuing Authority</label>
-                    <input type="text" value="SLMC" disabled />
+                    <input type="text" value=<?= $pharmacyData->pharmacistName ?> disabled />
                 </div>
                 <div>
                     <label>License Expiry Date</label>
@@ -39,25 +42,29 @@
                 </div>
                 <div>
                     <label>Email</label>
-                    <input type="text" value="remed@pharma.com" disabled />
+                    <input type="text" value=<?= $pharmacyData->email ?> disabled />
                 </div>
                 <div>
                     <label>Contact</label>
-                    <input type="text" value="+94 77 123 4567" disabled />
+                    <input type="text" value=<?= $pharmacyData->contactNo ?> disabled />
                 </div>
                 <div>
                     <label>Address</label>
-                    <input type="text" value="123 Galle Road, Colombo" disabled />
+                    <input type="text" value=<?= $pharmacyData->address ?> disabled />
                 </div>
                 <div>
-                    <label>Start Date</label>
-                    <input type="date" value="2021-05-01" disabled />
+                    <label>Approved Date</label>
+                    <input type="date" value=<?= $pharmacyData->approvedDate ?> disabled />
                 </div>
 
                 <div class="button-container">
-                    <button type="button" id="editBtn">Change Details</button>
-                    <button type="button" id="changePasswordBtn">Change Password</button>
+                    <button type="button" class="button1" id="editBtn">Change Details</button>
+                    <button type="button" class="button1" id="changePasswordBtn">Change Password</button>
+
                 </div>
+                <button type="button" class="button2" id="removePharmacyBtn"> Remove Account!</button>
+
+
             </form>
         </div>
     </div>

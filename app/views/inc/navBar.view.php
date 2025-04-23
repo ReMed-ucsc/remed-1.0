@@ -8,8 +8,8 @@
 
     <div class="navbar-right">
         <img class="bell" src="<?= ROOT ?>/assets/images/bell-icon.png" alt="notification" />
-        
-        <a href="<?=ROOT?>/admin/Profile"><img class="user" src="<?= ROOT ?>/assets/images/TestAccount.png" alt="user" /></a>
+
+        <a href="<?= ROOT ?>/admin/Profile"><img class="user" src="<?= ROOT ?>/assets/images/TestAccount.png" alt="user" /></a>
 </header>
 <!-- Navbar end-->
 
@@ -81,7 +81,7 @@
 
 <!-- <div id="profile" class="profile">
     <div class="profile-item">
-        <a href="<?=ROOT?>/admin/Profile"><img src="<?= ROOT ?>/assets/images/admin.png" alt="" /></a>
+        <a href="<?= ROOT ?>/admin/Profile"><img src="<?= ROOT ?>/assets/images/admin.png" alt="" /></a>
         <div class="details">
             <h4>ADMINISTRATOR</h4>
             <p>admin@gmail.com</p>
@@ -108,6 +108,7 @@
     </div>
 </div>
 <!-- notification end -->
+ <!-- Notification Popup -->
 
 <script>
     // JavaScript to toggle the dropdown menu visibility
@@ -183,5 +184,4 @@
             dropdown.style.display = 'none';
         }
     });
-
 </script>

@@ -105,7 +105,7 @@ class MedicineOrder
 
     public function getOrdersByPharmacy($pharmacyID)
     {
-        $query = "SELECT * FROM $this->table WHERE PharmacyID = :PharmacyID";
+        $query = "SELECT * FROM $this->table WHERE PharmacyID = :PharmacyID ORDER BY date DESC";
         return $this->query($query, ['PharmacyID' => $pharmacyID]);
     }
 

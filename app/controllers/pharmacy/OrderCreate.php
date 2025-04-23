@@ -4,6 +4,11 @@ class OrderCreate
 {
     use Controller;
 
+    public function __construct()
+    {
+        $this->protectRoute();
+    }
+
     public function index()
     {
         $data['OrderID'] = isset($_GET['OrderID']) ? $_GET['OrderID'] : null;

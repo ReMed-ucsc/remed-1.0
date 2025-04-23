@@ -13,7 +13,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                     <h2>ADMINISTRATOR</h2>
                     <?php if (!empty($admin)): ?>
                         <p><?= htmlspecialchars($admin->username)?></p>
-                         <p><?= htmlspecialchars($admin->email )?></p>
+                        <p><?= htmlspecialchars($admin->email )?></p>
                     <?php else: ?>
                         <p>No admin data available</p>
                     <?php endif; ?>

@@ -6,7 +6,7 @@ class Patient extends User
     // use User;
 
     protected $table = 'patient';
-    protected $allowedColumns = ['patientName', 'email', 'password', 'token'];
+    protected $allowedColumns = ['PatientID','patientName', 'email','dob','gender','contact','address', 'password', 'token'];
 
     public function validate($data)
     {
@@ -48,5 +48,9 @@ class Patient extends User
             'password' => $password
         ];
         return $this->insert($data);
+    }
+    public function getAllPatients(){
+        $query="SELECT * FROM $this->table ";
+        return $this->query($query);
     }
 }

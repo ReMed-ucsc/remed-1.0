@@ -35,10 +35,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                 </div>
             </div>
             <div class="Form">
-                <div>
-                    <label for="document">Document:</label>
-                    <input class="Input" type="file" id="document" name="document" >
-                </div>
+                
                 <div>
                     <label for="deliveryTime">Delivery Time:</label>
                     <select class="Input" id="deliveryTime" name="deliveryTime" required>

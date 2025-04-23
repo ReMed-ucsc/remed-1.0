@@ -24,7 +24,11 @@ require_once BASE_PATH . '/app/views/inc/header.view.php'
                         </li>
                         <li>
                             <label for="email">Email Address:</label><br>
-                            <input type="email" id="username" name="email" placeholder="Email" required>
+                            <input type="email" id="email" name="email" placeholder="Email" required>
+                        </li>
+                        <li>
+                            <label for="contactNo">Contact Number:</label><br>
+                            <input type="tel" id="contactNo" name="contactNo" placeholder="Contact Number" required>
                         </li>
                         <li>
                             <label for="password">Password:</label><br>

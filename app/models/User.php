@@ -70,4 +70,15 @@ class User
         ];
         return $this->insert($data);
     }
+    public function getlastId()
+    {
+        $sql = "SELECT COUNT(*) AS approved_count FROM $this->table";
+        $result = $this->query($sql);
+
+        if (is_array($result) && isset($result[0])) {
+            return $result[0]->approved_count; // Access the property as an object
+        }
+
+        return 0;
+    }
 }

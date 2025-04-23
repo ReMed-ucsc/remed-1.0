@@ -16,6 +16,7 @@ class PharmacyDetails
 
         // Get all pharmacies
         $PharmacyModel = new Pharmacy();
+        $Msg = $PharmacyModel->notification('pending');
         $pharmacy = $PharmacyModel->getPharmacies('APPROVED');
 
 
@@ -23,7 +24,8 @@ class PharmacyDetails
             'pharmacyName' => $name,
             'PharmacyID' => $PharmacyID,
             'authToken' => $authToken,
-            'pharmacy' => $pharmacy
+            'pharmacy' => $pharmacy,
+            'notification' => $Msg
         ];
 
 
@@ -38,6 +40,10 @@ class PharmacyDetails
         // $this->protectRoute();
 
         $pharmacyModel = new Pharmacy();
+        $driver = new Driver();
+
+        $MsgDriver = $driver->notificationDriver('pending');
+        $Msg = $pharmacyModel->notification('pending');
         $pharmacy = $pharmacyModel->first(['PharmacyId' => $id]);
 
 
@@ -46,7 +52,11 @@ class PharmacyDetails
             exit();
         }
 
-        $data = ['pharmacy' => $pharmacy];
+        $data = [
+            'notification' => $Msg,
+            'notificationDriver' => $MsgDriver,
+            'pharmacy' => $pharmacy
+        ];
 
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $data = [
@@ -57,6 +67,8 @@ class PharmacyDetails
                 'contactNo' => $_POST['contactNo'],
                 'email' => $_POST['email'],
                 'address' => $_POST['address'],
+                'notification' => $Msg,
+                'notificationDriver' => $MsgDriver,
                 'document' => $_FILES['document'] ?? null
             ];
 
@@ -93,7 +105,9 @@ class PharmacyDetails
                 'address' => $_POST['address'] ?? '',
                 'email' => $_POST['email'] ?? '',
                 'status' => 'APPROVED',
-                'document' => ''
+                'document' => '',
+                'latitude'=>$_POST['latitude'],
+                'longitude'=>$_POST['longitude']
             ];
 
             show($data);
@@ -142,4 +156,5 @@ class PharmacyDetails
         redirect('admin/PharmacyDetails');
         exit();
     }
+
 }

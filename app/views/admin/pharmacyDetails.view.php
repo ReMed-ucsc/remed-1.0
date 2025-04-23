@@ -2,15 +2,31 @@
 <?php require_once BASE_PATH . '/app/views/inc/navBar.view.php' ?>
 
 <body>
+    <div id="customConfirm" class="modal">
+        <div class="modal-content">
+            <p>Are you sure you want to delete this pharmacy?</p>
+            <div class="modal-buttons">
+                <button id="confirmYes" class="btn yes">Yes</button>
+                <button id="confirmNo" class="btn no">No</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Search Box Form -->
     <div class="above-table">
         <div class="search-container">
-            <input type="text" id="searchInput" class="search-box" placeholder="Search here...">
-            <img src="<?= ROOT ?>/assets/images/search.png" alt="icon">
-            <!-- <button class="search-button" onclick="performSearch()">Search</button> -->
+            <form id="search-form">
+                <input type="text" name="search" id="searchInput" class="search-box" placeholder="Search here... "
+                    value="<?php if (isset($_GET['search'])) {
+                        echo htmlspecialchars($_GET['search']);
+                    } ?>">
+                <button type="submit" class="search-button" onclick="performSearch()">Search</button>
+            </form>
+
         </div>
         <div>
-            <a class="add-btn" href="<?= ROOT ?>/admin/newPharmacy/"><img src="<?= ROOT ?>/assets/images/add.png" alt="" style="width:30px; height:auto; margin-right:5px;">Add Pharmacy</a>
+            <a class="add-btn" href="<?= ROOT ?>/admin/newPharmacy/"><img src="<?= ROOT ?>/assets/images/add.png" alt=""
+                    style="width:30px; height:auto; margin-right:5px;">Add Pharmacy</a>
         </div>
 
     </div>
@@ -45,7 +61,7 @@
             <?php if (empty($pharmacy)): ?>
                 <p>No data records found.</p>
             <?php else: ?>
-                <table>
+                <table class="table-container">
                     <thead>
                         <tr>
                             <th>Pharmacy ID</th>
@@ -54,7 +70,7 @@
                             <th>Contact Number</th>
                             <th>License</th>
                             <th>Approved Date</th>
-                            <th>Email</th>
+                            <!-- <th>Email</th> -->
                             <th>Address</th>
                             <th>Status</th>
                             <th>Actions</th>
@@ -70,14 +86,16 @@
                                     <td><?= htmlspecialchars($pharmacy_item->contactNo) ?></td>
                                     <td><?= htmlspecialchars($pharmacy_item->RegNo ?? '') ?></td>
                                     <td><?= htmlspecialchars($pharmacy_item->approvedDate ?? '') ?></td>
-                                    <td><?= htmlspecialchars($pharmacy_item->email ?? '') ?></td>
+                                    <!-- <td><?= htmlspecialchars($pharmacy_item->email ?? '') ?></td> -->
                                     <td><?= htmlspecialchars($pharmacy_item->address) ?></td>
                                     <td class="status statusA"><?= htmlspecialchars($pharmacy_item->status) ?></td>
                                     <td>
-                                        <a href="<?= ROOT ?>/admin/PharmacyDetails/edit/<?= htmlspecialchars($pharmacy_item->PharmacyID) ?>">
+                                        <a
+                                            href="<?= ROOT ?>/admin/PharmacyDetails/edit/<?= htmlspecialchars($pharmacy_item->PharmacyID) ?>">
                                             <img class="action edit" src="../../public/assets/images/pencil.png" alt="Edit" />
                                         </a>
-                                        <a href="#" onclick="confirmDelete('<?= ROOT ?>/admin/PharmacyDetails/delete/<?= $pharmacy_item->PharmacyID ?>')">
+                                        <a href="#"
+                                            onclick="confirmDelete('<?= ROOT ?>/admin/PharmacyDetails/delete/<?= $pharmacy_item->PharmacyID ?>')">
                                             <img class="action remove" src="../../public/assets/images/bin.png" alt="Delete" />
                                         </a>
                                     </td>

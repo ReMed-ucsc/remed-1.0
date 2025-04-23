@@ -2,13 +2,12 @@
 
 
 class Admin extends User
-
 {
     use Model;
 
     protected $table = 'admin';
 
-    protected $allowedColumns = ['id','username', 'email', 'password', 'token', 'level'];
+    protected $allowedColumns = ['id', 'username', 'email', 'contactNo', 'password', 'token', 'token_expiry'];
 
 
     // Validation method
@@ -19,6 +18,10 @@ class Admin extends User
         // Validate username
         if (empty($data['username'])) {
             $this->errors['username'] = "User name is required.";
+        }
+
+        if (empty($data['contactNo'])){
+            $this ->errors['contactNo']="Contact No is required.";
         }
 
         // Validate email
@@ -35,11 +38,12 @@ class Admin extends User
     }
 
     // Method to register an admin
-    public function registerAdmin($username, $email, $password)
+    public function registerAdmin($username, $email, $contactNo, $password)
     {
         $data = [
             'username' => $username,
             'email' => $email,
+            'contactNo'=>$contactNo,
             'password' => password_hash($password, PASSWORD_DEFAULT), // Hash password for security
             'token' => bin2hex(random_bytes(16)), // Generate a random 32-character token
         ];
@@ -69,18 +73,14 @@ class Admin extends User
         $data = ['fcmToken' => $fcmToken];
         $this->update($email, $data, 'email');
     }
-    public function get_admin(){
+    public function get_admin()
+    {
         $sql = "Select * FROM $this->table LIMIT 1";
-        $res =  $this->query($sql);
-        if(is_array($res) && count($res)){
+        $res = $this->query($sql);
+        if (is_array($res) && count($res)) {
             return $res[0];
         }
         return false;
     }
-    //  public function get_admin($id)
-    // {
-    //     $data = ['id' => $id];
-    //     return $this->first($data, []);
-    // }
 
 }

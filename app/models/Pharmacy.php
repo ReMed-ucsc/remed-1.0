@@ -54,17 +54,6 @@ class Pharmacy extends User
         return $this->first($data);
     }
 
-    // function checkLicenseNumberUnique($licenseNumber)
-    // {
-    //     // Assuming you have a database connection $db
-    //     global $db;
-    //     $query = $db->prepare("SELECT COUNT(*) FROM pharmacy WHERE license = ?");
-    //     $query->execute([$licenseNumber]);
-    //     $count = $query->fetchColumn();
-
-    //     return $count == 0;
-    // }
-
     function validate($data)
     {
         $this->errors = []; // Reset errors
@@ -83,11 +72,6 @@ class Pharmacy extends User
         if (!is_numeric($data['contactNo']) || strlen($data['contactNo']) < 10) {
             $this->errors['contactNo'] = "Invalid contact number.";
         }
-
-        // Check if license is unique
-        // if (!$this->checkLicenseNumberUnique($data['license'])) {
-        //     $this->errors['license'] = "License number already exists.";
-        // }
 
         return empty($this->errors); // Pass if no errors
     }
@@ -125,20 +109,20 @@ class Pharmacy extends User
         $sql = "Select * FROM $this->table where status = :status";
         return $this->query($sql, ['status' => $status]);
     }
-
-    // public function pendingPharmacy()
-    // {
-    //     $sql = "SELECT * FROM $this->table WHREE status='Pending'";
-    //     $pendingPharmacies = $this->table->query($sql)->fetchAll();
-
-    //     require_once BASE_PATH ."/app/views/admin/pendingPharmacy.view.php";
-    // }
-    public function getlastId()
+    public function getlastId($status="APPROVED")
     {
-        $sql = "SELECT MAX(PharmacyId) AS last_id FROM $this->table WHERE  status = 'APPROVED'";
-        return $this->query($sql);
-    }
+        $sql = "SELECT COUNT(*) AS approved_count FROM $this->table WHERE status = :status";
+        $result = $this->query($sql, ['status' => $status]);
 
+        if (is_array($result) && isset($result[0])) {
+            return $result[0]->approved_count; // Access the property as an object
+        }
+        return 0;
+    }
+    public function notification($status="pending"){
+        $sql="SELECT name , PharmacyID FROM $this->table WHERE status = :status LIMIT 5";
+        return $this->query($sql,['status'=> $status]);
+    }
 
     public function searchNearbyPharmacy($latitude, $longitude, $range = 10)
     {

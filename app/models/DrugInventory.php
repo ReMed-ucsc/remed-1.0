@@ -26,21 +26,31 @@ class DrugInventory
         return $this->updateWithConditions($data, $conditions);
     }
 
-    public function addDrug($threshold, $storageLocation, $storageConditions, $unitPrice)
+    public function addDrug($productId, $pharmacyId, $stockQuantity, $threshold, $storageLocation, $storageConditions, $unitPrice)
     {
-        $query = "INSERT INTO drugInventory (drugInventory.thresholdLimit,drugInventory.storageLocation,drugInventory.storageConditions,drugInventory.unitPrice) 
-        VALUES
-        (:InventoryId,:thresholdLimit,:storageLocation,:storageConditions,:unitPrice)";
+        // $query = "INSERT INTO drugInventory (ProductID, PharmacyID, availableCount, drugInventory.thresholdLimit,drugInventory.storageLocation,drugInventory.storageConditions,drugInventory.unitPrice) 
+        // VALUES
+        // (:ProductID, :PharmacyID, :availableCount, :thresholdLimit,:storageLocation,:storageConditions,:unitPrice)";
 
         $data = [
             // 'InventoryId' => $inventoryId,
+            'ProductID' => $productId,
+            'PharmacyID' => $pharmacyId,
+            'availableCount' => $stockQuantity,
             'thresholdLimit' => $threshold,
             'storageLocation' => $storageLocation,
             'storageConditions' => $storageConditions,
             'unitPrice' => $unitPrice
         ];
 
-        $results = $this->query($query, $data);
-        return $results;
+        $success = $this->insert($data);
+
+        // If the insertion was successful, retrieve the last inserted ID
+        if ($success) {
+            return $this->lastInsertId();
+        }
+
+        // Return false if the insertion failed
+        return false;
     }
 }

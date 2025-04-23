@@ -130,10 +130,10 @@
 
       </div>
       <div class="submit-section">
-        <button type="submit" form="inventoryForm" class="proceed">
-          <a href="<?= ROOT ?>/inventoryView" style="text-decoration: none; color:black;">
-            Update
-          </a>
+        <button type="submit" class="proceed">
+          <!-- <a href="<?= ROOT ?>/inventoryView/edit/<?= $inventory->InventoryId ?>" style="text-decoration: none; color:black;"> -->
+          Update
+          <!-- </a> -->
         </button>
         </form>
       </div>

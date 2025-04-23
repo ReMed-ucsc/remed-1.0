@@ -28,16 +28,14 @@ class InventoryCreate
     {
         $stock = new StockDataView();
         $drug = new DrugInventory();
+        $pharmacyId = $_SESSION['user_id'];
 
-        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        if ($_SERVER['REQUEST_METHOD'] == "POST" && $_POST['productId']) {
 
 
 
             $data = [
-                'productName'        => $_POST['productName'],
-                'manufacturer'       => $_POST['manufacturer'],
-                'genericName'        => $_POST['genericName'],
-                'category'           => $_POST['category'],
+                'productId'        => $_POST['productId'],
                 'batchId'            => $_POST['batchID'] ?? '',
                 'stockQuantity'      => $_POST['stockQuantity'] ?? '',
                 'thresholdLimit'     => $_POST['thresholdLimit'] ?? '',
@@ -50,8 +48,10 @@ class InventoryCreate
                 'sellingPrice'       => $_POST['sellingPrice'] ?? ''
             ];
 
-            $ChangedInventoryId = $drug->addDrug(
-
+            $InventoryId = $drug->addDrug(
+                $data['productId'],
+                $pharmacyId,
+                $data['stockQuantity'],
                 $data['thresholdLimit'],
                 $data['storageLocation'],
                 $data['storageConditions'],
@@ -59,17 +59,24 @@ class InventoryCreate
             );
 
             // Call to add stock and drug information
-            $stock->addStock(
-                $ChangedInventoryId,
-                $data['stockQuantity'],
-                $data['manufacturingDate'],
-                $data['expiryDate'],
-                $data['purchaseCost'],
-                $data['purchaseDate'], // purchaseDate (current date)
-                $data['batchId']
-            );
-            $this->view('pharmacy/InventoryCreate', ['inventoryForm' => $data]);
+            if ($InventoryId) {
+                $stockID = $stock->addStock(
+                    $InventoryId,
+                    $data['stockQuantity'],
+                    $data['manufacturingDate'],
+                    $data['expiryDate'],
+                    $data['purchaseCost'],
+                    $data['purchaseDate'], // purchaseDate (current date)
+                    $data['batchId']
+                );
+
+                if ($stockID) {
+                    redirect('inventoryView/' . $InventoryId);
+                    exit;
+                }
+            }
         }
+        redirect('inventoryCreate');
     }
 
     // public function addItem()

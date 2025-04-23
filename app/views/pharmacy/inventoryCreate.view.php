@@ -55,27 +55,14 @@
         Add to Inventory
       </div>
       <div class="order-body">
-
-        <div class="search-bar">
-          <form action="<?= ROOT ?>/inventoryCreate/addItem" method="post">
-            <input type="hidden" id="medicine-id" name="medicineId" value="" />
-            <input type="text" id="medicine-search" placeholder="Search by medicine or generic name..." />
-            <input type="text" id="medicine-quantity" name="quantity" placeholder="Quantity" />
-            <button id="add-medicine" type="submit">Add</button>
-          </form>
-        </div>
-        <div id="search-results" class="search-results"></div>
-
-
-
-        <form id="inventoryForm" method="POST" action="<?= ROOT ?>/inventoryCreate/addItem/<?= $InventoryId ?>">
+        <form id="inventoryForm" action="<?php echo ROOT; ?>/inventoryCreate/addItem" method="POST">
           <div class="inventoryDetails size2">
             <div class="left">
               <ul>
                 <li>Medicine Name</li>
-                <li>Brand Name</li>
+                <!-- <li>Brand Name</li>
                 <li>Generic Name</li>
-                <li>Category</li>
+                <li>Category</li> -->
                 <li>Batch No</li>
                 <li>Stock Quantity</li>
                 <li>Reorder Level</li>
@@ -91,8 +78,10 @@
 
             <div class="right">
               <ul>
+                <input type="hidden" id="medicine-id" name="productId" value="" />
                 <li><input type="text" id="productName" name="productName" placeholder="Auto"></li>
-                <li><input type="text" id="manufacturer" name="manufacturer" placeholder="Auto"></li>
+                <div id="search-results" class="search-results"></div>
+                <!-- <li><input type="text" id="manufacturer" name="manufacturer" placeholder="Auto"></li>
                 <li><input type="text" id="genericName" name="genericName" placeholder="Auto"></li>
                 <li>
                   <select id="category" name="category">
@@ -100,7 +89,7 @@
                     <option value="Prescription">Prescription</option>
                     <option value="Supplement">Supplement</option>
                   </select>
-                </li>
+                </li> -->
                 <li><input type="text" name="batchID" placeholder="Auto"></li>
                 <li><input type="number" name="stockQuantity" placeholder="Enter quantity"></li>
                 <li><input type="text" name="thresholdLimit" placeholder="Suggest"></li>
@@ -109,8 +98,8 @@
                 <li><input type="date" name="expiryDate"></li>
                 <li><input type="date" name="purchaseDate"></li>
                 <li><input type="text" name="storageCondition" placeholder="Optional"></li>
-                <li><input type="number" name="purchasePrice"></li>
-                <li><input type="number" id="unitPrice" name="sellingPrice"></li>
+                <li><input type="text" name="purchasePrice"></li>
+                <li><input type="text" id="unitPrice" name="sellingPrice"></li>
               </ul>
             </div>
           </div>
@@ -118,7 +107,6 @@
           <!-- <div class="submit-section">
           <button type="submit">Add to Inventory</button>
         </div> -->
-        </form>
 
 
 
@@ -131,7 +119,7 @@
 
     <div class="right-section">
       <div class="chat-box">
-        <div class="id">
+        <!-- <div class="id">
           <div class="input-group">
             <label>Stock ID</label>
             <input type="text" placeholder="Value" value="" disabled>
@@ -140,16 +128,16 @@
             <label>Invoice ID</label>
             <input type="text" placeholder="Value" value="" disabled>
           </div>
-        </div>
+        </div> -->
         <!-- Sample chat messages -->
         <div class="chat-messages">
           <div class="display-area" id="displayArea">
             <!-- <p>Click an image to enlarge it here</p> -->
             <!-- <img src="<?= ROOT ?>/assets/images/prescription2.jpg" alt=""> -->
-            <div class="upload">
+            <!-- <div class="upload">
               <label for="fileUpload" class="customUpload">Upload Invoice</label>
               <input type="file" id="fileUpload">
-            </div>
+            </div> -->
 
 
           </div>
@@ -159,15 +147,18 @@
 
 
         <button id="addInventoryBtn" class="proceed" type="submit">
-          <a href="<?= ROOT ?>/order/edit" style="text-decoration: none; color:black;">
-            Add to Inventory
-          </a>
+          Add to Inventory
         </button>
+        </form>
 
       </div>
     </div>
     <!-- </div> -->
 
+    <script>
+      const pharmacyId = <?= $_SESSION['user_id'] ?>;
+      console.log(pharmacyId)
+    </script>
     <!-- <script src="<?= ROOT ?>/assets/js/pharmacy/orderView.js"></script> -->
     <script src="<?= ROOT ?>/assets/js/pharmacy/orderMain.js"></script>
     <script src="<?= ROOT ?>/assets/js/pharmacy/orderView.js"></script>

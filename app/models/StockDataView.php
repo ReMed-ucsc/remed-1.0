@@ -4,7 +4,7 @@ class StockDataView
 {
     use Model;
 
-    protected $table = ['stockPurchase'];
+    protected $table = 'stockPurchase';
     protected $allowedColumns = ['StockID', 'InventoryID', 'stockQuantity', 'manufacturingDate', 'expiryDate', 'purchaseDate', 'purchaseCost', 'batchNumber'];
     protected $order_column = ['StockID'];
 
@@ -31,16 +31,17 @@ class StockDataView
         return $result;
     }
 
-    public function addStock($stockQuantity, $manufacturerDate, $expiryDate, $purchaseCost, $purchaseDate, $batchNumber)
+    public function addStock($inventoryID, $stockQuantity, $manufacturerDate, $expiryDate, $purchaseCost, $purchaseDate, $batchNumber)
     {
-        $query = "
-            INSERT INTO stockPurchase (stockPurchase.InventoryID,stockPurchase.stockQuantity,stockPurchase.manufacturingDate,stockPurchase.expiryDate,stockPurchase.purchaseDate,stockPurchase.purchaseCost,stockPurchase.batchNumber)
-            Values
-    (:InventoryID,:stockQuantity,:manufacturingDate,:expiryDate,:purchaseDate,:purchaseCost, :batchNumber)
-            
-        ";
+        //     $query = "
+        //         INSERT INTO stockPurchase (stockPurchase.InventoryID,stockPurchase.stockQuantity,stockPurchase.manufacturingDate,stockPurchase.expiryDate,stockPurchase.purchaseDate,stockPurchase.purchaseCost,stockPurchase.batchNumber)
+        //         Values
+        // (:InventoryID,:stockQuantity,:manufacturingDate,:expiryDate,:purchaseDate,:purchaseCost, :batchNumber)
+
+        //     ";
 
         $data = [
+            'InventoryID' => $inventoryID,
             'stockQuantity' => $stockQuantity,
             'manufacturingDate' => $manufacturerDate,
             'expiryDate' => $expiryDate,
@@ -49,9 +50,15 @@ class StockDataView
             'batchNumber' => $batchNumber
         ];
 
-        $result = $this->query($query, $data);
+        $success = $this->insert($data);
 
-        return $result;
+        // If the insertion was successful, retrieve the last inserted ID
+        if ($success) {
+            return $this->lastInsertId();
+        }
+
+        // Return false if the insertion failed
+        return false;
     }
 
     public function getPurchaseHistory($inventoryID)

@@ -53,4 +53,14 @@ class Patient extends User
         $query="SELECT * FROM $this->table ";
         return $this->query($query);
     }
+    public function getlastId()
+    {
+        $sql = "SELECT COUNT(*) AS patient_count FROM $this->table";
+        $result = $this->query($sql);
+
+        if (is_array($result) && isset($result[0])) {
+            return $result[0]->patient_count; // Access the property as an object
+        }
+        return 0;
+    }
 }

@@ -287,6 +287,24 @@
                 </a>
               </button>
 
+            <?php
+            }
+          } else if (isset($data['order']) && $data['order']->status == 'A' && !$order->pickup) {
+            if ($order->paymentReceived) {
+            ?>
+
+
+              <button class="proceed">
+                <a href="<?= ROOT ?>/order/updateOrderStatus/<?= $order->OrderID ?>/WD" style="text-decoration: none; color:black;">
+                  Send for delivery
+                </a>
+              </button>
+            <?php
+            } else { ?>
+
+              <!-- style should change here -->
+
+              Waiting for payment Completion
           <?php
             }
           }

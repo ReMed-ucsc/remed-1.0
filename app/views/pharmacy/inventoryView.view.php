@@ -63,7 +63,7 @@
                 <li>Expiry Date</li>
                 <li>Storage Conditions</li>
                 <li>Purchase Price</li>
-                <li>Selling Price</li>
+                <li>Unit Price</li>
               </ul>
             </div>
 
@@ -81,12 +81,12 @@
                 <li><input type="date" name="manufacturingDate" value="<?= date('Y-m-d', strtotime($inventory->manufacturingDate)) ?>" disabled></li>
                 <li><input type="date" name="expiryDate" value="<?= date('Y-m-d', strtotime($inventory->expiryDate)) ?>" disabled></li>
                 <li><input type="text" name="storageConditions" value="<?= htmlspecialchars($inventory->storageConditions) ?>" placeholder="Optional"></li>
-                <?php
-                $unitCost = (($inventory->availableCount) - ($inventory->LastStockQuantity)) > 0
-                  ? $inventory->purchaseCost / ($inventory->availableCount - $inventory->LastStockQuantity)
-                  : 0;
-                ?>
-                <li><input type="number" name="purchaseCost" value="<?= htmlspecialchars($unitCost) ?>" disabled></li>
+                <!-- <?php
+                      $unitCost = (($inventory->availableCount) - ($inventory->LastStockQuantity)) > 0
+                        ? $inventory->purchaseCost / ($inventory->availableCount - $inventory->LastStockQuantity)
+                        : 0;
+                      ?> -->
+                <li><input type="number" name="purchaseCost" value="<?= htmlspecialchars($inventory->purchaseCost) ?>" disabled></li>
                 <li><input type="number" name="sellingPrice" value="<?= htmlspecialchars($inventory->SellingPrice) ?>"></li>
 
               </ul>

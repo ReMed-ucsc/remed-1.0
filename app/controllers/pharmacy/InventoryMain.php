@@ -31,7 +31,7 @@ class InventoryMain
         $inventoryModel = new StockInventoryDetails();
         $inventory = $inventoryModel->getInventoryByPharmacy($pharmacyID);
 
-        //pass the data to the view
+
         $this->view('pharmacy/inventoryMain', ['inventories' => $inventory]);
     }
     // public function read()

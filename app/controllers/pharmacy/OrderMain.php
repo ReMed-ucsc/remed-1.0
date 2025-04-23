@@ -32,18 +32,18 @@ class OrderMain
         $orders = $orderModel->getOrdersByPharmacy($pharmacyID);
         // $orders = $orderModel->getOrderDetails();
 
-        // Pass the data to the view
+
         $this->View('pharmacy/orderMain', ['orders' => $orders]);
     }
 
-    public function read()
-    {
-        $orderModel = new MedicineOrder();
-        $orders = $orderModel->getOrderDetails();
+    // public function read()
+    // {
+    //     $orderModel = new MedicineOrder();
+    //     $orders = $orderModel->getOrderDetails();
 
-        // Pass the data to the view
-        $this->View('pharmacy/orderMain', ['orders' => $orders]);
-    }
+    //     // Pass the data to the view
+    //     $this->View('pharmacy/orderMain', ['orders' => $orders]);
+    // }
 
     // add other methods like edit, update, delete, etc.
 }

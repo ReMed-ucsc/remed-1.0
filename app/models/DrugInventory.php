@@ -25,4 +25,22 @@ class DrugInventory
 
         return $this->updateWithConditions($data, $conditions);
     }
+
+    public function addDrug($threshold, $storageLocation, $storageConditions, $unitPrice)
+    {
+        $query = "INSERT INTO drugInventory (drugInventory.thresholdLimit,drugInventory.storageLocation,drugInventory.storageConditions,drugInventory.unitPrice) 
+        VALUES
+        (:InventoryId,:thresholdLimit,:storageLocation,:storageConditions,:unitPrice)";
+
+        $data = [
+            // 'InventoryId' => $inventoryId,
+            'thresholdLimit' => $threshold,
+            'storageLocation' => $storageLocation,
+            'storageConditions' => $storageConditions,
+            'unitPrice' => $unitPrice
+        ];
+
+        $results = $this->query($query, $data);
+        return $results;
+    }
 }

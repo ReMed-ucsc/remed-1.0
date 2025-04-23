@@ -57,18 +57,18 @@
       <div class="order-body">
 
         <div class="search-bar">
-          <form action="<?= ROOT ?>/inventoryCreate" method="post">
+          <form action="<?= ROOT ?>/inventoryCreate/addItem" method="post">
             <input type="hidden" id="medicine-id" name="medicineId" value="" />
             <input type="text" id="medicine-search" placeholder="Search by medicine or generic name..." />
             <input type="text" id="medicine-quantity" name="quantity" placeholder="Quantity" />
-            <button id="add-medicine">Add</button>
+            <button id="add-medicine" type="submit">Add</button>
           </form>
         </div>
         <div id="search-results" class="search-results"></div>
 
 
 
-        <form id="inventoryForm" method="POST" action="<?= ROOT ?>/inventoryCreate">
+        <form id="inventoryForm" method="POST" action="<?= ROOT ?>/inventoryCreate/addItem/<?= $InventoryId ?>">
           <div class="inventoryDetails size2">
             <div class="left">
               <ul>
@@ -82,6 +82,7 @@
                 <li>Storage Location</li>
                 <li>Manufacturing Date</li>
                 <li>Expiry Date</li>
+                <li>Purchase Date</li>
                 <li>Storage Conditions</li>
                 <li>Purchase Price</li>
                 <li>Selling Price</li>
@@ -90,11 +91,11 @@
 
             <div class="right">
               <ul>
-                <li><input type="text" name="ProductName" placeholder="Auto"></li>
-                <li><input type="text" name="Manufacturer" placeholder="Auto"></li>
-                <li><input type="text" name="genericName" placeholder="Auto"></li>
+                <li><input type="text" id="productName" name="productName" placeholder="Auto"></li>
+                <li><input type="text" id="manufacturer" name="manufacturer" placeholder="Auto"></li>
+                <li><input type="text" id="genericName" name="genericName" placeholder="Auto"></li>
                 <li>
-                  <select name="category">
+                  <select id="category" name="category">
                     <option value="Over the Counter">Over the Counter</option>
                     <option value="Prescription">Prescription</option>
                     <option value="Supplement">Supplement</option>
@@ -102,13 +103,14 @@
                 </li>
                 <li><input type="text" name="batchID" placeholder="Auto"></li>
                 <li><input type="number" name="stockQuantity" placeholder="Enter quantity"></li>
-                <li><input type="text" name="reorderLevel" placeholder="Suggest"></li>
+                <li><input type="text" name="thresholdLimit" placeholder="Suggest"></li>
                 <li><input type="text" name="storageLocation" placeholder="Search and Select"></li>
                 <li><input type="date" name="manufacturingDate"></li>
                 <li><input type="date" name="expiryDate"></li>
+                <li><input type="date" name="purchaseDate"></li>
                 <li><input type="text" name="storageCondition" placeholder="Optional"></li>
                 <li><input type="number" name="purchasePrice"></li>
-                <li><input type="number" name="sellingPrice"></li>
+                <li><input type="number" id="unitPrice" name="sellingPrice"></li>
               </ul>
             </div>
           </div>
@@ -166,7 +168,7 @@
     </div>
     <!-- </div> -->
 
-    <script src="<?= ROOT ?>/assets/js/pharmacy/orderCreate.js"></script>
+    <!-- <script src="<?= ROOT ?>/assets/js/pharmacy/orderView.js"></script> -->
     <script src="<?= ROOT ?>/assets/js/pharmacy/orderMain.js"></script>
     <script src="<?= ROOT ?>/assets/js/pharmacy/orderView.js"></script>
     <script src="<?= ROOT ?>/assets/js/pharmacy/inventory.js"></script>

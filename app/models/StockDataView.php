@@ -31,20 +31,21 @@ class StockDataView
         return $result;
     }
 
-    public function addStock($inventoryID, $stockQuantity, $manufacturerDate, $wxpiryDate, $purchaseCost, $purchaseDate, $batchNumber)
+    public function addStock($stockQuantity, $manufacturerDate, $expiryDate, $purchaseCost, $purchaseDate, $batchNumber)
     {
         $query = "
-            INSERT INTO stockPurchase (stockPurchase.InventoryID,stockPurchase.stockQuantity,stockPurchase.manufacturingDate,stockPurchase.expiryDate,stockPurchase.purchaseDate,stockPurchase.purchaseCost,stockPurchase.batchNumber);
+            INSERT INTO stockPurchase (stockPurchase.InventoryID,stockPurchase.stockQuantity,stockPurchase.manufacturingDate,stockPurchase.expiryDate,stockPurchase.purchaseDate,stockPurchase.purchaseCost,stockPurchase.batchNumber)
+            Values
+    (:InventoryID,:stockQuantity,:manufacturingDate,:expiryDate,:purchaseDate,:purchaseCost, :batchNumber)
             
         ";
 
         $data = [
-            'InventoryID' => $inventoryID,
             'stockQuantity' => $stockQuantity,
             'manufacturingDate' => $manufacturerDate,
-            'expiryDate' => $wxpiryDate,
-            'purchaseDate' => $purchaseCost,
-            'purchaseCost' => $purchaseDate,
+            'expiryDate' => $expiryDate,
+            'purchaseDate' => $purchaseDate,
+            'purchaseCost' => $purchaseCost,
             'batchNumber' => $batchNumber
         ];
 

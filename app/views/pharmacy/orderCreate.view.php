@@ -153,29 +153,33 @@
         </div>
       </div>
       <div class="submit-section">
-        <!-- <?php if ($viewOnly) { ?>
-        <button class="edit-order">
-          <a href="<?= ROOT ?>/order/edit" style="text-decoration: none; color:white;">
-            Edit Order
-          </a>
-        </button>
-        </form>
-        <button class="delete-order">Delete Order</button>
-      <?php } else {  ?>
-        <button class="delete-order">
-          <a href="<?= ROOT ?>/order/" style="text-decoration: none; color:white;">
-            Cancel
-          </a>
-        </button>
 
-      <?php } ?> -->
 
-        <button class="proceed">
-          <a href="<?= ROOT ?>/order/edit" style="text-decoration: none; color:black;">
-            Proceed
-          </a>
-        </button>
+        <?php if (isset($data['orderDetails']) && $data['orderDetails']->status == 'Q') { ?>
+          Payment Method:
 
+          <div class="button-container">
+            <button class="">
+              <a href="<?= ROOT ?>/orderCreate/updateOrderStatus/<?= $OrderID ?>/A/cash" style="text-decoration: none; color:black;">
+                Card
+              </a>
+            </button>
+            <button class="">
+              <a href="<?= ROOT ?>/orderCreate/updateOrderStatus/<?= $OrderID ?>/A/card" style="text-decoration: none; color:black;">
+                Cash
+              </a>
+            </button>
+          <?php }   ?>
+
+          </div>
+
+          <?php if (isset($data['orderDetails']) && $data['orderDetails']->status == 'W') { ?>
+            <button class="proceed">
+              <a href="<?= ROOT ?>/orderCreate/updateOrderStatus/<?= $OrderID ?>/Q" style="text-decoration: none; color:black;">
+                Proceed
+              </a>
+            </button>
+          <?php } ?>
       </div>
     </div>
     <!-- </div> -->

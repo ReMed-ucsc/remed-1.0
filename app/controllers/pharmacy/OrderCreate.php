@@ -11,6 +11,7 @@ class OrderCreate
         // If we have an order ID, fetch the order items
         if ($data['OrderID']) {
             $orderListModel = new OrderView();
+            $data['orderDetails'] = $orderListModel->getOrderDetails($data['OrderID']);
             $data['orderItems'] = $orderListModel->getOrderMedicines($data['OrderID']);
             $data['totalPrice'] = $this->calculateTotalPrice($data['orderItems']);
         } else {
@@ -113,6 +114,22 @@ class OrderCreate
 
             $medicineListModel = new OrderList();
             $medicineListModel->deleteItem($orderId, $itemId);
+
+            redirect("orderCreate/?OrderID=$orderId");
+        } else {
+            redirect("orderCreate");
+        }
+    }
+
+    public function updateOrderStatus($orderId, $status, $paymentMethod = null)
+    {
+        if ($paymentMethod) {
+            $orderModel = new MedicineOrder();
+            $orderModel->setPaymentMethod($orderId, $paymentMethod);
+        }
+        if ($orderId && $status) {
+            $orderModel = new MedicineOrder();
+            $orderModel->updateOrderStatus($orderId, $status);
 
             redirect("orderCreate/?OrderID=$orderId");
         } else {

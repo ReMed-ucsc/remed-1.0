@@ -82,5 +82,23 @@ class Admin extends User
         }
         return false;
     }
+    public function findByEmail($email) {
+        return $this->get_row("SELECT * FROM $this->table WHERE email = ?", [$email]);
+    }
+
+    public function findByToken($token) {
+        return $this->get_row("SELECT * FROM $this->table WHERE token = ?", [$token]);
+    }
+
+    public function saveResetToken($email, $token) {
+        $query = "UPDATE $this->table SET token = :token, token_expiry = NOW() + INTERVAL 10 MINUTE WHERE email = :email";
+        return $this->query($query, ['token' => $token, 'email' => $email]);
+    }
+
+    public function resetPassword($token, $password) {
+        $query = "UPDATE $this->table SET password = :password, token_expiry = NULL 
+                  WHERE token = :token AND token_expiry > NOW()";
+        return $this->query($query, ['password' => $password, 'token' => $token]);
+    }
 
 }

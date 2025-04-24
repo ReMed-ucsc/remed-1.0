@@ -14,6 +14,13 @@ class StockInventoryDetails
         return $this->first(['InventoryId' => $inventoryID]);
     }
 
+    public function checkPharmacyInventory($inventoryID, $pharmacyID)
+    {
+        $query = "SELECT * FROM $this->table WHERE InventoryId = :InventoryId AND PharmacyID = :PharmacyID";
+        $data = ['InventoryId' => $inventoryID, 'PharmacyID' => $pharmacyID];
+        return $this->query($query, $data);
+    }
+
     public function getInventoryMedicines($inventoryID)
     {
         $where = ['InventoryId' => $inventoryID];

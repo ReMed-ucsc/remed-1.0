@@ -42,7 +42,7 @@ class OrderCreate
         $orderModel = new MedicineOrder();
 
         $patientId = 0; // Unregistered patient
-        $destination = null;
+        $destination = "Physical Order";
         $pickup = 1;
         $prescription = null;
         $destinationLat = null;

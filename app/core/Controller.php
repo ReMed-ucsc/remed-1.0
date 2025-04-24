@@ -55,36 +55,16 @@ trait Controller
         return $_SESSION[$key] ?? null;
     }
 
-    // Destroy the session
-    public function destroySession()
-    {
-        $this->startSession();
-
-        // Clear all session variables
-        $_SESSION = array();
-
-        // If it's desired to kill the session, also delete the session cookie
-        if (ini_get("session.use_cookies")) {
-            $params = session_get_cookie_params();
-            setcookie(
-                session_name(),
-                '',
-                time() - 42000,
-                $params["path"],
-                $params["domain"],
-                $params["secure"],
-                $params["httponly"]
-            );
-        }
-
-        // Finally, destroy the session
-        session_destroy();
-    }
 
     // Check if a user is authenticated
     public function isAuthenticated()
     {
         $this->startSession();
+
+        if (!isset($_SESSION['isAdmin'])) {
+            return false;
+        }
+
         $userIdType = $_SESSION['isAdmin'] ? 'id' : 'user_id';
         return isset($_SESSION[$userIdType]) && !empty($_SESSION[$userIdType]);
     }
@@ -162,5 +142,55 @@ trait Controller
             redirect('admin/dashboard'); // Redirect to admin area
             exit();
         }
+    }
+
+    public function preventCaching()
+    {
+        header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+        header("Cache-Control: post-check=0, pre-check=0", false);
+        header("Pragma: no-cache");
+        header("Expires: Wed, 01 Jan 1997 00:00:00 GMT");
+    }
+
+    // Destroy the session
+    public function destroySession()
+    {
+        $this->startSession();
+
+        // Clear all session variables
+        $_SESSION = array();
+
+        // If it's desired to kill the session, also delete the session cookie
+        if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(
+                session_name(),
+                '',
+                time() - 42000,
+                $params["path"],
+                $params["domain"],
+                $params["secure"],
+                $params["httponly"]
+            );
+        }
+
+        // Finally, destroy the session
+        session_destroy();
+    }
+
+    public function secureLogout()
+    {
+        $this->destroySession();
+
+        // Prevent caching
+        $this->preventCaching();
+
+        // Force a new session ID
+        session_regenerate_id(true);
+
+        // Redirect with a random parameter to prevent caching of the redirect
+        $randomParam = md5(uniqid(mt_rand(), true));
+        redirect('login?nocache=' . $randomParam);
+        exit();
     }
 }

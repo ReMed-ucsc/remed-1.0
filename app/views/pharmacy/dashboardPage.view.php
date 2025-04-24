@@ -253,7 +253,7 @@
     </section>
 
     <script>
-      const stockLevel = <?= json_encode([$stockLevels]) ?>;
+      const stockLevel = <?= json_encode($stockLevels) ?>;
       console.log(stockLevel);
     </script>
     <script src="<?= ROOT ?>/assets/js/pharmacy/dashboardPage.js"></script>

@@ -1,37 +1,63 @@
 <?php
-require_once BASE_PATH.'/app/views/inc/header.view.php';
-require_once BASE_PATH.'/app/views/inc/navBar.view.php';
+require_once BASE_PATH . '/app/views/inc/header.view.php';
+require_once BASE_PATH . '/app/views/inc/navBar.view.php';
 ?>
 
 <body>
-<h2 class="page-title">Admin Account Management</h2>
+    <h2 class="page-title">Admin Account Management</h2>
 
-<div class="details-container">
-    <form class="Form" action="" method="POST">
-        <div>
-            <label for="name">Name:</label>
-            <input class="Input" type="text" id="name" name="username" placeholder="Enter name" value="<?= htmlspecialchars($admin->username) ?>" required>
-        </div>
+    <div class="details-container">
+        <form class="Form" action="" method="POST">
 
-        <div>
-            <label for="email">Email:</label>
-            <input class="Input" type="email" id="email" name="email" placeholder="Enter email" value="<?= htmlspecialchars($admin->email) ?>" required>
-        </div>
 
-        <div>
-            <label for="password">Password:</label>
-            <input class="Input" type="password" id="password" name="password" placeholder="Enter password" value="<?= htmlspecialchars($admin->password) ?>" required>
-        </div>
 
-        <div>
-            <label for="confirm_password">Confirm password:</label>
-            <input class="Input" type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter password" required>
-        </div>
+            <div>
+                <label for="name">Name:</label>
+                <input class="Input" type="text" id="name" name="username" placeholder="Enter name"
+                    value="<?= isset($data['username']) ? htmlspecialchars($data['username']) : '' ?>" required>
+                <?php if (!empty($data['errors']['username'])): ?>
+                    <p style="color:red"><?= htmlspecialchars($data['errors']['username']) ?></p>
+                <?php endif; ?>
+            </div>
 
-        <div>
-            <button type="submit" class="btn-green">Save changes</button>
-        </div>
-    </form>
-</div>
+            <div>
+                <label for="email">Email:</label>
+                <input class="Input" type="email" id="email" name="email" placeholder="Enter email"
+                    value="<?= isset($data['email']) ? htmlspecialchars($data['email']) : '' ?>" required>
+                <?php if (!empty($data['errors']['email'])): ?>
+                    <p style="color:red"><?= htmlspecialchars($data['errors']['email']) ?></p>
+                <?php endif; ?>
+            </div>
 
-<?php require_once BASE_PATH.'/app/views/inc/footer.view.php'; ?>
+            <div>
+                <label for="contactNo">ContactNo:</label>
+                <input class="Input" type="tel" id="contactNo" name="contactNo" placeholder="Enter Contact No"
+                    value="<?= isset($data['contactNo']) ? htmlspecialchars($data['contactNo']) : '' ?>" required>
+                <?php if (!empty($data['errors']['contactNo'])): ?>
+                    <p style="color:red"><?= htmlspecialchars($data['errors']['contactNo']) ?></p>
+                <?php endif; ?>
+            </div>
+
+            <div>
+                <label for="password">Password:</label>
+                <input class="Input" type="password" id="password" name="password" placeholder="Enter password"
+                    required>
+            </div>
+
+            <div>
+                <label for="confirm_password">Confirm password:</label>
+                <input class="Input" type="password" id="confirm_password" name="confirm_password"
+                    placeholder="Re-enter password" required>
+            </div>
+
+            <?php if (!empty($data['errors']['password'])): ?>
+                <p style="color:red"><?= htmlspecialchars($data['errors']['password']) ?></p>
+            <?php endif; ?>
+
+            <div>
+                <button type="submit" class="btn-green">Save changes</button>
+            </div>
+        </form>
+    </div>
+
+    <?php require_once BASE_PATH . '/app/views/inc/footer.view.php'; ?>

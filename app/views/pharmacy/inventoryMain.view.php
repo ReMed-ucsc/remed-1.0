@@ -55,6 +55,7 @@
         </button>
       </div>
 
+      <!-- <?php show($data) ?> -->
       <div class="ongoing">Current Stock</div>
 
       <section class="table-management">
@@ -78,7 +79,7 @@
               <?php foreach ($inventories as $inventory): ?>
                 <tr>
                   <td><?= htmlspecialchars($inventory->InventoryId) ?></td>
-                  <td><?= htmlspecialchars($inventory->genericName) ?></td>
+                  <td><?= htmlspecialchars($inventory->ProductName) ?></td>
                   <td><?= htmlspecialchars($inventory->availableCount) ?></td>
                   <td><?= htmlspecialchars($inventory->category) ?></td>
                   <td><?= htmlspecialchars($inventory->expiryDate) ?></td>
@@ -91,7 +92,7 @@
                       else
                         echo 'Low Stock';
                       ?></td>
-                  <td><a class="view" href="<?= ROOT ?>/inventoryView/<?= $inventory->InventoryId ?>">View</a></td>
+                  <td><a class="view" href="<?= ROOT ?>/inventoryView/<?= $inventory->InventoryId ?>">Update</a></td>
 
                 </tr>
               <?php endforeach; ?>

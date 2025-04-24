@@ -18,8 +18,17 @@ class Medicine
 
         // $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
 
-        $data['username'] = [];
-        $this->view('pharmacy/medicine', $data);
+        if (!isset($_SESSION['user_id'])) {
+            redirect('login'); // or show an unauthorized message
+            exit();
+        }
+
+        $pharmacyID = $_SESSION['user_id'];
+
+        $medicineModel = new StockInventoryDetails;
+        $medicine = $medicineModel->getInventoryByPharmacy($pharmacyID);
+
+        $this->View('pharmacy/medicine', ['medicine' => $medicine]);
     }
 
     // add other methods like edit, update, delete, etc.

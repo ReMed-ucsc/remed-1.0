@@ -5,7 +5,7 @@ class OrderView
     use Model;
 
     protected $table = 'OrderView';
-    protected $allowedColumns = ['OrderID', 'PatientID', 'MedicineID', 'Quantity', 'PharmacyID'];
+    protected $allowedColumns = ['OrderID', 'date', 'patientName', 'totalBill', 'status', 'PatientID', 'MedicineID', 'Quantity', 'PharmacyID', 'paymentMethod', 'paymentReceived'];
     protected $order_column = "OrderID";
 
 
@@ -15,12 +15,12 @@ class OrderView
     private $ACCEPT_QUOTATION = 'Q';
     private $DELIVERED = 'D';
     private $USER_PICKED_UP = 'U';
-    private $CANCELED = 'C';
-    private $REJECTED = 'R';
-    private $PICKED_UP = 'P';
+    private $REJECTED = 'R';            // user rejects order after reviewing quotation
     private $DELIVERY_FAILED = 'F';
-    private $ACCEPTED = 'A';
+    private $ACCEPTED = 'A';            // user accepts the order after reviewing quotation
+    private $WAITING_FOR_DRIVER = 'WD'; // waiting for driver to accept the order
     private $DELIVERY_IN_PROGRESS = 'I';
+    private $DELIVERY_CANCEL = 'DC';
     private $DELIVERY_COMPLETED = 'C';
     private $WAITING_FOR_PICKUP = 'WP';
 
@@ -55,19 +55,49 @@ class OrderView
         $statusMap = [
             $this->WAITING => 'WAITING',
             $this->PROCESSING => 'PROCESSING',
-            $this->ACCEPT_QUOTATION => 'ACCEPT_QUOTATION',
+            $this->ACCEPT_QUOTATION => 'ACCEPT QUOTATION',
             $this->DELIVERED => 'DELIVERED',
-            $this->USER_PICKED_UP => 'USER_PICKED_UP',
-            $this->CANCELED => 'CANCELED',
+            $this->USER_PICKED_UP => 'USER PICKED UP',
             $this->REJECTED => 'REJECTED',
-            $this->PICKED_UP => 'PICKED_UP',
-            $this->DELIVERY_FAILED => 'DELIVERY_FAILED',
+            $this->DELIVERY_FAILED => 'DELIVERY FAILED',
             $this->ACCEPTED => 'ACCEPTED',
-            $this->DELIVERY_IN_PROGRESS => 'DELIVERY_IN_PROGRESS',
-            $this->DELIVERY_COMPLETED => 'DELIVERY_COMPLETED',
-            $this->WAITING_FOR_PICKUP => 'WAITING_FOR_PICKUP'
+            $this->WAITING_FOR_DRIVER => 'WAITING FOR DRIVER',
+            $this->DELIVERY_IN_PROGRESS => 'DELIVERY IN PROGRESS',
+            $this->DELIVERY_CANCEL => 'DELIVERY CANCEL',
+            $this->DELIVERY_COMPLETED => 'DELIVERY COMPLETED',
+            $this->WAITING_FOR_PICKUP => 'WAITING FOR PICKUP'
         ];
 
         return $statusMap[$status] ?? 'UNKNOWN';
+    }
+
+    public function patientCount($pharmacyID)
+    {
+        $query = "SELECT COUNT(Distinct PatientID) AS patientCount FROM $this->table WHERE PharmacyID = ?";
+        return $this->query($query, [$pharmacyID]);
+    }
+
+    public function orderCount($pharmacyID)
+    {
+        $query = "SELECT COUNT(DISTINCT OrderID) AS orderCount FROM $this->table WHERE PharmacyID = ?";
+        return $this->query($query, [$pharmacyID]);
+    }
+
+    public function monthlyIncome($pharmacyID)
+    {
+        $query = "SELECT SUM(totalBill) AS currentBalance 
+              FROM $this->table 
+              WHERE PharmacyID = ? 
+              AND date >= DATE_FORMAT(CURDATE() - INTERVAL 1 MONTH, '%Y-%m-01') 
+              AND date < DATE_FORMAT(CURDATE() + INTERVAL 1 MONTH, '%Y-%m-01')";
+
+        return $this->query($query, [$pharmacyID]);
+    }
+
+    public function getPayment($pharmacyId)
+    {
+        $query = "SELECT * FROM $this->table WHERE PharmacyID = ? AND paymentReceived = 1";
+        $data = [$pharmacyId];
+        return $this->query($query, $data);
     }
 }

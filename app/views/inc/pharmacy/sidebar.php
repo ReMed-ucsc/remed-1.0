@@ -1,7 +1,14 @@
 <?php
 // Assuming session has been started on the parent page
-$userEmail = isset($_SESSION['email']) ? $_SESSION['email'] : 'userexample123@gmail.com';
-$pharmacyName = isset($_SESSION['pharmacy_name']) ? $_SESSION['pharmacy_name'] : 'Healthcare Pharmacy';
+// $userEmail = isset($_SESSION['email']) ? $_SESSION['email'] : 'userexample123@gmail.com';
+// $pharmacyName = isset($_SESSION['pharmacy_name']) ? $_SESSION['pharmacy_name'] : 'Healthcare Pharmacy';
+
+$pharmacyID = $_SESSION['user_id'];
+
+$pharmacyModel = new Pharmacy();
+$pharmacy = $pharmacyModel->getPharmacyById($pharmacyID);
+
+
 ?>
 
 <!-- <div class="sidebar-part"> -->
@@ -12,11 +19,11 @@ $pharmacyName = isset($_SESSION['pharmacy_name']) ? $_SESSION['pharmacy_name'] :
     </div>
     <div class="head">
       <div class="user-img">
-        <img src="<?= ROOT ?>/assets/images/admin.png" alt="" />
+        <img src="<?= ROOT ?>/assets/images/pharmacy logo.png" alt="" />
       </div>
       <div class="user-details">
-        <p class="title"><?php echo htmlspecialchars($userEmail); ?></p>
-        <p class="name"><?php echo htmlspecialchars($pharmacyName); ?></p>
+        <p class="title"><?= htmlspecialchars($pharmacy->email) ?></p>
+        <p class="name"><?= htmlspecialchars($pharmacy->name) ?></p>
       </div>
     </div>
     <div class="nav">
@@ -113,7 +120,7 @@ $pharmacyName = isset($_SESSION['pharmacy_name']) ? $_SESSION['pharmacy_name'] :
           </a>
         </li>
         <li>
-          <a href="<?= ROOT ?>">
+          <a href="<?= ROOT ?>/login/logout" id="logout-link">
             <i class="icon ph-bold ph-sign-out"></i>
             <span class="text">Logout</span>
           </a>

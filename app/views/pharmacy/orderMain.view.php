@@ -91,9 +91,9 @@
                       ?></td>
                   <!-- <td><?= htmlspecialchars($order->pickup) ?></td> -->
                   <td><?php
-                      if ($order->status != 'W')
-                        echo 'Waiting';
-                      else if ($order->status != 'P') echo 'Processing';
+                      $orderModel = new MedicineOrder();
+                      $orderStatus = $orderModel->getStatusName($order->status);
+                      echo $orderStatus;
                       ?></td>
                   <td><a class="view" href="<?= ROOT ?>/order/<?= $order->OrderID ?>">View</a></td>
                 </tr>

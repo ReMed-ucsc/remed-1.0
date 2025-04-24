@@ -14,6 +14,13 @@ class StockInventoryDetails
         return $this->first(['InventoryId' => $inventoryID]);
     }
 
+    public function checkPharmacyInventory($inventoryID, $pharmacyID)
+    {
+        $query = "SELECT * FROM $this->table WHERE InventoryId = :InventoryId AND PharmacyID = :PharmacyID";
+        $data = ['InventoryId' => $inventoryID, 'PharmacyID' => $pharmacyID];
+        return $this->query($query, $data);
+    }
+
     public function getInventoryMedicines($inventoryID)
     {
         $where = ['InventoryId' => $inventoryID];
@@ -21,30 +28,55 @@ class StockInventoryDetails
         return $this->selectWhere(['ProductName', 'Manufacturer', 'genericName', 'category', 'batchNumber', 'LastStockQuantity', 'thresholdLimit', 'storageLocation', 'manufacturingDate', 'expiryDate', 'storageConditions', 'purchaseCost', 'sellingPrice'], $where, [], 'InventoryId ASC');
     }
 
-    public function addInventory($medicineName, $brandName, $genericName, $category, $batchID, $StockQuantity, $reorderLevel, $storageLocation, $manufacturingDate, $expiryDate, $storageCondition, $purchasePrice, $sellingPrice)
-    {
-        $data = [
-            'ProductName' => $medicineName,
-            'Manufacturer' => $brandName,
-            'genericName' => $genericName,
-            'category' => $category,
-            'batchNumber' => $batchID,
-            'availableCount' => $StockQuantity,
-            'thresholdLimit' => $reorderLevel,
-            'storageLocation' => $storageLocation,
-            'manufacturingDate' => $manufacturingDate,
-            'expiryDate' => $expiryDate,
-            'storageCondition' => $storageCondition,
-            'purchaseCost' => $purchasePrice,
-            'sellingPrice' => $sellingPrice
+    // public function addInventory(array $data)
+    // {
+    //     // Extract individual values from the $data array
+    //     $ProductName         = $data['ProducteName'];
+    //     $Manufacturer        = $data['Manufacturer'];
+    //     $genericName         = $data['genericName'];
+    //     $category            = $data['category'];
+    //     $batchNumber         = $data['batchNumber'];
+    //     $LatestStockQuantity = $data['LatestStockQuantity'];
+    //     $thresholdLimit      = $data['thresholdLimit'];
+    //     $storageLocation     = $data['storageLocation'];
+    //     $manufacturingDate   = $data['manufacturingDate'];
+    //     $expiryDate          = $data['expiryDate'];
+    //     $storageConditions   = $data['storageConditions'];
+    //     $purchaseCost        = $data['purchaseCost'];
+    //     $sellingPrice        = $data['sellingPrice'];
 
-        ];
-        return $this->insert($data);
-    }
+    //     // Prepare array for insertion (make sure column names match your database)
+    //     $insertData = [
+    //         'ProductName'         => $ProductName,
+    //         'Manufacturer'        => $Manufacturer,
+    //         'genericName'         => $genericName,
+    //         'category'            => $category,
+    //         'batchNumber'         => $batchNumber,
+    //         'LastStockQuantity'   => $LatestStockQuantity,
+    //         'thresholdLimit'      => $thresholdLimit,
+    //         'storageLocation'     => $storageLocation,
+    //         'manufacturingDate'   => $manufacturingDate,
+    //         'expiryDate'          => $expiryDate,
+    //         'storageConditions'   => $storageConditions,
+    //         'purchaseCost'        => $purchaseCost,
+    //         'SellingPrice'        => $sellingPrice,
+    //     ];
+
+    //     // Insert into DB using model's insert method
+    //     return $this->insert($insertData);
+    // }
+
+
 
     public function getInventoryDetails()
     {
         $sql = "Select * FROM $this->table";
         return $this->query($sql);
+    }
+
+    public function getInventoryByPharmacy($pharmacyID)
+    {
+        $query = "SELECT * FROM $this->table WHERE PharmacyID = :PharmacyID";
+        return $this->query($query, ['PharmacyID' => $pharmacyID]);
     }
 }

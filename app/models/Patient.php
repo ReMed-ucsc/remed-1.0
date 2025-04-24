@@ -6,7 +6,7 @@ class Patient extends User
     // use User;
 
     protected $table = 'patient';
-    protected $allowedColumns = ['patientName', 'email', 'password', 'token'];
+    protected $allowedColumns = ['PatientID','patientName', 'email','dob','gender','contact','address', 'password', 'token'];
 
     public function validate($data)
     {
@@ -48,5 +48,20 @@ class Patient extends User
             'password' => $password
         ];
         return $this->insert($data);
+    }
+
+    public function getAllPatients(){
+        $query="SELECT * FROM $this->table ";
+        return $this->query($query);
+    }
+    public function getlastId()
+    {
+        $sql = "SELECT COUNT(*) AS patient_count FROM $this->table";
+        $result = $this->query($sql);
+
+        if (is_array($result) && isset($result[0])) {
+            return $result[0]->patient_count; // Access the property as an object
+        }
+        return 0;
     }
 }

@@ -20,7 +20,7 @@ class SignUp
 
             // Validate data
             if ($admin->validation($data)) {
-                $admin->registerAdmin($data['username'], $data['email'], $data['password']);
+                $admin->registerAdmin($data['username'], $data['email'], $data['contactNo'],$data['password']);
                 redirect('admin/login'); // Redirect to the login page
                 exit();
             } else {

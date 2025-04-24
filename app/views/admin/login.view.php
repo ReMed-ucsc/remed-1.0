@@ -27,7 +27,7 @@ require_once BASE_PATH . '/app/views/inc/header.view.php'
                             <input type="password" id="password" name="password" placeholder="Password" required>
                         </li>
                         <div class="remember">
-                            <input type="checkbox" name="remember" id="remember">
+                            <input type="checkbox" name="remember" id="remember" required>
                             <label for="remember">Remember me</label>
                         </div>
 

@@ -8,7 +8,7 @@ class Driver extends User
 
     protected $allowedColumns = [
         'driverID',
-        'vehicleLicneseNo',
+        'vehicalLicenseNo',
         'driverName',
         'email',
         'password',
@@ -36,14 +36,6 @@ class Driver extends User
             $$this->errors['email'] = 'Invalid email address';
         }
 
-        // if (empty($data['password'])) {
-        //     $this->errors['password'] = 'Password is required';
-        // }
-
-        // if (empty($data['fcmToken'])) {
-        //     $this->errors['fcmToken'] = 'FCm token is required';
-        // }
-
         if (empty($this->errors)) {
             return true;
         }
@@ -58,7 +50,7 @@ class Driver extends User
         return $result ? $result[0] : null; // Return the first object or null
     }
 
-    public function registerDriver($name, $email, $password, $dob, $tellNo, $NIC, $deliveryTime)
+    public function registerDriver($name, $email, $password, $dob, $tellNo, $NIC, $deliveryTime, $vehicalNumber)
     {
         $data = [
             'driverName' => $name,
@@ -68,7 +60,8 @@ class Driver extends User
             'telNo' => $tellNo,
             'NIC' => $NIC,
             'deliveryTime' => $deliveryTime,
-            'status' => 'pending'
+            'status' => 'pending',
+            'vehicalLicenseNo' => $vehicalNumber
         ];
 
         return $this->insert($data);
@@ -94,17 +87,26 @@ class Driver extends User
 
         return $this->update($driverID, $data, 'DriverID');
     }
+    public function getlastId($status="APPROVED")
+    {
+        $sql = "SELECT COUNT(*) AS row_count FROM $this->table WHERE status = :status";
+        $result = $this->query($sql, ['status' => $status]);
 
-    // public function getLastInsertedId()
-    // {
-    //     $sql = "SELECT MAX(driverID) AS last_id FROM $this->table";
-    //     $result = $this->query($sql);
+      
+        // If the result is an object, access the property using ->
+        if (is_array($result) && isset($result[0])) {
+            return $result[0]->row_count; // Access the property as an object
+        }
 
-    //     // echo "Last ID from database: ";
-    //     // var_dump($result);
-    //     // Return the last ID or 0 if the table is empty
-    //     return $result[0]['last_id'] ?? 0;
-    // }
+        // Default return value if no result is found
+        return 0;
+    }
+
+    public function notificationDriver($status="pending"){
+        $sql = "SELECT driverId , driverName FROM $this->table WHERE status = :status LIMIT 5";
+        return $this->query($sql,['status' => $status]);
+    }
+
 
     public function otpAdd($driverID, $otp, $expireTime)
     {

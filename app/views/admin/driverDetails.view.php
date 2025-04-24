@@ -8,9 +8,11 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
     <!-- Search Box Form -->
     <div class="above-table">
         <div class="search-container">
-            <input type="text" id="searchInput" class="search-box" placeholder="Search here...">
-            <img src="<?= ROOT ?>/assets/images/search.png" alt="icon">
-            <!-- <button class="search-button" onclick="performSearch()">Search</button> -->
+            <form id="search-form">
+                <input type="text" name="search" id="searchInput" class="search-box" placeholder="Search here..." value="<?php if (isset($_GET['search'])) {echo htmlspecialchars($_GET['search']);} ?>">
+                <button type="submit" class="search-button" onclick="performSearch()">Search</button>
+            </form>
+
         </div>
         <div>
             <a class="add-btn" href="<?= ROOT ?>/admin/newDriver/"><img src="<?= ROOT ?>/assets/images/add.png" alt="" style="width:30px; height:auto; margin-right:5px;">Add newDriver</a>
@@ -21,14 +23,14 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
 
     <!-- Table Structure -->
     <div class="details-container">
-        <table>
+        <table class="table-container">
             <thead>
                 <tr>
                     <th>Driver ID</th>
                     <th>Driver Name</th>
                     <th>Contact Number</th>
                     <th>Delivery Time</th>
-                    <th>Email</th>
+                    <!-- <th>Email</th> -->
                     <th>Status</th>
                 </tr>
             </thead>
@@ -36,11 +38,11 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                 <?php foreach ($driver as $drivers): ?>
                     <?php if ($drivers): ?>
                         <tr>
-                            <td><?=htmlspecialchars($drivers->driverID)?></td>
+                            <td><?= htmlspecialchars($drivers->driverId) ?></td>
                             <td><?= htmlspecialchars($drivers->driverName) ?></td>
-                            <td><?= htmlspecialchars($drivers->telNo)  ?></td>
+                            <td><?= htmlspecialchars($drivers->telNo) ?></td>
                             <td><?= htmlspecialchars($drivers->deliveryTime) ?></td>
-                            <td><?= htmlspecialchars($drivers->email) ?></td>
+                            <!-- <td><?= htmlspecialchars($drivers->email) ?></td> -->
                             <td><span class="status-user"><?= htmlspecialchars($drivers->status) ?></span></td>
                         </tr>
                     <?php endif; ?>

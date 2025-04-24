@@ -6,6 +6,7 @@ class StockDataView
 
     protected $table = 'stockPurchase';
     protected $allowedColumns = ['StockID', 'InventoryID', 'stockQuantity', 'manufacturingDate', 'expiryDate', 'purchaseDate', 'purchaseCost', 'batchNumber'];
+
     protected $order_column = ['StockID'];
 
     public function getMedicineStockPurchaseDetails($pharmacyId, $month, $year)

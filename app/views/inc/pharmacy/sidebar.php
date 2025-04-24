@@ -69,8 +69,7 @@ $pharmacy = $pharmacyModel->getPharmacyById($pharmacyID);
             </a>
           </li>
           <li>
-
-            <a href="<?= ROOT ?>/income">
+            <a href="<?= ROOT ?>/IncomeView">
               <i class="icon ph-bold ph-currency-dollar"></i>
               <span class="text">Income</span>
             </a>

@@ -15,11 +15,12 @@ class OrderView
     private $ACCEPT_QUOTATION = 'Q';
     private $DELIVERED = 'D';
     private $USER_PICKED_UP = 'U';
-    private $REJECTED = 'R';
+    private $REJECTED = 'R';            // user rejects order after reviewing quotation
     private $DELIVERY_FAILED = 'F';
-    private $ACCEPTED = 'A';
-    private $DELIVERY_CANCEL = 'DC';
+    private $ACCEPTED = 'A';            // user accepts the order after reviewing quotation
+    private $WAITING_FOR_DRIVER = 'WD'; // waiting for driver to accept the order
     private $DELIVERY_IN_PROGRESS = 'I';
+    private $DELIVERY_CANCEL = 'DC';
     private $DELIVERY_COMPLETED = 'C';
     private $WAITING_FOR_PICKUP = 'WP';
 
@@ -60,8 +61,9 @@ class OrderView
             $this->REJECTED => 'REJECTED',
             $this->DELIVERY_FAILED => 'DELIVERY FAILED',
             $this->ACCEPTED => 'ACCEPTED',
-            $this->DELIVERY_CANCEL => 'DELIVERY CANCEL',
+            $this->WAITING_FOR_DRIVER => 'WAITING FOR DRIVER',
             $this->DELIVERY_IN_PROGRESS => 'DELIVERY IN PROGRESS',
+            $this->DELIVERY_CANCEL => 'DELIVERY CANCEL',
             $this->DELIVERY_COMPLETED => 'DELIVERY COMPLETED',
             $this->WAITING_FOR_PICKUP => 'WAITING FOR PICKUP'
         ];

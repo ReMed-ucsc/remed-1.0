@@ -5,6 +5,12 @@ require_once BASE_PATH . '/api/controllers/utilis/DeliveryUtility.php';
 class Order
 {
     use Controller;
+
+    public function __construct()
+    {
+        $this->protectRoute();
+    }
+
     public function index($orderId)
     {
         // $this->protectRoute();
@@ -14,12 +20,13 @@ class Order
         $orderCommentModel = new OrderComment();
 
         $order = $orderModel->getMedicineOrder($orderId);
+        $orderStatus = $orderModel->getStatusName($order->status);
         $orderMedicine = $orderMedicineModel->getOrderMedicines($orderId);
         $orderComments = $orderCommentModel->getCommentsByOrder($orderId);
 
         $orderPrescription = $orderModel->getPrescription($orderId);
 
-        $this->view('pharmacy/orderView', ['order' => $order, 'medicineList' => $orderMedicine, 'comments' => $orderComments, 'prescription' => $orderPrescription, 'viewOnly' => true]);
+        $this->view('pharmacy/orderView', ['order' => $order, 'status' => $orderStatus, 'medicineList' => $orderMedicine, 'comments' => $orderComments, 'prescription' => $orderPrescription, 'viewOnly' => true]);
     }
 
     public function edit($orderId)
@@ -31,6 +38,7 @@ class Order
 
 
         $order = $orderModel->getMedicineOrder($orderId);
+        $orderStatus = $orderModel->getStatusName($order->status);
         $orderMedicine = $orderMedicineModel->getOrderMedicines($orderId);
         $orderComments = $orderCommentModel->getCommentsByOrder($orderId);
 
@@ -51,7 +59,7 @@ class Order
             exit;
         } else {
 
-            $this->view('pharmacy/orderView', ['order' => $order, 'medicineList' => $orderMedicine, 'comments' => $orderComments, 'viewOnly' => false]);
+            $this->view('pharmacy/orderView', ['order' => $order, 'status' => $orderStatus, 'medicineList' => $orderMedicine, 'comments' => $orderComments, 'viewOnly' => false]);
         }
     }
 
@@ -105,6 +113,22 @@ class Order
             exit;
         } else {
             $this->view('pharmacy/orderView', ['order' => $order, 'medicineList' => $orderMedicine, 'viewOnly' => true]);
+        }
+    }
+
+    public function updateOrderStatus($orderId, $status, $paymentMethod = null)
+    {
+        if ($paymentMethod) {
+            $orderModel = new MedicineOrder();
+            $orderModel->setPaymentMethod($orderId, $paymentMethod);
+        }
+        if ($orderId && $status) {
+            $orderModel = new MedicineOrder();
+            $orderModel->updateOrderStatus($orderId, $status);
+
+            redirect("order/$orderId");
+        } else {
+            redirect("order");
         }
     }
 

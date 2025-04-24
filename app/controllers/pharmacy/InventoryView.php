@@ -4,6 +4,11 @@ class InventoryView
 {
     use Controller;
 
+    public function __construct()
+    {
+        $this->protectRoute();
+    }
+
     public function index($inventoryId)
     {
         $inventoryModel = new StockInventoryDetails();

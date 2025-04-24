@@ -46,9 +46,9 @@ We appreciate your patience and look forward to having you with us! ";
 
     public function logout()
     {
-        $this->destroySession();
-        redirect('login');
-        exit();
+        $this->secureLogout();
+        // redirect('login');
+        // exit();
     }
 }
 

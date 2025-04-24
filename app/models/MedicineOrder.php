@@ -34,12 +34,23 @@ class MedicineOrder
         return $this->first(['OrderId' => $orderID]);
     }
 
+    public function checkPharmacyOrder($orderID, $pharmacyID)
+    {
+        $query = "SELECT * FROM $this->table WHERE OrderID = :OrderID AND PharmacyID = :PharmacyID";
+        $data = ['OrderID' => $orderID, 'PharmacyID' => $pharmacyID];
+        return $this->query($query, $data);
+    }
+
 
     public function getOrdersByPatient($patientID)
     {
         $query = "SELECT * FROM $this->table WHERE PatientID = :patientID and OrderID in (select DISTINCT(OrderID) FROM OrderView WHERE PatientID = :patientID) order by date DESC";
         $data = ['patientID' => $patientID];
-        return $this->query($query, $data);
+        if ($this->query($query, $data)) {
+            return $this->query($query, $data);
+        } else {
+            return false;
+        }
     }
 
     public function placeOrder($patientID, $pickup, $destination, $destinationLat, $destinationLong, $pharmacyID, $prescription)

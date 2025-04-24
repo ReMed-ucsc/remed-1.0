@@ -14,6 +14,11 @@ class InventoryView
         $inventoryModel = new StockInventoryDetails();
         $stock = new StockDataView();
 
+        if ($inventoryModel->checkPharmacyInventory($inventoryId, $_SESSION['user_id']) == false) {
+            redirect("inventoryMain");
+            exit;
+        }
+
         $inventory = $inventoryModel->getMedicineInventory($inventoryId);
         $inventoryList = $inventoryModel->getInventoryDetails($inventoryId);
         $historyList = $stock->getPurchaseHistory($inventoryId);

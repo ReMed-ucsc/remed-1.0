@@ -55,6 +55,7 @@
         </button>
       </div>
 
+      <!-- <?php show($data) ?> -->
       <div class="ongoing">Current Stock</div>
 
       <section class="table-management">

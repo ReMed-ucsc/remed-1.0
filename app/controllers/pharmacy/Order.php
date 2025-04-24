@@ -13,11 +13,15 @@ class Order
 
     public function index($orderId)
     {
-        // $this->protectRoute();
 
         $orderModel = new MedicineOrder();
         $orderMedicineModel = new OrderView();
         $orderCommentModel = new OrderComment();
+
+        if ($orderModel->checkPharmacyOrder($orderId, $_SESSION['user_id']) == false) {
+            redirect("orderMain");
+            exit;
+        }
 
         $order = $orderModel->getMedicineOrder($orderId);
         $orderStatus = $orderModel->getStatusName($order->status);
@@ -36,6 +40,10 @@ class Order
         $medicineListModel = new OrderList();
         $orderCommentModel = new OrderComment();
 
+        if ($orderModel->checkPharmacyOrder($orderId, $_SESSION['user_id']) == false) {
+            redirect("orderMain");
+            exit;
+        }
 
         $order = $orderModel->getMedicineOrder($orderId);
         $orderStatus = $orderModel->getStatusName($order->status);

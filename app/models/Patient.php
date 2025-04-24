@@ -49,6 +49,7 @@ class Patient extends User
         ];
         return $this->insert($data);
     }
+
     public function getAllPatients(){
         $query="SELECT * FROM $this->table ";
         return $this->query($query);

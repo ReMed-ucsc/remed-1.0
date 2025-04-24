@@ -18,8 +18,17 @@ class ProfilePage
 
         // $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
 
-        $data['username'] = [];
-        $this->view('pharmacy/profilePage', $data);
+        if (!isset($_SESSION['user_id'])) {
+            redirect('login'); // or show an unauthorized message
+            exit();
+        }
+
+        $pharmacyID = $_SESSION['user_id'];
+
+        $pharmacyModel = new Pharmacy($pharmacyID);
+        $pharmacyData = $pharmacyModel->getPharmacyById($pharmacyID);
+
+        $this->view('pharmacy/ProfilePage', ['pharmacyData' => $pharmacyData]);
     }
 
     // add other methods like edit, update, delete, etc.

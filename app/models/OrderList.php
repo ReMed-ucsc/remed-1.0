@@ -63,4 +63,9 @@ class OrderList
 
         return ['error' => false, 'message' => 'Order list updated successfully'];
     }
+
+    public function deleteItem($orderID, $productID)
+    {
+        return $this->deleteWithConditions(['orderId' => $orderID, 'productId' => $productID]);
+    }
 }

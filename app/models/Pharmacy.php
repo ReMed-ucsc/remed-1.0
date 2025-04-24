@@ -153,4 +153,6 @@ class Pharmacy extends User
 
         return $this->selectWhere($columns, $conditions, $additionalData, 'distance ASC');
     }
+
+    public function updatePharmacy() {}
 }

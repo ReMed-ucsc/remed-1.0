@@ -55,18 +55,18 @@ trait Controller
         return $_SESSION[$key] ?? null;
     }
 
-    // Destroy the session
-    public function destroySession()
-    {
-        $this->startSession();
-        session_destroy();
-    }
 
     // Check if a user is authenticated
     public function isAuthenticated()
     {
         $this->startSession();
-        return isset($_SESSION['id']);
+
+        if (!isset($_SESSION['isAdmin'])) {
+            return false;
+        }
+
+        $userIdType = $_SESSION['isAdmin'] ? 'id' : 'user_id';
+        return isset($_SESSION[$userIdType]) && !empty($_SESSION[$userIdType]);
     }
 
     public function isAuthorized()
@@ -79,7 +79,7 @@ trait Controller
     {
         $app = new App();
 
-        $timeoutDuration = 1800; // 30 minutes
+        $timeoutDuration = 3600; // 1hr in seconds
 
         if ($this->getSession('last_activity') && (time() - $this->getSession('last_activity') > $timeoutDuration)) {
             // Last activity was more than $timeoutDuration ago
@@ -101,39 +101,96 @@ trait Controller
     {
         $app = new App();
 
-
-        // if (!$this->isAuthenticated()) {
-        //     $timeoutDuration = 30; // in seconds
-
-
-        //     if ($this->getSession('last_activity') && (time() - $this->getSession('last_activity') > $timeoutDuration)) {
-        //         // Last activity was more than $timeoutDuration ago
-        //         $this->destroySession();
-        //         if ($app->checkAdmin()) {
-        //             redirect('admin/login');
-        //         } else {
-        //             redirect('login');
-        //         }
-        //         exit();
-        //     }
-        // }
-
+        // First check if the user is authenticated
         if (!$this->isAuthenticated()) {
+            // Not logged in, redirect to appropriate login page
             if ($app->checkAdmin()) {
                 redirect('admin/login');
             } else {
                 redirect('login');
             }
             exit();
-        } else if ($app->checkAdmin()) {
-            if (!$this->isAuthorized()) {
+        }
+
+        // Check for session timeout
+        $timeoutDuration = 3600; // 1 hour in seconds
+        if ($this->getSession('last_activity') && (time() - $this->getSession('last_activity') > $timeoutDuration)) {
+            // Last activity was more than $timeoutDuration ago
+            $this->destroySession();
+            if ($app->checkAdmin()) {
                 redirect('admin/login');
-            }
-        } else {
-            if ($this->isAuthorized()) {
+            } else {
                 redirect('login');
             }
+            exit();
+        }
+
+        // Update last activity time
+        $this->setSession('last_activity', time());
+
+        // Now check if user is in the correct section based on role
+        $isAdmin = $app->checkAdmin(); // Current section is admin
+        $userIsAdmin = $this->isAuthorized(); // User has admin role
+
+        // Redirect if user is in the wrong section
+        if ($isAdmin && !$userIsAdmin) {
+            // Trying to access admin section without admin privileges
+            redirect('login'); // Redirect to regular user area
+            exit();
+        } else if (!$isAdmin && $userIsAdmin) {
+            // Admin user trying to access regular user section
+            redirect('admin/dashboard'); // Redirect to admin area
+            exit();
         }
     }
-    
+
+    public function preventCaching()
+    {
+        header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+        header("Cache-Control: post-check=0, pre-check=0", false);
+        header("Pragma: no-cache");
+        header("Expires: Wed, 01 Jan 1997 00:00:00 GMT");
+    }
+
+    // Destroy the session
+    public function destroySession()
+    {
+        $this->startSession();
+
+        // Clear all session variables
+        $_SESSION = array();
+
+        // If it's desired to kill the session, also delete the session cookie
+        if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(
+                session_name(),
+                '',
+                time() - 42000,
+                $params["path"],
+                $params["domain"],
+                $params["secure"],
+                $params["httponly"]
+            );
+        }
+
+        // Finally, destroy the session
+        session_destroy();
+    }
+
+    public function secureLogout()
+    {
+        $this->destroySession();
+
+        // Prevent caching
+        $this->preventCaching();
+
+        // Force a new session ID
+        session_regenerate_id(true);
+
+        // Redirect with a random parameter to prevent caching of the redirect
+        $randomParam = md5(uniqid(mt_rand(), true));
+        redirect('login?nocache=' . $randomParam);
+        exit();
+    }
 }

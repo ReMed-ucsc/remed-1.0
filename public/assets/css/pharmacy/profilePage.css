@@ -87,15 +87,17 @@ input {
 }
 
 .button-container {
-  grid-column: span 2;
+  /* grid-column: span 2; */
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
+  gap: 10px;
+  width: 100%;
 }
 
-button {
+.button1 {
   padding: 10px 20px;
-  background-color: #007b5e;
+  background-color: #982a0f;
   color: white;
   border: none;
   border-radius: 10px;
@@ -103,6 +105,20 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #005e48;
+.button1:hover {
+  background-color: #b2602e;
+}
+
+.button2{
+  padding: 10px 20px;
+  background-color: #982a0f00;
+  border-color: #982a0f;
+  color: rgb(162, 24, 24);
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  justify-content:flex-end;
+  align-items: center;
+  width: auto;
 }

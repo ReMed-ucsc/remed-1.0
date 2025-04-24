@@ -184,7 +184,7 @@
           <!-- style should change here -->
 
           <label for="status">Order Status:</label>
-          <input type="text" placeholder="Value" value="<?= htmlspecialchars($status) ?>" disabled>
+          <div class="orderStatus-input"> <?= htmlspecialchars($status) ?></div>
 
           <!-- <div class="selectWrapper">
             <select id="status" class="statusSelect">
@@ -249,7 +249,7 @@
 
             <!-- style should change here -->
 
-            <button class="proceed">
+            <button class="edit-order">
               <a href="<?= ROOT ?>/order/updateOrderStatus/<?= $order->OrderID ?>/P" style="text-decoration: none; color:black;">
                 Proceed
               </a>
@@ -265,7 +265,7 @@
               </button>
               </form>
 
-              <button class="proceed">
+              <button class="edit-order">
                 <a href="<?= ROOT ?>/order/updateOrderStatus/<?= $order->OrderID ?>/Q" style="text-decoration: none; color:black;">
                   Send Quotation
                 </a>
@@ -281,7 +281,7 @@
 
 
             <?php } else {  ?>
-              <button class="proceed">
+              <button class="edit-order">
                 <a href="<?= ROOT ?>/order/updateOrderStatus/<?= $order->OrderID ?>/Q" style="text-decoration: none; color:black;">
                   Send Quotation
                 </a>
@@ -294,7 +294,7 @@
             ?>
 
 
-              <button class="proceed">
+              <button class="edit-order">
                 <a href="<?= ROOT ?>/order/updateOrderStatus/<?= $order->OrderID ?>/WD" style="text-decoration: none; color:black;">
                   Send for delivery
                 </a>
@@ -304,7 +304,7 @@
 
               <!-- style should change here -->
 
-              Waiting for payment Completion
+              <p class="paymentWaiting">Waiting for payment Completion...</p>
           <?php
             }
           }

@@ -203,6 +203,8 @@
     <section class="table-management">
       <div class="table">
         <p>Recent payments</p>
+
+        <!-- <?php show($data) ?> -->
         <table>
           <thead>
             <tr>
@@ -215,70 +217,32 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>YY-953581</td>
-              <td>Mr. Jones</td>
-              <td>14-08-2022</td>
-              <td>Card</td>
-              <td>Rs. 5,000.00</td>
-              <td>Completed</td>
-            </tr>
-            <tr>
-              <td>YY-953582</td>
-              <td>Mr. Smith</td>
-              <td>15-08-2022</td>
-              <td>Cash</td>
-              <td>Rs. 2,500.00</td>
-              <td>Pending</td>
-            </tr>
-            <tr>
-              <td>YY-953582</td>
-              <td>Mr. Smith</td>
-              <td>15-08-2022</td>
-              <td>Cash</td>
-              <td>Rs. 2,500.00</td>
-              <td>Pending</td>
-            </tr>
-            <tr>
-              <td>YY-953582</td>
-              <td>Mr. Smith</td>
-              <td>15-08-2022</td>
-              <td>Cash</td>
-              <td>Rs. 2,500.00</td>
-              <td>Pending</td>
-            </tr>
-            <tr>
-              <td>YY-953582</td>
-              <td>Mr. Smith</td>
-              <td>15-08-2022</td>
-              <td>Cash</td>
-              <td>Rs. 2,500.00</td>
-              <td>Pending</td>
-            </tr>
-            <tr>
-              <td>YY-953582</td>
-              <td>Mr. Smith</td>
-              <td>15-08-2022</td>
-              <td>Cash</td>
-              <td>Rs. 2,500.00</td>
-              <td>Pending</td>
-            </tr>
-            <tr>
-              <td>YY-953582</td>
-              <td>Mr. Smith</td>
-              <td>15-08-2022</td>
-              <td>Cash</td>
-              <td>Rs. 2,500.00</td>
-              <td>Pending</td>
-            </tr>
-            <tr>
-              <td>YY-953582</td>
-              <td>Mr. Smith</td>
-              <td>15-08-2022</td>
-              <td>Cash</td>
-              <td>Rs. 2,500.00</td>
-              <td>Pending</td>
-            </tr>
+
+            <?php if (!empty($data['payments'])): ?>
+              <?php foreach ($data['payments'] as $payments): ?>
+                <tr>
+
+                  <td><?= htmlspecialchars($payments->OrderID) ?></td>
+                  <td><?= htmlspecialchars($payments->patientName) ?></td>
+                  <td><?= htmlspecialchars($payments->date) ?></td>
+                  <td><?= htmlspecialchars($payments->paymentMethod) ?></td>
+                  <td><?= htmlspecialchars($payments->totalBill) ?></td>
+                  <td><?php
+                      $orderModel = new MedicineOrder();
+                      $status = $orderModel->getStatusName($payments->status);
+                      echo $status;
+                      ?></td>
+
+
+                </tr>
+              <?php endforeach; ?>
+            <?php else: ?>
+              <tr>
+                <td colspan="7" style="text-align: center;">No Payments Received</td>
+              </tr>
+            <?php endif; ?>
+
+
           </tbody>
         </table>
       </div>

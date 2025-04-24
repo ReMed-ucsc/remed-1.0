@@ -5,7 +5,7 @@ class OrderView
     use Model;
 
     protected $table = 'OrderView';
-    protected $allowedColumns = ['OrderID', 'PatientID', 'MedicineID', 'Quantity', 'PharmacyID'];
+    protected $allowedColumns = ['OrderID', 'date', 'patientName', 'totalBill', 'status', 'PatientID', 'MedicineID', 'Quantity', 'PharmacyID', 'paymentMethod', 'paymentReceived'];
     protected $order_column = "OrderID";
 
 
@@ -92,5 +92,12 @@ class OrderView
               AND date < DATE_FORMAT(CURDATE() + INTERVAL 1 MONTH, '%Y-%m-01')";
 
         return $this->query($query, [$pharmacyID]);
+    }
+
+    public function getPayment($pharmacyId)
+    {
+        $query = "SELECT * FROM $this->table WHERE PharmacyID = ? AND paymentReceived = 1";
+        $data = [$pharmacyId];
+        return $this->query($query, $data);
     }
 }

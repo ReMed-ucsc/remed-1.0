@@ -39,7 +39,12 @@ class DashboardPage
         $orderCount = $patientModel->orderCount($pharmacyID);
         $monthlyIncome = $patientModel->monthlyIncome($pharmacyID);
 
-        $this->view('pharmacy/dashboardPage', ['patientCount' => $patientCount, 'orderCount' => $orderCount, 'monthlyIncome' => $monthlyIncome]);
+        $payments = $patientModel->getPayment($pharmacyID);
+
+
+
+
+        $this->view('pharmacy/dashboardPage', ['patientCount' => $patientCount, 'orderCount' => $orderCount, 'monthlyIncome' => $monthlyIncome, 'payments' => $payments]);
     }
 
     // add other methods like edit, update, delete, etc.

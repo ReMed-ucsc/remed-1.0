@@ -53,4 +53,32 @@ class DrugInventory
         // Return false if the insertion failed
         return false;
     }
+
+    public function getStockLevelCountsArray($pharmacyId)
+    {
+        $query = "
+            SELECT 
+                SUM(CASE WHEN stockLevel = 'i' THEN 1 ELSE 0 END) as inStock,
+                SUM(CASE WHEN stockLevel = 'l' THEN 1 ELSE 0 END) as lowStock,
+                SUM(CASE WHEN stockLevel = 'o' THEN 1 ELSE 0 END) as outOfStock
+            FROM 
+                $this->table 
+            WHERE 
+                PharmacyID = :pharmacyId";
+
+        $params = ['pharmacyId' => $pharmacyId];
+        $result = $this->query($query, $params);
+
+        if ($result) {
+            // Return as a simple numeric array
+            return [
+                (int)$result[0]->inStock,
+                (int)$result[0]->lowStock,
+                (int)$result[0]->outOfStock
+            ];
+        }
+
+        // Return zeros if no results
+        return [0, 0, 0];
+    }
 }

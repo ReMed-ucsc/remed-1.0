@@ -199,12 +199,14 @@
 
 
     </div>
+
+
     <!-- <div class="bottom"> -->
     <section class="table-management">
       <div class="table">
         <p>Recent payments</p>
 
-        <!-- <?php show($data) ?> -->
+        <?php show($stockLevels) ?>
         <table>
           <thead>
             <tr>
@@ -247,8 +249,13 @@
         </table>
       </div>
 
+
     </section>
 
+    <script>
+      const stockLevel = <?= json_encode([$stockLevels]) ?>;
+      console.log(stockLevel);
+    </script>
     <script src="<?= ROOT ?>/assets/js/pharmacy/dashboardPage.js"></script>
 
 

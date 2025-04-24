@@ -40,10 +40,10 @@ const ctxPie = document.getElementById('myPieChart').getContext('2d');
 const myPieChart = new Chart(ctxPie, {
     type: 'pie',
     data: {
-        labels: ['Over the counter', 'Prescription drugs', 'Supplements'],
+        labels: ['In Stock', 'Low Stock', 'Out of Stock'],
         datasets: [{
             label: 'Inventory Distribution',
-            data: [70, 20, 10],
+            data: stockLevel,
             backgroundColor: [
                 'rgb(0, 80, 67)',
                 'rgb(3, 39, 93)',

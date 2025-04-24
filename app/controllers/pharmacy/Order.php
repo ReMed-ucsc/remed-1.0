@@ -5,6 +5,12 @@ require_once BASE_PATH . '/api/controllers/utilis/DeliveryUtility.php';
 class Order
 {
     use Controller;
+
+    public function __construct()
+    {
+        $this->protectRoute();
+    }
+
     public function index($orderId)
     {
         // $this->protectRoute();

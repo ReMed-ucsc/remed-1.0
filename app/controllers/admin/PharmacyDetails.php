@@ -66,9 +66,11 @@ class PharmacyDetails
                 'RegNo' => $_POST['RegNo'],
                 'contactNo' => $_POST['contactNo'],
                 'email' => $_POST['email'],
-                'address' => $_POST['address'],
+                'address' => $_POST['pharmacy-address'],
                 'notification' => $Msg,
                 'notificationDriver' => $MsgDriver,
+                'latitude'=>$_POST['latitude'],
+                'longitude'=>$_POST['longitude'],
                 'document' => $_FILES['document'] ?? null
             ];
 
@@ -102,7 +104,7 @@ class PharmacyDetails
                 'pharmacistName' => $_POST['pharmacistName'] ?? '',
                 'RegNo' => $_POST['RegNo'] ?? '',
                 'contactNo' => $_POST['contactNo'] ?? '',
-                'address' => $_POST['address'] ?? '',
+                'address' => $_POST['pharmacy-address'] ?? '',
                 'email' => $_POST['email'] ?? '',
                 'status' => 'APPROVED',
                 'document' => '',

@@ -31,19 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // searchResults.addEventListener("click", function (event) {
-  //   if (event.target.classList.contains("search-result-item")) {
-  //     const medicineId = event.target.dataset.medicineId;
-  //     const medicineName = event.target.textContent;
-  //     // Update the input element with the selected medicine's details
-  //     searchInput.value = medicineName;
-  //     searchInput.dataset.medicineId = medicineId;
-  //     // Set the hidden input field's value
-  //     hiddenInput.value = medicineId;
-  //     // Clear the search results
-  //     searchResults.innerHTML = "";
-  //   }
-  // });
+ 
 
   searchResults.addEventListener("click", function (event) {
     if (event.target.classList.contains("search-result-item")) {

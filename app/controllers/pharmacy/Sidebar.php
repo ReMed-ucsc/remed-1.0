@@ -18,8 +18,22 @@ class Sidebar
 
         // $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
 
-        $data['username'] = [];
-        $this->view('pharmacy/sidebar', $data);
+        // $data['username'] = [];
+        // $this->view('pharmacy/sidebar', $data);
+
+        if (!isset($_SESSION['user_id'])) {
+            redirect('login'); // or show an unauthorized message
+            exit();
+        }
+
+        $pharmacyID = $_SESSION['user_id'];
+
+        $pharmacyModel = new Pharmacy();
+        $pharmacy = $pharmacyModel->getPharmacyById($pharmacyID);
+
+        show($pharmacy);
+
+        $this->View('inc/pharmacy/sidebar', ['pharmacy' => $pharmacy]);
     }
 
     // add other methods like edit, update, delete, etc.

@@ -50,6 +50,8 @@
 
     <?php include(BASE_PATH . '/app/views/inc/pharmacy/sidebar.php'); ?>
 
+    <!-- <?php show($data) ?> -->
+
     <!-- <div class="Order-page"> -->
     <!-- <div class="right"> -->
     <div class="overlay">
@@ -178,8 +180,13 @@
     <div class="right-section">
       <div class="chat-box">
         <div class="orderStatus">
+
+          <!-- style should change here -->
+
           <label for="status">Order Status:</label>
-          <div class="selectWrapper">
+          <div class="orderStatus-input"> <?= htmlspecialchars($status) ?></div>
+
+          <!-- <div class="selectWrapper">
             <select id="status" class="statusSelect">
               <?php foreach ($statusList as $key => $value): ?>
                 <option value="<?= htmlspecialchars($key) ?>" <?= ($key == $order->status) ? 'selected' : '' ?>>
@@ -187,7 +194,8 @@
                 </option>
               <?php endforeach; ?>
             </select>
-          </div>
+          </div> -->
+
         </div>
 
         <div class="id">
@@ -235,42 +243,86 @@
         </div>
       </div>
       <div class="submit-section">
-        <?php if ($viewOnly) { ?>
-          <button class="edit-order">
-            <a href="<?= ROOT ?>/order/edit/<?= $order->OrderID ?>" style="text-decoration: none; color:black;">
-              Edit Order
-            </a>
-          </button>
-          </form>
-          <button class="delete-order" onclick=handleOrderConfirm()>
-            Confirm Order
-          </button>
+        <div class="button-container">
 
-          <form id="confirmForm" method="POST" action="<?= ROOT ?>/Order/confirmOrder/<?= $order->OrderID ?>" style="display:none;">
-            <input type="hidden" name="orderId" , value="<?= $order->OrderID ?>">
-          </form>
+          <?php if (isset($data['order']) && $data['order']->status == 'W') { ?>
 
-          <script>
-            function handleOrderConfirm() {
-              if (confirm("Are you sure you want to confirm the order")) {
-                document.getElementById("confirmForm").submit();
-              }
+            <!-- style should change here -->
+
+            <button class="edit-order">
+              <a href="<?= ROOT ?>/order/updateOrderStatus/<?= $order->OrderID ?>/P" style="text-decoration: none; color:black;">
+                Proceed
+              </a>
+            </button>
+
+          <?php } else if (isset($data['order']) && $data['order']->status == 'P') {  ?>
+
+            <?php if ($viewOnly) { ?>
+              <button class="edit-order">
+                <a href="<?= ROOT ?>/order/edit/<?= $order->OrderID ?>" style="text-decoration: none; color:black;">
+                  Edit Order
+                </a>
+              </button>
+              </form>
+
+              <button class="edit-order">
+                <a href="<?= ROOT ?>/order/updateOrderStatus/<?= $order->OrderID ?>/Q" style="text-decoration: none; color:black;">
+                  Send Quotation
+                </a>
+              </button>
+              <!-- <button class="delete-order" onclick=handleOrderConfirm()>
+                Confirm Order
+              </button> -->
+
+              <form id="confirmForm" method="POST" action="<?= ROOT ?>/Order/confirmOrder/<?= $order->OrderID ?>" style="display:none;">
+                <input type="hidden" name="orderId" , value="<?= $order->OrderID ?>">
+              </form>
+
+
+
+            <?php } else {  ?>
+              <button class="edit-order">
+                <a href="<?= ROOT ?>/order/updateOrderStatus/<?= $order->OrderID ?>/Q" style="text-decoration: none; color:black;">
+                  Send Quotation
+                </a>
+              </button>
+
+            <?php
             }
-          </script>
+          } else if (isset($data['order']) && $data['order']->status == 'A' && !$order->pickup) {
+            if ($order->paymentReceived) {
+            ?>
 
-        <?php } else {  ?>
-          <button class="delete-order">
-            <a href="<?= ROOT ?>/order/<?= $order->OrderID ?>" style="text-decoration: none; color:white;">
-              Cancel
-            </a>
-          </button>
 
-        <?php } ?>
+              <button class="edit-order">
+                <a href="<?= ROOT ?>/order/updateOrderStatus/<?= $order->OrderID ?>/WD" style="text-decoration: none; color:black;">
+                  Send for delivery
+                </a>
+              </button>
+            <?php
+            } else { ?>
+
+              <!-- style should change here -->
+
+              <p class="paymentWaiting">Waiting for payment Completion...</p>
+          <?php
+            }
+          }
+          ?>
+        </div>
 
       </div>
     </div>
     <!-- </div> -->
 
+
+    <script>
+      function handleOrderConfirm() {
+        if (confirm("Are you sure you want to confirm the order")) {
+          document.getElementById("confirmForm").submit();
+        }
+      }
+    </script>
     <script>
       const pharmacyId = <?= isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 'null' ?>;
       const orderData = <?= json_encode([

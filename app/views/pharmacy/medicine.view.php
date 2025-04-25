@@ -52,79 +52,37 @@
                                 <th>Generic Name</th>
                                 <th>Medicine Name</th>
                                 <th>Unit Price</th>
-                                <th>Supplier ID</th>
                                 <th>Expiration Date</th>
+                                <th>Stock Quantity</th>
                                 <th>Reorder Level</th>
                                 <!-- <th>Status</th> -->
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>BATCH-001</td>
-                                <td>Paracetamol</td>
-                                <td>Panadol</td>
-                                <td>Pain Relief</td>
-                                <td>$10.00</td>
-                                <td>SUP-456</td>
-                                <td>2025-06-15</td>
-                                <td>50</td>
-                                <!-- <td>In Stock</td> -->
-                            </tr>
-                            <tr>
-                                <td>BATCH-003</td>
-                                <td>Vitamin C</td>
-                                <td>Citrohealth</td>
-                                <td>Supplements</td>
-                                <td>$5.00</td>
-                                <td>SUP-123</td>
-                                <td>2026-02-20</td>
-                                <td>100</td>
-                                <!-- <td>In Stock</td> -->
-                            </tr>
-                            <tr>
-                                <td>BATCH-003</td>
-                                <td>Vitamin C</td>
-                                <td>Citrohealth</td>
-                                <td>Supplements</td>
-                                <td>$5.00</td>
-                                <td>SUP-123</td>
-                                <td>2026-02-20</td>
-                                <td>100</td>
-                                <!-- <td>In Stock</td> -->
-                            </tr>
-                            <tr>
-                                <td>BATCH-003</td>
-                                <td>Vitamin C</td>
-                                <td>Citrohealth</td>
-                                <td>Supplements</td>
-                                <td>$5.00</td>
-                                <td>SUP-123</td>
-                                <td>2026-02-20</td>
-                                <td>100</td>
-                                <!-- <td>In Stock</td> -->
-                            </tr>
-                            <tr>
-                                <td>BATCH-003</td>
-                                <td>Vitamin C</td>
-                                <td>Citrohealth</td>
-                                <td>Supplements</td>
-                                <td>$5.00</td>
-                                <td>SUP-123</td>
-                                <td>2026-02-20</td>
-                                <td>100</td>
-                                <!-- <td>In Stock</td> -->
-                            </tr>
-                            <tr>
-                                <td>BATCH-003</td>
-                                <td>Vitamin C</td>
-                                <td>Citrohealth</td>
-                                <td>Supplements</td>
-                                <td>$5.00</td>
-                                <td>SUP-123</td>
-                                <td>2026-02-20</td>
-                                <td>100</td>
-                                <!-- <td>In Stock</td> -->
-                            </tr>
+                            <?php foreach ($medicine as $item): ?>
+                                <?php if ($item->availableCount > $item->thresholdLimit): ?>
+                                    <tr>
+                                        <td><?= htmlspecialchars($item->ProductID) ?></td>
+                                        <td><?= htmlspecialchars($item->Manufacturer) ?></td>
+                                        <td><?= htmlspecialchars($item->genericName) ?></td>
+                                        <td><?= htmlspecialchars($item->ProductName) ?></td>
+                                        <td><?= htmlspecialchars($item->SellingPrice) ?></td>
+                                        <td><?= htmlspecialchars($item->expiryDate) ?></td>
+                                        <td><?= htmlspecialchars($item->availableCount) ?></td>
+
+                                        <td><?= htmlspecialchars($item->thresholdLimit) ?></td>
+
+
+
+
+
+
+
+                                        <!-- <td>In Stock</td> -->
+                                    </tr>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+
                         </tbody>
                     </table>
                 </section>
@@ -141,35 +99,38 @@
                                 <th>Generic Name</th>
                                 <th>Medicine Name</th>
                                 <th>Unit Price</th>
-                                <th>Supplier ID</th>
                                 <th>Expiration Date</th>
+                                <th>Stock Quantity</th>
+
                                 <th>Reorder Level</th>
                                 <!-- <th>Status</th> -->
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>BATCH-004</td>
-                                <td>Amoxicillin</td>
-                                <td>Amoxil</td>
-                                <td>Antibiotics</td>
-                                <td>$8.00</td>
-                                <td>SUP-456</td>
-                                <td>2025-08-15</td>
-                                <td>20</td>
-                                <!-- <td>Out of Stock</td> -->
-                            </tr>
-                            <tr>
-                                <td>BATCH-002</td>
-                                <td>Ibuprofen</td>
-                                <td>Advil</td>
-                                <td>Pain Relief</td>
-                                <td>$12.50</td>
-                                <td>SUP-789</td>
-                                <td>2024-12-10</td>
-                                <td>30</td>
-                                <!-- <td>Out of Stock</td> -->
-                            </tr>
+                            <?php foreach ($medicine as $item): ?>
+
+                                <?php if ($item->availableCount > 0 && $item->availableCount <= $item->thresholdLimit): ?>
+                                    <tr>
+                                        <td><?= htmlspecialchars($item->ProductID) ?></td>
+                                        <td><?= htmlspecialchars($item->Manufacturer) ?></td>
+                                        <td><?= htmlspecialchars($item->genericName) ?></td>
+                                        <td><?= htmlspecialchars($item->ProductName) ?></td>
+                                        <td><?= htmlspecialchars($item->SellingPrice) ?></td>
+                                        <td><?= htmlspecialchars($item->expiryDate) ?></td>
+                                        <td><?= htmlspecialchars($item->availableCount) ?></td>
+
+                                        <td><?= htmlspecialchars($item->thresholdLimit) ?></td>
+
+
+
+
+
+
+
+                                        <!-- <td>In Stock</td> -->
+                                    </tr>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </section>
@@ -187,46 +148,32 @@
                                 <th style="width:5%;">Generic Name</th>
                                 <th style="width:5%;">Medicine Name</th>
                                 <th style="width:5%;">Unit Price</th>
-                                <th style="width:5%;">Supplier ID</th>
                                 <th style="width:5%;">Expiration Date</th>
+                                <th>Stock Quantity</th>
+
                                 <th style="width:5%;">Reorder Level</th>
                                 <!-- <th style="width:5%;">Status</th> -->
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>BATCH-004</td>
-                                <td>Amoxicillin</td>
-                                <td>Amoxil</td>
-                                <td>Antibiotics</td>
-                                <td>$8.00</td>
-                                <td>SUP-456</td>
-                                <td>2025-08-15</td>
-                                <td>20</td>
-                                <!-- <td>Low Stock</td> -->
-                            </tr>
-                            <tr>
-                                <td>BATCH-002</td>
-                                <td>Ibuprofen</td>
-                                <td>Advil</td>
-                                <td>Pain Relief</td>
-                                <td>$12.50</td>
-                                <td>SUP-789</td>
-                                <td>2024-12-10</td>
-                                <td>30</td>
-                                <!-- <td>Low Stock</td> -->
-                            </tr>
-                            <tr>
-                                <td>BATCH-004</td>
-                                <td>Amoxicillin</td>
-                                <td>Amoxil</td>
-                                <td>Antibiotics</td>
-                                <td>$8.00</td>
-                                <td>SUP-456</td>
-                                <td>2025-08-15</td>
-                                <td>20</td>
-                                <!-- <td>Low Stock</td> -->
-                            </tr>
+                            <?php foreach ($medicine as $item): ?>
+
+                                <?php if ($item->availableCount == 0): ?>
+                                    <tr>
+                                        <td><?= htmlspecialchars($item->ProductID) ?></td>
+                                        <td><?= htmlspecialchars($item->Manufacturer) ?></td>
+                                        <td><?= htmlspecialchars($item->genericName) ?></td>
+                                        <td><?= htmlspecialchars($item->ProductName) ?></td>
+                                        <td><?= htmlspecialchars($item->SellingPrice) ?></td>
+                                        <td><?= htmlspecialchars($item->expiryDate) ?></td>
+                                        <td><?= htmlspecialchars($item->availableCount) ?></td>
+
+                                        <td><?= htmlspecialchars($item->thresholdLimit) ?></td>
+
+                                        <!-- <td>In Stock</td> -->
+                                    </tr>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </section>

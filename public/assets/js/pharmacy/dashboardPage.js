@@ -1,153 +1,208 @@
-const ctxBar = document.getElementById('myBarChart').getContext('2d');
-const myBarChart = new Chart(ctxBar, {
-    type: 'line',
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("Stock Level Data:", stockLevel);
+  console.log("Income Data:", income);
+  console.log("Patient Visit Data:", patientVisit);
+
+  // Only proceed if canvas elements exist
+  if (!document.getElementById("myBarChart")) {
+    console.error("Bar chart canvas missing");
+    return;
+  }
+
+  // Revenue/Income Line Chart
+  const ctxBar = document.getElementById("myBarChart").getContext("2d");
+  const myBarChart = new Chart(ctxBar, {
+    type: "line",
     data: {
-        labels: income.labels, // X-axis labels
-        datasets: [{
-            label: 'Over the counter',
-            data: income.data, // Y-axis values
-            backgroundColor: 'rgb(0, 80, 67);',
-            borderColor: 'rgb(0, 80, 67)',
-            borderWidth: 1,
-            fill: false,
-            tension: 0.3,
-        }]
-        
+      labels: income.labels || ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+      datasets: [
+        {
+          label: "Revenue",
+          data: income.data || [0, 0, 0, 0, 0, 0],
+          backgroundColor: "rgba(0, 80, 67, 0.2)",
+          borderColor: "rgb(0, 80, 67)",
+          borderWidth: 2,
+          fill: true,
+          tension: 0.3,
+        },
+      ],
     },
     options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            y: {
-                beginAtZero: true,
-            },
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: "Revenue (Rs)",
+          },
         },
+      },
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              return `Rs. ${context.raw}`;
+            },
+          },
+        },
+      },
     },
-});
+  });
 
-const ctxPie = document.getElementById('myPieChart').getContext('2d');
-const myPieChart = new Chart(ctxPie, {
-    type: 'pie',
-    data: {
-        labels: ['In Stock', 'Low Stock', 'Out of Stock'],
-        datasets: [{
-            label: 'Inventory Distribution',
-            data: stockLevel,
+  // Inventory Pie Chart
+  if (document.getElementById("myPieChart")) {
+    const ctxPie = document.getElementById("myPieChart").getContext("2d");
+    const myPieChart = new Chart(ctxPie, {
+      type: "pie",
+      data: {
+        labels: ["In Stock", "Low Stock", "Out of Stock"],
+        datasets: [
+          {
+            label: "Inventory Distribution",
+            data: Array.isArray(stockLevel) ? stockLevel : [10, 5, 2], // Fallback data
             backgroundColor: [
-                'rgb(0, 80, 67)',
-                'rgb(3, 39, 93)',
-                'rgb(183, 28, 28)'
+              "rgb(0, 80, 67)", // Green for in stock
+              "rgb(255, 159, 64)", // Orange for low stock
+              "rgb(183, 28, 28)", // Red for out of stock
             ],
             borderColor: [
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+              "rgba(0, 80, 67, 0.8)",
+              "rgba(255, 159, 64, 0.8)",
+              "rgba(183, 28, 28, 0.8)",
             ],
-            borderWidth: 1
-        }]
-    },
-    options: {
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
         responsive: true,
-        // maintainAspectRatio: false,
-    },
+        plugins: {
+          legend: {
+            position: "bottom",
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const label = context.label || "";
+                const value = context.raw || 0;
+                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                const percentage = Math.round((value / total) * 100);
+                return `${label}: ${value} (${percentage}%)`;
+              },
+            },
+          },
+        },
+      },
+    });
+  }
+
+  // Patient Visit Chart
+  if (document.getElementById("myPatientChart")) {
+    const ctxPatient = document
+      .getElementById("myPatientChart")
+      .getContext("2d");
+    const myPatientChart = new Chart(ctxPatient, {
+      type: "line",
+      data: {
+        labels: patientVisit.labels || ["Week 1", "Week 2", "Week 3", "Week 4"],
+        datasets: [
+          {
+            label: "Patient Visits",
+            data: patientVisit.data || [0, 0, 0, 0],
+            backgroundColor: "rgba(108, 160, 220, 0.7)",
+            borderColor: "rgba(108, 160, 220, 0.9)",
+            borderWidth: 2,
+            tension: 0.4,
+            fill: true,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: "Number of Visits",
+            },
+          },
+        },
+      },
+    });
+  }
+
+  // Sales by Category - Doughnut Chart
+  if (document.getElementById("myDoughnutChart")) {
+    const ctxDoughnut = document
+      .getElementById("myDoughnutChart")
+      .getContext("2d");
+    const myDoughnutChart = new Chart(ctxDoughnut, {
+      type: "doughnut",
+      data: {
+        labels: ["Painkillers", "Antibiotics", "Vitamins", "Others"],
+        datasets: [
+          {
+            label: "Sales by Category",
+            data: [35, 25, 20, 20],
+            backgroundColor: [
+              "rgba(3, 39, 93, 0.8)",
+              "rgba(75, 192, 192, 0.8)",
+              "rgba(255, 205, 86, 0.8)",
+              "rgba(201, 203, 207, 0.8)",
+            ],
+            borderColor: "#f0f0f0",
+            borderWidth: 1,
+            hoverOffset: 10,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        cutout: "60%",
+        plugins: {
+          legend: {
+            position: "bottom",
+          },
+        },
+      },
+    });
+  }
+
+  // Line Chart
+  if (document.getElementById("myLineChart")) {
+    const ctxLine = document.getElementById("myLineChart").getContext("2d");
+    const myLineChart = new Chart(ctxLine, {
+      type: "line",
+      data: {
+        labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+        datasets: [
+          {
+            label: "Revenue Trend",
+            data: [50000, 70000, 65000, 80000],
+            backgroundColor: "rgba(3, 39, 93, 0.2)",
+            borderColor: "rgb(3, 39, 93)",
+            borderWidth: 2,
+            tension: 0.4,
+            fill: true,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+  }
 });
 
-
 function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    sidebar.classList.toggle('open');  // Toggle the 'open' class to show or hide sidebar
+  const sidebar = document.getElementById("sidebar");
+  sidebar.classList.toggle("open");
 }
-
-// const ctx = document.getElementById('myPatientChart').getContext('2d');
-//     const myChart = new Chart(ctx, {
-//       type: 'line', // Use 'line' for curved charts
-//       data: {
-//         labels: patientVisit.labels, // X-axis labels
-//         datasets: [{
-//           label: 'Sales',
-//           data: patientVisit.data, // Data points
-//           backgroundColor: 'rgba(108, 160, 220, 0.7)', // Area fill color
-//           borderColor: 'rgba(108, 160, 220, 0.9)', // Line color
-//           borderWidth: 2, // Line width
-//           tension: 0.4, // Adds curve to the line
-//           fill: true // Enables area coloring
-//         }]
-//       },
-//       options: {
-//         responsive: true,
-//         scales: {
-//           x: { // X-axis customization
-//             beginAtZero: true
-//           },
-//           y: { // Y-axis customization
-//             beginAtZero: true
-//           }
-//         }
-//       }
-//     });
-  
-
-    //new part from here
-
-    // Revenue Trend - Line Chart
-// const ctxLine = document.getElementById('myLineChart').getContext('2d');
-// const myLineChart = new Chart(ctxLine, {
-//   type: 'line',
-//   data: {
-//     labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
-//     datasets: [{
-//       label: 'Revenue',
-//       data: [50000, 70000, 65000, 80000],
-//       backgroundColor: 'rgba(3, 39, 93, 0.2)',
-//       borderColor: 'rgb(3, 39, 93)',
-//       borderWidth: 2,
-//       tension: 0.4,
-//       fill: true
-//     }]
-//   },
-//   options: {
-//     responsive: true,
-//     scales: {
-//       x: {
-//         beginAtZero: true
-//       },
-//       y: {
-//         beginAtZero: true
-//       }
-//     }
-//   }
-// });
-
-// Sales by Category - Doughnut Chart
-// const ctxDoughnut = document.getElementById('myDoughnutChart').getContext('2d');
-
-// const myDoughnutChart = new Chart(ctxDoughnut, {
-//   type: 'doughnut',
-//   data: {
-//     labels: ['Painkillers', 'Antibiotics', 'Vitamins', 'Others'],
-//     datasets: [{
-//       label: 'Sales by Category',
-//       data: [35, 25, 20, 20],
-//       backgroundColor: [rgba(3, 39, 93,0.3), rgba(32, 39, 93, 0.2), rgba(3, 93, 93, 0.2), rgba(3, 39, 93, 0.2)],
-//       borderColor: '#f0f0f0', // subtle inner glow-like separation
-//       borderWidth: 2,
-//       hoverOffset: 10
-//     }]
-//   },
-//   options: {
-//     responsive: true,
-//     cutout: '60%',
-//     plugins: {
-//       legend: {
-//         position: 'bottom',
-//         labels: {
-//           color: '#333',
-//           font: {
-//             size: 12,
-//             weight: 'bold'
-//           }
-//         }
-//       }
-//     }
-//   }
-// });

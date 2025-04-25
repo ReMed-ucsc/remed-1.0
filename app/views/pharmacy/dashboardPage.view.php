@@ -266,12 +266,12 @@
     <script>
       const stockLevel = <?= json_encode($stockLevels) ?>;
       const income = <?= json_encode($income) ?>;
-      const patientVisit = <?= json_encode($patientVisit) ?>
+      const patientVisit = <?= json_encode($patientVisit) ?>;
       console.log(stockLevel);
       console.log(income);
       console.log(patientVisit);
     </script>
-    <script src="<?= ROOT ?>/assets/js/pharmacy/test.js"></script>
+    <script src="<?= ROOT ?>/assets/js/pharmacy/dashboardPage.js"></script>
 
 
 

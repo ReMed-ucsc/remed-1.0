@@ -26,17 +26,34 @@ class DrugInventory
         return $this->updateWithConditions($data, $conditions);
     }
 
+    public function getAvailableCount($productId, $pharmacyId)
+    {
+        $query = "SELECT availableCount FROM drugInventory WHERE ProductID = :productId AND PharmacyID = :pharmacyId ORDER BY DrugInventoryID DESC LIMIT 1";
+
+        $result = $this->query($query, [
+            'productId' => $productId,
+            'pharmacyId' => $pharmacyId
+        ]);
+
+        return $result[0]->availableCount ?? 0;
+    }
+
+
     public function addDrug($productId, $pharmacyId, $stockQuantity, $threshold, $storageLocation, $storageConditions, $unitPrice)
     {
         // $query = "INSERT INTO drugInventory (ProductID, PharmacyID, availableCount, drugInventory.thresholdLimit,drugInventory.storageLocation,drugInventory.storageConditions,drugInventory.unitPrice) 
         // VALUES
         // (:ProductID, :PharmacyID, :availableCount, :thresholdLimit,:storageLocation,:storageConditions,:unitPrice)";
 
+        $availableCount = $this->getAvailableCount($productId, $pharmacyId);
+
+        $newAvailableCount = $stockQuantity + $availableCount;
+
         $data = [
             // 'InventoryId' => $inventoryId,
             'ProductID' => $productId,
             'PharmacyID' => $pharmacyId,
-            'availableCount' => $stockQuantity,
+            'availableCount' => $newAvailableCount,
             'thresholdLimit' => $threshold,
             'storageLocation' => $storageLocation,
             'storageConditions' => $storageConditions,

@@ -35,5 +35,45 @@ class InventoryRefill
         $this->View('pharmacy/inventoryRefill', ['InventoryId' => $inventoryId, 'inventory' => $inventory, 'inventoryList' => $inventoryList, 'historyList' => $historyList]);
     }
 
+    public function addStock($inventoryId)
+    {
+        var_dump($_POST);
+        $stockModel = new StockDataView();
+
+        if ($_SERVER['REQUEST_METHOD'] == "POST" && $_POST['InventoryId']) {
+            $data = [
+                'InventoryId'        => $_POST['InventoryId'],
+                'batchId'            => $_POST['batchID'] ?? '',
+                'stockQuantity'      => $_POST['stockQuantity'] ?? '',
+                // 'thresholdLimit'     => $_POST['thresholdLimit'] ?? '',
+                // 'storageLocation'    => $_POST['storageLocation'] ?? '',
+                'manufacturingDate'  => $_POST['manufacturingDate'] ?? '',
+                'expiryDate'         => $_POST['expiryDate'] ?? '',
+                'purchaseDate'       => $_POST['purchaseDate'] ?? '',
+                // 'storageConditions'  => $_POST['storageCondition'] ?? '',
+                'purchaseCost'       => $_POST['purchasePrice'] ?? '',
+                'sellingPrice'       => $_POST['sellingPrice'] ?? ''
+            ];
+
+            if ($inventoryId) {
+                $stockID = $stockModel->addStock(
+                    $inventoryId,
+                    $data['stockQuantity'],
+                    $data['manufacturingDate'],
+                    $data['expiryDate'],
+                    $data['purchaseCost'],
+                    $data['purchaseDate'], // purchaseDate (current date)
+                    $data['batchId']
+                );
+
+                if ($stockID) {
+                    redirect('inventoryView/' . $inventoryId);
+                    exit;
+                }
+            }
+        }
+        redirect('inventoryView/' . $inventoryId);
+    }
+
     // add other methods like edit, update, delete, etc.
 }

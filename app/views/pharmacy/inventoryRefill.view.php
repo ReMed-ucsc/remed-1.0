@@ -52,10 +52,10 @@
         <div class="main-content">
             <h2>Inventory Management &nbsp; &#8250; &nbsp;</h2>
             <div class="ongoing">
-                Add to Inventory
+                Restock Inventory
             </div>
             <div class="order-body">
-                <form id="inventoryForm" action="<?php echo ROOT; ?>/inventoryCreate/addItem" method="POST">
+                <form id="inventoryForm" action="<?php echo ROOT; ?>/inventoryRefill/addStock/<?= $inventory->InventoryId ?>" method="POST">
                     <div class="inventoryDetails size1">
                         <div class="left">
                             <ul>
@@ -71,14 +71,14 @@
                                 <li>Expiry Date</li>
                                 <li>Purchase Date</li>
                                 <li>Storage Conditions</li>
-                                <li>Purchase Price</li>
-                                <li>Selling Price</li>
+                                <li>Purchase Cost</li>
+                                <li>Selling Price(unit)</li>
                             </ul>
                         </div>
 
                         <div class="right">
                             <ul>
-                                <input type="hidden" id="medicine-id" name="productId" value="" />
+                                <input type="hidden" id="medicine-id" name="InventoryId" value="<?= htmlspecialchars($inventory->InventoryId) ?>" />
                                 <li><input type="text" id="productName" name="productName" placeholder="Auto" value="<?= htmlspecialchars($inventory->ProductName) ?>" disabled></li>
                                 <div id="search-results" class="search-results"></div>
                                 <!-- <li><input type="text" id="manufacturer" name="manufacturer" placeholder="Auto"></li>
@@ -93,11 +93,11 @@
                                 <li><input type="text" name="batchID" placeholder="Enter Batch number"></li>
                                 <li><input type="number" name="stockQuantity" placeholder="Enter quantity"></li>
                                 <li><input type="text" name="thresholdLimit" value="<?= htmlspecialchars($inventory->thresholdLimit) ?>" placeholder="20" disabled></li>
-                                <li><input type="text" name="storageLocation" value="<?= htmlspecialchars($inventory->storageLocation) ?>" placeholder="Search and Select"></li>
+                                <li><input type="text" name="storageLocation" value="<?= htmlspecialchars($inventory->storageLocation) ?>" placeholder="Search and Select" disabled></li>
                                 <li><input type="date" name="manufacturingDate"></li>
                                 <li><input type="date" name="expiryDate"></li>
                                 <li><input type="date" name="purchaseDate"></li>
-                                <li><input type="text" name="storageCondition" value="<?= htmlspecialchars($inventory->storageConditions) ?>" placeholder="Optional"></li>
+                                <li><input type="text" name="storageCondition" value="<?= htmlspecialchars($inventory->storageConditions) ?>" placeholder="None" disabled></li>
                                 <li><input type="text" name="purchasePrice" placeholder="Enter purchase Cost"></li>
                                 <li><input type="text" id="unitPrice" name="sellingPrice" placeholder="Enter unit Selling price"></li>
                             </ul>

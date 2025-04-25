@@ -47,16 +47,9 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                             <td class="status-mark">
                                 <span class="status pending"><?= htmlspecialchars($pharmacy_items->status) ?></span>
                             </td>
-                            <td class="action-onboard">
-                                <div class="action-border">
-                                    <a class="onboard"
-                                        href="<?= ROOT ?>/admin/PendingPharmacy/onbordPharmacy/<?= htmlspecialchars($pharmacy_items->PharmacyID) ?>">onboard</a>
-                                </div>
-                                <div class="action-border">
-                                    <a class="reject"
-                                        href="<?= ROOT ?>/admin/PendingPharmacy/reject/<?= htmlspecialchars($pharmacy_items->PharmacyID) ?>">Reject</a>
-                                </div>
-
+                            <td>
+                                <a class="onboard"
+                                    href="<?= ROOT ?>/admin/PendingPharmacy/onbordPharmacy/<?= htmlspecialchars($pharmacy_items->PharmacyID) ?>">Onboard</a>
                             </td>
                         </tr>
                     <?php endif; ?>

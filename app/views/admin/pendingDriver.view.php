@@ -52,7 +52,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                                 </div>
 
                                 <div class="action-border">
-                                    <a class="reject"
+                                    <a class="reject-action"
                                         href="<?= ROOT ?>/admin/PendingDriver/reject/<?= htmlspecialchars($driver_details->driverId) ?>">Reject</a>
                                 </div>
                             </td>

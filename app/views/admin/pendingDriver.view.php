@@ -10,11 +10,13 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
     <!-- Search Box Form -->
     <div class="search-container">
         <form id="search-form">
-            <input type="text" id="searchInput" name="search" class="search-box" placeholder="Search here..." value="<?php if (isset($_GET['search'])) {echo htmlspecialchars($_GET['search']);} ?>">
+            <input type="text" id="searchInput" name="search" class="search-box" placeholder="Search here..." value="<?php if (isset($_GET['search'])) {
+                echo htmlspecialchars($_GET['search']);
+            } ?>">
             <button type="submit" class="search-button" onclick="performSearch()">Search</button>
         </form>
-        
-        
+
+
     </div>
     <!-- Table Structure -->
     <div class="details-container">
@@ -43,11 +45,21 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                                     <?= htmlspecialchars($driver_details->status) ?>
                                 </span>
                             </td>
-                            <td><a class="onboard" href="<?=ROOT?>/admin/PendingDriver/OnboardDrivers/<?= htmlspecialchars($driver_details->driverId) ?>">OnBoard</a></td>
+                            <td>
+                                <div class="action-border">
+                                    <a class="onboard"
+                                        href="<?= ROOT ?>/admin/PendingDriver/OnboardDrivers/<?= htmlspecialchars($driver_details->driverId) ?>">OnBoard</a>
+                                </div>
+
+                                <div class="action-border">
+                                    <a class="reject"
+                                        href="<?= ROOT ?>/admin/PendingDriver/reject/<?= htmlspecialchars($driver_details->driverId) ?>">Reject</a>
+                                </div>
+                            </td>
                         </tr>
                     <?php endif; ?>
                 <?php endforeach; ?>
-                </tbody>
+            </tbody>
 
         </table>
     </div>

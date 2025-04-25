@@ -70,8 +70,7 @@ class PharmacyDetails
                 'notification' => $Msg,
                 'notificationDriver' => $MsgDriver,
                 'latitude'=>$_POST['latitude'],
-                'longitude'=>$_POST['longitude'],
-                'document' => $_FILES['document'] ?? null
+                'longitude'=>$_POST['longitude']
             ];
 
 

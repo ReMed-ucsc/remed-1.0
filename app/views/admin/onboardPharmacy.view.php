@@ -20,7 +20,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php'
 
 
 
-        <form  action="" method="POST" enctype="multipart/form-data">
+        <form action="" method="POST" enctype="multipart/form-data">
             <div class="onboard-top">
                 <div class="Form">
                     <div>
@@ -76,22 +76,23 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php'
                     <div class="license-document">
                         <lable for="document">License:</lable>
                         <?php
-
                         $licenseFile = htmlspecialchars($pharmacy->license);
                         $licenseUrl = "http://localhost/remed-1.0/uploads/license/$licenseFile";
 
                         $fileExtension = strtolower(pathinfo($licenseFile, PATHINFO_EXTENSION));
+
                         if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif', 'webp'])) {
-                            echo "<img class='license' src='$licenseUrl' alt='License Image' style='max-width: 300px; max-height: 300px;' />";
+                            echo "<img class='license' src='$licenseUrl' alt='License Image' style='width: 100%; max-height: 300px;' />";
                         } elseif ($fileExtension === 'pdf') {
                             echo "<embed class='license' src='$licenseUrl' type='application/pdf' width='100%' height='300px' />";
                         } else {
                             echo "License file format not supported.";
                         }
-                        $downloadIcon = ROOT . "/assets/images/downloading.png";
-                        echo "<br><a href='$licenseUrl' class='download' ><img  src='$downloadIcon' alt='download'/></a>";
 
+                        $downloadIcon = ROOT . "/assets/images/downloading.png"; // move PHP out of echo string
+                        echo "<br><a href='$licenseUrl' download class='download'><img src='$downloadIcon' alt='download' style='height: 24px;' /></a>";
                         ?>
+
                     </div>
                 </div>
             </div>

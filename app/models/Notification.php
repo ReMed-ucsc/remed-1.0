@@ -41,7 +41,8 @@ class Notification
         $data = [
             "pharmacyId" => $pharmacyId,
             "orderId" => $orderId,
-            "message" => $message
+            "message" => $message,
+            'isRead' => 0
         ];
         return $this->insert($data);
     }

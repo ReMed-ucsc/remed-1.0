@@ -4,55 +4,57 @@ class NotificationController
 {
     use Controller;
 
-    public function stream($userId){
-        
-    $notificationModel = new Notification();
-    $lastHeartbeat = time();
+    public function stream($userId)
+    {
 
-    // Disable output buffering
-    while (ob_get_level()) ob_end_flush();
-    header('Content-Type: text/event-stream');
-    header('Cache-Control: no-cache');
-    header('Connection: keep-alive');
+        $notificationModel = new Notification();
+        $lastHeartbeat = time();
 
-    echo ": connected\n\n";
-    flush();
+        // Disable output buffering
+        while (ob_get_level()) ob_end_flush();
+        header('Content-Type: text/event-stream');
+        header('Cache-Control: no-cache');
+        header('Connection: keep-alive');
 
-    while (true) {
-        if (connection_aborted()) {
-            exit;
-        }
+        echo ": connected\n\n";
+        flush();
 
-        // Send heartbeat every 15s
-        if (time() - $lastHeartbeat > 15) {
-            echo ": heartbeat at " . date('H:i:s') . "\n\n";
-            flush();
-            $lastHeartbeat = time();
-        }
-
-        // Check for notifications
-        $notifications = $notificationModel->getUnreadNotification($userId);
-        if (!empty($notifications)) {
-            if (!is_array($notifications)) {
-                $notifications = [$notifications];
+        while (true) {
+            if (connection_aborted()) {
+                exit;
             }
 
-            foreach ($notifications as $notification) {
-                echo "event: notification\n";
-                echo "data: " . json_encode([
-                    'id' => $notification->notificationId,
-                    'message' => $notification->message
-                ]) . "\n\n";
+            // Send heartbeat every 15s
+            if (time() - $lastHeartbeat > 15) {
+                echo ": heartbeat at " . date('H:i:s') . "\n\n";
+                flush();
+                $lastHeartbeat = time();
             }
 
-            // Mark as read
-            $ids = array_map(fn($n) => $n->notificationId, $notifications);
-            $notificationModel->markAsRead($ids);
+            // Check for notifications
+            $notifications = $notificationModel->getUnreadNotification($userId);
+            if (!empty($notifications)) {
+                if (!is_array($notifications)) {
+                    $notifications = [$notifications];
+                }
 
-            flush();
+                foreach ($notifications as $notification) {
+                    echo "event: notification\n";
+                    echo "data: " . json_encode([
+                        'id' => $notification->notificationId,
+                        'message' => $notification->message,
+                        'orderId' => $notification->orderId
+                    ]) . "\n\n";
+                }
+
+                // Mark as read
+                $ids = array_map(fn($n) => $n->notificationId, $notifications);
+                $notificationModel->markAsRead($ids);
+
+                flush();
+            }
+
+            usleep(100000); // 100ms delay
         }
-
-        usleep(100000); // 100ms delay
     }
-}
 }

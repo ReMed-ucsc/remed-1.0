@@ -41,13 +41,15 @@ function initSSE(notificationPopup, notificationMessage) {
 
             notificationMessage.textContent = data.message;
 
-        // Show the popup
-        notificationPopup.classList.add('show');
+            notificationPopup.dataset.orderId = data.orderId;
 
-        // Hide the popup after 5 seconds
-        setTimeout(function() {
-            notificationPopup.classList.remove('show');
-        }, 5000); // Popup will disappear after 5 seconds
+            // Show the popup
+            notificationPopup.classList.add('show');
+
+            // Hide the popup after 5 seconds
+            setTimeout(function () {
+                notificationPopup.classList.remove('show');
+            }, 5000); // Popup will disappear after 5 seconds
         } catch (e) {
             console.error("❗ Error parsing notification data:", e);
         }
@@ -69,7 +71,7 @@ function initSSE(notificationPopup, notificationMessage) {
     };
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const notificationPopup = document.getElementById('notification-popup');
     const notificationMessage = document.getElementById('notification-message');
 

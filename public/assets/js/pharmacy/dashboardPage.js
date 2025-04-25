@@ -2,28 +2,30 @@ const ctxBar = document.getElementById('myBarChart').getContext('2d');
 const myBarChart = new Chart(ctxBar, {
     type: 'line',
     data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June'], // X-axis labels
+        labels: income.labels, // X-axis labels
         datasets: [{
             label: 'Over the counter',
-            data: [20000, 30000, 25000, 40000, 60000, 50000], // Y-axis values
+            data: income.data, // Y-axis values
             backgroundColor: 'rgb(0, 80, 67);',
-            borderColor: 'rgb(0, 80, 67);',
-            borderWidth: 1
-        },
-        {
-            label: 'Prescription drugs',
-            data: [15000, 25000, 20000, 30000, 50000, 40000],
-            backgroundColor: 'rgb(3, 39, 93)',
-            borderColor: 'rgb(3, 39, 93)',
-            borderWidth: 1
-        },
-        {
-            label: 'Supplements',
-            data: [10000, 20000, 15000, 25000, 40000, 30000],
-            backgroundColor: 'rgb(183, 28, 28)',
-            borderColor: 'rgb(183, 28, 28)',
-            borderWidth: 1
+            borderColor: 'rgb(0, 80, 67)',
+            borderWidth: 1,
+            fill: false,
+            tension: 0.3,
         }]
+        // {
+        //     label: 'Prescription drugs',
+        //     data: [15000, 25000, 20000, 30000, 50000, 40000],
+        //     backgroundColor: 'rgb(3, 39, 93)',
+        //     borderColor: 'rgb(3, 39, 93)',
+        //     borderWidth: 1
+        // },
+        // {
+        //     label: 'Supplements',
+        //     data: [10000, 20000, 15000, 25000, 40000, 30000],
+        //     backgroundColor: 'rgb(183, 28, 28)',
+        //     borderColor: 'rgb(183, 28, 28)',
+        //     borderWidth: 1
+        // }]
     },
     options: {
         responsive: true,
@@ -132,22 +134,22 @@ const myLineChart = new Chart(ctxLine, {
 // Sales by Category - Doughnut Chart
 const ctxDoughnut = document.getElementById('myDoughnutChart').getContext('2d');
 
-// Solid-glow gradient slices (strong contrast, no alpha)
-const gradient1 = ctxDoughnut.createLinearGradient(0, 0, 200, 200);
-gradient1.addColorStop(0, '#00796B'); // darker green
-gradient1.addColorStop(1, '#26A69A'); // lighter green
+// // Solid-glow gradient slices (strong contrast, no alpha)
+// const gradient1 = ctxDoughnut.createLinearGradient(0, 0, 200, 200);
+// gradient1.addColorStop(0, '#00796B'); // darker green
+// gradient1.addColorStop(1, '#26A69A'); // lighter green
 
-const gradient2 = ctxDoughnut.createLinearGradient(0, 0, 200, 200);
-gradient2.addColorStop(0, '#1A237E'); // darker blue
-gradient2.addColorStop(1, '#3F51B5'); // lighter blue
+// const gradient2 = ctxDoughnut.createLinearGradient(0, 0, 200, 200);
+// gradient2.addColorStop(0, '#1A237E'); // darker blue
+// gradient2.addColorStop(1, '#3F51B5'); // lighter blue
 
-const gradient3 = ctxDoughnut.createLinearGradient(0, 0, 200, 200);
-gradient3.addColorStop(0, '#B71C1C'); // dark red
-gradient3.addColorStop(1, '#E53935'); // bright red
+// const gradient3 = ctxDoughnut.createLinearGradient(0, 0, 200, 200);
+// gradient3.addColorStop(0, '#B71C1C'); // dark red
+// gradient3.addColorStop(1, '#E53935'); // bright red
 
-const gradient4 = ctxDoughnut.createLinearGradient(0, 0, 200, 200);
-gradient4.addColorStop(0, '#FF6F00'); // dark amber
-gradient4.addColorStop(1, '#FFC107'); // bright amber
+// const gradient4 = ctxDoughnut.createLinearGradient(0, 0, 200, 200);
+// gradient4.addColorStop(0, '#FF6F00'); // dark amber
+// gradient4.addColorStop(1, '#FFC107'); // bright amber
 
 const myDoughnutChart = new Chart(ctxDoughnut, {
   type: 'doughnut',
@@ -156,7 +158,7 @@ const myDoughnutChart = new Chart(ctxDoughnut, {
     datasets: [{
       label: 'Sales by Category',
       data: [35, 25, 20, 20],
-      backgroundColor: [gradient1, gradient2, gradient3, gradient4],
+      backgroundColor: [rgba(3, 39, 83, 0.2), rgba(32, 39, 93, 0.2), rgba(3, 93, 93, 0.2), rgba(3, 39, 93, 0.2)],
       borderColor: '#f0f0f0', // subtle inner glow-like separation
       borderWidth: 2,
       hoverOffset: 10

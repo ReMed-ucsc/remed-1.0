@@ -44,9 +44,13 @@ class DashboardPage
 
 
         $drugModel = new DrugInventory();
-        $stockLevels = $drugModel->getStockLevelCountsArray($pharmacyID);
+        $orderViewModel = new OrderView();
 
-        $this->view('pharmacy/dashboardPage', ['patientCount' => $patientCount, 'stockLevels' => $stockLevels,  'orderCount' => $orderCount, 'monthlyIncome' => $monthlyIncome, 'payments' => $payments]);
+        $stockLevels = $drugModel->getStockLevelCountsArray($pharmacyID);
+        $income = $orderViewModel->getLast7DaysIncome($pharmacyID);
+
+
+        $this->view('pharmacy/dashboardPage', ['patientCount' => $patientCount, 'stockLevels' => $stockLevels,  'orderCount' => $orderCount, 'monthlyIncome' => $monthlyIncome, 'payments' => $payments, 'income' => $income]);
     }
 
     // add other methods like edit, update, delete, etc.

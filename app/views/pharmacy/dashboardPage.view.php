@@ -154,7 +154,7 @@
       <div class="middle">
         <div class="middleline">
           <div class="total-sales">
-            Total Sales
+            Revenue Trend
             <canvas id="myBarChart"></canvas>
           </div>
           <div class="inventory">
@@ -171,17 +171,18 @@
 
         <div class="middleline">
           <div class="total-sales">
-            Patient Visit
-            <canvas id="myPatientChart" width="500" height="200"></canvas>
+            Sales by Category
+            <canvas id="myDoughnutChart" width="200" height="200"></canvas>
           </div>
           <div class="total-sales">
+            Patient Visit
+            <canvas id="myPatientChart" width="400" height="200"></canvas>
+          </div>
+          <!-- <div class="total-sales">
             Revenue Trend
             <canvas id="myLineChart" width="300" height="200"></canvas>
-          </div>
-          <div class="total-sales">
-            Sales by Category
-            <canvas id="myDoughnutChart" width="300" height="200"></canvas>
-          </div>
+          </div> -->
+
         </div>
 
 
@@ -207,6 +208,8 @@
         <p>Recent payments</p>
 
         <?php show($stockLevels) ?>
+        <?php show($income) ?>
+
         <table>
           <thead>
             <tr>
@@ -254,7 +257,9 @@
 
     <script>
       const stockLevel = <?= json_encode($stockLevels) ?>;
+      const income = <?= json_encode($income) ?>;
       console.log(stockLevel);
+      console.log(income);
     </script>
     <script src="<?= ROOT ?>/assets/js/pharmacy/dashboardPage.js"></script>
 

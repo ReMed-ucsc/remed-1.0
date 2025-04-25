@@ -16,76 +16,100 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php'
 
 <body>
     <h2 class="page-title">Onboard Pharmacy Details</h2>
-    <div class="details-container">
+    <div class="onboard-container">
 
-        
 
-        <form class="form-container" action="" method="POST" enctype="multipart/form-data">
-            <div class="Form">
-                <div>
-                    <label for="pharmacyName">Pharmacy Name:</label>
-                    <input class="Input" type="text" id="pharmacyName" name="name" placeholder="Enter pharmacy name"
-                        value="<?= htmlspecialchars($pharmacy->name) ?>" required>
+
+        <form  action="" method="POST" enctype="multipart/form-data">
+            <div class="onboard-top">
+                <div class="Form">
+                    <div>
+                        <label for="pharmacyName">Pharmacy Name:</label>
+                        <input class="Input" type="text" id="pharmacyName" name="name" placeholder="Enter pharmacy name"
+                            value="<?= htmlspecialchars($pharmacy->name) ?>" required>
+
+                    </div>
+
+                    <div>
+                        <label for="pharmacistName">Pharmacist's Name:</label>
+                        <input class="Input" type="text" id="pharmacistName" name="pharmacistName"
+                            placeholder="Enter pharmacist's name"
+                            value="<?= htmlspecialchars($pharmacy->pharmacistName) ?>" required>
+                    </div>
+
+                    <div>
+                        <label for="license">License Number:</label>
+
+                        <input class="Input" type="text" id="license" name="RegNo" placeholder="Enter license"
+                            value="<?= htmlspecialchars($pharmacy->RegNo) ?>" disabled>
+
+                    </div>
 
                 </div>
 
-                <div>
-                    <label for="pharmacistName">Pharmacist's Name:</label>
-                    <input class="Input" type="text" id="pharmacistName" name="pharmacistName"
-                        placeholder="Enter pharmacist's name" value="<?= htmlspecialchars($pharmacy->pharmacistName) ?>"
-                        required>
+                <div class="Form">
+                    <div>
+                        <label for="email">Email:</label>
+                        <input class="Input" type="email" id="email" name="email" placeholder="Enter email"
+                            value="<?= htmlspecialchars($pharmacy->email) ?>" required>
+                    </div>
+
+                    <div>
+                        <label for="contactNo">Contact Number:</label>
+                        <input class="Input" type="text" id="contactNo" name="contactNo"
+                            placeholder="Enter contact number" value="<?= htmlspecialchars($pharmacy->contactNo) ?>"
+                            required>
+                    </div>
+
+                    <div>
+                        <label for="address">Pharmacy Address:</label>
+                        <!-- <input class="Input" type="text" id="address" name="address" placeholder="Enter address" required> -->
+                        <input class="Input" type="text" id="pharmacy-address" name="pharmacy-address"
+                            placeholder="Enter pharmacy address" value="<?= htmlspecialchars($pharmacy->address) ?>">
+                        <input type="hidden" id="latitude" name="latitude">
+                        <input type="hidden" id="longitude" name="longitude">
+                    </div>
                 </div>
 
-                <div>
-                    <label for="license">License Number:</label>
+                <div class="Form">
 
-                    <input class="Input" type="text" id="license" name="RegNo" placeholder="Enter license"
-                        value="<?= htmlspecialchars($pharmacy->RegNo) ?>" disabled>
+                    <div class="license-document">
+                        <lable for="document">License:</lable>
+                        <?php
 
+                        $licenseFile = htmlspecialchars($pharmacy->license);
+                        $licenseUrl = "http://localhost/remed-1.0/uploads/license/$licenseFile";
+
+                        $fileExtension = strtolower(pathinfo($licenseFile, PATHINFO_EXTENSION));
+                        if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif', 'webp'])) {
+                            echo "<img class='license' src='$licenseUrl' alt='License Image' style='max-width: 300px; max-height: 300px;' />";
+                        } elseif ($fileExtension === 'pdf') {
+                            echo "<embed class='license' src='$licenseUrl' type='application/pdf' width='100%' height='300px' />";
+                        } else {
+                            echo "License file format not supported.";
+                        }
+                        $downloadIcon = ROOT . "/assets/images/downloading.png";
+                        echo "<br><a href='$licenseUrl' class='download' ><img  src='$downloadIcon' alt='download'/></a>";
+
+                        ?>
+                    </div>
                 </div>
             </div>
-
-            <div class="Form">
+            <div class="onboard-bottom">
                 <div>
-                    <label for="email">Email:</label>
-                    <input class="Input" type="email" id="email" name="email" placeholder="Enter email"
-                        value="<?= htmlspecialchars($pharmacy->email) ?>" required>
-                </div>
-
-                <div>
-                    <label for="contactNo">Contact Number:</label>
-                    <input class="Input" type="text" id="contactNo" name="contactNo" placeholder="Enter contact number"
-                        value="<?= htmlspecialchars($pharmacy->contactNo) ?>" required>
-                </div>
-
-                <div>
-                    <label for="address">Pharmacy Address:</label>
-                    <!-- <input class="Input" type="text" id="address" name="address" placeholder="Enter address" required> -->
-                    <input class="Input" type="text" id="pharmacy-address" name="pharmacy-address"
-                        placeholder="Enter pharmacy address" value="<?= htmlspecialchars($pharmacy->address) ?>">
-                    <input type="hidden" id="latitude" name="latitude">
-                    <input type="hidden" id="longitude" name="longitude">
-                </div>
-            </div>
-
-            <div class="Form">
-                <div>
-                    <label for="document">Document:</label>
-                    <input class="Input" type="file" id="document" name="document">
-                </div>
-
-
-                <div>
+                    <div>
+                        <label for="document">NMRA Report:</label>
+                        <input class="Input" type="file" id="document" name="document">
+                    </div>
                     <button type="submit" class="btn-green">Save Changes</button>
-                    <button type="button" class="btn-red" onclick="window.history.back()">Discard Changes</button>
                 </div>
             </div>
 
         </form>
-        
-
-
-
+        <div>
+            <a class="reject"
+                href="<?= ROOT ?>/admin/PendingPharmacy/reject/<?= htmlspecialchars($pharmacy->PharmacyID) ?>">Reject</a>
+        </div>
     </div>
     <script>
         function initMap() {

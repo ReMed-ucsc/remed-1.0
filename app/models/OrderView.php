@@ -175,4 +175,35 @@ class OrderView
 
         return ['labels' => $labels, 'data' => $data];
     }
+
+    public function patientVisitWeekly($pharmacyID)
+    {
+        $query = "
+
+            SELECT 
+                DATE(date) AS visitDate,
+                COUNT(DISTINCT patientName) AS dailyPatientCount 
+            FROM {$this->table} 
+            WHERE
+                PharmacyID = :pharmacyId
+                AND date >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)
+            GROUP BY visitDate
+
+        ";
+        $params = ['pharmacyId' => $pharmacyID];
+        $result = $this->query($query, $params);
+
+        $visitMap = [];
+        foreach ($result as $row) {
+            $visitMap[$row->visitDate] = (int)$row->dailyPatientCount;
+        }
+
+        for ($i = 6; $i >= 0; $i--) {
+            $date = date('Y-m-d', strtotime("-$i days"));
+            $labels[] = $date;
+            $data[] = $visitMap[$date] ?? 0;
+        }
+
+        return ['labels' => $labels, 'data' => $data];
+    }
 }

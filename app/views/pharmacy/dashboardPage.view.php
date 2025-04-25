@@ -23,6 +23,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    canvas {
+      width: 100% !important;
+      height: 400px;
+    }
+  </style>
 </head>
 
 <body>
@@ -178,10 +184,10 @@
             Patient Visit
             <canvas id="myPatientChart" width="400" height="200"></canvas>
           </div>
-          <!-- <div class="total-sales">
+          <div class="total-sales">
             Revenue Trend
             <canvas id="myLineChart" width="300" height="200"></canvas>
-          </div> -->
+          </div>
 
         </div>
 
@@ -209,6 +215,8 @@
 
         <?php show($stockLevels) ?>
         <?php show($income) ?>
+        <?php show($patientVisit) ?>
+
 
         <table>
           <thead>
@@ -258,10 +266,12 @@
     <script>
       const stockLevel = <?= json_encode($stockLevels) ?>;
       const income = <?= json_encode($income) ?>;
+      const patientVisit = <?= json_encode($patientVisit) ?>
       console.log(stockLevel);
       console.log(income);
+      console.log(patientVisit);
     </script>
-    <script src="<?= ROOT ?>/assets/js/pharmacy/dashboardPage.js"></script>
+    <script src="<?= ROOT ?>/assets/js/pharmacy/test.js"></script>
 
 
 

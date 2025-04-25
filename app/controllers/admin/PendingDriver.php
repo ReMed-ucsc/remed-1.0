@@ -59,5 +59,11 @@ class PendingDriver
         }
          $this->view('admin/editDriver', $data);
     }
+    public function reject($id){
+        $driverModel = new Driver();
+
+        $driverModel->rejectDriver($id);
+        redirect("admin/PendingDriver");
+    }
     // add other methods like edit, update, delete, etc.
 }

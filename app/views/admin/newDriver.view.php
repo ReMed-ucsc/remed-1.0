@@ -12,7 +12,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
         </div>
     <?php } ?>
     <h2 class="page-title">Onboard New Driver</h2>
-    <div class="details-container">
+    <div class="details-container" >
         <form class="form-container" action="<?= ROOT ?>/admin/DriverDetails/create" method="POST" enctype="multipart/form-data">
             <div class="Form">
                 <!-- <div>
@@ -28,7 +28,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                 <div>
                     <label for="vehicalLicenseNo">Vehicle License Number:</label>
                     <input class="Input" type="text" id="lecenseNumber" name="vehicalLicenseNo"
-                        placeholder="Enter license" required>
+                        placeholder="Enter license" disabled>
                 </div>
             </div>
             <div class="Form">

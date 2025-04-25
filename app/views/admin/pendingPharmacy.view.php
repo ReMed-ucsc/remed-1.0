@@ -7,7 +7,9 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
     <!-- Search Box Form -->
     <div class="search-container">
         <form id="search-form">
-            <input type="text" id="searchInput" name="search" class="search-box" placeholder="Search here..." value="<?php if (isset($_GET['search'])) {echo htmlspecialchars($_GET['search']);} ?>">
+            <input type="text" id="searchInput" name="search" class="search-box" placeholder="Search here..." value="<?php if (isset($_GET['search'])) {
+                echo htmlspecialchars($_GET['search']);
+            } ?>">
             <button type="submit" class="search-button" onclick="performSearch()">Search</button>
         </form>
 
@@ -45,9 +47,16 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                             <td class="status-mark">
                                 <span class="status pending"><?= htmlspecialchars($pharmacy_items->status) ?></span>
                             </td>
-                            <td>
-                                <a class="onboard"
-                                    href="<?= ROOT ?>/admin/PendingPharmacy/onbordPharmacy/<?= htmlspecialchars($pharmacy_items->PharmacyID) ?>">onboard</a>
+                            <td class="action">
+                                <div class="action-border">
+                                    <a class="onboard"
+                                        href="<?= ROOT ?>/admin/PendingPharmacy/onbordPharmacy/<?= htmlspecialchars($pharmacy_items->PharmacyID) ?>">onboard</a>
+                                </div>
+                                <div class="action-border">
+                                    <a class="reject"
+                                        href="<?= ROOT ?>/admin/PendingPharmacy/reject/<?= htmlspecialchars($pharmacy_items->PharmacyID) ?>">Reject</a>
+                                </div>
+
                             </td>
                         </tr>
                     <?php endif; ?>

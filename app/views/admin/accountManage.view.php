@@ -6,9 +6,9 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
 <body>
     <h2 class="page-title">Admin Account Management</h2>
 
-    <div class="details-container">
-        <form class="Form" action="" method="POST">
-
+    <div class="profile-edit-container">
+        <form  action="" method="POST">
+            
 
 
             <div>
@@ -17,15 +17,6 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                     value="<?= isset($data['username']) ? htmlspecialchars($data['username']) : '' ?>" required>
                 <?php if (!empty($data['errors']['username'])): ?>
                     <p style="color:red"><?= htmlspecialchars($data['errors']['username']) ?></p>
-                <?php endif; ?>
-            </div>
-
-            <div>
-                <label for="email">Email:</label>
-                <input class="Input" type="email" id="email" name="email" placeholder="Enter email"
-                    value="<?= isset($data['email']) ? htmlspecialchars($data['email']) : '' ?>" required>
-                <?php if (!empty($data['errors']['email'])): ?>
-                    <p style="color:red"><?= htmlspecialchars($data['errors']['email']) ?></p>
                 <?php endif; ?>
             </div>
 

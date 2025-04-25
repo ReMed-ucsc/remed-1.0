@@ -154,5 +154,10 @@ class Pharmacy extends User
         return $this->selectWhere($columns, $conditions, $additionalData, 'distance ASC');
     }
 
+    public function rejectPharmacy($id){
+        $sql="UPDATE $this->table SET status = 'REJECT' WHERE PharmacyID = :id";
+        return $this->query($sql,['id'=>$id]);
+    }
+
     public function updatePharmacy() {}
 }

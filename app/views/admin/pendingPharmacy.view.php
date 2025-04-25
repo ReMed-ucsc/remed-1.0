@@ -7,7 +7,9 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
     <!-- Search Box Form -->
     <div class="search-container">
         <form id="search-form">
-            <input type="text" id="searchInput" name="search" class="search-box" placeholder="Search here..." value="<?php if (isset($_GET['search'])) {echo htmlspecialchars($_GET['search']);} ?>">
+            <input type="text" id="searchInput" name="search" class="search-box" placeholder="Search here..." value="<?php if (isset($_GET['search'])) {
+                echo htmlspecialchars($_GET['search']);
+            } ?>">
             <button type="submit" class="search-button" onclick="performSearch()">Search</button>
         </form>
 
@@ -47,7 +49,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                             </td>
                             <td>
                                 <a class="onboard"
-                                    href="<?= ROOT ?>/admin/PendingPharmacy/onbordPharmacy/<?= htmlspecialchars($pharmacy_items->PharmacyID) ?>">onboard</a>
+                                    href="<?= ROOT ?>/admin/PendingPharmacy/onbordPharmacy/<?= htmlspecialchars($pharmacy_items->PharmacyID) ?>">Onboard</a>
                             </td>
                         </tr>
                     <?php endif; ?>

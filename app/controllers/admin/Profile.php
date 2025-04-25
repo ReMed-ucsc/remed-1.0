@@ -56,6 +56,7 @@ class Profile
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $data = [
                 'username' => $_POST['username'],
+                'contactNo' => $_POST['contactNo']
                 'email' => $_POST['email'],
                 'contactNo' => $_POST['contactNo'],
                 'password' => $_POST['password'] ?? '', // default empty if not provided
@@ -67,6 +68,7 @@ class Profile
                 $data['errors']['password'] = "Passwords do not match!";
             }
 
+            if ($adminModel->validateAdmin($data)) {
             // Remove confirm_password from data before saving to DB
             unset($data['confirm_password']);
 

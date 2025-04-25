@@ -99,7 +99,7 @@
               <div class="data">
                 <p>Rs.10,000</p>
               </div>
-              <a href="<?= ROOT ?>/income">View details</a>
+              <a href="<?= ROOT ?>/incomeView">View details</a>
             </div>
             <div class="card blue-card">
               <img src="<?= ROOT ?>/assets/images/storage.jpg" class="card-icon">

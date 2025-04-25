@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" ctial-scale=1.0">
     <title>ReMed Dashboard</title>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/medicine.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/table.css">
@@ -59,29 +59,35 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($medicine as $item): ?>
-                                <?php if ($item->availableCount > $item->thresholdLimit): ?>
-                                    <tr>
-                                        <td><?= htmlspecialchars($item->ProductID) ?></td>
-                                        <td><?= htmlspecialchars($item->Manufacturer) ?></td>
-                                        <td><?= htmlspecialchars($item->genericName) ?></td>
-                                        <td><?= htmlspecialchars($item->ProductName) ?></td>
-                                        <td><?= htmlspecialchars($item->SellingPrice) ?></td>
-                                        <td><?= htmlspecialchars($item->expiryDate) ?></td>
-                                        <td><?= htmlspecialchars($item->availableCount) ?></td>
+                            <?php if (!empty($medicine)): ?>
+                                <?php foreach ($medicine as $item): ?>
+                                    <?php if ($item->availableCount > $item->thresholdLimit): ?>
+                                        <tr>
+                                            <td><?= htmlspecialchars($item->ProductID) ?></td>
+                                            <td><?= htmlspecialchars($item->Manufacturer) ?></td>
+                                            <td><?= htmlspecialchars($item->genericName) ?></td>
+                                            <td><?= htmlspecialchars($item->ProductName) ?></td>
+                                            <td><?= htmlspecialchars($item->SellingPrice) ?></td>
+                                            <td><?= htmlspecialchars($item->expiryDate) ?></td>
+                                            <td><?= htmlspecialchars($item->availableCount) ?></td>
 
-                                        <td><?= htmlspecialchars($item->thresholdLimit) ?></td>
-
-
-
+                                            <td><?= htmlspecialchars($item->thresholdLimit) ?></td>
 
 
 
 
-                                        <!-- <td>In Stock</td> -->
-                                    </tr>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
+
+
+
+                                            <!-- <td>In Stock</td> -->
+                                        </tr>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="7" style="text-align: center;">No Payments Received</td>
+                                </tr>
+                            <?php endif; ?>
 
                         </tbody>
                     </table>
@@ -107,30 +113,37 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($medicine as $item): ?>
+                            <?php if (!empty($medicine)): ?>
 
-                                <?php if ($item->availableCount > 0 && $item->availableCount <= $item->thresholdLimit): ?>
-                                    <tr>
-                                        <td><?= htmlspecialchars($item->ProductID) ?></td>
-                                        <td><?= htmlspecialchars($item->Manufacturer) ?></td>
-                                        <td><?= htmlspecialchars($item->genericName) ?></td>
-                                        <td><?= htmlspecialchars($item->ProductName) ?></td>
-                                        <td><?= htmlspecialchars($item->SellingPrice) ?></td>
-                                        <td><?= htmlspecialchars($item->expiryDate) ?></td>
-                                        <td><?= htmlspecialchars($item->availableCount) ?></td>
+                                <?php foreach ($medicine as $item): ?>
 
-                                        <td><?= htmlspecialchars($item->thresholdLimit) ?></td>
+                                    <?php if ($item->availableCount > 0 && $item->availableCount <= $item->thresholdLimit): ?>
+                                        <tr>
+                                            <td><?= htmlspecialchars($item->ProductID) ?></td>
+                                            <td><?= htmlspecialchars($item->Manufacturer) ?></td>
+                                            <td><?= htmlspecialchars($item->genericName) ?></td>
+                                            <td><?= htmlspecialchars($item->ProductName) ?></td>
+                                            <td><?= htmlspecialchars($item->SellingPrice) ?></td>
+                                            <td><?= htmlspecialchars($item->expiryDate) ?></td>
+                                            <td><?= htmlspecialchars($item->availableCount) ?></td>
 
-
-
-
+                                            <td><?= htmlspecialchars($item->thresholdLimit) ?></td>
 
 
 
-                                        <!-- <td>In Stock</td> -->
-                                    </tr>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
+
+
+
+
+                                            <!-- <td>In Stock</td> -->
+                                        </tr>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="7" style="text-align: center;">No Payments Received</td>
+                                </tr>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </section>
@@ -143,37 +156,44 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th style="width:5%;">Item ID</th>
-                                <th style="width:5%;">Brand Name</th>
-                                <th style="width:5%;">Generic Name</th>
-                                <th style="width:5%;">Medicine Name</th>
-                                <th style="width:5%;">Unit Price</th>
-                                <th style="width:5%;">Expiration Date</th>
+                                <th>Item ID</th>
+                                <th>Brand Name</th>
+                                <th>Generic Name</th>
+                                <th>Medicine Name</th>
+                                <th>Unit Price</th>
+                                <th>Expiration Date</th>
                                 <th>Stock Quantity</th>
 
-                                <th style="width:5%;">Reorder Level</th>
-                                <!-- <th style="width:5%;">Status</th> -->
+                                <th>Reorder Level</th>
+                                <!-- <th>Status</th> -->
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($medicine as $item): ?>
+                            <?php if (!empty($medicine)): ?>
 
-                                <?php if ($item->availableCount == 0): ?>
-                                    <tr>
-                                        <td><?= htmlspecialchars($item->ProductID) ?></td>
-                                        <td><?= htmlspecialchars($item->Manufacturer) ?></td>
-                                        <td><?= htmlspecialchars($item->genericName) ?></td>
-                                        <td><?= htmlspecialchars($item->ProductName) ?></td>
-                                        <td><?= htmlspecialchars($item->SellingPrice) ?></td>
-                                        <td><?= htmlspecialchars($item->expiryDate) ?></td>
-                                        <td><?= htmlspecialchars($item->availableCount) ?></td>
+                                <?php foreach ($medicine as $item): ?>
 
-                                        <td><?= htmlspecialchars($item->thresholdLimit) ?></td>
+                                    <?php if ($item->availableCount == 0): ?>
+                                        <tr>
+                                            <td><?= htmlspecialchars($item->ProductID) ?></td>
+                                            <td><?= htmlspecialchars($item->Manufacturer) ?></td>
+                                            <td><?= htmlspecialchars($item->genericName) ?></td>
+                                            <td><?= htmlspecialchars($item->ProductName) ?></td>
+                                            <td><?= htmlspecialchars($item->SellingPrice) ?></td>
+                                            <td><?= htmlspecialchars($item->expiryDate) ?></td>
+                                            <td><?= htmlspecialchars($item->availableCount) ?></td>
 
-                                        <!-- <td>In Stock</td> -->
-                                    </tr>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
+                                            <td><?= htmlspecialchars($item->thresholdLimit) ?></td>
+
+                                            <!-- <td>In Stock</td> -->
+                                        </tr>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="7" style="text-align: center;">No Payments Received</td>
+                                </tr>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </section>

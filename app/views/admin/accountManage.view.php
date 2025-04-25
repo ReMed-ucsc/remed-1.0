@@ -6,8 +6,8 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
 <body>
     <h2 class="page-title">Admin Account Management</h2>
 
-    <div class="details-container">
-        <form class="Form" action="" method="POST">
+    <div class="profile-edit-container">
+        <form  action="" method="POST">
             
 
             <div>

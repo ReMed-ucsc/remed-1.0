@@ -6,7 +6,7 @@ class Dashboard
 
     public function index()
     {
-
+        
 
         // Get session data
         $AdminID = $this->getSession('id');

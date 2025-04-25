@@ -100,5 +100,26 @@ class Admin extends User
                   WHERE token = :token AND token_expiry > NOW()";
         return $this->query($query, ['password' => $password, 'token' => $token]);
     }
+    public function validateAdmin($data)
+    {
+        $this->errors = [];
+
+        // Validate password
+        if (empty($data['password'])) {
+            $this->errors['password'] = "Password is required";
+        } else if (strlen($data['password']) < 8) {
+            $this->errors['password'] = "Password must be at least 8 characters long";
+        } else if (!preg_match('/[A-Z]/', $data['password'])) {
+            $this->errors['password'] = "Password must contain at least one uppercase letter";
+        } else if (!preg_match('/[a-z]/', $data['password'])) {
+            $this->errors['password'] = "Password must contain at least one lowercase letter";
+        } else if (!preg_match('/[0-9]/', $data['password'])) {
+            $this->errors['password'] = "Password must contain at least one number";
+        } else if (!preg_match('/[\W]/', $data['password'])) {
+            $this->errors['password'] = "Password must contain at least one special character";
+        }
+
+        return empty($this->errors);
+    }
 
 }

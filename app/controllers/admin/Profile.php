@@ -56,7 +56,6 @@ class Profile
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $data = [
                 'username' => $_POST['username'],
-                'email' => $_POST['email'],
                 'contactNo' => $_POST['contactNo']
             ];
 
@@ -65,7 +64,7 @@ class Profile
             }
           
 
-            if ($adminModel->validate($data)) {
+            if ($adminModel->validateAdmin($data)) {
                 if (!empty($data['password'])) {
                     $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
                 }

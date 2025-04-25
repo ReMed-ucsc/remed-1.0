@@ -107,15 +107,15 @@ class PharmacyDetails
                 'address' => $_POST['pharmacy-address'] ?? '',
                 'email' => $_POST['email'] ?? '',
                 'status' => 'APPROVED',
-                'document' => '',
+                'document' => $_FILES['document']['name'],
                 'latitude'=>$_POST['latitude'],
                 'longitude'=>$_POST['longitude']
             ];
 
-            show($data);
+            // show($data);
             // File upload handling
             if (isset($_FILES['document']) && $_FILES['document']['error'] == UPLOAD_ERR_OK) {
-                $uploadDir = BASE_PATH . '/uploads/license/';
+                $uploadDir = BASE_PATH . '/uploads/NMRA/';
                 if (!is_dir($uploadDir)) {
                     mkdir($uploadDir, 0777, true);
                 }

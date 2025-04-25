@@ -41,7 +41,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php'
                         <label for="license">License Number:</label>
 
                         <input class="Input" type="text" id="license" name="RegNo" placeholder="Enter license"
-                            value="<?= htmlspecialchars($pharmacy->RegNo) ?>" disabled>
+                            value="<?= htmlspecialchars($pharmacy->RegNo) ?>" readonly>
 
                     </div>
 

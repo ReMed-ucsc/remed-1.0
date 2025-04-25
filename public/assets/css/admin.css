@@ -11,7 +11,7 @@
 .status.pending {
   background-color: #f44336;
 }
-.action-border{
+.action-border {
   align-items: center;
   margin-bottom: 20px;
 }
@@ -26,12 +26,30 @@
   margin: 10px;
   text-decoration: none;
 }
-.reject {
+.reject-action{
+  align-items: center;
   background-color: #ff0000;
-  margin: 10px;
   color: white;
   padding: 5px 10px;
   border-radius: 15px;
+  /* margin-left: 10px; */
+  cursor: pointer;
+  margin: 10px;
+  text-decoration: none;
+}
+
+.reject {
+  background-color: #ff0000;
+  position: relative;
+  width: 200px;
+  margin: 10px;
+  bottom: 35px;
+  left: -60px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 17px 100px;
+  border-radius: 20px;
   cursor: pointer;
   text-decoration: none;
 }
@@ -40,7 +58,13 @@
   flex-direction: column;
   justify-content: center;
 }
-
+.license-document{
+  width: 500px;
+  height: 200px;
+}
+.license{
+  border: 2px solid black;
+}
 .statusA {
   background-color: none;
   color: #2e7d32;
@@ -166,6 +190,20 @@ select {
   flex-direction: column;
   justify-content: center;
 }
+.download {
+  width: 100px;
+  height: 100px;
+}
+.download img {
+  width: 30px;
+  height: 30px;
+  border: solid black 2px;
+  border-radius: 50%;
+  padding: 2px;
+  background-color: var(--btn-green);
+  /* margin: 10px; */
+}
+
 /* 
 @media screen and (max-width: 1200px) {
   tr{
@@ -206,7 +244,7 @@ select {
 .table-container {
   width: 100%;
   overflow-x: auto;
-  margin: 20px 0;
+  margin: 10px 0;
 }
 
 table {

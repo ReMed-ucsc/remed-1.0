@@ -142,11 +142,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const myDoughnutChart = new Chart(ctxDoughnut, {
       type: "doughnut",
       data: {
-        labels: ["Painkillers", "Antibiotics", "Vitamins", "Others"],
+        labels: medicineCat.labels,
         datasets: [
           {
             label: "Sales by Category",
-            data: [35, 25, 20, 20],
+            data: medicineCat.data,
             backgroundColor: [
               "rgba(3, 39, 93, 0.8)",
               "rgba(75, 192, 192, 0.8)",

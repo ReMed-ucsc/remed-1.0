@@ -24,4 +24,34 @@ class Drug
         }
         return null;
     }
+
+    public function getMedicineCategoryChartData()
+    {
+        $query = "
+        SELECT 
+            CASE 
+                WHEN Category = 'Pain Reliever' THEN 'Pain Killers'
+                WHEN Category = 'Vitamins' THEN 'Vitamins'
+                WHEN Category = 'Antibiotic' THEN 'Antibiotics'
+                ELSE 'Others'
+            END AS categoryGroup,
+            COUNT(*) AS count
+        FROM {$this->table}
+        GROUP BY categoryGroup
+    ";
+
+        $result = $this->query($query);
+
+        $labels = ['Pain Killers', 'Vitamins', 'Antibiotics', 'Others'];
+        $dataMap = array_fill_keys($labels, 0);
+
+        foreach ($result as $row) {
+            $dataMap[$row->categoryGroup] = (int)$row->count;
+        }
+
+        return [
+            'labels' => $labels,
+            'data' => array_values($dataMap)
+        ];
+    }
 }

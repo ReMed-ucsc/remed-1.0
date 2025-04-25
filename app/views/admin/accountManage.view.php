@@ -15,13 +15,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                 <input class="Input" type="text" id="name" name="username" placeholder="Enter name"
                     value="<?= isset($data['username']) ? htmlspecialchars($data['username']) : '' ?>" required>
             </div>
-
-            <div>
-                <label for="email">Email:</label>
-                <input class="Input" type="email" id="email" name="email" placeholder="Enter email"
-                    value="<?= isset($data['email']) ? htmlspecialchars($data['email']) : '' ?>" required>
-            </div>
-
+            
             <div>
                 <label for="contactNo">ContactNo:</label>
                 <input class="Input" type="tel" id="contactNo" name="contactNo" placeholder="Enter Contact No"

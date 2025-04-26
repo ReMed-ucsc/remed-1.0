@@ -56,85 +56,85 @@ function animateExpenses() {
     }, duration / steps);
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('simpleDownloadBtn').addEventListener('click', function () {
-        generateSimplePDF();
-    });
+// document.addEventListener('DOMContentLoaded', function () {
+//     document.getElementById('simpleDownloadBtn').addEventListener('click', function () {
+//         generateSimplePDF();
+//     });
 
-    function generateSimplePDF() {
-        try {
-            // Get table data
-            const table = document.querySelector('#orderReport table');
-            const headerCells = table.querySelectorAll('thead th');
-            const rows = table.querySelectorAll('tbody tr');
+//     function generateSimplePDF() {
+//         try {
+//             // Get table data
+//             const table = document.querySelector('#orderReport table');
+//             const headerCells = table.querySelectorAll('thead th');
+//             const rows = table.querySelectorAll('tbody tr');
 
-            // Extract header texts
-            const headers = [];
-            headerCells.forEach(cell => {
-                headers.push(cell.textContent.trim());
-            });
+//             // Extract header texts
+//             const headers = [];
+//             headerCells.forEach(cell => {
+//                 headers.push(cell.textContent.trim());
+//             });
 
-            // Extract row data
-            const data = [];
-            rows.forEach(row => {
-                const rowData = [];
-                row.querySelectorAll('td').forEach(cell => {
-                    rowData.push(cell.textContent.trim());
-                });
-                data.push(rowData);
-            });
+//             // Extract row data
+//             const data = [];
+//             rows.forEach(row => {
+//                 const rowData = [];
+//                 row.querySelectorAll('td').forEach(cell => {
+//                     rowData.push(cell.textContent.trim());
+//                 });
+//                 data.push(rowData);
+//             });
 
-            // Create PDF
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
+//             // Create PDF
+//             const { jsPDF } = window.jspdf;
+//             const doc = new jsPDF();
 
-            // Add title
-            doc.setFontSize(18);
-            doc.text('Income Report', 105, 15, { align: 'center' });
+//             // Add title
+//             doc.setFontSize(18);
+//             doc.text('Income Report', 105, 15, { align: 'center' });
 
-            // Add date
-            doc.setFontSize(12);
-            doc.text('Generated on: ' + new Date().toLocaleString(), 105, 25, { align: 'center' });
+//             // Add date
+//             doc.setFontSize(12);
+//             doc.text('Generated on: ' + new Date().toLocaleString(), 105, 25, { align: 'center' });
 
-            // Add summary
-            doc.setFontSize(14);
-            doc.text('Income Summary', 14, 35);
+//             // Add summary
+//             doc.setFontSize(14);
+//             doc.text('Income Summary', 14, 35);
 
-            doc.setFontSize(12);
-            doc.text('Total Income: ' + document.getElementById('total-income').textContent, 14, 45);
-            doc.text('Total Expenses: ' + document.getElementById('total-expenses').textContent, 14, 55);
+//             doc.setFontSize(12);
+//             doc.text('Total Income: ' + document.getElementById('total-income').textContent, 14, 45);
+//             doc.text('Total Expenses: ' + document.getElementById('total-expenses').textContent, 14, 55);
 
-            // Add table
-            doc.autoTable({
-                head: [headers],
-                body: data,
-                startY: 65,
-                theme: 'grid',
-                headStyles: { fillColor: [80, 80, 80] },
-                styles: { overflow: 'linebreak' },
-                columnStyles: {
-                    0: { cellWidth: 30 },
-                    1: { cellWidth: 30 },
-                    2: { cellWidth: 70 },
-                    3: { cellWidth: 'auto' }
-                }
-            });
+//             // Add table
+//             doc.autoTable({
+//                 head: [headers],
+//                 body: data,
+//                 startY: 65,
+//                 theme: 'grid',
+//                 headStyles: { fillColor: [80, 80, 80] },
+//                 styles: { overflow: 'linebreak' },
+//                 columnStyles: {
+//                     0: { cellWidth: 30 },
+//                     1: { cellWidth: 30 },
+//                     2: { cellWidth: 70 },
+//                     3: { cellWidth: 'auto' }
+//                 }
+//             });
 
-            // Add footer
-            const pageCount = doc.internal.pages.length;
-            for (let i = 1; i <= pageCount; i++) {
-                doc.setPage(i);
-                doc.setFontSize(10);
-                doc.text('Page ' + i + ' of ' + pageCount, 105, 290, { align: 'center' });
-                doc.text('ReMed Pharmacy Management System', 105, 285, { align: 'center' });
-            }
+//             // Add footer
+//             const pageCount = doc.internal.pages.length;
+//             for (let i = 1; i <= pageCount; i++) {
+//                 doc.setPage(i);
+//                 doc.setFontSize(10);
+//                 doc.text('Page ' + i + ' of ' + pageCount, 105, 290, { align: 'center' });
+//                 doc.text('ReMed Pharmacy Management System', 105, 285, { align: 'center' });
+//             }
 
-            // Save the PDF
-            doc.save('simple_income_report.pdf');
+//             // Save the PDF
+//             doc.save('simple_income_report.pdf');
 
-        } catch (error) {
-            console.error('Error generating simple PDF:', error);
-            alert('Failed to generate PDF: ' + error.message);
-        }
-    }
-});
+//         } catch (error) {
+//             console.error('Error generating simple PDF:', error);
+//             alert('Failed to generate PDF: ' + error.message);
+//         }
+//     }
+// });

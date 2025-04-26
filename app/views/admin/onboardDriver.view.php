@@ -16,7 +16,7 @@ $errors = $data['errors'] ?? [];
     <?php } ?>
     <h2 class="page-title">Onboard Driver</h2>
     <div class="details-container">
-        <form class="form-container" action="<?= ROOT ?>/admin/DriverDetails/onboardDriver" method="POST"
+        <form class="form-container" action="" method="POST"
             enctype="multipart/form-data">
             <div class="Form">
                 <div>

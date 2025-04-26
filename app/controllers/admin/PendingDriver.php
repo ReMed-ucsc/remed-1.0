@@ -46,13 +46,12 @@ class PendingDriver
                 'vehicalLicenseNo'=>$_POST['vehicalLicenseNo'],
                 'email'=>$_POST['email'],
                 'telNo'=>$_POST['telNo'],
+                'deliveryTime'=>$_POST['deliveryTime'],
                 'status'=>'APPROVED'
-
             ];
      
 
             if ($driverModel->validate($data)) {
-
                 $driverModel->update($id, $data, 'driverId');
                 redirect('admin/DriverDetails');
                 exit();

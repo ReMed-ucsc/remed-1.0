@@ -136,9 +136,12 @@ class Order
 
             if ($status == 'WP') {
                 $this->confirmOrder($orderId);
-            }
+                //echo ("hutto execute una");
 
-            redirect("order/$orderId");
+                $utilityModel = new DeliveryUility();
+                $utilityModel->sendDetailstoDriver($orderId);
+                redirect("order/$orderId");
+            }
         } else {
             redirect("order");
         }
@@ -163,10 +166,10 @@ class Order
 
             //redirect to all orderes viewwing page 
             //change to appropiate redirection
-            redirect("orderMain");
+            //redirect("orderMain");
             exit;
         }
 
-        redirect("orderMain");
+        //redirect("orderMain");
     }
 }

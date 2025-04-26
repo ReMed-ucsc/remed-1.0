@@ -22,6 +22,7 @@ class MedicineOrder
     private $DELIVERY_REJECTED = 'DR';
     private $DELIVERY_COMPLETED = 'WC';
     private $WAITING_FOR_PICKUP = 'WP';
+    private $DRIVER_PICKED_UP = 'DP';
 
     public function getOrderDetails()
     {
@@ -112,7 +113,8 @@ class MedicineOrder
             $this->DELIVERY_IN_PROGRESS => 'DELIVERY IN PROGRESS',
             $this->DELIVERY_REJECTED => 'DELIVERY REJECTED',
             $this->DELIVERY_COMPLETED => 'DELIVERY COMPLETED',
-            $this->WAITING_FOR_PICKUP => 'WAITING FOR PICKUP'
+            $this->WAITING_FOR_PICKUP => 'WAITING FOR PICKUP',
+            $this->DRIVER_PICKED_UP => 'DRIVER PICKED UP'
         ];
 
         return $statusMap[$status] ?? 'UNKNOWN';

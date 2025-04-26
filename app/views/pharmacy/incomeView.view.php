@@ -12,10 +12,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
     <script src="<?= ROOT ?>/assets/js/pharmacy/income.js"> </script>
 </head>
 
-<body>
+<body data-user-id="<?php echo $_SESSION['user_id'] ?? ''; ?>">
 
     <header>
         <?php
@@ -84,7 +87,7 @@
                 </div>
 
                 <div class="middle">
-                    <section class="table-management income-table">
+                    <section class="table-management income-table" id="orderReport">
                         <h3>Income</h3>
                         <table class="table">
                             <thead>
@@ -145,8 +148,311 @@
                             </tbody>
                         </table>
                     </section>
+                    <button id="simpleDownloadBtn">Download Simple PDF</button>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        function generateTwoPagePDF() {
+            try {
+                // First, check if we can access the income table
+                const incomeTableSection = document.querySelector('#orderReport .income-table') || document.querySelector('#orderReport');
+
+                if (!incomeTableSection) {
+                    throw new Error("Income table section not found. Please check the HTML structure.");
+                }
+
+                const incomeTable = incomeTableSection.querySelector('table');
+
+                if (!incomeTable) {
+                    throw new Error("Income table not found within the section. Please check the HTML structure.");
+                }
+
+                // Get income table data
+                const incomeHeaderCells = incomeTable.querySelectorAll('thead th');
+                const incomeRows = incomeTable.querySelectorAll('tbody tr');
+
+                // Extract income header texts
+                const incomeHeaders = [];
+                incomeHeaderCells.forEach(cell => {
+                    incomeHeaders.push(cell.textContent.trim());
+                });
+
+                // Extract income row data
+                const incomeData = [];
+                incomeRows.forEach(row => {
+                    const rowData = [];
+                    row.querySelectorAll('td').forEach(cell => {
+                        rowData.push(cell.textContent.trim());
+                    });
+                    incomeData.push(rowData);
+                });
+
+                // Now look for the expenses table - with error handling
+                let expensesTable = null;
+                let expensesHeaders = [];
+                let expensesData = [];
+
+                // Try multiple possible selectors for expenses table
+                const expensesTableSection = document.querySelector('.expenses-table') ||
+                    document.querySelector('#expensesReport') ||
+                    document.querySelector('section.expenses-table');
+
+                if (expensesTableSection) {
+                    expensesTable = expensesTableSection.querySelector('table');
+
+                    if (expensesTable) {
+                        // Extract expenses header texts
+                        const expensesHeaderCells = expensesTable.querySelectorAll('thead th');
+                        expensesHeaderCells.forEach(cell => {
+                            expensesHeaders.push(cell.textContent.trim());
+                        });
+
+                        // Extract expenses row data
+                        const expensesRows = expensesTable.querySelectorAll('tbody tr');
+                        expensesRows.forEach(row => {
+                            const rowData = [];
+                            row.querySelectorAll('td').forEach(cell => {
+                                rowData.push(cell.textContent.trim());
+                            });
+                            expensesData.push(rowData);
+                        });
+                    } else {
+                        console.warn("Expenses table not found within the expenses section");
+                    }
+                } else {
+                    console.warn("Expenses table section not found in document");
+                }
+
+                // Create PDF
+                const {
+                    jsPDF
+                } = window.jspdf;
+                const doc = new jsPDF();
+
+                // Get month and year for header
+                const month = document.getElementById('month')?.options[document.getElementById('month')?.selectedIndex]?.text || '';
+                const year = document.getElementById('year')?.value || '';
+
+                // ===== PAGE 1: INCOME =====
+
+                // Add title with pharmacy name
+                doc.setFontSize(22);
+                doc.setTextColor(44, 62, 80);
+                doc.text('ReMed Pharmacy', 105, 15, {
+                    align: 'center'
+                });
+
+                // Add subtitle
+                doc.setFontSize(18);
+                doc.setTextColor(52, 73, 94);
+                doc.text(`Income Report - ${month} ${year}`, 105, 25, {
+                    align: 'center'
+                });
+
+                // Add date
+                doc.setFontSize(11);
+                doc.setTextColor(100, 100, 100);
+                doc.text('Generated on: ' + new Date().toLocaleString(), 105, 32, {
+                    align: 'center'
+                });
+
+                //summary boxes
+                // Income card
+                doc.setFillColor(52, 152, 219);
+                doc.rect(14, 40, 85, 35, 'F');
+                doc.setTextColor(255, 255, 255);
+                doc.setFontSize(14);
+                doc.text('This month income', 56, 50, {
+                    align: 'center'
+                });
+                doc.setFontSize(16);
+
+                // Income amout
+                const totalIncomeElement = document.getElementById('total-income');
+                const totalIncomeText = totalIncomeElement ? totalIncomeElement.textContent : "Rs. 0";
+                doc.text(totalIncomeText, 56, 65, {
+                    align: 'center'
+                });
+
+                // Expenses card
+                doc.setFillColor(46, 204, 113);
+                doc.rect(110, 40, 85, 35, 'F');
+                doc.setTextColor(255, 255, 255);
+                doc.setFontSize(14);
+                doc.text('This month expenses', 152, 50, {
+                    align: 'center'
+                });
+                doc.setFontSize(16);
+
+                // Safely get expenses amount
+                const totalExpensesElement = document.getElementById('total-expenses');
+                const totalExpensesText = totalExpensesElement ? totalExpensesElement.textContent : "Rs. 0";
+                doc.text(totalExpensesText, 152, 65, {
+                    align: 'center'
+                });
+
+                // Add page 1 heading
+                doc.setFontSize(16);
+                doc.setTextColor(44, 62, 80);
+                doc.text('Income Details', 105, 85, {
+                    align: 'center'
+                });
+
+                // Add income table
+                doc.autoTable({
+                    head: [incomeHeaders],
+                    body: incomeData,
+                    startY: 95,
+                    theme: 'grid',
+                    headStyles: {
+                        fillColor: [52, 73, 94],
+                        textColor: [255, 255, 255],
+                        fontStyle: 'bold',
+                        halign: 'left',
+                        fontSize: 12
+                    },
+                    bodyStyles: {
+                        textColor: [44, 62, 80],
+                        fontSize: 11
+                    },
+                    alternateRowStyles: {
+                        fillColor: [240, 240, 240]
+                    },
+                    styles: {
+                        overflow: 'linebreak',
+                        cellPadding: 6
+                    },
+                    columnStyles: {
+                        0: {
+                            cellWidth: 30
+                        },
+                        1: {
+                            cellWidth: 30
+                        },
+                        2: {
+                            cellWidth: 70
+                        },
+                        3: {
+                            cellWidth: 'auto',
+                            halign: 'right'
+                        }
+                    }
+                });
+
+                // Set total pages based on whether we have expenses data
+                const totalPages = expensesData.length > 0 ? 2 : 1;
+
+                // Add footer to page 1
+                doc.setFontSize(10);
+                doc.setTextColor(100, 100, 100);
+                doc.text(`Page 1 of ${totalPages}`, 105, 290, {
+                    align: 'center'
+                });
+                doc.text('ReMed Pharmacy Management System', 105, 285, {
+                    align: 'center'
+                });
+
+                // ===== PAGE 2: EXPENSES (only if we have data) =====
+                if (expensesData.length > 0) {
+                    // Add new page
+                    doc.addPage();
+
+                    // Add title with pharmacy name on page 2
+                    doc.setFontSize(22);
+                    doc.setTextColor(44, 62, 80);
+                    doc.text('ReMed Pharmacy', 105, 15, {
+                        align: 'center'
+                    });
+
+                    // Add subtitle
+                    doc.setFontSize(18);
+                    doc.setTextColor(52, 73, 94);
+                    doc.text(`Expenses Report - ${month} ${year}`, 105, 25, {
+                        align: 'center'
+                    });
+
+                    // Add date
+                    doc.setFontSize(11);
+                    doc.setTextColor(100, 100, 100);
+                    doc.text('Generated on: ' + new Date().toLocaleString(), 105, 32, {
+                        align: 'center'
+                    });
+
+                    // Add page 2 heading
+                    doc.setFontSize(16);
+                    doc.setTextColor(44, 62, 80);
+                    doc.text('Expenses Details', 105, 45, {
+                        align: 'center'
+                    });
+
+                    // Add expenses table
+                    doc.autoTable({
+                        head: [expensesHeaders],
+                        body: expensesData,
+                        startY: 55,
+                        theme: 'grid',
+                        headStyles: {
+                            fillColor: [52, 73, 94],
+                            textColor: [255, 255, 255],
+                            fontStyle: 'bold',
+                            halign: 'left',
+                            fontSize: 12
+                        },
+                        bodyStyles: {
+                            textColor: [44, 62, 80],
+                            fontSize: 11
+                        },
+                        alternateRowStyles: {
+                            fillColor: [240, 240, 240]
+                        },
+                        styles: {
+                            overflow: 'linebreak',
+                            cellPadding: 6
+                        },
+                        columnStyles: {
+                            0: {
+                                cellWidth: 35
+                            },
+                            1: {
+                                cellWidth: 35
+                            },
+                            2: {
+                                cellWidth: 35
+                            },
+                            3: {
+                                cellWidth: 'auto',
+                                halign: 'right'
+                            }
+                        }
+                    });
+
+                    // Add footer to page 2
+                    doc.setFontSize(10);
+                    doc.setTextColor(100, 100, 100);
+                    doc.text('Page 2 of 2', 105, 290, {
+                        align: 'center'
+                    });
+                    doc.text('ReMed Pharmacy Management System', 105, 285, {
+                        align: 'center'
+                    });
+                }
+
+                // Save the PDF with month/year in filename
+                doc.save(`Income_Expenses_Report_${month}_${year}.pdf`);
+
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                alert('Failed to generate PDF: ' + error.message);
+            }
+        }
+
+        //download button
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('simpleDownloadBtn').addEventListener('click', function() {
+                generateTwoPagePDF();
+            });
+        });
+    </script>
 </body>

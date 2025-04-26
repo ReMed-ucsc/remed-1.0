@@ -4,7 +4,7 @@ require_once BASE_PATH . '/app/models/MedicineProductView.php';
 require_once BASE_PATH . '/app/core/init.php';
 require_once BASE_PATH . '/app/core/helper_classes.php';
 
-class GetPharmacyMedicinesController
+class GetMedicinesForInventoryController
 {
     public function index()
     {
@@ -26,12 +26,12 @@ class GetPharmacyMedicinesController
 
 
             $medicineModel = new MedicineProductView();
-            $medicineList = $medicineModel->getPharmacyMedicineList($productIDs, $searchQuery, $limit, $offset);
+            $medicineList = $medicineModel->getNewMedicineList($productIDs, $searchQuery, $limit, $offset);
 
             if (!empty($medicineList)) {
                 $response['data'] = $medicineList;
                 $result->setErrorStatus(false);
-                $result->setMessage("Medicine list ready");
+                $result->setMessage("Newly available Medicine list ready");
             } else {
                 $result->setErrorStatus(true);
                 $result->setMessage("No medicines found");

@@ -217,7 +217,7 @@ body {
 }
 
 .total-sales{
-  flex: 1;
+  /* flex: 1; */
   background-color: white;
   border-radius: 15px;
   padding: 40px;
@@ -226,6 +226,14 @@ body {
   height: 400px;
   display: flex;
   flex-direction: column;
+}
+
+.size1{
+  flex:1
+}
+
+.size2{
+  flex: 2;
 }
 
 .inventory{

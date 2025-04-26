@@ -40,10 +40,23 @@
     <!-- <div class="Order-page"> -->
     <!-- <div class="right"> -->
     <div class="main-content">
-      <h2>Inventory Management &nbsp; &#8250; &nbsp;</h2>
-      <div class="ongoing">
-        View Inventory
+      <div class="upper">
+        <div class="upper-left">
+          <!-- <h2>Inventory Management &nbsp; &#8250; &nbsp;</h2> -->
+          <div class="ongoing">
+            <h2>Inventory Management &nbsp; &#8250; &nbsp;</h2>
+            View Inventory
+          </div>
+        </div>
+        <div class="upper-right">
+          <div>
+            <button class="add-stock"><a href="<?= ROOT ?>/inventoryRefill/<?= $inventory->InventoryId ?>">
+                New Stock</a></button>
+          </div>
+        </div>
+
       </div>
+
       <div class="order-body">
 
 
@@ -55,7 +68,7 @@
                 <li>Brand Name</li>
                 <li>Generic Name</li>
                 <li>Category</li>
-                <li>Batch No</li>
+                <li>Last Batch No</li>
                 <li>Stock Quantity</li>
                 <li>Reorder Level</li>
                 <li>Storage Location</li>

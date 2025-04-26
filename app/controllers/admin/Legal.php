@@ -3,8 +3,13 @@
 class Legal
 {
     use Controller;
+
+    public function __construct(){
+        $this->protectRoute();
+    }
     public function index()
     {
+
         $legal = new LegalModel;
         $msg = new Pharmacy();
         $driver = new Driver();

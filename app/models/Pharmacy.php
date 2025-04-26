@@ -77,7 +77,7 @@ class Pharmacy extends User
     }
 
 
-    public function registerPharmacy($pharmacyName, $pharmacistName, $license, $contactNo, $email, $address, $document, $latitude, $longitude)
+    public function registerPharmacy($pharmacyName,$RegNo, $pharmacistName, $license, $contactNo, $email, $address, $document, $latitude, $longitude)
     {
         if ($this->getPharmacyByEmail($email)) {
             return false;
@@ -89,6 +89,7 @@ class Pharmacy extends User
                 'address' => $address,
                 'contactNo' => $contactNo,
                 'license' => $license,
+                'RegNo'=> $RegNo,
                 'document' => $document,
                 'status' => 'APPROVED',
                 'latitude' => $latitude,
@@ -159,5 +160,5 @@ class Pharmacy extends User
         return $this->query($sql,['id'=>$id]);
     }
 
-    public function updatePharmacy() {}
+    
 }

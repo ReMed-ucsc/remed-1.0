@@ -49,7 +49,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                             </td>
                             <td>
                                 <a class="onboard"
-                                    href="<?= ROOT ?>/admin/PendingPharmacy/onbordPharmacy/<?= htmlspecialchars($pharmacy_items->PharmacyID) ?>">Onboard</a>
+                                    href="<?= ROOT ?>/admin/PendingPharmacy/onboardPharmacy/<?= htmlspecialchars($pharmacy_items->PharmacyID) ?>">Onboard</a>
                             </td>
                         </tr>
                     <?php endif; ?>

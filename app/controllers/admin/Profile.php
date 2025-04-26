@@ -3,6 +3,10 @@
 class Profile
 {
     use Controller;
+
+    public function __construct(){
+        $this->protectRoute();
+    }
     public function index()
     {
         $id = $this->getSession("id");
@@ -51,52 +55,42 @@ class Profile
         $data = [
             'admin' => $admin,
             'notification' => $Msg,
-            'notificationDriver' => $MsgDriver
+            'notificationDriver' => $MsgDriver,
+            'errors' => []
         ];
-        if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $data = [
-                'username' => $_POST['username'],
-                'contactNo' => $_POST['contactNo']
-                'email' => $_POST['email'],
-                'contactNo' => $_POST['contactNo'],
-                'password' => $_POST['password'] ?? '', // default empty if not provided
-                'confirm_password' => $_POST['confirm_password'] ?? ''
-            ];
 
-            // Password and confirm password match check
-            if (!empty($data['password']) && $data['password'] !== $data['confirm_password']) {
-                $data['errors']['password'] = "Passwords do not match!";
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $username = $_POST['username'];
+            $contactNo = $_POST['contactNo'];
+            $password = $_POST['password'] ?? '';
+            $confirm_password = $_POST['confirm_password'] ?? '';
+
+            // Validate password match
+            if (!empty($password) && $password !== $confirm_password) {
+                $data['errors']['confirm_password'] = "Passwords do not match.";
             }
 
-            if ($adminModel->validateAdmin($data)) {
-            // Remove confirm_password from data before saving to DB
-            unset($data['confirm_password']);
+            $updateData = [
+                'username' => $username,
+                'contactNo' => $contactNo
+            ];
 
-            if (empty($data['errors']) && $adminModel->validate($data)) {
-                if (!empty($data['password'])) {
-                    $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-                } else {
-                    unset($data['password']); // if password empty, don't update it
-                }
+            if (!empty($password) && empty($data['errors'])) {
+                $updateData['password'] = password_hash($password, PASSWORD_DEFAULT);
+            }
 
-                $adminModel->update($id, $data, 'id');
+            if (empty($data['errors']) && $adminModel->validateAdmin($updateData)) {
+                $adminModel->update($id, $updateData, 'id');
                 redirect('admin/profile');
                 exit();
             } else {
-                $data['admin'] = $admin; // retain the admin data to show in the form
-                $data['notification'] = $Msg;
-                $data['notificationDriver'] = $MsgDriver;
-                $data['errors'] = $data['errors'] ?? []; // in case only password mismatch
-                if (!empty($adminModel->errors)) {
-                    $data['errors'] = array_merge($data['errors'], $adminModel->errors);
-                }
-
+                $data['errors'] = array_merge($data['errors'], $adminModel->errors ?? []);
             }
         }
 
-
         $this->view('admin/accountManage', $data);
     }
+
 
     // add other methods like edit, update, delete, etc.
 }

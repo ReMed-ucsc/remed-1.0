@@ -2,8 +2,13 @@
 class DriverDetails
 {
     use Controller;
+
+    public function __construct(){
+        $this->protectRoute();
+    }
     public function index()
     {
+
         $driverDetails = new Driver();
         $msg = new Pharmacy();
 
@@ -56,6 +61,7 @@ class DriverDetails
 
         redirect('admin/driverDetails');
     }
+    
 
     // add other methods like edit, update, delete, etc.
 }

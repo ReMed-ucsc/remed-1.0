@@ -3,6 +3,9 @@
 class User
 {
     use Controller;
+    public function __construct(){
+        $this->protectRoute();
+    }
     public function index()
     {
         $user = new Patient();

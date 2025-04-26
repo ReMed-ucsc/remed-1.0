@@ -2,6 +2,10 @@
 class NewDriver
 {
     use Controller;
+
+    public function __construct(){
+        $this->protectRoute();
+    }
     public function index()
     {
         // Protect the route

@@ -3,7 +3,9 @@
 class PharmacyDetails
 {
     use Controller;
-
+    public function __construct(){
+        $this->protectRoute();
+    }
     public function index()
     {
         // Protect the route
@@ -70,8 +72,7 @@ class PharmacyDetails
                 'notification' => $Msg,
                 'notificationDriver' => $MsgDriver,
                 'latitude'=>$_POST['latitude'],
-                'longitude'=>$_POST['longitude'],
-                'document' => $_FILES['document'] ?? null
+                'longitude'=>$_POST['longitude']
             ];
 
 

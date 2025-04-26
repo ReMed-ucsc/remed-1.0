@@ -20,9 +20,16 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php'
 
 
 
-        <form  action="" method="POST" enctype="multipart/form-data">
+        <form action="" method="POST" enctype="multipart/form-data">
             <div class="onboard-top">
                 <div class="Form">
+                    <?php if (!empty($errors)): ?>
+                        <div class="error">
+                            <?= implode("<br>", $errors) ?>
+                        </div>
+                        
+                    <?php endif; ?>
+
                     <div>
                         <label for="pharmacyName">Pharmacy Name:</label>
                         <input class="Input" type="text" id="pharmacyName" name="name" placeholder="Enter pharmacy name"
@@ -56,7 +63,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php'
 
                     <div>
                         <label for="contactNo">Contact Number:</label>
-                        <input class="Input" type="text" id="contactNo" name="contactNo"
+                        <input class="Input" type="text" id="contactNo" name="contactNo" maxlength="10" minlength="10"
                             placeholder="Enter contact number" value="<?= htmlspecialchars($pharmacy->contactNo) ?>"
                             required>
                     </div>
@@ -65,7 +72,8 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php'
                         <label for="address">Pharmacy Address:</label>
                         <!-- <input class="Input" type="text" id="address" name="address" placeholder="Enter address" required> -->
                         <input class="Input" type="text" id="pharmacy-address" name="pharmacy-address"
-                            placeholder="Enter pharmacy address" value="<?= htmlspecialchars($pharmacy->address) ?>">
+                            placeholder="Enter pharmacy address" value="<?= htmlspecialchars($pharmacy->address) ?>"
+                            required>
                         <input type="hidden" id="latitude" name="latitude">
                         <input type="hidden" id="longitude" name="longitude">
                     </div>
@@ -76,22 +84,23 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php'
                     <div class="license-document">
                         <lable for="document">License:</lable>
                         <?php
-
                         $licenseFile = htmlspecialchars($pharmacy->license);
                         $licenseUrl = "http://localhost/remed-1.0/uploads/license/$licenseFile";
 
                         $fileExtension = strtolower(pathinfo($licenseFile, PATHINFO_EXTENSION));
+
                         if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif', 'webp'])) {
-                            echo "<img class='license' src='$licenseUrl' alt='License Image' style='max-width: 300px; max-height: 300px;' />";
+                            echo "<img class='license' src='$licenseUrl' alt='License Image' style='width: 100%; max-height: 300px;' />";
                         } elseif ($fileExtension === 'pdf') {
                             echo "<embed class='license' src='$licenseUrl' type='application/pdf' width='100%' height='300px' />";
                         } else {
                             echo "License file format not supported.";
                         }
-                        $downloadIcon = ROOT . "/assets/images/downloading.png";
-                        echo "<br><a href='$licenseUrl' class='download' ><img  src='$downloadIcon' alt='download'/></a>";
 
+                        $downloadIcon = ROOT . "/assets/images/downloading.png"; // move PHP out of echo string
+                        echo "<br><a href='$licenseUrl' download class='download'><img src='$downloadIcon' alt='download' style='height: 24px;' /></a>";
                         ?>
+
                     </div>
                 </div>
             </div>
@@ -99,9 +108,9 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php'
                 <div>
                     <div>
                         <label for="document">NMRA Report:</label>
-                        <input class="Input" type="file" id="document" name="document">
+                        <input class="Input" type="file" id="document" name="document" required>
                     </div>
-                    <button type="submit" class="btn-green">Save Changes</button>
+                    <button type="submit" class="btn-green">OnBoard</button>
                 </div>
             </div>
 

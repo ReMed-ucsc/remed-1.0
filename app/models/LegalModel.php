@@ -27,4 +27,10 @@ class LegalModel
         $sql = "UPDATE $this->table SET privacy_policy = :privacy, terms_and_conditions = :terms";
         return $this->query($sql, ["privacy" => $privacy, "terms" => $terms]);
     }
+    public function getDate()
+    {
+        $query = "SELECT Date FROM $this->table ";
+
+        return $this->query($query);
+    }
 }

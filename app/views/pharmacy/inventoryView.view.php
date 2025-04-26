@@ -42,9 +42,8 @@
     <div class="main-content">
       <div class="upper">
         <div class="upper-left">
-          <!-- <h2>Inventory Management &nbsp; &#8250; &nbsp;</h2> -->
+          <h2>Inventory Management &nbsp; &#8250; &nbsp;</h2>
           <div class="ongoing">
-            <h2>Inventory Management &nbsp; &#8250; &nbsp;</h2>
             View Inventory
           </div>
         </div>

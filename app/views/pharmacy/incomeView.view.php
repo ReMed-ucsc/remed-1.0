@@ -62,8 +62,10 @@
                 <div class="top">
                     <div class=" cards">
                         <div class="card black-card">
-                            <img src="<?= ROOT ?>/assets/images/revenue.jpg" class="card-icon">
-                            <h4>This month income</h4>
+                            <div><img src="<?= ROOT ?>/assets/images/revenue.jpg" class="card-icon"></div>
+                            <div>
+                                <h4>This month income</h4>
+                            </div>
                             <div class="data">
                                 <h2>
                                     <p id="total-income" data-value="<?= $totalIncome ?>">
@@ -89,6 +91,8 @@
                 </div>
 
                 <div class="middle">
+                    <button id="simpleDownloadBtn"><i class="ph-bold ph-download-simple" style="font-size: 20px;"></i>Download PDF</button>
+
                     <section class="table-management income-table" id="orderReport">
                         <h3>Income</h3>
                         <table class="table">
@@ -120,7 +124,6 @@
                             </tbody>
                         </table>
                     </section>
-
                     <section class="table-management expenses-table" style="display: none;">
                         <h3>Expenses</h3>
                         <table class="table">
@@ -150,7 +153,6 @@
                             </tbody>
                         </table>
                     </section>
-                    <button id="simpleDownloadBtn">Download Simple PDF</button>
                 </div>
             </div>
         </div>

@@ -114,23 +114,75 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //expiry,manufacture,purchase date validations
   
-  document.querySelector('form').addEventListener('submit', function (e) {
-    const mfgDate = new Date(document.querySelector('[name="manufacturingDate"]').value);
-    const expDate = new Date(document.querySelector('[name="expiryDate"]').value);
-    const purDate = new Date(document.querySelector('[name="purchaseDate"]').value);
+  // document.querySelector('form').addEventListener('submit', function (e) {
+  //   const mfgDate = new Date(document.querySelector('[name="manufacturingDate"]').value);
+  //   const expDate = new Date(document.querySelector('[name="expiryDate"]').value);
+  //   const purDate = new Date(document.querySelector('[name="purchaseDate"]').value);
 
-    if (expDate <= mfgDate) {
-      alert("Expiry date must be after manufacturing date.");
-      e.preventDefault();
-      return;
+  //   if (expDate <= mfgDate) {
+  //     alert("Expiry date must be after manufacturing date.");
+  //     e.preventDefault();
+  //     return;
+  //   }
+
+  //   if (purDate > expDate) {
+  //     alert("Purchase date must be before expiry date.");
+  //     e.preventDefault();
+  //     return;
+  //   }
+  // });
+
+  const today = new Date();
+const todayStr = today.toISOString().split('T')[0];
+
+// Set manufacturing date max = today
+document.querySelector('[name="manufacturingDate"]').max = todayStr;
+
+// When manufacturing date is selected
+document.querySelector('[name="manufacturingDate"]').addEventListener('change', function () {
+    const mfgDate = new Date(this.value);
+
+    const purInput = document.querySelector('[name="purchaseDate"]');
+    purInput.min = this.value;
+    purInput.max = todayStr;
+    purInput.value = ''; // clear previous selection
+
+    const expInput = document.querySelector('[name="expiryDate"]');
+    const minExpDate = new Date(mfgDate);
+    minExpDate.setDate(minExpDate.getDate() + 1);
+    expInput.min = minExpDate.toISOString().split('T')[0];
+    expInput.value = ''; // clear previous selection
+});
+
+// On form submit
+document.querySelector('form').addEventListener('submit', function (e) {
+    const mfgInput = document.querySelector('[name="manufacturingDate"]');
+    const purInput = document.querySelector('[name="purchaseDate"]');
+    const expInput = document.querySelector('[name="expiryDate"]');
+
+    if (!mfgInput.value || !purInput.value || !expInput.value) {
+        alert("All dates are required.");
+        e.preventDefault();
+        return;
     }
 
-    if (purDate > expDate) {
-      alert("Purchase date must be before expiry date.");
-      e.preventDefault();
-      return;
+    const mfgDate = new Date(mfgInput.value);
+    const purDate = new Date(purInput.value);
+    const expDate = new Date(expInput.value);
+
+    if (expDate <= mfgDate || expDate <= purDate) {
+        alert("Expiry date must be after both manufacturing and purchase dates.");
+        e.preventDefault();
+        return;
     }
-  });
+
+    if (purDate < mfgDate || purDate > today) {
+        alert("Purchase date must be between manufacturing date and today.");
+        e.preventDefault();
+        return;
+    }
+});
+
 
 
   

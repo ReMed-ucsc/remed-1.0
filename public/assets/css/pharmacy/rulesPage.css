@@ -1,0 +1,28 @@
+/* .form-panel{
+    overflow: scroll;
+    display: flex;
+    justify-content: flex-start;
+    scrollbar-width: none;
+} */
+
+
+.form-panel {
+    position: relative; /* To position child relative to this */
+    width: 100%; /* Parent div takes full width */
+    height: 90%; /* Parent div takes full height */
+    display: flex;
+    justify-content: flex-start;
+    overflow: scroll;
+    justify-content: space-evenly;
+}
+
+.form-panel .privacy_policy {
+    width: 95%; /* Slightly less than the parent */
+    height: 35%; /* Near half of the parent */
+    overflow: scroll;
+    scrollbar-width: none;
+    background-color: #ffffff;
+    border: 1px black solid;
+}
+
+

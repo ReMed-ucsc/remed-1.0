@@ -295,7 +295,7 @@
 
 
               <button class="edit-order">
-                <a href="<?= ROOT ?>/order/updateOrderStatus/<?= $order->OrderID ?>/WD" style="text-decoration: none; color:black;">
+                <a href="<?= ROOT ?>/order/updateOrderStatus/<?= $order->OrderID ?>/WP" style="text-decoration: none; color:black;">
                   Send for delivery
                 </a>
               </button>

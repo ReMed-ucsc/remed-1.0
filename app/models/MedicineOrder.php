@@ -19,8 +19,8 @@ class MedicineOrder
     private $ACCEPTED = 'A';            // user accepts the order after reviewing quotation
     private $WAITING_FOR_DRIVER = 'WD'; // waiting for driver to accept the order
     private $DELIVERY_IN_PROGRESS = 'I';
-    private $DELIVERY_CANCEL = 'DC';
-    private $DELIVERY_COMPLETED = 'C';
+    private $DELIVERY_REJECTED = 'DR';
+    private $DELIVERY_COMPLETED = 'WC';
     private $WAITING_FOR_PICKUP = 'WP';
 
     public function getOrderDetails()
@@ -110,7 +110,7 @@ class MedicineOrder
             $this->ACCEPTED => 'ACCEPTED',
             $this->WAITING_FOR_DRIVER => 'WAITING FOR DRIVER',
             $this->DELIVERY_IN_PROGRESS => 'DELIVERY IN PROGRESS',
-            $this->DELIVERY_CANCEL => 'DELIVERY CANCEL',
+            $this->DELIVERY_REJECTED => 'DELIVERY REJECTED',
             $this->DELIVERY_COMPLETED => 'DELIVERY COMPLETED',
             $this->WAITING_FOR_PICKUP => 'WAITING FOR PICKUP'
         ];

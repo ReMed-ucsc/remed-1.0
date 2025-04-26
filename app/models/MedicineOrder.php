@@ -139,6 +139,7 @@ class MedicineOrder
         //show($income);
 
         return $income;
+    }
 
     public function getOrdersByPharmacy($pharmacyID)
     {

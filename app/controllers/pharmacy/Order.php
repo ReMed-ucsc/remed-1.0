@@ -134,6 +134,10 @@ class Order
             $orderModel = new MedicineOrder();
             $orderModel->updateOrderStatus($orderId, $status);
 
+            if ($status == 'WP') {
+                $this->confirmOrder($orderId);
+            }
+
             redirect("order/$orderId");
         } else {
             redirect("order");

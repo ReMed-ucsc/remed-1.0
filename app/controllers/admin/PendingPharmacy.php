@@ -3,6 +3,9 @@
 class PendingPharmacy
 {
     use Controller;
+    public function __construct(){
+        $this->protectRoute();
+    }
     public function index()
     {
         $pharmacy = new Pharmacy;
@@ -18,7 +21,7 @@ class PendingPharmacy
         ];
         $this->view('admin/pendingPharmacy', $data);
     }
-    public function onbordPharmacy($id)
+    public function onboardPharmacy($id)
     {
         $pharmacyModel = new Pharmacy();
         $driver = new Driver();
@@ -28,7 +31,7 @@ class PendingPharmacy
         $pharmacy = $pharmacyModel->getPharmacyById($id);
 
         if (!$pharmacy) {
-            redirect("admin/PendingPharmacy");
+            redirect("admin/pendingPharmacy");
             exit();
         }
 

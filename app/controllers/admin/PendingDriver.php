@@ -2,6 +2,9 @@
 class PendingDriver
 {
     use Controller;
+    public function __construct(){
+        $this->protectRoute();
+    }
     public function index()
     {
         $driverModel=new Driver();
@@ -57,7 +60,7 @@ class PendingDriver
                 $data['errors'] = $driverModel->errors;
             }
         }
-         $this->view('admin/editDriver', $data);
+         $this->view('admin/onboardDriver', $data);
     }
     public function reject($id){
         $driverModel = new Driver();

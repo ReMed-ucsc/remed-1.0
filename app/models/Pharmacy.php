@@ -159,5 +159,5 @@ class Pharmacy extends User
         return $this->query($sql,['id'=>$id]);
     }
 
-    public function updatePharmacy() {}
+    
 }

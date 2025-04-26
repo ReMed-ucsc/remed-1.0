@@ -3,6 +3,10 @@
 class Profile
 {
     use Controller;
+
+    public function __construct(){
+        $this->protectRoute();
+    }
     public function index()
     {
         $id = $this->getSession("id");

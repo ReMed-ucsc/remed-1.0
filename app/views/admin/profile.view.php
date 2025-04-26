@@ -22,7 +22,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
             <div class="profile-right">
                 <a class="btn-green" href="<?= ROOT ?>/admin/profile/edit/<?=htmlspecialchars($admin->id)?>">Edit Profile</a>
                 <a class="btn-green" href="<?= ROOT ?>/admin/legal">Laws and Regulation</a>
-                <a class="btn-red" href="<?= ROOT ?>/admin/login">Log Out</a>
+                <a class="btn-red" href="<?= ROOT ?>/admin/login/logout">Log Out</a>
             </div>
         </div>
     </div>

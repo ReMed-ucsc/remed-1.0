@@ -32,10 +32,13 @@ class Login
                     redirect('admin/dashboard');
                     exit();
                 }
+                else{
+                    $admin->errors['password']= "Password is Wrong. Enter Correct Password";
+
+                }
+            }else{
+                $admin->errors['email'] = "Email is Wrong .Please Enter Correct Email";
             }
-
-
-            $admin->errors['email'] = "Wrong email or password";
 
             $data['errors'] = $admin->errors;
         }

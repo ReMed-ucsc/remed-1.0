@@ -265,7 +265,7 @@ trait Model
         // show($result);
         if ($result) {
             // Get the last inserted ID
-            return true;
+            return $this->lastInsertId();
         }
 
         return false;

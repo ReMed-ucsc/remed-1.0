@@ -14,7 +14,7 @@ class IncomeView
         $month = isset($_GET['month']) ? (int)$_GET['month'] : date('n');
         $year = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
 
-        $incomeModel = new Income();
+        $incomeModel = new MedicineOrder();
         $incomeData = $incomeModel->getIncome($pharmacyId, $month, $year);
 
         $expenseModel = new StockDataView;
@@ -32,7 +32,7 @@ class IncomeView
             $totalExpenses += $item->purchaseCost;
         }
 
-        //show($totalExpenses);
+        //show($stockData);
 
 
         // echo "System Date: " . date('Y-m-d H:i:s') . "<br>";
@@ -44,6 +44,7 @@ class IncomeView
             'userId' => $pharmacyId,
             'auth_token' => $authToken,
             'incomeData' => $incomeData,
+            'expenses' => $stockData,
             'totalIncome' => $totalIncome,
             'totalExpenses' => $totalExpenses,
             'orders' => $incomeData,

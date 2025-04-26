@@ -36,6 +36,31 @@ class CreateCommentController
             $deliveryId = $data['deliveryId'];
             $comment = $data['comment'];
 
+            if (!empty($comment)) {
+                $patterns = [
+                    '/<script\b[^>]*>(.*?)<\/script>/is', // script tags
+                    '/on\w+="[^"]*"/i',  //inline event handling
+                    '/javascript:/i',
+                    '/<iframe\b[^>]*>/i', //ifram tags
+                    '/<img\b[^>]*on\w+=["\'][^"\']*["\']/i', //img with error tags
+                    '/<svg\b[^>]*>/i'
+                ];
+
+                foreach ($patterns as $pattern) {
+                    if (preg_match($pattern, $comment)) {
+                        http_response_code(400);
+                        $result->setErrorStatus(true);
+                        $result->setMessage("text contain unwantted elemtns");
+
+                        $response['result']['error'] = $result->isError();
+                        $response['result']['message'] = $result->getMessage();
+                        echo json_encode($response);
+
+                        return;
+                    }
+                }
+            }
+
             $deliveryData = $deliveryModel->first(["DeliveryId" => $deliveryId]);
 
             if ($deliveryData) {

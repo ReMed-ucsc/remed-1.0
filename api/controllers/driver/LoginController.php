@@ -24,24 +24,30 @@ class LoginController
             $user = $userModel->getDriverByEmail($email);
 
             if ($user) {
-                //show($user);
-                // Access password as an object property
-                if (password_verify($password, $user->password)) {
-                    $authToken = hash('sha384', microtime() . uniqid() . bin2hex(random_bytes(10)));
-                    $userModel->updateToken($email, $authToken);
-                    $userModel->updateFcmToken($email, $fcmToken);
+                if ($user->status == 'active') {
+                    //show($user);
+                    // Access password as an object property
+                    if (password_verify($password, $user->password)) {
+                        $authToken = hash('sha384', microtime() . uniqid() . bin2hex(random_bytes(10)));
+                        $userModel->updateToken($email, $authToken);
+                        $userModel->updateFcmToken($email, $fcmToken);
 
-                    $response['user']['name'] = $user->driverName;
-                    $response['user']['email'] = $email;
-                    $response['user']['auth_token'] = $authToken;
-                    $response['user']['driverId'] = $user->driverId;
+                        $response['user']['name'] = $user->driverName;
+                        $response['user']['email'] = $email;
+                        $response['user']['auth_token'] = $authToken;
+                        $response['user']['driverId'] = $user->driverId;
 
-                    $result->setErrorStatus(false);
-                    $result->setMessage("Login successful");
+                        $result->setErrorStatus(false);
+                        $result->setMessage("Login successful");
+                    } else {
+                        http_response_code(401);
+                        $result->setErrorStatus(true);
+                        $result->setMessage("Invalid credentials");
+                    }
                 } else {
                     http_response_code(401);
                     $result->setErrorStatus(true);
-                    $result->setMessage("Invalid credentials");
+                    $result->setMessage("Sorry your account not activated yet");
                 }
             } else {
                 http_response_code(404);

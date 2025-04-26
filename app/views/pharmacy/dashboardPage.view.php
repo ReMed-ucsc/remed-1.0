@@ -31,7 +31,7 @@
   </style>
 </head>
 
-<body>
+<body data-user-id="<?php echo $_SESSION['user_id'] ?? ''; ?>">
 
   <header>
     <?php

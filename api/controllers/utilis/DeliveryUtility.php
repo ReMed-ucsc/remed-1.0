@@ -9,6 +9,8 @@ class DeliveryUility
     private $fcmUrl = 'https://fcm.googleapis.com/v1/projects/remed-notification/messages:send';
     private $serviceAccountPath;
 
+    private $debugMode = false;
+
     public function __construct()
     {
         $this->serviceAccountPath = BASE_PATH . '/api/controllers/utilis/serviceaccount.json';
@@ -39,7 +41,9 @@ class DeliveryUility
         } else {
             // If no data found, return an error response
             http_response_code(404);
-            echo json_encode(['error' => 'Data not found']);
+            if ($this->debugMode) {
+                echo json_encode(['error' => 'Data not found']);
+            }
             return;
         }
 
@@ -63,14 +67,20 @@ class DeliveryUility
             });
 
             if (empty($fcmTokens)) {
-                http_response_code(404);
-                echo json_encode("No tokens found");
+                if ($this->debugMode) {
+                    http_response_code(404);
+                    echo json_encode("No tokens found");
+                }
             } else {
-                echo json_encode(["FCM tokens found" => array_values($fcmTokens)]);
+                if ($this->debugMode) {
+                    echo json_encode(["FCM tokens found" => array_values($fcmTokens)]);
+                }
             }
         } else {
-            http_response_code(404);
-            echo json_encode("No token found");
+            if ($this->debugMode) {
+                http_response_code(404);
+                echo json_encode("No token found");
+            }
         }
 
 
@@ -98,10 +108,13 @@ class DeliveryUility
             return "New delivery request sent";
         } else {
             http_response_code(404);
-            return [
-                "status" => "error",
-                "message" => "No driver found"
-            ];
+
+            if ($this->debugMode) {
+                return [
+                    "status" => "error",
+                    "message" => "No driver found"
+                ];
+            }
         }
     }
 
@@ -109,9 +122,13 @@ class DeliveryUility
     private function fcmSender($payload)
     {
         if (!$payload) {
-            json_encode("payload not found");
+            if ($this->debugMode) {
+                json_encode("payload not found");
+            }
         } else {
-            json_encode("Payload " . print_r($payload));
+            if ($this->debugMode) {
+                json_encode("Payload " . print_r($payload));
+            }
         }
 
         $this->accessToken =  $this->generateAccessToken();
@@ -138,7 +155,9 @@ class DeliveryUility
         $response = curl_exec($ch);
 
         $responseDecoded = json_decode($response, true);
-        echo json_encode("FCM response: " . print_r($responseDecoded, true));
+        if ($this->debugMode) {
+            echo json_encode("FCM response: " . print_r($responseDecoded, true));
+        }
 
 
         if ($response === false) {
@@ -162,7 +181,9 @@ class DeliveryUility
             ];
         }
 
-        error_log("server response " . print_r($responseDecoded));
+        if ($this->debugMode) {
+            error_log("server response " . print_r($responseDecoded));
+        }
 
         return $responseDecoded;
     }

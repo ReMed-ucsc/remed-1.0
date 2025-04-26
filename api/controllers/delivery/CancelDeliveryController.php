@@ -4,13 +4,17 @@ require_once BASE_PATH . '/app/core/init.php';
 require_once BASE_PATH . '/app/core/helper_classes.php';
 require_once BASE_PATH . '/app/models/Delivery.php';
 require_once BASE_PATH . '/app/models/MedicineOrder.php';
+require_once BASE_PATH . '/api/controllers/utilis/DeliveryUtility.php';
 
 class CancelDeliveryController
 {
     public function index()
     {
         $result = new Result();
-        $respone = array();
+        $respone = [];
+
+        $orderId = "";
+        $deliveryId = "";
 
         $input = file_get_contents('php://input');
         $data = json_decode($input, true);
@@ -57,18 +61,37 @@ class CancelDeliveryController
                         $result->setErrorStatus(true);
                         $result->setMessage("No delivery found");
                     } else {
+                        if ($delivery->status == 'pickedUp') {
+                            $deliveryModel->addToBreakDownAfterPickup(
+                                $driverId,
+                                $deliveryId,
+                                $orderId,
+                                $data['lat'],
+                                $data['lng']
+                            );
+                        } else {
+                            //sending new delivery requests if the package still in the pharmacy
+                            $deliveryUtilityModel = new DeliveryUility();
+                            $deliveryUtilityModel->sendDetailstoDriver($orderId);
+                        }
                         $deliveryModel->changeDeliveryStatus($deliveryId, "Cancel");
 
                         http_response_code(200);
                         $result->setErrorStatus(false);
                         $result->setMessage("Order canceled");
+
+                        $order = new Order();
+                        $orderResult = $order->getMedicineOrder($orderId);
+
+                        $notificationModel = new Notification();
+                        $notificationModel->createNotification($orderResult->PharmacyID, $orderId, "Order $orderId Canceled");
                     }
                 }
             }
         }
 
-        $respone['error'] = $result->isError();
-        $respone['message'] = $result->getMessage();
+        $respone['result']['error'] = $result->isError();
+        $respone['result']['message'] = $result->getMessage();
 
         echo json_encode($respone);
     }

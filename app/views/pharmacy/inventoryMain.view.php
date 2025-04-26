@@ -49,11 +49,11 @@
 
     <div class="main-content">
       <h2>Inventory</h2>
-      <div class="search-container">
+      <!-- <div class="search-container">
         <input type="text" placeholder="Search here" class="search-bar">
         <button class="search"><i class="icon ph-bold ph-magnifying-glass"></i>
         </button>
-      </div>
+      </div> -->
 
       <!-- <?php show($data) ?> -->
       <div class="ongoing">Current Stock</div>

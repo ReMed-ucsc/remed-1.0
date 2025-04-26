@@ -690,11 +690,19 @@ tr:nth-child(odd) .custom-select {
 .message.pharmacy {
   background-color: #d4f1f4;
   align-self: flex-start;
+  position: relative;
+  clear: both;
+  float: left;
+  text-align: left;
 }
 
 .message.patient {
   background-color: #fcd5ce;
   align-self: flex-end;
+  text-align: right;
+  position: relative;
+  clear: both;
+  float: right;
   text-align: right;
 }
 

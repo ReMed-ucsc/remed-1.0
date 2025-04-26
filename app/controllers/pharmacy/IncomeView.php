@@ -3,6 +3,13 @@
 class IncomeView
 {
     use Controller;
+
+
+    public function __construct()
+    {
+        $this->protectRoute();
+    }
+
     public function index()
     {
         //get session data

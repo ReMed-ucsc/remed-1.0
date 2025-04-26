@@ -47,7 +47,7 @@ require_once BASE_PATH . '/app/views/inc/header.view.php'
                             </div>
                         <?php endif; ?>
                         <p class="forget">I have already account <span><a href="<?=ROOT?>/admin/login/">LogIn</a></span>?</p>
-                        <p class="forget">Forget <span><a href="#"> Password</a></span>?</p>
+                        <p class="forget">Forget <span><a href="<?=ROOT?>/admin/AuthController"> Password</a></span>?</p>
                 </form>
             </div>
         </div>

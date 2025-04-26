@@ -11,17 +11,60 @@
 .status.pending {
   background-color: #f44336;
 }
-
+.action-border {
+  align-items: center;
+  margin-bottom: 20px;
+}
 .onboard {
+  align-items: center;
   background-color: #2196f3;
   color: white;
   padding: 5px 10px;
   border-radius: 15px;
-  margin-left: 10px;
+  /* margin-left: 10px; */
   cursor: pointer;
+  margin: 10px;
+  text-decoration: none;
+}
+.reject-action{
+  align-items: center;
+  background-color: #ff0000;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 15px;
+  /* margin-left: 10px; */
+  cursor: pointer;
+  margin: 10px;
   text-decoration: none;
 }
 
+.reject {
+  background-color: #ff0000;
+  position: relative;
+  width: 200px;
+  margin: 10px;
+  bottom: 35px;
+  left: -60px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 17px 100px;
+  border-radius: 20px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.action-onboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.license-document{
+  width: 500px;
+  height: 200px;
+}
+.license{
+  border: 2px solid black;
+}
 .statusA {
   background-color: none;
   color: #2e7d32;
@@ -147,6 +190,20 @@ select {
   flex-direction: column;
   justify-content: center;
 }
+.download {
+  width: 100px;
+  height: 100px;
+}
+.download img {
+  width: 30px;
+  height: 30px;
+  border: solid black 2px;
+  border-radius: 50%;
+  padding: 2px;
+  background-color: var(--btn-green);
+  /* margin: 10px; */
+}
+
 /* 
 @media screen and (max-width: 1200px) {
   tr{
@@ -187,13 +244,13 @@ select {
 .table-container {
   width: 100%;
   overflow-x: auto;
-  margin: 20px 0;
+  margin: 10px 0;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-   min-width: 600px;/* Ensures table doesn't get too squeezed */
+  min-width: 600px; /* Ensures table doesn't get too squeezed */
 }
 
 thead {
@@ -201,13 +258,15 @@ thead {
   color: white;
 }
 
-th, td {
+th,
+td {
   padding: 12px 15px;
   text-align: left;
   border-bottom: 1px solid #ddd;
   font-size: 14px;
   width: auto;
   max-width: 20px;
+  height: auto;
   break-inside: avoid;
 }
 
@@ -224,8 +283,9 @@ tbody tr:hover {
   .table-container {
     margin: 15px 0;
   }
-  
-  th, td {
+
+  th,
+  td {
     padding: 10px;
     font-size: 13px;
     column-count: 2;
@@ -236,14 +296,11 @@ tbody tr:hover {
   .table-container {
     margin: 10px 0;
   }
-  
-  th, td {
+
+  th,
+  td {
     padding: 8px;
     font-size: 12px;
     column-count: 3;
   }
 }
-
-
-
-

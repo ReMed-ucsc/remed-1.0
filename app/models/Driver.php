@@ -170,5 +170,8 @@ class Driver extends User
         ];
 
         return $this->update($driverId, $data, 'driverID');
+    public function rejectDriver($id){
+        $sql="UPDATE $this->table SET status = 'REJECT' WHERE driverID = :id";
+        return $this->query($sql,['id'=>$id]);
     }
 }

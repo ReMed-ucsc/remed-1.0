@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ReMed Dashboard</title>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/incomeView.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/navbar.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/table.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/pharmacy/incomeView.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/component/sidebar.css">
     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -30,10 +30,11 @@
 
     <div class="fullpage">
         <div class="main-content">
+            <h2>Income</h2>
             <div class="structure">
                 <div class="search-bar">
-                    <form method="GET" style="margin: 20px 0;">
-                        <div>
+                    <form method="GET">
+                        <div class="search-bar-styles">
                             <label for="month">Month:</label>
                             <select name="month" id="month" class="select">
                                 <?php for ($m = 1; $m <= 12; $m++): ?>
@@ -53,8 +54,9 @@
                                     </option>
                                 <?php endfor ?>
                             </select>
+
+                            <button type="submit" class="select">Filter</button>
                         </div>
-                        <button type="submit">Filter</button>
                     </form>
                 </div>
                 <div class="top">

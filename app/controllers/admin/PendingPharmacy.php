@@ -45,16 +45,18 @@ class PendingPharmacy
                 'RegNo' => $_POST['RegNo'],
                 'contactNo' => $_POST['contactNo'],
                 'email' => $_POST['email'],
-                'address' => $_POST['address'],
+                'address' => $_POST['pharmacy-address'],
                 'status' => 'APPROVED',
                 'notification' => $Msg,
                 'notificationDriver' => $MsgDriver,
-                'document' => $_FILES['document'] ?? null
+                'latitude'=>$_POST['latitude'],
+                'longitude'=>$_POST['longitude'],
+                'document' => $_FILES['document']['name'] ?? null
             ];
-            // show($data);
+            show($data);
             // File upload handling
             if (isset($_FILES['document']) && $_FILES['document']['error'] == UPLOAD_ERR_OK) {
-                $uploadDir = BASE_PATH . '/uploads/license/';
+                $uploadDir = BASE_PATH . '/uploads/NMRA/';
                 if (!is_dir($uploadDir)) {
                     mkdir($uploadDir, 0777, true);
                 }
@@ -70,7 +72,7 @@ class PendingPharmacy
             // Validate and insert
             if ($pharmacyModel->validate($data)) {
 
-                $pharmacyModel->update($id, $data, 'pharmacyId');
+                $pharmacyModel->update($id, $data, 'PharmacyID');
                 redirect('admin/PharmacyDetails');
                 exit();
             } else {
@@ -78,7 +80,13 @@ class PendingPharmacy
             }
         }
 
-        $this->view('admin/editPharmacy', $data);
+        $this->view('admin/onboardPharmacy', $data);
+    }
+    public function reject($id){
+        $pharmacyModel = new Pharmacy();
+
+        $pharmacyModel->rejectPharmacy($id);
+        redirect("admin/PendingPharmacy");
     }
 
 

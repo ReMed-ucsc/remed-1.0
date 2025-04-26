@@ -201,6 +201,13 @@ trait Model
                         foreach ($value['in'] as $i => $inValue) {
                             $data["{$key}_$i"] = $inValue;
                         }
+                    } elseif (isset($value['not in'])) {
+                        // Handle NOT IN operation
+                        $placeholders = implode(", ", array_map(fn($i) => ":{$key}_$i", array_keys($value['not in'])));
+                        $query .= "$key NOT IN ($placeholders) AND ";
+                        foreach ($value['not in'] as $i => $inValue) {
+                            $data["{$key}_$i"] = $inValue;
+                        }
                     }
                 } else {
                     $query .= "$key = :$key AND ";

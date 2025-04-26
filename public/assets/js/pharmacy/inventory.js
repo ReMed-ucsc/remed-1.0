@@ -58,12 +58,13 @@ document.addEventListener("DOMContentLoaded", function () {
     if (query.length > 1) {
       // Start searching after 3 characters
       fetch(
-        `http://localhost/remed-1.0/api/medicine/getMedicines?search=${query}`
+        `http://localhost/remed-1.0/api/medicine/getMedicinesForInventory?search=${query}&pharmacyID=${pharmacyId}`
       )
         .then((response) => response.json())
         .then((data) => {
           searchResults.innerHTML = "";
           data.data.forEach((medicine) => {
+            console.log(medicine);
             const div = document.createElement("div");
             div.classList.add("search-result-item");
             div.textContent = `${medicine.ProductName}`;
@@ -110,5 +111,27 @@ document.addEventListener("DOMContentLoaded", function () {
       //   .catch((error) => console.error("Error fetching medicine details:", error));
     }
   });
+
+  //expiry,manufacture,purchase date validations
+  
+  document.querySelector('form').addEventListener('submit', function (e) {
+    const mfgDate = new Date(document.querySelector('[name="manufacturingDate"]').value);
+    const expDate = new Date(document.querySelector('[name="expiryDate"]').value);
+    const purDate = new Date(document.querySelector('[name="purchaseDate"]').value);
+
+    if (expDate <= mfgDate) {
+      alert("Expiry date must be after manufacturing date.");
+      e.preventDefault();
+      return;
+    }
+
+    if (purDate > expDate) {
+      alert("Purchase date must be before expiry date.");
+      e.preventDefault();
+      return;
+    }
+  });
+
+
   
 });

@@ -21,7 +21,6 @@ class InventoryMain
         $this->view('pharmacy/inventoryMain', ['inventories' => $inventory]);
     }
 
-    public function Create() {}
 
     public function addItem()
     {

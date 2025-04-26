@@ -76,7 +76,7 @@ class StockInventoryDetails
 
     public function getInventoryByPharmacy($pharmacyID)
     {
-        $query = "SELECT * FROM $this->table WHERE PharmacyID = :PharmacyID";
+        $query = "SELECT * FROM $this->table WHERE PharmacyID = :PharmacyID ORDER BY InventoryID DESC";
         return $this->query($query, ['PharmacyID' => $pharmacyID]);
     }
 }

@@ -14,10 +14,27 @@ body{
 }
 .details-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    background-color: var(--form-container);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.57);
+    /* margin: 70px; */
+    width: 90%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+.profile-edit-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
     background-color: var(--form-container);
     padding: 30px;
     border-radius: 10px;
@@ -27,6 +44,37 @@ body{
     height: auto;
     margin-left: auto;
     margin-right: auto;
+}
+.profile-edit-container form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; 
+    /* min-width: 50%; */
+    margin-bottom: 30px;
+    margin-right: 10px;
+}
+.onboard-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    background-color: var(--form-container);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.57);
+    /* margin: 70px; */
+    width: 90%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+.onboard-container form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .page-title{
@@ -39,15 +87,19 @@ body{
     flex-direction: row;
     justify-content: space-between;
 }
+.onboard-top{
+    display: flex;
+    flex-direction: row;
+}
 
 .Form{
-    
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     width: 100%; 
-    min-width: 33.333%;
+    /* min-width: 50%; */
     margin-bottom: 30px;
+    margin-right: 10px;
 }
 
 
@@ -67,6 +119,7 @@ label {
     padding: 10px;
     border: 2px solid #ccc;
 }
+
 
 
 textarea.legal {

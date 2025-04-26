@@ -66,9 +66,11 @@ class PharmacyDetails
                 'RegNo' => $_POST['RegNo'],
                 'contactNo' => $_POST['contactNo'],
                 'email' => $_POST['email'],
-                'address' => $_POST['address'],
+                'address' => $_POST['pharmacy-address'],
                 'notification' => $Msg,
                 'notificationDriver' => $MsgDriver,
+                'latitude'=>$_POST['latitude'],
+                'longitude'=>$_POST['longitude'],
                 'document' => $_FILES['document'] ?? null
             ];
 
@@ -102,18 +104,18 @@ class PharmacyDetails
                 'pharmacistName' => $_POST['pharmacistName'] ?? '',
                 'RegNo' => $_POST['RegNo'] ?? '',
                 'contactNo' => $_POST['contactNo'] ?? '',
-                'address' => $_POST['address'] ?? '',
+                'address' => $_POST['pharmacy-address'] ?? '',
                 'email' => $_POST['email'] ?? '',
                 'status' => 'APPROVED',
-                'document' => '',
+                'document' => $_FILES['document']['name'],
                 'latitude'=>$_POST['latitude'],
                 'longitude'=>$_POST['longitude']
             ];
 
-            show($data);
+            // show($data);
             // File upload handling
             if (isset($_FILES['document']) && $_FILES['document']['error'] == UPLOAD_ERR_OK) {
-                $uploadDir = BASE_PATH . '/uploads/license/';
+                $uploadDir = BASE_PATH . '/uploads/NMRA/';
                 if (!is_dir($uploadDir)) {
                     mkdir($uploadDir, 0777, true);
                 }

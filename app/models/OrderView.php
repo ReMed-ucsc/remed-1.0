@@ -100,4 +100,110 @@ class OrderView
         $data = [$pharmacyId];
         return $this->query($query, $data);
     }
+
+    public function getIncomeSummary($pharmacyID)
+    {
+        $today = date('Y-m-d');
+        $monthStart = date('Y-m-01');
+        $yearStart = date('Y-01-01');
+
+        $query = "
+        SELECT
+            SUM(CASE WHEN DATE(date) = :today THEN totalBill ELSE 0 END) AS dailyIncome,
+            SUM(CASE WHEN date BETWEEN :monthStart AND :today THEN totalBill ELSE 0 END) AS monthlyIncome,
+            SUM(CASE WHEN date BETWEEN :yearStart AND :today THEN totalBill ELSE 0 END) AS yearlyIncome
+        FROM {$this->table}
+        WHERE paymentReceived = 1 AND PharmacyID = :pharmacyId
+    ";
+
+        $params = [
+            'today' => $today,
+            'monthStart' => $monthStart,
+            'yearStart' => $yearStart,
+            'pharmacyId' => $pharmacyID
+        ];
+
+        $result = $this->query($query, $params);
+
+        if ($result) {
+            return [
+                (int)$result[0]->dailyIncome,
+                (int)$result[0]->monthlyIncome,
+                (int)$result[0]->yearlyIncome
+            ];
+        }
+
+        // Return zeros if no result
+        return [0, 0, 0];
+    }
+
+
+    //dailyIncome
+
+    public function getLast7DaysIncome($pharmacyID)
+    {
+        $query = "
+        SELECT 
+            DATE(date) AS incomeDate,
+            SUM(totalBill) AS income
+        FROM {$this->table}
+        WHERE 
+            paymentReceived = 1 
+            AND PharmacyID = :pharmacyId
+            AND date >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)
+        GROUP BY incomeDate
+    ";
+
+        $params = ['pharmacyId' => $pharmacyID];
+        $result = $this->query($query, $params);
+
+        // Create date => income map from DB
+        $incomeMap = [];
+        foreach ($result as $row) {
+            $incomeMap[$row->incomeDate] = (int)$row->income;
+        }
+
+        // Fill last 7 days (including today), even if missing
+        $labels = [];
+        $data = [];
+
+        for ($i = 6; $i >= 0; $i--) {
+            $date = date('Y-m-d', strtotime("-$i days"));
+            $labels[] = $date;
+            $data[] = $incomeMap[$date] ?? 0;
+        }
+
+        return ['labels' => $labels, 'data' => $data];
+    }
+
+    public function patientVisitWeekly($pharmacyID)
+    {
+        $query = "
+
+            SELECT 
+                DATE(date) AS visitDate,
+                COUNT(DISTINCT patientName) AS dailyPatientCount 
+            FROM {$this->table} 
+            WHERE
+                PharmacyID = :pharmacyId
+                AND date >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)
+            GROUP BY visitDate
+
+        ";
+        $params = ['pharmacyId' => $pharmacyID];
+        $result = $this->query($query, $params);
+
+        $visitMap = [];
+        foreach ($result as $row) {
+            $visitMap[$row->visitDate] = (int)$row->dailyPatientCount;
+        }
+
+        for ($i = 6; $i >= 0; $i--) {
+            $date = date('Y-m-d', strtotime("-$i days"));
+            $labels[] = $date;
+            $data[] = $visitMap[$date] ?? 0;
+        }
+
+        return ['labels' => $labels, 'data' => $data];
+    }
 }

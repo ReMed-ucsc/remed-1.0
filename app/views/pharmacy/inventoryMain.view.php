@@ -24,7 +24,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body>
+<body data-user-id="<?php echo $_SESSION['user_id'] ?? ''; ?>">
 
   <header>
     <?php
@@ -49,11 +49,11 @@
 
     <div class="main-content">
       <h2>Inventory</h2>
-      <div class="search-container">
+      <!-- <div class="search-container">
         <input type="text" placeholder="Search here" class="search-bar">
         <button class="search"><i class="icon ph-bold ph-magnifying-glass"></i>
         </button>
-      </div>
+      </div> -->
 
       <!-- <?php show($data) ?> -->
       <div class="ongoing">Current Stock</div>

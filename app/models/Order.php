@@ -1,6 +1,6 @@
 <?php
 
-require_once BASE_PATH . '/api/coontrollers/utilis/DeliveryUtility.php';
+require_once BASE_PATH . '/api/controllers/utilis/DeliveryUtility.php';
 
 class Order
 {
@@ -28,11 +28,13 @@ class Order
 
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $orderId = $_POST['orderId'];
-            $status = 'W';
+            $status = 'WP';
 
-            $status = $orderModel->getStatusName('Q');
+            //$status = 'WAITING_FOR_PICKUP';
 
             $orderModel->updateOrderStatus($orderId, $status);
+
+            //show($status);
 
             //add the logic to only execute if the order is to be delivered
             //check if the order is store pickup
@@ -40,10 +42,10 @@ class Order
 
             //redirect to all orderes viewwing page 
             //change to appropiate redirection
-            redirect("orderMain");
+            //redirect("order/updateOrderStatus/$orderId/WD");
             exit;
         }
 
-        //redirect("orderMain");
+        redirect("order/updateOrderStatus/$orderId/WD");
     }
 }

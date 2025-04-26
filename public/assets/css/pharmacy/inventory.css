@@ -92,3 +92,22 @@ gap: 15px;
     scrollbar-width: none;
 
 }
+
+.upper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.upper-right button{
+    color: rgb(255, 255, 255);
+    background-color: darkgreen;
+    padding: 18px;
+    border: none;
+}
+
+.add-stock a{
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}

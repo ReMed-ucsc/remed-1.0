@@ -4,6 +4,9 @@ require_once BASE_PATH . '/app/models/DeliveryView.php';
 require_once BASE_PATH . '/app/models/Driver.php';
 require_once BASE_PATH . '/app/core/init.php';
 require_once BASE_PATH . '/app/core/helper_classes.php';
+require_once BASE_PATH . '/app/models/Notification.php';
+require_once BASE_PATH . '/app/models/MedicineOrder.php';
+
 
 class GetDeliveryController
 {
@@ -51,7 +54,7 @@ class GetDeliveryController
                     $response['error'] = true;
                     $response['message'] = 'No order found';
                 } else {
-                    if ($delivery['status'] == 'Q') {
+                    if ($delivery['status'] == 'WP') {
 
                         $delivery['pharmacyLatitude'] = number_format($delivery['pharmacyLatitude'], 6, '.', '');
                         $delivery['pharmacyLongitude'] = number_format($delivery['pharmacyLongitude'], 6, '.', '');
@@ -61,7 +64,14 @@ class GetDeliveryController
                         $response['data'] = $delivery;
                         $result->setErrorStatus(false);
                         $result->setMessage("Order found");
+
+                        $medicineOrderModel = new MedicineOrder();
+                        $medicineOrderModel->updateOrderStatus($delivery['orderId'], 'DP');
+
+                        $notificationModel = new Notification();
+                        $notificationModel->createNotification($delivery['pharmacyId'], $delivery['orderId'], "order $orderId accepted for delivery");
                     } else {
+                        http_response_code(400);
                         $result->setErrorStatus(true);
                         $response['error'] = true;
                         $response['message'] = 'Order already Confirmed';

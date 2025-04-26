@@ -23,9 +23,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    canvas {
+      width: 100% !important;
+      height: 400px;
+    }
+  </style>
 </head>
 
-<body>
+<body data-user-id="<?php echo $_SESSION['user_id'] ?? ''; ?>">
 
   <header>
     <?php
@@ -52,11 +58,11 @@
 
   <div class="main-content">
     <h2>Dashboard</h2>
-    <div class="search-container">
+    <!-- <div class="search-container">
       <input type="text" placeholder="Search here" class="search-bar">
       <button class="search"><i class="icon ph-bold ph-magnifying-glass"></i>
       </button>
-    </div>
+    </div> -->
     <div class="structure">
       <div class="top">
         <div class="cards">
@@ -99,7 +105,7 @@
               <div class="data">
                 <p>Rs.10,000</p>
               </div>
-              <a href="<?= ROOT ?>/income">View details</a>
+              <a href="<?= ROOT ?>/incomeView">View details</a>
             </div>
             <div class="card blue-card">
               <img src="<?= ROOT ?>/assets/images/storage.jpg" class="card-icon">
@@ -114,54 +120,19 @@
           </div>
         </div>
       </div>
-      <!-- <div class="middle">
-        <div class="middleline">
-          <div class="total-sales">
-            Total Sales
-            <canvas id="myBarChart"></canvas>
-          </div>
-          <div class="inventory">
-            <div class="weekly">
-              Inventory
-              <h5>Weekly
-                <ul class="sub-menu">
 
-                </ul>
-
-                <i class="arrow ph-bold ph-caret-down"></i>
-              </h5>
-            </div>
-            <canvas id="myPieChart"></canvas>
-          </div>
-        </div>
-        <div class="middleline">
-          <div class="total-sales">
-            Patient Visit
-            <canvas id="myPatientChart" width="500" height="200"></canvas>
-          </div>
-          <div class="total-sales">
-            Patient Visit
-            <canvas id="myPatientChart" width="200" height="200"></canvas>
-          </div>
-          <div class="total-sales">
-            Patient Visit
-            <canvas id="myPatientChart" width="300" height="200"></canvas>
-          </div>
-        </div>
-
-      </div> -->
 
       <div class="middle">
         <div class="middleline">
-          <div class="total-sales">
-            Total Sales
+          <div class="total-sales size2">
+            Revenue Trend
             <canvas id="myBarChart"></canvas>
           </div>
           <div class="inventory">
             <div class="weekly">
               Inventory
               <h5>Weekly
-                <ul class="sub-menu"></ul>
+                <ul class="sub-menu size1"></ul>
                 <i class="arrow ph-bold ph-caret-down"></i>
               </h5>
             </div>
@@ -170,41 +141,33 @@
         </div>
 
         <div class="middleline">
-          <div class="total-sales">
+          <div class="total-sales size1">
+            Medicine by Category
+            <canvas id="myDoughnutChart" canvas>
+          </div>
+          <div class="total-sales size2">
             Patient Visit
-            <canvas id="myPatientChart" width="500" height="200"></canvas>
+            <canvas id="myPatientChart"></canvas>
           </div>
-          <div class="total-sales">
-            Revenue Trend
-            <canvas id="myLineChart" width="300" height="200"></canvas>
-          </div>
-          <div class="total-sales">
-            Sales by Category
-            <canvas id="myDoughnutChart" width="300" height="200"></canvas>
-          </div>
+
+
         </div>
 
 
-        <!-- <div class="middleline">
-          <div class="total-sales">
-            Revenue Trend
-            <canvas id="myLineChart" width="400" height="200"></canvas>
-          </div>
-          <div class="total-sales">
-            Sales by Category
-            <canvas id="myDoughnutChart" width="400" height="200"></canvas>
-          </div>
-        </div> -->
+
       </div>
 
 
     </div>
+
+
     <!-- <div class="bottom"> -->
     <section class="table-management">
       <div class="table">
         <p>Recent payments</p>
 
-        <!-- <?php show($data) ?> -->
+
+
         <table>
           <thead>
             <tr>
@@ -247,8 +210,18 @@
         </table>
       </div>
 
+
     </section>
 
+    <script>
+      const stockLevel = <?= json_encode($stockLevels) ?>;
+      const income = <?= json_encode($income) ?>;
+      const patientVisit = <?= json_encode($patientVisit) ?>;
+      const medicineCat = <?= json_encode($medicineCategory) ?>;
+      console.log(stockLevel);
+      console.log(income);
+      console.log(patientVisit);
+    </script>
     <script src="<?= ROOT ?>/assets/js/pharmacy/dashboardPage.js"></script>
 
 

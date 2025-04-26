@@ -132,4 +132,43 @@ class Driver extends User
 
         return false;
     }
+
+    public function updataProfile($driverId, $data)
+    {
+        return $this->update($driverId, $data, 'driverId');
+    }
+
+    public function getProfile($driverId)
+    {
+        $data = [
+            'driverId' => $driverId
+        ];
+
+        $columns = [
+            'driverName',
+            'email',
+            'dob',
+            'telNo',
+            'deliveryTime',
+            'vehicalLicenseNo',
+            'status'
+        ];
+
+        $conditions = [
+            'driverId' => $driverId
+        ];
+
+        return $this->selectWhere($columns, $conditions, []);
+    }
+
+    public function updateProfile($driverId, $name, $vehicalNumber, $telNo)
+    {
+        $data = [
+            'driverName' => $name,
+            'vehicalLicenseNo' => $vehicalNumber,
+            'telNo' => $telNo
+        ];
+
+        return $this->update($driverId, $data, 'driverID');
+    }
 }

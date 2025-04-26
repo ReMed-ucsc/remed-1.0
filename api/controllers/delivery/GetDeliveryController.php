@@ -66,7 +66,7 @@ class GetDeliveryController
                         $result->setMessage("Order found");
 
                         $medicineOrderModel = new MedicineOrder();
-                        $medicineOrderModel->updateOrderStatus($delivery['orderId'], 'DELIVERY_IN_PROGRESS');
+                        $medicineOrderModel->updateOrderStatus($delivery['orderId'], 'DP');
 
                         $notificationModel = new Notification();
                         $notificationModel->createNotification($delivery['pharmacyId'], $delivery['orderId'], "order $orderId accepted for delivery");

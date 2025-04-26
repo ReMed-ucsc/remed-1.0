@@ -87,12 +87,12 @@ class Driver extends User
 
         return $this->update($driverID, $data, 'DriverID');
     }
-    public function getlastId($status="APPROVED")
+    public function getlastId($status = "APPROVED")
     {
         $sql = "SELECT COUNT(*) AS row_count FROM $this->table WHERE status = :status";
         $result = $this->query($sql, ['status' => $status]);
 
-      
+
         // If the result is an object, access the property using ->
         if (is_array($result) && isset($result[0])) {
             return $result[0]->row_count; // Access the property as an object
@@ -102,9 +102,10 @@ class Driver extends User
         return 0;
     }
 
-    public function notificationDriver($status="pending"){
+    public function notificationDriver($status = "pending")
+    {
         $sql = "SELECT driverId , driverName FROM $this->table WHERE status = :status LIMIT 5";
-        return $this->query($sql,['status' => $status]);
+        return $this->query($sql, ['status' => $status]);
     }
 
 
@@ -132,8 +133,49 @@ class Driver extends User
 
         return false;
     }
-    public function rejectDriver($id){
-        $sql="UPDATE $this->table SET status = 'REJECT' WHERE driverID = :id";
-        return $this->query($sql,['id'=>$id]);
+
+    public function updataProfile($driverId, $data)
+    {
+        return $this->update($driverId, $data, 'driverId');
+    }
+
+    public function getProfile($driverId)
+    {
+        $data = [
+            'driverId' => $driverId
+        ];
+
+        $columns = [
+            'driverName',
+            'email',
+            'dob',
+            'telNo',
+            'deliveryTime',
+            'vehicalLicenseNo',
+            'status'
+        ];
+
+        $conditions = [
+            'driverId' => $driverId
+        ];
+
+        return $this->selectWhere($columns, $conditions, []);
+    }
+
+    public function updateProfile($driverId, $name, $vehicalNumber, $telNo)
+    {
+        $data = [
+            'driverName' => $name,
+            'vehicalLicenseNo' => $vehicalNumber,
+            'telNo' => $telNo
+        ];
+
+        return $this->update($driverId, $data, 'driverID');
+    }
+
+    public function rejectDriver($id)
+    {
+        $sql = "UPDATE $this->table SET status = 'REJECT' WHERE driverID = :id";
+        return $this->query($sql, ['id' => $id]);
     }
 }

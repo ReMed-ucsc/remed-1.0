@@ -8,7 +8,7 @@ require_once BASE_PATH . '/app/models/MedicineOrder.php';
 require_once BASE_PATH . '/app/models/Driver.php';
 require_once BASE_PATH . '/app/models/Notification.php';
 
-class ConfirmDeliveryController
+class ConfirmPickupController
 {
     public function index()
     {
@@ -50,13 +50,12 @@ class ConfirmDeliveryController
                         $result->setErrorStatus(true);
                         $result->setMessage("No delivery found");
                     } else {
-                        $delivery->changeDeliveryStatus($deliveryId, "Delivered");
-                        $delivery->setDistance($deliveryId, $data['totalDistance']);
+                        $delivery->changeDeliveryStatus($deliveryId, "PickedUp");
                         $result->setErrorStatus(false);
-                        $result->setMessage("Updated successfully");
+                        $result->setMessage("pickup confirmed");
 
                         $notificationModel = new Notification();
-                        $notificationModel->createNotification($orderResult->PharmacyID, $orderId, "Order # $orderId delivered");
+                        $notificationModel->createNotification($orderResult->PharmacyID, $orderId, "Order pickedUp");
                     }
                 }
             }

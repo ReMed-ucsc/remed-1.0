@@ -8,10 +8,10 @@
 
     <div class="navbar-right">
         <img class="bell" src="<?= ROOT ?>/assets/images/bell-icon.png" alt="notification" />
-
         <a href="<?= ROOT ?>/admin/Profile"><img class="user" src="<?= ROOT ?>/assets/images/TestAccount.png"
                 alt="user" /></a>
     </div>
+
 </header>
 <!-- Navbar end-->
 
@@ -52,6 +52,7 @@
 </div>
 
 <!-- notification end -->
+ <!-- Notification Popup -->
 
 <script>
     /* show notification */
@@ -105,4 +106,5 @@
             dropdown.style.display = 'none';
         }
     });
+
 </script> -->

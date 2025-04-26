@@ -1,6 +1,6 @@
 <?php
 
-class AvailableMedicine
+class RulesPage
 {
     use Controller;
     public function index()
@@ -18,8 +18,19 @@ class AvailableMedicine
 
         // $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
 
-        $data['username'] = [];
-        $this->view('pharmacy/availableMedicine', $data);
+        if (!isset($_SESSION['user_id'])) {
+            redirect('login'); // or show an unauthorized message
+            exit();
+        }
+
+        $pharmacyID = $_SESSION['user_id'];
+
+        $pharmacyModel = new Pharmacy($pharmacyID);
+        $legal = new LegalModel();
+        $legalPolicy = $legal->getTermsConditions();
+        $pharmacyData = $pharmacyModel->getPharmacyById($pharmacyID);
+
+        $this->view('pharmacy/rulesPage', ['pharmacyData' => $pharmacyData, 'legalPolicy' => $legalPolicy]);
     }
 
     // add other methods like edit, update, delete, etc.

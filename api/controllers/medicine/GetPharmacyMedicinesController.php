@@ -17,7 +17,7 @@ class GetPharmacyMedicinesController
         $offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 0;
 
         try {
-            $inventoryViewModel = new InventoryView();
+            $inventoryViewModel = new DrugInventory();
             $productIDList = $inventoryViewModel->getPhramcyInventoryMedicines($_GET['pharmacyID']);
 
             $productIDs = array_map(function ($item) {

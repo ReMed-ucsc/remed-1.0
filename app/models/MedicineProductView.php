@@ -56,13 +56,13 @@ class MedicineProductView
         $this->setOffset($offset);
 
         $where = [
-            'ProductName' => ['not in' => $productIDs],
+            'ProductID' => ['not in' => $productIDs],
         ];
 
         if (!empty($productIDs)) {
             $where = [
                 'ProductName' => ['operator' => 'LIKE', 'value' => '%' . $searchQuery . '%'],
-                'ProductName' => ['not in' => $productIDs],
+                'ProductID' => ['not in' => $productIDs],
             ];
         }
 

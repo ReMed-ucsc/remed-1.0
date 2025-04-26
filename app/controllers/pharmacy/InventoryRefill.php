@@ -39,6 +39,7 @@ class InventoryRefill
     {
         var_dump($_POST);
         $stockModel = new StockDataView();
+        $inventoryModel = new DrugInventory();
 
         if ($_SERVER['REQUEST_METHOD'] == "POST" && $_POST['InventoryId']) {
             $data = [
@@ -67,6 +68,7 @@ class InventoryRefill
                 );
 
                 if ($stockID) {
+                    $inventoryModel->updateStock($inventoryId, $data['stockQuantity']);
                     redirect('inventoryView/' . $inventoryId);
                     exit;
                 }

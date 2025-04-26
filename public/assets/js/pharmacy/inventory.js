@@ -58,12 +58,13 @@ document.addEventListener("DOMContentLoaded", function () {
     if (query.length > 1) {
       // Start searching after 3 characters
       fetch(
-        `http://localhost/remed-1.0/api/medicine/getMedicines?search=${query}`
+        `http://localhost/remed-1.0/api/medicine/getMedicinesForInventory?search=${query}&pharmacyID=${pharmacyId}`
       )
         .then((response) => response.json())
         .then((data) => {
           searchResults.innerHTML = "";
           data.data.forEach((medicine) => {
+            console.log(medicine);
             const div = document.createElement("div");
             div.classList.add("search-result-item");
             div.textContent = `${medicine.ProductName}`;

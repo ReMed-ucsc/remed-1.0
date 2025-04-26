@@ -29,10 +29,10 @@
 
 
             <!-- Search Bar -->
-            <div class="search-container">
+            <!-- <div class="search-container">
                 <input type="text" placeholder="Search here" class="search-bar">
                 <button class="search"><i class="icon ph-bold ph-magnifying-glass"></i></button>
-            </div>
+            </div> -->
 
             <div class="tabs">
                 <button class="tab-button active" data-tab="available">In-Stock Medicines</button>

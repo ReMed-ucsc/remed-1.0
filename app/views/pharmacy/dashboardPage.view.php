@@ -58,11 +58,11 @@
 
   <div class="main-content">
     <h2>Dashboard</h2>
-    <div class="search-container">
+    <!-- <div class="search-container">
       <input type="text" placeholder="Search here" class="search-bar">
       <button class="search"><i class="icon ph-bold ph-magnifying-glass"></i>
       </button>
-    </div>
+    </div> -->
     <div class="structure">
       <div class="top">
         <div class="cards">

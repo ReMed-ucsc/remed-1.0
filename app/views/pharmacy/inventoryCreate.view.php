@@ -56,7 +56,7 @@
       </div>
       <div class="order-body">
         <form id="inventoryForm" action="<?php echo ROOT; ?>/inventoryCreate/addItem" method="POST">
-          <div class="inventoryDetails size2">
+          <div class="inventoryDetails size1">
             <div class="left">
               <ul>
                 <li>Medicine Name</li>

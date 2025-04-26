@@ -73,7 +73,7 @@ $pharmacy = $pharmacyModel->getPharmacyById($pharmacyID);
               <i class="icon ph-bold ph-currency-dollar"></i>
               <span class="text">Income</span>
             </a>
-            <ul class="sub-menu">
+            <!-- <ul class="sub-menu">
               <li>
                 <a href="#">
                   <span class="text">Earnings</span>
@@ -94,7 +94,7 @@ $pharmacy = $pharmacyModel->getPharmacyById($pharmacyID);
                   <span class="text">Payouts</span>
                 </a>
               </li>
-            </ul>
+            </ul> -->
           </li>
         </ul>
       </div>
@@ -102,7 +102,7 @@ $pharmacy = $pharmacyModel->getPharmacyById($pharmacyID);
         <p class="title">Settings</p>
         <ul>
           <li>
-            <a href="#">
+            <a href="<?= ROOT ?>/profilePage">
               <i class="icon ph-bold ph-gear"></i>
               <span class="text">Settings</span>
             </a>
@@ -114,7 +114,7 @@ $pharmacy = $pharmacyModel->getPharmacyById($pharmacyID);
       <p class="title">Account</p>
       <ul>
         <li>
-          <a href="#">
+          <a href="<?= ROOT ?>/rulesPage">
             <i class="icon ph-bold ph-info"></i>
             <span class="text">Help</span>
           </a>

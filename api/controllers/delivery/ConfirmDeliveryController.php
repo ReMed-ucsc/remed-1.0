@@ -55,6 +55,9 @@ class ConfirmDeliveryController
                         $result->setErrorStatus(false);
                         $result->setMessage("Updated successfully");
 
+                        $medicineOrderModel = new MedicineOrder();
+                        $medicineOrderModel->updateOrderStatus($delivery['orderId'], 'DC');
+
                         $notificationModel = new Notification();
                         $notificationModel->createNotification($orderResult->PharmacyID, $orderId, "Order # $orderId delivered");
                     }

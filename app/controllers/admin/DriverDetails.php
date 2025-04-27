@@ -36,11 +36,11 @@ class DriverDetails
             'error'=>[]
         ];
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $name = $_POST['driverName'];
-            $telNo = $_POST['telNo'];
-            $email = $_POST['email'];
-            $time = $_POST['deliveryTime'] ;
-            $license = $_POST['vehicalLicenseNo'] ;
+            $name = $_POST['driverName'] ?? '';
+            $telNo = $_POST['telNo'] ?? '';
+            $email = $_POST['email'] ?? '';
+            $time = $_POST['deliveryTime'] ?? '' ;
+            $license = $_POST['vehicalLicenseNo'] ?? '' ;
 
             $existError=$driver->existingDriver($license );
 

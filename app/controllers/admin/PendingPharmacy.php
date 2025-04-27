@@ -126,7 +126,7 @@ class PendingPharmacy
                 $data['errors'] = array_merge($data['errors'], $pharmacyModel->errors ?? []);
             }
         }
-        show($data);
+
         $this->view('admin/onboardPharmacy', $data);
     }
     public function reject($id)

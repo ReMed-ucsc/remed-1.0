@@ -108,7 +108,7 @@ class PharmacyDetails
                 'longitude'=>$longitude
             ];
             if(empty($data['errors'])){
-                $pharmacy->update($id,$UpdateData,'PharmacyID');
+                $pharmacyModel->update($id,$UpdateData,'PharmacyID');
                 redirect('admin/PharmacyDetails');
                 exit;
             }else{

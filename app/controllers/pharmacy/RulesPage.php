@@ -29,8 +29,10 @@ class RulesPage
         $legal = new LegalModel();
         $legalPolicy = $legal->getTermsConditions();
         $pharmacyData = $pharmacyModel->getPharmacyById($pharmacyID);
+        $privacy_policy = $legal->getPrivacyPolicy();
+        $date = $legal->getDate();
 
-        $this->view('pharmacy/rulesPage', ['pharmacyData' => $pharmacyData, 'legalPolicy' => $legalPolicy]);
+        $this->view('pharmacy/rulesPage', ['pharmacyData' => $pharmacyData, 'legalPolicy' => $legalPolicy, 'privacy_policy' => $privacy_policy, 'date' => $date]);
     }
 
     // add other methods like edit, update, delete, etc.

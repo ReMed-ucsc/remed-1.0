@@ -59,6 +59,7 @@
 
       <section class="table-management">
 
+        <!-- <?php show($data) ?> -->
 
         <table class="table">
           <thead>
@@ -85,9 +86,9 @@
                       else echo 'Pickup' ?></td>
                   <td><?= htmlspecialchars($order->date) ?></td>
                   <td><?php
-                      if ($order->pickup != 'Y')
-                        echo 'Cash on Delivery';
-                      else echo 'Online'
+                      if ($order->paymentMethod == '')
+                        echo 'Wait for payment';
+                      else echo $order->paymentMethod;
                       ?></td>
                   <!-- <td><?= htmlspecialchars($order->pickup) ?></td> -->
                   <td><?php

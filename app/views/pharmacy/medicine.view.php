@@ -36,8 +36,8 @@
 
             <div class="tabs">
                 <button class="tab-button active" data-tab="available">In-Stock Medicines</button>
-                <button class="tab-button" data-tab="non-available">Out-of-Stock Medicines</button>
-                <button class="tab-button" data-tab="low-stock">Low-Stock Medicines</button>
+                <button class="tab-button" data-tab="non-available">Low-Stock Medicines</button>
+                <button class="tab-button" data-tab="low-stock">Out-of-Stock Medicines</button>
             </div>
 
             <!-- Available Medicines Table -->

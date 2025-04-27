@@ -42,18 +42,7 @@ $pharmacy = $pharmacyModel->getPharmacyById($pharmacyID);
               <span class="text">Medicine</span>
               <i class="arrow ph-bold ph-caret-down"></i>
             </a>
-            <ul class="sub-menu">
-              <li>
-                <a href="<?= ROOT ?>/availableMedicine">
-                  <span class="text">Available Medicine</span>
-                </a>
-              </li>
-              <li>
-                <a href="<?= ROOT ?>/nonAvailableMedicine">
-                  <span class="text">Non-Available Medicine</span>
-                </a>
-              </li>
-            </ul>
+
           </li>
           <!-- <li class="active"> -->
           <li>
@@ -73,28 +62,7 @@ $pharmacy = $pharmacyModel->getPharmacyById($pharmacyID);
               <i class="icon ph-bold ph-currency-dollar"></i>
               <span class="text">Income</span>
             </a>
-            <!-- <ul class="sub-menu">
-              <li>
-                <a href="#">
-                  <span class="text">Earnings</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <span class="text">Funds</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <span class="text">Declines</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <span class="text">Payouts</span>
-                </a>
-              </li>
-            </ul> -->
+
           </li>
         </ul>
       </div>

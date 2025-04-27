@@ -35,6 +35,8 @@ class DashboardPage
 
         $pharmacyID = $_SESSION['user_id'];
         $patientModel = new OrderView;
+        $pharmacyModel = new Pharmacy();
+        $pharmacyName = $pharmacyModel->getPharmacyById($pharmacyID);
         $patientCount = $patientModel->patientCount($pharmacyID);
         $orderCount = $patientModel->orderCount($pharmacyID);
         $monthlyIncome = $patientModel->monthlyIncome($pharmacyID);
@@ -52,8 +54,15 @@ class DashboardPage
         $income = $orderViewModel->getLast7DaysIncome($pharmacyID);
         $patientVisit = $orderViewModel->patientVisitWeekly($pharmacyID);
         $medicineCategory = $drug->getMedicineCategoryChartData();
+        $totalIncome = $this->getSession('totalIncome');
+        $data = [
+            'totalIncome' => $totalIncome
+        ];
+        $ongoingOrder = $patientModel->ongoingOrderCount($pharmacyID);
+        $ongoingOrderCount = $ongoingOrder[0]->ongoingOrderCount ?? 0;
 
-        $this->view('pharmacy/dashboardPage', ['patientCount' => $patientCount, 'stockLevels' => $stockLevels,  'orderCount' => $orderCount, 'monthlyIncome' => $monthlyIncome, 'payments' => $payments, 'income' => $income, 'patientVisit' => $patientVisit, 'medicineCategory' => $medicineCategory]);
+
+        $this->view('pharmacy/dashboardPage', ['patientCount' => $patientCount, 'stockLevels' => $stockLevels,  'orderCount' => $orderCount, 'monthlyIncome' => $monthlyIncome, 'payments' => $payments, 'income' => $income, 'patientVisit' => $patientVisit, 'medicineCategory' => $medicineCategory, 'pharmacyName' => $pharmacyName, 'data' => $data, 'ongoingOrderCount' => $ongoingOrderCount]);
     }
 
     // add other methods like edit, update, delete, etc.

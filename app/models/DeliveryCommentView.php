@@ -48,8 +48,11 @@ class DeliveryCommentView
 
     public function getOneComment($commentID)
     {
-        $data = ["commentId" => $commentID];
+        $query = "SELECT * FROM comment WHERE CommentID = :CommentID";
+        $data = [
+            'CommentID' => $commentID
+        ];
 
-        return $this->first($data);
+        return $this->query($query, $data);
     }
 }

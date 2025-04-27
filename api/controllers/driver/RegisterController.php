@@ -40,7 +40,13 @@ class RegisterController
                 $user = $userModel->getDriverByEmail($email);
 
                 if (!$user) {
-                    if (strlen($password) < 8 || !preg_match('/\d/', $password) || !preg_match('/[!@#$%^&*]/', $password)) {
+                    if (
+                        strlen($password) < 8 ||
+                        !preg_match('/\d/', $password) ||
+                        !preg_match('/[!@#$%^&*]/', $password) ||
+                        !preg_match('/[A-Z]/', $password) ||  // Check for uppercase
+                        !preg_match('/[a-z]/', $password)
+                    ) {
                         http_response_code(400);
                         $result->setErrorStatus(true);
                         $result->setMessage("Password doesn't fill criteria");

@@ -309,21 +309,18 @@
             <?php
             }
           } else if (isset($data['order']) && $data['order']->status == 'A' && !$order->pickup) {
-            if ($order->paymentReceived) {
+            if ($order->paymentMethod == '') {
             ?>
+              <p class="paymentWaiting">Waiting for payment Completion...</p>
 
+            <?php
+            } else { ?>
 
               <button class="edit-order">
                 <a href="<?= ROOT ?>/order/updateOrderStatus/<?= $order->OrderID ?>/WP" style="text-decoration: none; color:black;">
                   Send for delivery
                 </a>
               </button>
-            <?php
-            } else { ?>
-
-              <!-- style should change here -->
-
-              <p class="paymentWaiting">Waiting for payment Completion...</p>
           <?php
             }
           }

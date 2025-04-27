@@ -3,7 +3,8 @@
 class PendingPharmacy
 {
     use Controller;
-    public function __construct(){
+    public function __construct()
+    {
         $this->protectRoute();
     }
     public function index()
@@ -38,25 +39,68 @@ class PendingPharmacy
         $data = [
             'pharmacy' => $pharmacy,
             'notification' => $Msg,
-            'notificationDriver' => $MsgDriver
+            'notificationDriver' => $MsgDriver,
+            'errors' => []
         ];
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $data = [
-                'name' => $_POST['name'],
-                'pharmacistName' => $_POST['pharmacistName'],
-                'RegNo' => $_POST['RegNo'],
-                'contactNo' => $_POST['contactNo'],
-                'email' => $_POST['email'],
-                'address' => $_POST['pharmacy-address'],
-                'status' => 'APPROVED',
+            $name = $_POST['name'];
+            $pharmacist = $_POST['pharmacistName'];
+            $RegNo = $_POST['RegNo'];
+            $contactNo = $_POST['contactNo'];
+            $email = $_POST['email'];
+            $address = $_POST['pharmacy-address'];
+            $latitude = $_POST['latitude'];
+            $longitude = $_POST['longitude'];
+            $document = $_FILES['document']['name'] ?? null;
+
+
+            if (empty($name)) {
+                $data['errors']['name'] = "Pharmacy Name is required !";
+            }
+            if (empty($pharmacist)) {
+                $data['errors']['pharmacistName'] = "Pharmacist's Name is required !";
+            }
+            if (empty($RegNo)) {
+                $data['errors']['RegNo'] = "Pharmacy License is required !";
+            }
+            if (!empty($existError)) {
+                $data['errors']['RegNo'] = "License Number Is Exist !";
+            }
+            if (empty($contactNo)) {
+                $data['errors']['contactNo'] = "Contact Number is required !";
+            }
+            if (empty($address)) {
+                $data['errors']['address'] = "Address is required !";
+            }
+            if (empty($email)) {
+                $data['errors']['email'] = "Email is required !";
+            }
+            if (empty($document)) {
+                $data['errors']['document'] = "NMRA report should Submit !";
+            }
+
+            if (empty($longitude) && empty($latitude)) {
+                $data['errors']['longitude'] = "Address Name is required !";
+            }
+            if (!preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email)) {
+                $data['errors']['email'] = "Wrrong Email !";
+            }
+
+            $updateData = [
                 'notification' => $Msg,
                 'notificationDriver' => $MsgDriver,
-                'latitude'=>$_POST['latitude'],
-                'longitude'=>$_POST['longitude'],
-                'document' => $_FILES['document']['name'] ?? null
+                'name'=>$name,
+                'pharmacistName'=>$pharmacist,
+                'RegNo'=>$RegNo,
+                'contactNo'=>$contactNo,
+                'email'=>$email,
+                'address'=>$address,
+                'longitude'=>$longitude,
+                'latitude'=>$latitude,
+                'status'=>"APPROVED",
+                'document'=>$document
             ];
-            show($data);
             // File upload handling
             if (isset($_FILES['document']) && $_FILES['document']['error'] == UPLOAD_ERR_OK) {
                 $uploadDir = BASE_PATH . '/uploads/NMRA/';
@@ -73,19 +117,20 @@ class PendingPharmacy
             }
 
             // Validate and insert
-            if ($pharmacyModel->validate($data)) {
+            if (empty($data['errors'])) {
 
-                $pharmacyModel->update($id, $data, 'PharmacyID');
+                $pharmacyModel->update($id, $updateData, 'PharmacyID');
                 redirect('admin/PharmacyDetails');
                 exit();
             } else {
-                $data['errors'] = $pharmacyModel->errors;
+                $data['errors'] = array_merge($data['errors'], $pharmacyModel->errors ?? []);
             }
         }
-
+        show($data);
         $this->view('admin/onboardPharmacy', $data);
     }
-    public function reject($id){
+    public function reject($id)
+    {
         $pharmacyModel = new Pharmacy();
 
         $pharmacyModel->rejectPharmacy($id);

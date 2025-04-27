@@ -14,18 +14,18 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
             <div>
                 <label for="name">Name:</label>
                 <input class="Input" type="text" id="name" name="username" placeholder="Enter name"
-                    value="<?= isset($data['username']) ? htmlspecialchars($data['username']) : '' ?>" required>
+                    value="<?= isset($data['username']) ? htmlspecialchars($data['username']) : '' ?>" >
                 <?php if (!empty($data['errors']['username'])): ?>
-                    <p style="color:red"><?= htmlspecialchars($data['errors']['username']) ?></p>
+                    <p style="color:red; margin-top:-30px; margin-bottom:20px"><?= htmlspecialchars($data['errors']['username']) ?></p>
                 <?php endif; ?>
             </div>
 
             <div>
                 <label for="contactNo">ContactNo:</label>
                 <input class="Input" type="tel" id="contactNo" name="contactNo" placeholder="Enter Contact No"
-                    value="<?= isset($data['contactNo']) ? htmlspecialchars($data['contactNo']) : '' ?>" required>
+                    value="<?= isset($data['contactNo']) ? htmlspecialchars($data['contactNo']) : '' ?>" >
                 <?php if (!empty($data['errors']['contactNo'])): ?>
-                    <p style="color:red"><?= htmlspecialchars($data['errors']['contactNo']) ?></p>
+                    <p style="color:red; margin-top:-30px; margin-bottom:20px"><?= htmlspecialchars($data['errors']['contactNo']) ?></p>
                 <?php endif; ?>
             </div>
 
@@ -41,8 +41,8 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                     placeholder="Re-enter password" required>
             </div>
 
-            <?php if (!empty($data['errors']['password'])): ?>
-                <p style="color:red"><?= htmlspecialchars($data['errors']['password']) ?></p>
+            <?php if (!empty($data['errors']['confirm_password'])): ?>
+                <p style="color:red; margin-top:-30px; margin-bottom:20px"><?= htmlspecialchars($data['errors']['confirm_password']) ?></p>
             <?php endif; ?>
 
             <div>

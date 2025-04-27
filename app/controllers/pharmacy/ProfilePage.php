@@ -28,7 +28,7 @@ class ProfilePage
         $pharmacyModel = new Pharmacy($pharmacyID);
         $pharmacyData = $pharmacyModel->getPharmacyById($pharmacyID);
 
-        $this->view('pharmacy/ProfilePage', ['pharmacyData' => $pharmacyData]);
+        $this->view('pharmacy/profilePage', ['pharmacyData' => $pharmacyData]);
     }
 
     // add other methods like edit, update, delete, etc.

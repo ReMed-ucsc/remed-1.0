@@ -703,7 +703,7 @@ tr:nth-child(odd) .custom-select {
   position: relative;
   clear: both;
   float: right;
-  text-align: right;
+  text-align: left;
 }
 
 .proceed{

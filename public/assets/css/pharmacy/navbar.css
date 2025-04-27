@@ -111,3 +111,13 @@ body {
 .popup-content {
     font-size: 16px;
 }
+
+.name{
+    font-size: 24px; /* Font size for the pharmacy name */
+  font-weight: bold; /* Make the name bold */
+  color: #fff; /* White color for text */
+  letter-spacing: 2px; /* Spacing between letters */
+  text-transform: uppercase; /* Capitalize all letters */
+  cursor: pointer; /* Add pointer cursor when hovering */
+  transition: color 0.3s ease;
+}

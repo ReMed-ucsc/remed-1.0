@@ -38,6 +38,13 @@ document.addEventListener("DOMContentLoaded", function () {
             text: "Revenue (Rs)",
           },
         },
+        x: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: `${income.labels[0]} - ${income.labels[6]} (days)`,
+          },
+        },
       },
       plugins: {
         tooltip: {
@@ -104,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .getElementById("myPatientChart")
       .getContext("2d");
     const myPatientChart = new Chart(ctxPatient, {
-      type: "line",
+      type: "bar",
       data: {
         labels: patientVisit.labels || ["Week 1", "Week 2", "Week 3", "Week 4"],
         datasets: [

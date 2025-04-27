@@ -68,10 +68,10 @@
         <div class="cards">
           <div class="profilecard">
             <div class="profilecard-left">
-              <img src="<?= ROOT ?>/assets/images/admin.png" class="card-icon">
+              <img src="<?= ROOT ?>/assets/images/pharmacy logo.png" class="card-icon">
               <h4>Profile</h4>
               <div class="data">
-                <p>HealthGuard Pharmacy</p>
+                <p><?= $pharmacyName->name ?></p>
               </div>
               <a href="<?= ROOT ?>/profilePage">View details</a>
             </div>
@@ -103,7 +103,7 @@
               <img src="<?= ROOT ?>/assets/images/revenue.jpg" class="card-icon">
               <h4>Income</h4>
               <div class="data">
-                <p>Rs.10,000</p>
+                <p>Rs.<?= number_format($data['totalIncome'], 2); ?></p>
               </div>
               <a href="<?= ROOT ?>/incomeView">View details</a>
             </div>
@@ -112,7 +112,7 @@
               <h4>Orders</h4>
 
               <div class="data">
-                <p>515-<span class="style">15</span></p>
+                <p><?= $orderCount[0]->orderCount ?? 0 ?>-<span class="style"><?= htmlspecialchars($ongoingOrderCount) ?></span></p>
               </div>
               <!-- <div class="resolve"><a href="#">Resolve - 15</a></div> -->
               <a href="<?= ROOT ?>/medicine">View details</a>
@@ -131,9 +131,9 @@
           <div class="inventory">
             <div class="weekly">
               Inventory
-              <h5>Weekly
-                <ul class="sub-menu size1"></ul>
-                <i class="arrow ph-bold ph-caret-down"></i>
+              <!-- <h5>Weekly</h5> -->
+              <!-- <ul class="sub-menu size1"></ul> -->
+              <!-- <i class="arrow ph-bold ph-caret-down"></i> -->
               </h5>
             </div>
             <canvas id="myPieChart"></canvas>

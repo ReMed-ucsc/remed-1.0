@@ -53,10 +53,12 @@ class ConfirmPickupController
                         $medicineOrderModel = new MedicineOrder();
                         $medicineOrder = $medicineOrderModel->getMedicineOrder($orderId);
 
-                        if ($medicineOrder->status != "DP") {
+                        if ($medicineOrder->status == "DA" && $medicineOrder->status != "DC") {
                             $delivery->changeDeliveryStatus($deliveryId, "PickedUp");
                             $result->setErrorStatus(false);
                             $result->setMessage("pickup confirmed");
+
+                            $medicineOrderModel->updateOrderStatus($orderId, 'DP');
 
                             $notificationModel = new Notification();
                             $notificationModel->createNotification($orderResult->PharmacyID, $orderId, "Order pickedUp");

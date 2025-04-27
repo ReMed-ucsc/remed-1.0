@@ -61,16 +61,22 @@ class ConfirmDeliveryController
                                 $result->setErrorStatus(true);
                                 $result->setMessage("Order already confirmed");
                             } else {
-                                $delivery->changeDeliveryStatus($deliveryId, "Delivered");
-                                $delivery->setDistance($deliveryId, $data['totalDistance']);
-                                $result->setErrorStatus(false);
-                                $result->setMessage("Updated successfully");
+                                if ($orderStatus != 'DP') {
+                                    http_response_code(400);
+                                    $result->setErrorStatus(true);
+                                    $result->setMessage("Package not picked up");
+                                } else {
+                                    $delivery->changeDeliveryStatus($deliveryId, "Delivered");
+                                    $delivery->setDistance($deliveryId, $data['totalDistance']);
+                                    $result->setErrorStatus(false);
+                                    $result->setMessage("Updated successfully");
 
-                                $medicineOrderModel = new MedicineOrder();
-                                $medicineOrderModel->updateOrderStatus($orderId, 'DC');
+                                    $medicineOrderModel = new MedicineOrder();
+                                    $medicineOrderModel->updateOrderStatus($orderId, 'DC');
 
-                                $notificationModel = new Notification();
-                                $notificationModel->createNotification($orderResult->PharmacyID, $orderId, "Order # $orderId delivered");
+                                    $notificationModel = new Notification();
+                                    $notificationModel->createNotification($orderResult->PharmacyID, $orderId, "Order # $orderId delivered");
+                                }
                             }
                         } catch (Exception $e) {
                             echo "Error: " . $e->getMessage();

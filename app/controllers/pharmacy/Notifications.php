@@ -5,20 +5,25 @@ class Notifications
     use Controller;
     public function index()
     {
-        // $user = new User;
-        // $arr['email'] = "name@example.com";
+        // Check if user is logged in and get pharmacyId
+        if (!isset($_SESSION['user_id'])) {
+            redirect('login');
+        }
 
-        // $result = $model->where(data_for_filtering, data_not_for_filtering);
-        // $result = $model->insert(insert_data);
-        // $result = $model->update(filtering_data updating_data, id_column_for_filtering);
-        // $result = $model->delete(id, id_column);
-        // $result = $user->findAll();
+        $userId = $_SESSION['user_id'];
+        $notificationModel = new Notification();
 
-        // show($result);
+        // Get all notifications for the pharmacy (both read and unread)
+        $notifications = $notificationModel->getAllNotifications($userId);
 
-        // $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
+        // Get unread notification count for display
+        //$unreadCount = $notificationModel->getUnreadCount($userId);
 
-        $data['username'] = [];
+        $data = [
+            'notifications' => $notifications,
+        ];
+
+        // Load notification view with data
         $this->view('pharmacy/notifications', $data);
     }
 

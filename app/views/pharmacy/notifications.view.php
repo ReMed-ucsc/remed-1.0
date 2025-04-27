@@ -14,7 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body>
+<body data-user-id="<?php echo $_SESSION['user_id'] ?? ''; ?>">
 
     <header>
 
@@ -42,20 +42,26 @@
                 <div class="notification-list">
                     <?php
                     // Sample notifications
-                    $notifications = [
-                        "Paradol (Paracetamol) - Batch B456 has only 50 units left. Expiry: 01/2025. Restock soon!",
-                        "Paradol (Paracetamol) - Batch B456 has only 50 units left. Expiry: 01/2025. Restock soon!",
-                        "Paradol (Paracetamol) - Batch B456 has only 50 units left. Expiry: 01/2025. Restock soon!",
-                        "Paradol (Paracetamol) - Batch B456 has only 50 units left. Expiry: 01/2025. Restock soon!",
-                        "Paradol (Paracetamol) - Batch B456 has only 50 units left. Expiry: 01/2025. Restock soon!",
-                    ];
+                    // $notifications = [
+                    //     "Paradol (Paracetamol) - Batch B456 has only 50 units left. Expiry: 01/2025. Restock soon!",
+                    //     "Paradol (Paracetamol) - Batch B456 has only 50 units left. Expiry: 01/2025. Restock soon!",
+                    //     "Paradol (Paracetamol) - Batch B456 has only 50 units left. Expiry: 01/2025. Restock soon!",
+                    //     "Paradol (Paracetamol) - Batch B456 has only 50 units left. Expiry: 01/2025. Restock soon!",
+                    //     "Paradol (Paracetamol) - Batch B456 has only 50 units left. Expiry: 01/2025. Restock soon!",
+                    // ];
 
-                    foreach ($notifications as $index => $notification) {
-                        echo '<div class="notification ' . ($index < 2 ? 'unread' : '') . '">
-                        <div class="notification-icon">👨‍⚕️</div>
-                        <p>' . $notification . '</p>
-                      </div>';
-                    }
+                    if (!empty($notifications)): ?>
+                        <?php foreach ($notifications as $index => $notification): ?>
+                            <div class="notification <?= isset($notification->read) && $notification->read == 0 ? 'unread' : '' ?>">
+                                <div class="notification-icon">👨‍⚕️</div>
+                                <p><?= $notification->message ?? $notification->notification_message ?? 'Notification' ?></p>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="no-notifications">
+                            <p>No notifications found.</p>
+                        </div>
+                    <?php endif; ?>
                     ?>
                 </div>
             </div>

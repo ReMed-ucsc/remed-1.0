@@ -46,4 +46,12 @@ class Notification
         ];
         return $this->insert($data);
     }
+
+    public function getAllNotifications($userId)
+    {
+        $condition = [
+            'pharmacyId' => $userId,
+        ];
+        return $this->selectWhere(conditions: $condition);
+    }
 }

@@ -150,7 +150,7 @@
                             </tbody>
                         </table>
                     </section>
-                    <button id="simpleDownloadBtn">Download Simple PDF</button>
+                    <button id="simpleDownloadBtn" class="select">Download Simple PDF</button>
                 </div>
             </div>
         </div>
@@ -158,7 +158,7 @@
     <script>
         function generateTwoPagePDF() {
             try {
-                // First, check if we can access the income table
+                //check for accesing income table
                 const incomeTableSection = document.querySelector('#orderReport .income-table') || document.querySelector('#orderReport');
 
                 if (!incomeTableSection) {

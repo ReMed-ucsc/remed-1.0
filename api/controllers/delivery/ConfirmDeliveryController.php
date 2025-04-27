@@ -50,16 +50,20 @@ class ConfirmDeliveryController
                         $result->setErrorStatus(true);
                         $result->setMessage("No delivery found");
                     } else {
-                        $delivery->changeDeliveryStatus($deliveryId, "Delivered");
-                        $delivery->setDistance($deliveryId, $data['totalDistance']);
-                        $result->setErrorStatus(false);
-                        $result->setMessage("Updated successfully");
+                        try {
+                            $delivery->changeDeliveryStatus($deliveryId, "Delivered");
+                            $delivery->setDistance($deliveryId, $data['totalDistance']);
+                            $result->setErrorStatus(false);
+                            $result->setMessage("Updated successfully");
 
-                        $medicineOrderModel = new MedicineOrder();
-                        $medicineOrderModel->updateOrderStatus($delivery['orderId'], 'DC');
+                            $medicineOrderModel = new MedicineOrder();
+                            $medicineOrderModel->updateOrderStatus($deliveryResult->OrderId, 'DC');
 
-                        $notificationModel = new Notification();
-                        $notificationModel->createNotification($orderResult->PharmacyID, $orderId, "Order # $orderId delivered");
+                            $notificationModel = new Notification();
+                            $notificationModel->createNotification($orderResult->PharmacyID, $orderId, "Order # $orderId delivered");
+                        } catch (Exception $e) {
+                            echo "Error: " . $e->getMessage();
+                        }
                     }
                 }
             }

@@ -50,12 +50,21 @@ class ConfirmPickupController
                         $result->setErrorStatus(true);
                         $result->setMessage("No delivery found");
                     } else {
-                        $delivery->changeDeliveryStatus($deliveryId, "PickedUp");
-                        $result->setErrorStatus(false);
-                        $result->setMessage("pickup confirmed");
+                        $medicineOrderModel = new MedicineOrder();
+                        $medicineOrder = $medicineOrderModel->getMedicineOrder($orderId);
 
-                        $notificationModel = new Notification();
-                        $notificationModel->createNotification($orderResult->PharmacyID, $orderId, "Order pickedUp");
+                        if ($medicineOrder->status != "DP") {
+                            $delivery->changeDeliveryStatus($deliveryId, "PickedUp");
+                            $result->setErrorStatus(false);
+                            $result->setMessage("pickup confirmed");
+
+                            $notificationModel = new Notification();
+                            $notificationModel->createNotification($orderResult->PharmacyID, $orderId, "Order pickedUp");
+                        } else {
+                            http_response_code(400);
+                            $result->setErrorStatus(true);
+                            $result->setMessage("Order already picked up");
+                        }
                     }
                 }
             }

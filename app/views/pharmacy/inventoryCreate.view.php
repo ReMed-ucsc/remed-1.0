@@ -71,8 +71,8 @@
                 <li>Expiry Date</li>
                 <li>Purchase Date</li>
                 <li>Storage Conditions</li>
-                <li>Purchase Price</li>
-                <li>Selling Price</li>
+                <li>Purchase Cost</li>
+                <li>Unit Selling Price</li>
               </ul>
             </div>
 
@@ -90,7 +90,7 @@
                     <option value="Supplement">Supplement</option>
                   </select>
                 </li> -->
-                <li><input type="text" name="batchID" placeholder="Auto"></li>
+                <li><input type="text" name="batchID" placeholder="Batch ID"></li>
                 <li><input type="number" name="stockQuantity" placeholder="Enter quantity"></li>
                 <li><input type="text" name="thresholdLimit" placeholder="Suggest"></li>
                 <li><input type="text" name="storageLocation" placeholder="Search and Select"></li>

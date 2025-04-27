@@ -50,7 +50,6 @@
 
     <?php include(BASE_PATH . '/app/views/inc/pharmacy/sidebar.php'); ?>
 
-    <!-- <?php show($data) ?> -->
 
     <!-- <div class="Order-page"> -->
     <!-- <div class="right"> -->
@@ -67,6 +66,9 @@
             <!-- Left Section -->
             <div class="left-section">
               <p class="patient">Requested Medicines</p>
+
+              <!-- <?php show($data) ?> -->
+
               <div class="prescription">
                 <div class="details">
                   <?php foreach ($medicineList as $medicine): ?>
@@ -111,7 +113,7 @@
                     <th style="width: 5%;">Medicine Name</th>
                     <th style="width: 5%;">Generic Name</th>
                     <th style="width: 5%;">Brand Name</th>
-                    <th style="width: 1%;">Dosage</th>
+                    <th style="width: 1%;">Unit Price</th>
                     <th style="width: 1%;">Quantity</th>
                     <th style="width: 5%;">Price</th>
                     <th style="<?php echo ($viewOnly ? 'display:none;' : '') ?> width: 5%; ">Action</th>
@@ -124,7 +126,7 @@
                       <td><?= htmlspecialchars($medicine->genericName) ?></td>
                       <td><?= htmlspecialchars($medicine->ManufactureName) ?> </td>
                       <td>
-                        <?= htmlspecialchars($medicine->strength) ?>
+                        <?= htmlspecialchars($medicine->unitPrice) ?>
 
                       </td>
                       <td>
@@ -144,12 +146,12 @@
                         <td>
                           <div class="button-container">
                             <button type="submit" name="update" class="image-button" value="<?= htmlspecialchars($medicine->ProductID) ?> ">
-                              <img src="<?= ROOT ?>/assets/images/edit.PNG" alt="edit">
+                              <img src="<?= ROOT ?>/assets/images/edit.png" alt="edit">
                             </button>
                             </form>
                             <form action="<?= ROOT ?>/order/deleteItem/<?= $order->OrderID ?>" method="post">
                               <button type="submit" name="delete" class="image-button" value="<?= htmlspecialchars($medicine->ProductID) ?>">
-                                <img src="<?= ROOT ?>/assets/images/delete.PNG" alt="delete">
+                                <img src="<?= ROOT ?>/assets/images/delete.png" alt="delete">
                               </button>
                             </form>
                           </div>
@@ -222,7 +224,7 @@
           <div class="display-area" id="displayArea">
             <div id="prescriptionView">
               <?php if (!empty($order->prescription)) : ?>
-                <img src="<?= ROOT . '/uploads/prescriptions/' . $order->prescription ?>" alt="Prescription">
+                <img src="<?= $order->prescription ?>" alt="Prescription">
               <?php else : ?>
                 <p>No prescription uploaded.</p>
               <?php endif; ?>
@@ -244,6 +246,23 @@
       </div>
       <div class="submit-section">
         <div class="button-container">
+          <?php if (isset($data['order']) && $data['order']->status == 'Q' && $order->PatientID == 0) { ?>
+            <p style="color: white">Payment Method:</p>
+
+            <div class="button-container">
+              <button class="">
+                <a href="<?= ROOT ?>/orderCreate/updateOrderStatus/<?= $order->OrderID ?>/A/cash" style="text-decoration: none; color:black;">
+                  Card
+                </a>
+              </button>
+              <button class="">
+                <a href="<?= ROOT ?>/orderCreate/updateOrderStatus/<?= $order->OrderID ?>/A/card" style="text-decoration: none; color:black;">
+                  Cash
+                </a>
+              </button>
+
+            </div>
+          <?php }   ?>
 
           <?php if (isset($data['order']) && $data['order']->status == 'W') { ?>
 

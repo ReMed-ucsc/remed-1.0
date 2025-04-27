@@ -55,18 +55,22 @@
         Create Order
       </div>
       <div class="order-body">
-        <div class="search-bar">
-          <form action="<?= ROOT ?>/orderCreate/<?= $OrderID ? "addToOrder" : "createOrder" ?>" method="post">
-            <input type="hidden" id="medicine-id" name="medicineId" value="" />
-            <input type="text" id="medicine-search" placeholder="Search by medicine or generic name..." />
-            <input type="text" id="medicine-quantity" name="quantity" placeholder="Quantity" />
-            <?php if ($OrderID) { ?>
-              <input type="hidden" id="order-id" name="orderId" value="<?= $OrderID ?>" />
-            <?php } ?>
-            <button id="add-medicine" name="add-medicine"><?= $OrderID ? "Add" : "Create" ?></button>
-          </form>
-        </div>
-        <div id="search-results" class="search-results"></div>
+
+        <?php if (!isset($data['orderDetails']) || (isset($data['orderDetails']) && $data['orderDetails']->status == 'W')) { ?>
+
+          <div class="search-bar">
+            <form action="<?= ROOT ?>/orderCreate/<?= $OrderID ? "addToOrder" : "createOrder" ?>" method="post">
+              <input type="hidden" id="medicine-id" name="medicineId" value="" />
+              <input type="text" id="medicine-search" placeholder="Search by medicine or generic name..." />
+              <input type="text" id="medicine-quantity" name="quantity" placeholder="Quantity" />
+              <?php if ($OrderID) { ?>
+                <input type="hidden" id="order-id" name="orderId" value="<?= $OrderID ?>" />
+              <?php } ?>
+              <button id="add-medicine" name="add-medicine"><?= $OrderID ? "Add" : "Create" ?></button>
+            </form>
+          </div>
+          <div id="search-results" class="search-results"></div>
+        <?php } ?>
 
         <!-- Table Section -->
         <section class="table-management">
@@ -156,7 +160,7 @@
 
 
         <?php if (isset($data['orderDetails']) && $data['orderDetails']->status == 'Q') { ?>
-          Payment Method:
+          <p style="color: white">Payment Method:</p>
 
           <div class="button-container">
             <button class="">
@@ -169,17 +173,17 @@
                 Cash
               </a>
             </button>
-          <?php }   ?>
 
           </div>
+        <?php }   ?>
 
-          <?php if (isset($data['orderDetails']) && $data['orderDetails']->status == 'W') { ?>
-            <button class="proceed">
-              <a href="<?= ROOT ?>/orderCreate/updateOrderStatus/<?= $OrderID ?>/Q" style="text-decoration: none; color:black;">
-                Proceed
-              </a>
-            </button>
-          <?php } ?>
+        <?php if (isset($data['orderDetails']) && $data['orderDetails']->status == 'W') { ?>
+          <button class="proceed">
+            <a href="<?= ROOT ?>/orderCreate/updateOrderStatus/<?= $OrderID ?>/Q" style="text-decoration: none; color:black;">
+              Proceed
+            </a>
+          </button>
+        <?php } ?>
       </div>
     </div>
     <!-- </div> -->

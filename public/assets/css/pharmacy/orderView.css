@@ -364,16 +364,34 @@ body {
 
 .button-container {
   display: flex;
-  flex-direction: row; /* Ensures buttons are aligned in a row */
+  flex-direction: column; /* Ensures buttons are aligned in a row */
    /* Optional: Adds spacing between buttons */
-   gap: 15px;
-   align-items: center;
-   justify-content: center;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+}
+
+.button-container p{
+  
+}
+
+.button-containers{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  position: relative;
+  top: 10px;
 }
 
 button {
   /* padding: 10px 20px; */
   cursor: pointer;
+  padding: 20px 50px;
+  color: white;
+  border-radius: 15px;
+  border:1px black solid;
 }
 
 

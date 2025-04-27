@@ -247,9 +247,9 @@
       <div class="submit-section">
         <div class="button-container">
           <?php if (isset($data['order']) && $data['order']->status == 'Q' && $order->PatientID == 0) { ?>
-            <p style="color: white">Payment Method:</p>
+            <!-- <p style="color: white">Payment Method:</p> -->
 
-            <div class="button-container">
+            <div class="button-containers">
               <button class="">
                 <a href="<?= ROOT ?>/orderCreate/updateOrderStatus/<?= $order->OrderID ?>/A/cash" style="text-decoration: none; color:black;">
                   Card

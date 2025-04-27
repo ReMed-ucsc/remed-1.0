@@ -5,7 +5,7 @@ class DrugInventory
     use Model;
 
     protected $table = 'drugInventory';
-    protected $allowedColumns = ['InventoryId', 'ProductID', 'PharmacyID', 'unitPrice', 'ongoingOrder', 'availableCount', 'thresholdLimit', 'storageLocation', 'storageConditions'];
+    protected $allowedColumns = ['InventoryId', 'ProductID', 'PharmacyID', 'unitPrice', 'ongoingOrder', 'availableCount', 'thresholdLimit', 'storageLocation', 'storageConditions', 'additionalColumn'];
     protected $order_column = ['InventoryId'];
 
     public function updateInventory($inventoryId, $threshold, $storageLocation, $storageConditions, $unitPrice)
@@ -58,7 +58,7 @@ class DrugInventory
         return $this->selectWhere(['ProductID'], $conditions);
     }
 
-    public function addDrug($productId, $pharmacyId, $stockQuantity, $threshold, $storageLocation, $storageConditions, $unitPrice)
+    public function addDrug($productId, $pharmacyId, $stockQuantity, $threshold, $storageLocation, $storageConditions, $unitPrice, $additionalColumn)
     {
         // $query = "INSERT INTO drugInventory (ProductID, PharmacyID, availableCount, drugInventory.thresholdLimit,drugInventory.storageLocation,drugInventory.storageConditions,drugInventory.unitPrice) 
         // VALUES
@@ -76,7 +76,8 @@ class DrugInventory
             'thresholdLimit' => $threshold,
             'storageLocation' => $storageLocation,
             'storageConditions' => $storageConditions,
-            'unitPrice' => $unitPrice
+            'unitPrice' => $unitPrice,
+            'additionalColumn' => $additionalColumn
         ];
 
         $success = $this->insert($data);

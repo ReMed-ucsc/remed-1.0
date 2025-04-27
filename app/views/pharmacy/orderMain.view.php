@@ -57,6 +57,34 @@
 
       <div class="ongoing">Ongoing Orders</div>
 
+      <!-- searchbar -->
+
+      <div class="search-bar-styles">
+        <label for="month">Month:</label>
+        <select name="month" id="month" class="select">
+          <?php for ($m = 1; $m <= 12; $m++): ?>
+            <option value="<?= $m ?>" <?= $m == $month ? 'selected' : '' ?>>
+              <?= date('F', mktime(0, 0, 0, $m, 1)) ?>
+            </option>
+          <?php endfor ?>
+        </select>
+
+        <label for="year">Year:</label>
+        <select name="year" id="year" class="select">
+          <?php
+          $currentYear = date('Y');
+          for ($y = $currentYear - 5; $y <= $currentYear; $y++): ?>
+            <option value="<?= $y ?>" <?= $y == $year ? 'selected' : '' ?>>
+              <?= $y ?>
+            </option>
+          <?php endfor ?>
+        </select>
+
+        <button type="submit" class="select">Filter</button>
+      </div>
+
+      <!-- searchbar end -->
+
       <section class="table-management">
 
 

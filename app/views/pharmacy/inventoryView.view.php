@@ -100,6 +100,8 @@
                       ?> -->
                 <li><input type="number" name="purchaseCost" value="<?= htmlspecialchars($inventory->purchaseCost) ?>" disabled></li>
                 <li><input type="number" name="sellingPrice" value="<?= htmlspecialchars($inventory->SellingPrice) ?>"></li>
+                <li><input type="text" name="sellingPrice" value="<?= htmlspecialchars($inventory->additionalColumn) ?>"></li>
+
 
               </ul>
             </div>

@@ -73,6 +73,7 @@
                 <li>Storage Conditions</li>
                 <li>Purchase Price</li>
                 <li>Selling Price</li>
+                <li>additional Column</li>
               </ul>
             </div>
 
@@ -100,6 +101,8 @@
                 <li><input type="text" name="storageCondition" placeholder="Optional"></li>
                 <li><input type="text" name="purchasePrice"></li>
                 <li><input type="text" id="unitPrice" name="sellingPrice"></li>
+                <li><input type="number" id="additionalColumn" name="additionalColumn"></li>
+
               </ul>
             </div>
           </div>

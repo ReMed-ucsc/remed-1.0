@@ -51,7 +51,8 @@ class InventoryCreate
                 'purchaseDate'       => $_POST['purchaseDate'] ?? '',
                 'storageConditions'  => $_POST['storageCondition'] ?? '',
                 'purchaseCost'       => $_POST['purchasePrice'],
-                'sellingPrice'       => $_POST['sellingPrice'] ?? ''
+                'sellingPrice'       => $_POST['sellingPrice'] ?? '',
+                'additionalColumn'   => $_POST['additionalColumn']
             ];
 
             $InventoryId = $drug->addDrug(
@@ -61,7 +62,8 @@ class InventoryCreate
                 $data['thresholdLimit'],
                 $data['storageLocation'],
                 $data['storageConditions'],
-                $data['sellingPrice']
+                $data['sellingPrice'],
+                $data['additionalColumn']
             );
 
             // Call to add stock and drug information

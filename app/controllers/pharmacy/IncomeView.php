@@ -34,6 +34,8 @@ class IncomeView
             $totalIncome = $totalIncome + $item->totalBill;
         }
 
+        $this->setSession('totalIncome', $totalIncome);
+
         $totalExpenses = 0;
         foreach ($stockData as $item) {
             $totalExpenses += $item->purchaseCost;

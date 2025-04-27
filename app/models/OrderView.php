@@ -206,4 +206,16 @@ class OrderView
 
         return ['labels' => $labels, 'data' => $data];
     }
+
+    public function ongoingOrderCount($pharmacyID)
+    {
+        // SQL query to count ongoing orders (orders that are not in 'U' or 'DP' status)
+        $query = "SELECT COUNT(DISTINCT OrderID) AS ongoingOrderCount 
+              FROM $this->table 
+              WHERE PharmacyID = ? 
+              AND Status NOT IN ('U', 'DP')";
+
+        // Return the result using the query function, passing pharmacyID as parameter
+        return $this->query($query, [$pharmacyID]);
+    }
 }

@@ -25,7 +25,7 @@
 
         </div>
         <div>
-            <a class="add-btn" href="<?= ROOT ?>/admin/newPharmacy/"><img src="<?= ROOT ?>/assets/images/add.png" alt=""
+            <a class="add-btn" href="<?= ROOT ?>/admin/pharmacyDetails/create"><img src="<?= ROOT ?>/assets/images/add.png" alt=""
                     style="width:30px; height:auto; margin-right:5px;">Add Pharmacy</a>
         </div>
 
@@ -70,7 +70,6 @@
                             <th>Contact Number</th>
                             <th>License</th>
                             <th>Approved Date</th>
-                            <!-- <th>Email</th> -->
                             <th>Address</th>
                             <th>Status</th>
                             <th>Actions</th>

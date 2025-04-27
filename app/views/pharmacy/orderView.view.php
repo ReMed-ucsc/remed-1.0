@@ -325,6 +325,7 @@
     </script>
     <script>
       const pharmacyId = <?= isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 'null' ?>;
+      const API_URL = "<?= API_URL ?>";
       const orderData = <?= json_encode([
                           'order' => $data['order'],
                           'medicineList' => $data['medicineList'],

@@ -140,8 +140,9 @@ class Order
 
                 $utilityModel = new DeliveryUility();
                 $utilityModel->sendDetailstoDriver($orderId);
-                redirect("order/$orderId");
             }
+
+            redirect("order/$orderId");
         } else {
             redirect("order");
         }

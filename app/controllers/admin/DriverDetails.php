@@ -29,37 +29,63 @@ class DriverDetails
     public function create()
     {
         // Prepare data for the view
-        $data = [];
-
+        
+        $driver = new Driver();
+        $data = [
+            'driver'=>$driver,
+            'error'=>[]
+        ];
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $driver = new Driver();
+            $name = $_POST['driverName'];
+            $telNo = $_POST['telNo'];
+            $email = $_POST['email'];
+            $time = $_POST['deliveryTime'] ;
+            $license = $_POST['vehicalLicenseNo'] ;
+
+            $existError=$driver->existingDriver($license );
+
+            if (empty($name)) {
+                $data['errors']['driverName'] = "Driver Name is required !";
+            }
+            if (empty($telNo)) {
+                $data['errors']['telNo'] = "Contact Number is required !";
+            }
+            if (empty($time)) {
+                $data['errors']['deliveryTime'] = "Delivery time is required !";
+            }
+            if (!empty($existError)) {
+                $data['errors']['vehicalLicenseNo'] = "License Number Is Exist !";
+            }
+            if (empty($license)) {
+                $data['errors']['vehicalLicenseNo'] = "Vehicle License Number is required !";
+            }
+            if (empty($email)) {
+                $data['errors']['email'] = "Email is required !";
+            }
+            if (!preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email)) {
+                $data['errors']['email'] = "Wrrong Email !";
+            }
             // Prepare driver data
-            $data = [
-                'driverName' => $_POST['driverName'] ?? '',
-                'telNo' => $_POST['telNo'] ?? '',
-                'email' => $_POST['email'] ?? '',
-                'deliveryTime' => $_POST['deliveryTime'] ?? '',
-                'vehicalLicenseNo' => $_POST['vehicalLicenseNo'] ?? '',
+            $updateData = [
+                'driverName' => $name,
+                'telNo' => $telNo,
+                'email' => $email,
+                'deliveryTime' => $time,
+                'vehicalLicenseNo' => $license,
                 'status'=>"APPROVED",
                 'token' => md5(uniqid()),
                 'fcmToken' => md5(uniqid())
             ];
 
             // Validate and save
-            if ($driver->validate($data)) {
-                $result = $driver->insert($data);
-                if ($result) {
-                    redirect('admin/driverDetails');
-                    exit();
-                } else {
-                    $data['errors']['general'] = 'Failed to create driver';
-                }
+            if (empty($data['errors'])) {
+                $driver->insert($updateData);
+                redirect('admin/driverDetails');
             } else {
-                $data['errors'] = $driver->errors;
+                $data['errors'] = array_merge($data['errors'], $driver->errors ?? []);
             }
         }
-
-        redirect('admin/driverDetails');
+        $this->view('admin/newDriver',$data);
     }
     
 

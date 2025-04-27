@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +12,8 @@
 
 <?php
 require_once BASE_PATH . '/app/views/inc/navBar.view.php'
-?>
+    ?>
+
 <body>
     <h2 class="page-title">Edit Pharmacy Details</h2>
     <div class="details-container">
@@ -25,15 +25,25 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php'
                 <div>
                     <label for="pharmacyName">Pharmacy Name:</label>
                     <input class="Input" type="text" id="pharmacyName" name="name" placeholder="Enter pharmacy name"
-                        value="<?= htmlspecialchars($pharmacy->name) ?>" required>
+                        value="<?= htmlspecialchars($pharmacy->name) ?>">
+                    <?php if (!empty($data['errors']['name'])): ?>
+                        <p style="color:red; margin-top:-30px; margin-bottom:20px">
+                            <?= htmlspecialchars($data['errors']['name']) ?>
+                        </p>
+                    <?php endif; ?>
 
                 </div>
 
                 <div>
                     <label for="pharmacistName">Pharmacist's Name:</label>
                     <input class="Input" type="text" id="pharmacistName" name="pharmacistName"
-                        placeholder="Enter pharmacist's name" value="<?= htmlspecialchars($pharmacy->pharmacistName) ?>"
-                        required>
+                        placeholder="Enter pharmacist's name"
+                        value="<?= htmlspecialchars($pharmacy->pharmacistName) ?>">
+                    <?php if (!empty($data['errors']['pharmacistName'])): ?>
+                        <p style="color:red; margin-top:-30px; margin-bottom:20px">
+                            <?= htmlspecialchars($data['errors']['pharmacistName']) ?>
+                        </p>
+                    <?php endif; ?>
                 </div>
 
                 <div>
@@ -41,6 +51,11 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php'
 
                     <input class="Input" type="text" id="license" name="RegNo" placeholder="Enter license"
                         value="<?= htmlspecialchars($pharmacy->RegNo) ?>" readonly>
+                    <?php if (!empty($data['errors']['RegNo'])): ?>
+                        <p style="color:red; margin-top:-30px; margin-bottom:20px">
+                            <?= htmlspecialchars($data['errors']['RegNo']) ?>
+                        </p>
+                    <?php endif; ?>
 
                 </div>
             </div>
@@ -49,32 +64,41 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php'
                 <div>
                     <label for="email">Email:</label>
                     <input class="Input" type="email" id="email" name="email" placeholder="Enter email"
-                        value="<?= htmlspecialchars($pharmacy->email) ?>" required>
+                        value="<?= htmlspecialchars($pharmacy->email) ?>">
+                    <?php if (!empty($data['errors']['email'])): ?>
+                        <p style="color:red; margin-top:-30px; margin-bottom:20px">
+                            <?= htmlspecialchars($data['errors']['email']) ?>
+                        </p>
+                    <?php endif; ?>
                 </div>
 
                 <div>
                     <label for="contactNo">Contact Number:</label>
                     <input class="Input" type="text" id="contactNo" name="contactNo" placeholder="Enter contact number"
-                        value="<?= htmlspecialchars($pharmacy->contactNo) ?>" required>
+                        value="<?= htmlspecialchars($pharmacy->contactNo) ?>">
+                    <?php if (!empty($data['errors']['contactNo'])): ?>
+                        <p style="color:red; margin-top:-30px; margin-bottom:20px">
+                            <?= htmlspecialchars($data['errors']['contactNo']) ?>
+                        </p>
+                    <?php endif; ?>
                 </div>
 
                 <div>
                     <label for="address">Pharmacy Address:</label>
                     <!-- <input class="Input" type="text" id="address" name="address" placeholder="Enter address" required> -->
                     <input class="Input" type="text" id="pharmacy-address" name="pharmacy-address"
-                        placeholder="Enter pharmacy address" value="<?= htmlspecialchars($pharmacy->address) ?>" >
+                        placeholder="Enter pharmacy address" value="<?= htmlspecialchars($pharmacy->address) ?>">
                     <input type="hidden" id="latitude" name="latitude">
                     <input type="hidden" id="longitude" name="longitude">
+                    <?php if (!empty($data['errors']['longitude'])): ?>
+                        <p style="color:red; margin-top:-30px; margin-bottom:20px">
+                            <?= htmlspecialchars($data['errors']['longitude']) ?>
+                        </p>
+                    <?php endif; ?>
                 </div>
             </div>
 
             <div class="Form">
-                <!-- <div>
-                    <label for="document">Document:</label>
-                    <input class="Input" type="file" id="document" name="document">
-                </div> -->
-
-
                 <div>
                     <button type="submit" class="btn-green">Save Changes</button>
                     <button type="button" class="btn-red" onclick="window.history.back()">Discard Changes</button>

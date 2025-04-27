@@ -15,7 +15,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
 
         </div>
         <div>
-            <a class="add-btn" href="<?= ROOT ?>/admin/newDriver/"><img src="<?= ROOT ?>/assets/images/add.png" alt="" style="width:30px; height:auto; margin-right:5px;">Add newDriver</a>
+            <a class="add-btn" href="<?= ROOT ?>/admin/driverDetails/create"><img src="<?= ROOT ?>/assets/images/add.png" alt="" style="width:30px; height:auto; margin-right:5px;">Add newDriver</a>
         </div>
 
     </div>

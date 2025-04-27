@@ -4,7 +4,7 @@ class OrderComment
 {
     use Model;
 
-    protected $table = 'ordercomments';
+    protected $table = 'orderComments';
     protected $allowedColumns = ['OrderID', 'comments', 'sender', 'createdAt'];
     protected $order_column = "commentID";
 

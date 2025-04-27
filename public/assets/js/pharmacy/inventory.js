@@ -1,14 +1,20 @@
 // Example when selecting a result
-document.getElementById('search-results').addEventListener('click', function(e) {
-    if (e.target.classList.contains('result-item')) {
+document
+  .getElementById("search-results")
+  .addEventListener("click", function (e) {
+    if (e.target.classList.contains("result-item")) {
       const medData = JSON.parse(e.target.dataset.medicine); // assuming search result has data-medicine='{"ProductName":"Paracetamol",...}'
-  
-      document.querySelector('input[name="productName"]').value = medData.ProductName;
-      document.querySelector('input[name="manufacturer"]').value = medData.Manufacturer;
-      document.querySelector('input[name="genericName"]').value = medData.GenericName;
+
+      document.querySelector('input[name="productName"]').value =
+        medData.ProductName;
+      document.querySelector('input[name="manufacturer"]').value =
+        medData.Manufacturer;
+      document.querySelector('input[name="genericName"]').value =
+        medData.GenericName;
       document.querySelector('input[name="category"]').value = medData.Category; // or select field
-      document.querySelector('input[name="purchasePrice"]').value = medData.UnitPrice;
-      
+      document.querySelector('input[name="purchasePrice"]').value =
+        medData.UnitPrice;
+
       // Optional: auto-calculate next batchID
       // fetch('<?= ROOT ?>/inventoryCreate/getNextBatchID') // backend route
       //   .then(res => res.text())
@@ -17,10 +23,8 @@ document.getElementById('search-results').addEventListener('click', function(e) 
       //   });
     }
   });
-  
 
-  //outside button
-
+//outside button
 
 // document.getElementById('addInventoryBtn').addEventListener('click', function () {
 //   const form = document.getElementById('inventoryForm');
@@ -46,7 +50,6 @@ document.getElementById('search-results').addEventListener('click', function(e) 
 
 //searchbar
 document.addEventListener("DOMContentLoaded", function () {
-
   // console.log(orderData); // Your PHP data is available here
 
   const searchInput = document.getElementById("productName");
@@ -58,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (query.length > 1) {
       // Start searching after 3 characters
       fetch(
-        `http://localhost/remed-1.0/api/medicine/getMedicinesForInventory?search=${query}&pharmacyID=${pharmacyId}`
+        `${API_URL}/medicine/getMedicinesForInventory?search=${query}&pharmacyID=${pharmacyId}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -78,8 +81,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
- 
-
   searchResults.addEventListener("click", function (event) {
     if (event.target.classList.contains("search-result-item")) {
       const medicineId = event.target.dataset.medicineId;
@@ -88,17 +89,13 @@ document.addEventListener("DOMContentLoaded", function () {
       searchInput.dataset.medicineId = medicineId;
       hiddenInput.value = medicineId;
       searchResults.innerHTML = "";
-      
-  
+
       // Fetch full medicine details
       // fetch(`http://localhost/remed-1.0/api/medicine/getMedicineById?id=${medicineId}`)
       //   .then((response) => response.json())
       //   .then((data) => {
       //     const medicine = data.data;
 
-          
-
-  
       //     // Fill form fields here
       //     document.getElementById("productName").value = medicine.ProductName;
       //     document.getElementById("manufacturer").value = medicine.Manufacturer;
@@ -106,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
       //     document.getElementById("category").value = medicine.CategoryID;
       //     document.getElementById("unitPrice").value = medicine.SellingPrice;
       //     // etc...
-  
+
       //   })
       //   .catch((error) => console.error("Error fetching medicine details:", error));
     }
@@ -164,6 +161,7 @@ document.querySelector('form').addEventListener('submit', function (e) {
         alert("All dates are required.");
         e.preventDefault();
         return;
+
     }
 
     const mfgDate = new Date(mfgInput.value);

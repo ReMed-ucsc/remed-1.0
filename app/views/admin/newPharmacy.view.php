@@ -17,46 +17,60 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
 <body>
     <h2 class="page-title">Onboard New Pharmacy</h2>
     <div class="details-container">
-        <?php if (!empty($errors)): ?>
-            <div class="error-messages">
-                <?php foreach ($errors as $error): ?>
-                    <p class="error"><?= htmlspecialchars($error) ?></p>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
 
-        <form id="registration-form" class="form-container" action="<?= ROOT ?>/admin/PharmacyDetails/create"
-            method="POST" enctype="multipart/form-data">
+        <form id="registration-form" class="form-container" action="" method="POST" enctype="multipart/form-data">
             <div class="Form">
                 <div>
                     <label for="pharmacyName">Pharmacy Name:</label>
-                    <input class="Input" type="text" id="pharmacyName" name="name" placeholder="Enter pharmacy name"
-                        required>
+                    <input class="Input" type="text" id="pharmacyName" name="name" placeholder="Enter pharmacy name">
+                    <?php if (!empty($data['errors']['name'])): ?>
+                        <p style="color:red; margin-top:-30px; margin-bottom:20px">
+                            <?= htmlspecialchars($data['errors']['name']) ?>
+                        </p>
+                    <?php endif; ?>
                 </div>
 
                 <div>
                     <label for="pharmacistName">Pharmacist's Name:</label>
                     <input class="Input" type="text" id="pharmacistName" name="pharmacistName"
-                        placeholder="Enter pharmacist's name" required>
+                        placeholder="Enter pharmacist's name">
+                    <?php if (!empty($data['errors']['pharmacistName'])): ?>
+                        <p style="color:red; margin-top:-30px; margin-bottom:20px">
+                            <?= htmlspecialchars($data['errors']['pharmacistName']) ?>
+                        </p>
+                    <?php endif; ?>
                 </div>
 
                 <div>
                     <label for="licenseNumber">License Number:</label>
-                    <input class="Input" type="text" id="licenseNumber" name="RegNo" placeholder="Enter license"
-                        required>
+                    <input class="Input" type="text" id="licenseNumber" name="RegNo" placeholder="Enter license">
+                    <?php if (!empty($data['errors']['RegNo'])): ?>
+                        <p style="color:red; margin-top:-30px; margin-bottom:20px">
+                            <?= htmlspecialchars($data['errors']['RegNo']) ?>
+                        </p>
+                    <?php endif; ?>
                 </div>
             </div>
 
             <div class="Form">
                 <div>
                     <label for="email">Email:</label>
-                    <input class="Input" type="email" id="email" name="email" placeholder="Enter email" required>
+                    <input class="Input" type="text" id="email" name="email" placeholder="Enter email">
+                    <?php if (!empty($data['errors']['email'])): ?>
+                        <p style="color:red; margin-top:-30px; margin-bottom:20px">
+                            <?= htmlspecialchars($data['errors']['email']) ?>
+                        </p>
+                    <?php endif; ?>
                 </div>
 
                 <div>
                     <label for="contactNo">Contact Number:</label>
-                    <input class="Input" type="text" id="contactNo" name="contactNo" placeholder="Enter contact number"
-                        required>
+                    <input class="Input" type="text" id="contactNo" name="contactNo" placeholder="Enter contact number">
+                    <?php if (!empty($data['errors']['contactNo'])): ?>
+                        <p style="color:red; margin-top:-30px; margin-bottom:20px">
+                            <?= htmlspecialchars($data['errors']['contactNo']) ?>
+                        </p>
+                    <?php endif; ?>
                 </div>
 
                 <div>
@@ -66,6 +80,11 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                         placeholder="Enter pharmacy address">
                     <input type="hidden" id="latitude" name="latitude">
                     <input type="hidden" id="longitude" name="longitude">
+                    <?php if (!empty($data['errors']['longitude'])): ?>
+                        <p style="color:red; margin-top:-30px; margin-bottom:20px">
+                            <?= htmlspecialchars($data['errors']['longitude']) ?>
+                        </p>
+                    <?php endif; ?>
                 </div>
             </div>
 
@@ -73,6 +92,11 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                 <div>
                     <label for="document">NMRA Report:</label>
                     <input class="Input" type="file" id="document" name="document">
+                    <?php if (!empty($data['errors']['document'])): ?>
+                        <p style="color:red; margin-top:-30px; margin-bottom:20px">
+                            <?= htmlspecialchars($data['errors']['document']) ?>
+                        </p>
+                    <?php endif; ?>
                 </div>
 
                 <div>

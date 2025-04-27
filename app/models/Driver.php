@@ -178,4 +178,9 @@ class Driver extends User
         $sql = "UPDATE $this->table SET status = 'REJECT' WHERE driverID = :id";
         return $this->query($sql, ['id' => $id]);
     }
+    public function existingDriver($license){
+        $sql="SELECT driverID FROM $this->table WHERE vehicalLicenseNo = :vehicalLicenseNo";
+        $result= $this->query($sql,['vehicalLicenseNo'=>$license]);
+        return $result;
+    }
 }

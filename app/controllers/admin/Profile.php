@@ -74,6 +74,12 @@ class Profile
                 'username' => $username,
                 'contactNo' => $contactNo
             ];
+            if(empty($username)){
+                $data['errors']['username']="username required";
+            }
+            if(empty($contactNo)){
+                $data['errors']['contactNo']="Contact required";
+            }
 
             if (!empty($password) && empty($data['errors'])) {
                 $updateData['password'] = password_hash($password, PASSWORD_DEFAULT);

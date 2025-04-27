@@ -57,32 +57,62 @@ class PharmacyDetails
         $data = [
             'notification' => $Msg,
             'notificationDriver' => $MsgDriver,
-            'pharmacy' => $pharmacy
+            'pharmacy' => $pharmacy,
+            'errors'=>[]
         ];
 
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $data = [
+            $name=$_POST['name'] ;
+            $pharmacist=$_POST['pharmacistName'];
+            $RegNo=$_POST['RegNo'];
+            $contactNo=$_POST['contactNo'];
+            $address=$_POST['pharmacy-address'];
+            $email=$_POST['email'];
+            $latitude=$_POST['latitude'];
+            $longitude=$_POST['longitude'];
 
-                'name' => $_POST['name'],
-                'pharmacistName' => $_POST['pharmacistName'],
-                'RegNo' => $_POST['RegNo'],
-                'contactNo' => $_POST['contactNo'],
-                'email' => $_POST['email'],
-                'address' => $_POST['pharmacy-address'],
+
+            if(empty($name)){
+                $data['errors']['name']="Pharmacy Name is required !";
+            }
+            if(empty($pharmacist)){
+                $data['errors']['pharmacistName']="Pharmacist's Name is required !";
+            }
+            if(empty($RegNo)){
+                $data['errors']['RegNo']="Pharmacy License is required !";
+            }
+            if(empty($contactNo)){
+                $data['errors']['contactNo']="Contact is required !";
+            }
+            if(empty($email)){
+                $data['errors']['email']="Email is required !";
+            }
+            
+            if(empty($longitude) && empty($latitude) && empty($address)){
+                $data['errors']['longitude']="Pharmacy address is required !";
+            }
+            if(!preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email)){
+                $data['errors']['email']="Wrrong Email !";
+            }
+            $UpdateData = [
+
+                'name' => $name,
+                'pharmacistName' => $pharmacist,
+                'RegNo' => $RegNo,
+                'contactNo' => $contactNo,
+                'email' => $email,
+                'address' => $address,
                 'notification' => $Msg,
                 'notificationDriver' => $MsgDriver,
-                'latitude'=>$_POST['latitude'],
-                'longitude'=>$_POST['longitude']
+                'latitude'=>$latitude,
+                'longitude'=>$longitude
             ];
-
-
-            if ($pharmacyModel->validate($data)) {
-
-                $pharmacyModel->update($id, $data, 'pharmacyId');
+            if(empty($data['errors'])){
+                $pharmacy->update($id,$UpdateData,'PharmacyID');
                 redirect('admin/PharmacyDetails');
-                exit();
-            } else {
-                $data['errors'] = $pharmacyModel->errors;
+                exit;
+            }else{
+                $data['errors'] = array_merge($data['errors'], $pharmacyModel->errors ?? []);
             }
         }
 
@@ -94,27 +124,71 @@ class PharmacyDetails
         // Protect the route
         // $this->protectRoute();
 
-        $data = [];
+        
+        $pharmacy = new Pharmacy();
+
+        $data=[
+            'pharmacy'=>$pharmacy,
+            'errors'=>[]
+        ];
 
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $pharmacy = new Pharmacy();
+            $name=$_POST['name'] ;
+            $pharmacist=$_POST['pharmacistName'];
+            $RegNo=$_POST['RegNo'];
+            $contactNo=$_POST['contactNo'];
+            $address=$_POST['pharmacy-address'];
+            $email=$_POST['email'];
+            $document=$_FILES['document']['name'];
+            $latitude=$_POST['latitude'];
+            $longitude=$_POST['longitude'];
+
+            $existError=$pharmacy->existingPharmacy($RegNo);
+
+            if(empty($name)){
+                $data['errors']['name']="Pharmacy Name is required !";
+            }
+            if(empty($pharmacist)){
+                $data['errors']['pharmacistName']="Pharmacist's Name is required !";
+            }
+            if(empty($RegNo)){
+                $data['errors']['RegNo']="Pharmacy License is required !";
+            }
+            if(!empty($existError)){
+                $data['errors']['RegNo']="License Number Is Exist !";
+            }
+            if(empty($contactNo)){
+                $data['errors']['contactNo']="Contact is required !";
+            }
+            if(empty($email)){
+                $data['errors']['email']="Email is required !";
+            }
+            if(empty($document)){
+                $data['errors']['document']="NMRA report should Submit !";
+            }
+            
+            if(empty($longitude) && empty($latitude) && empty($address)){
+                $data['errors']['longitude']="Pharmacy address is required !";
+            }
+            if(!preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email)){
+                $data['errors']['email']="Wrrong Email !";
+            }
 
             // Prepare basic data
-            $data = [
-                'name' => $_POST['name'] ?? '',
-                'pharmacistName' => $_POST['pharmacistName'] ?? '',
-                'RegNo' => $_POST['RegNo'] ?? '',
-                'contactNo' => $_POST['contactNo'] ?? '',
-                'address' => $_POST['pharmacy-address'] ?? '',
-                'email' => $_POST['email'] ?? '',
+            $Newdata = [
+                'name' => $name,
+                'pharmacistName' => $pharmacist,
+                'RegNo' => $RegNo,
+                'contactNo' => $contactNo,
+                'address' => $address,
+                'email' => $email,
                 'status' => 'APPROVED',
-                'document' => $_FILES['document']['name'],
-                'latitude'=>$_POST['latitude'],
-                'longitude'=>$_POST['longitude']
+                'document' => $document,
+                'latitude'=>$latitude,
+                'longitude'=>$longitude
+                
             ];
-
-            // show($data);
-            // File upload handling
+            
             if (isset($_FILES['document']) && $_FILES['document']['error'] == UPLOAD_ERR_OK) {
                 $uploadDir = BASE_PATH . '/uploads/NMRA/';
                 if (!is_dir($uploadDir)) {
@@ -123,31 +197,25 @@ class PharmacyDetails
                 $filename = uniqid() . '_' . basename($_FILES['document']['name']);
                 $uploadPath = $uploadDir . $filename;
                 if (move_uploaded_file($_FILES['document']['tmp_name'], $uploadPath)) {
-                    $data['document'] = $filename;
+                    $Newdata['document'] = $filename;
                 } else {
                     $data['errors']['document'] = 'File upload failed';
                 }
             }
 
-            // Validate and insert
-            if ($pharmacy->validate($data)) {
-                $result = $pharmacy->insert($data);
 
-                // show($result);
-                if ($result) {
-                    redirect('admin/PharmacyDetails');
-                    exit();
-                } else {
-                    $data['errors']['general'] = "Failed to create pharmacy";
-                }
-            } else {
-                // show('error');
-                $data['errors'] = $pharmacy->errors;
+            if(empty($data['errors'])){
+                $pharmacy->insert($Newdata);
+                redirect('admin/PharmacyDetails');
+                exit;
+            }else{
+                $data['errors'] = array_merge($data['errors'], $pharmacy->errors ?? []);
             }
         }
 
-        redirect('admin/pharmacyDetails');
-        // $this->view('admin/pharmacyDetails', $data);
+
+        // redirect('admin/pharmacyDetails');
+        $this->view('admin/newPharmacy', $data);
     }
     public function delete($id)
     {

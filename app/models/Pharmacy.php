@@ -159,6 +159,10 @@ class Pharmacy extends User
         $sql="UPDATE $this->table SET status = 'REJECT' WHERE PharmacyID = :id";
         return $this->query($sql,['id'=>$id]);
     }
-
+    public function existingPharmacy($RegNo){
+        $sql="SELECT PharmacyID FROM $this->table WHERE RegNo = :RegNo";
+        $result= $this->query($sql,['RegNo'=>$RegNo]);
+        return $result;
+    }
     
 }

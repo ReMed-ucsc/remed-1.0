@@ -35,8 +35,10 @@ if (str_contains($_SERVER['SERVER_NAME'], 'ngrok-free.app')) {
 
 if ($_SERVER['SERVER_NAME'] == 'localhost') {
     define('ROOT', $protocol . '://localhost/remed-1.0/public');
+    define('API_URL', $protocol . '://localhost/remed-1.0/api');
 } else {
     define('ROOT', $protocol . '://' . $_SERVER['SERVER_NAME'] . '/remed-1.0/public');
+    define('API_URL', $protocol . '://' . $_SERVER['SERVER_NAME'] . '/remed-1.0/api');
 }
 
 define('DBHOST', getenv('DBHOST'));

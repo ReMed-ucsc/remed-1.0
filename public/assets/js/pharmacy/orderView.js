@@ -1,6 +1,6 @@
-console.log("P:", pharmacyId)
-document.addEventListener("DOMContentLoaded", function () {
+console.log("P:", pharmacyId);
 
+document.addEventListener("DOMContentLoaded", function () {
   // console.log(orderData); // Your PHP data is available here
 
   const searchInput = document.getElementById("medicine-search");
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (query.length > 2) {
       // Start searching after 3 characters
       fetch(
-        `http://localhost/remed-1.0/api/medicine/getPharmacyMedicines?search=${query}&pharmacyID=${pharmacyId}`
+        `${API_URL}/medicine/getPharmacyMedicines?search=${query}&pharmacyID=${pharmacyId}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -31,8 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
- 
-
   searchResults.addEventListener("click", function (event) {
     if (event.target.classList.contains("search-result-item")) {
       const medicineId = event.target.dataset.medicineId;
@@ -40,13 +38,13 @@ document.addEventListener("DOMContentLoaded", function () {
       searchInput.dataset.medicineId = medicineId;
       hiddenInput.value = medicineId;
       searchResults.innerHTML = "";
-  
+
       // Fetch full medicine details
-      fetch(`http://localhost/remed-1.0/api/medicine/getMedicineById?id=${medicineId}`)
+      fetch(`${API_URL}/medicine/getMedicineById?id=${medicineId}`)
         .then((response) => response.json())
         .then((data) => {
           const medicine = data.data;
-  
+
           // Fill form fields here
           document.getElementById("ProductName").value = medicine.ProductName;
           document.getElementById("Manufacturer").value = medicine.Manufacturer;
@@ -54,143 +52,138 @@ document.addEventListener("DOMContentLoaded", function () {
           document.getElementById("category").value = medicine.CategoryID;
           document.getElementById("unitPrice").value = medicine.SellingPrice;
           // etc...
-  
         })
-        .catch((error) => console.error("Error fetching medicine details:", error));
+        .catch((error) =>
+          console.error("Error fetching medicine details:", error)
+        );
     }
   });
-  
 });
 
+const chatIcon = document.querySelector(".chaticon");
+const prescriptionView = document.getElementById("prescriptionView");
+const chatView = document.getElementById("chatView");
+let isChatOpen = false;
 
-  const chatIcon = document.querySelector('.chaticon');
-  const prescriptionView = document.getElementById('prescriptionView');
-  const chatView = document.getElementById('chatView');
+chatIcon.addEventListener("click", () => {
+  isChatOpen = !isChatOpen;
+  prescriptionView.style.display = isChatOpen ? "none" : "block";
+  chatView.style.display = isChatOpen ? "block" : "none";
+});
+
+document.getElementById("sendChat")?.addEventListener("click", () => {
+  const input = document.getElementById("chatInput");
+  const message = input.value.trim();
+  if (message) {
+    const log = document.getElementById("chatLog");
+    const newMsg = document.createElement("div");
+    newMsg.textContent = "You: " + message;
+    log.appendChild(newMsg);
+    input.value = "";
+  }
+});
+
+//message with dummy data
+
+document.addEventListener("DOMContentLoaded", function () {
+  const chatIcon = document.getElementById("chatIcon");
+  const prescriptionView = document.getElementById("prescriptionView");
+  const chatView = document.getElementById("chatView");
+  const chatMessages = document.getElementById("chatMessages");
+  const sendBtn = document.getElementById("sendBtn");
+  const chatInput = document.getElementById("chatInput");
+
   let isChatOpen = false;
 
-  chatIcon.addEventListener('click', () => {
-    isChatOpen = !isChatOpen;
-    prescriptionView.style.display = isChatOpen ? 'none' : 'block';
-    chatView.style.display = isChatOpen ? 'block' : 'none';
+  console.log(orderData); // Your PHP data is available here
+
+  const orderId = orderData.order.OrderID;
+  const medicines = orderData.medicineList;
+  const comments = orderData.comments;
+  const isViewOnly = orderData.viewOnly;
+
+  comments.sort((a, b) => {
+    // Convert createdAt strings to Date objects for comparison
+    const dateA = new Date(a.createdAt);
+    const dateB = new Date(b.createdAt);
+    return dateA - dateB; // Ascending order (oldest first)
   });
 
-  document.getElementById('sendChat')?.addEventListener('click', () => {
-    const input = document.getElementById('chatInput');
-    const message = input.value.trim();
-    if (message) {
-      const log = document.getElementById('chatLog');
-      const newMsg = document.createElement('div');
-      newMsg.textContent = "You: " + message;
-      log.appendChild(newMsg);
-      input.value = "";
+  // Populate dummy chat
+  comments.forEach((msg) => {
+    const sender = msg.sender == "p" ? "pharmacy" : "patient";
+    const msgDiv = document.createElement("div");
+    msgDiv.classList.add("message", sender);
+    msgDiv.textContent = msg.comments;
+    chatMessages.appendChild(msgDiv);
+  });
+
+  // Toggle chat/prescription view
+  chatIcon.addEventListener("click", () => {
+    isChatOpen = !isChatOpen;
+    prescriptionView.style.display = isChatOpen ? "none" : "block";
+    chatView.style.display = isChatOpen ? "block" : "none";
+  });
+
+  // Send button action
+  sendBtn.addEventListener("click", () => {
+    const text = chatInput.value.trim();
+    if (text !== "") {
+      const msgDiv = document.createElement("div");
+      msgDiv.classList.add("message", "pharmacy");
+      msgDiv.textContent = text;
+      chatMessages.appendChild(msgDiv);
+      chatInput.value = "";
+      chatMessages.scrollTop = chatMessages.scrollHeight;
     }
   });
+});
 
-  //message with dummy data
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const chatIcon = document.getElementById("chatIcon");
-    const prescriptionView = document.getElementById("prescriptionView");
-    const chatView = document.getElementById("chatView");
-    const chatMessages = document.getElementById("chatMessages");
-    const sendBtn = document.getElementById("sendBtn");
-    const chatInput = document.getElementById("chatInput");
-  
-    let isChatOpen = false;
-
-
-      console.log(orderData); // Your PHP data is available here
-      
-      const orderId = orderData.order.OrderID;
-      const medicines = orderData.medicineList;
-      const comments = orderData.comments;
-      const isViewOnly = orderData.viewOnly;
-      
-  
-      comments.sort((a, b) => {
-        // Convert createdAt strings to Date objects for comparison
-        const dateA = new Date(a.createdAt);
-        const dateB = new Date(b.createdAt);
-        return dateA - dateB; // Ascending order (oldest first)
-      });
-      
-
-    // Populate dummy chat
-    comments.forEach(msg => {
-      const sender = msg.sender == 'p' ? 'pharmacy' : 'patient';
-      const msgDiv = document.createElement("div");
-      msgDiv.classList.add("message", sender);
-      msgDiv.textContent = msg.comments;
-      chatMessages.appendChild(msgDiv);
-    });
-  
-    // Toggle chat/prescription view
-    chatIcon.addEventListener("click", () => {
-      isChatOpen = !isChatOpen;
-      prescriptionView.style.display = isChatOpen ? "none" : "block";
-      chatView.style.display = isChatOpen ? "block" : "none";
-    });
-  
-    // Send button action
-    sendBtn.addEventListener("click", () => {
-      const text = chatInput.value.trim();
-      if (text !== "") {
-        const msgDiv = document.createElement("div");
-        msgDiv.classList.add("message", "pharmacy");
-        msgDiv.textContent = text;
-        chatMessages.appendChild(msgDiv);
-        chatInput.value = "";
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-      }
-    });
-  });
-  
 // Function to send a new message
 function sendMessage(text) {
   const token = orderData.authToken;
 
-  
   // Get the order ID from your order data
   const orderId = orderData.order.OrderID; // assuming you have orderData available
-  
+
   // Create the request payload
   const payload = {
     OrderID: orderId,
     comments: text,
-    sender: 'p' // 'p' for pharmacy, assuming that's your convention
+    sender: "p", // 'p' for pharmacy, assuming that's your convention
   };
-  
+
   // Make the API call
-  fetch('http://localhost/remed-1.0/api/order/commentOrder', {
-    method: 'POST',
+  fetch(`${API_URL}/order/commentOrder`, {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(payload)
+    body: JSON.stringify(payload),
   })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then(data => {
-    console.log('Message sent successfully:', data);
-    
-    // // Add the message to the UI
-    // const msgDiv = document.createElement("div");
-    // msgDiv.classList.add("message", "pharmacy");
-    // msgDiv.textContent = text;
-    // chatMessages.appendChild(msgDiv);
-    
-    // Scroll to bottom of chat
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  })
-  .catch(error => {
-    console.error('Error sending message:', error);
-    alert('Failed to send message. Please try again.');
-  });
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log("Message sent successfully:", data);
+
+      // // Add the message to the UI
+      // const msgDiv = document.createElement("div");
+      // msgDiv.classList.add("message", "pharmacy");
+      // msgDiv.textContent = text;
+      // chatMessages.appendChild(msgDiv);
+
+      // Scroll to bottom of chat
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    })
+    .catch((error) => {
+      console.error("Error sending message:", error);
+      alert("Failed to send message. Please try again.");
+    });
 }
 
 // Update the send button event listener

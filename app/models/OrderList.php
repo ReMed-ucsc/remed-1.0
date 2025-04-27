@@ -13,7 +13,7 @@ class OrderList
         $orderList = [];
         foreach ($productIDs as $key => $productID) {
             $orderList[] = [
-                'orderID' => $orderID,
+                'OrderID' => $orderID,
                 'ProductID' => $productID,
                 'quantity' => $quantities[$key]
             ];
@@ -28,7 +28,7 @@ class OrderList
         foreach ($productIDs as $index => $productID) {
             $data = ['quantity' => $quantities[$index]];
             $conditions = [
-                'orderId' => $orderID,
+                'OrderId' => $orderID,
                 'productId' => $productID
             ];
 

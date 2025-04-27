@@ -96,7 +96,7 @@ class CreateOrderController
             $success = $orderListModel->setOrderList($orderID, $productIDs, $quantities);
 
             if (!$success) {
-                throw new Exception("Failed to add order items. ");
+                throw new Exception("Failed to add order items.");
             }
 
             $success = $orderCommentModel->addComment($orderID,  $comments, 'u');

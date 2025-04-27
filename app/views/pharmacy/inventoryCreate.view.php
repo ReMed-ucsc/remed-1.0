@@ -157,6 +157,7 @@
 
     <script>
       const pharmacyId = <?= $_SESSION['user_id'] ?>;
+      const API_URL = "<?= API_URL ?>";
       console.log(pharmacyId)
     </script>
     <!-- <script src="<?= ROOT ?>/assets/js/pharmacy/orderView.js"></script> -->

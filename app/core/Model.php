@@ -274,7 +274,9 @@ trait Model
     public function insertBatch($data)
     {
         foreach ($data as $row) {
-            if (!$this->insert($row)) {
+            $result = $this->insert($row);
+            // show($result);
+            if ($result === false) {
                 return false;
             }
         }

@@ -6,6 +6,9 @@ require_once BASE_PATH . '/app/models/Patient.php';
 require_once BASE_PATH . '/app/core/init.php';
 require_once BASE_PATH . '/app/core/helper_classes.php';
 
+use Cloudinary\Api\Upload\UploadApi;
+
+
 class CreateOrderController
 {
     public function index()
@@ -96,7 +99,7 @@ class CreateOrderController
             $success = $orderListModel->setOrderList($orderID, $productIDs, $quantities);
 
             if (!$success) {
-                throw new Exception("Failed to add order items. ");
+                throw new Exception("Failed to add order items.");
             }
 
             $success = $orderCommentModel->addComment($orderID,  $comments, 'u');
@@ -153,7 +156,13 @@ class CreateOrderController
         }
 
         // Move uploaded file
-        if (!move_uploaded_file($file['tmp_name'], $targetFile)) {
+        try {
+            $uploadResult = (new UploadApi())->upload($_FILES['prescription']['tmp_name'], [
+                'public_id' => $fileName,
+                'folder'    => 'prescriptions'
+            ]);
+            $fileName = $uploadResult['secure_url'];
+        } catch (Exception $e) {
             throw new Exception("Failed to upload file.");
         }
 

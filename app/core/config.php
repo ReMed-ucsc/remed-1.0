@@ -35,8 +35,10 @@ if (str_contains($_SERVER['SERVER_NAME'], 'ngrok-free.app')) {
 
 if ($_SERVER['SERVER_NAME'] == 'localhost') {
     define('ROOT', $protocol . '://localhost/remed-1.0/public');
+    define('API_URL', $protocol . '://localhost/remed-1.0/api');
 } else {
     define('ROOT', $protocol . '://' . $_SERVER['SERVER_NAME'] . '/remed-1.0/public');
+    define('API_URL', $protocol . '://' . $_SERVER['SERVER_NAME'] . '/remed-1.0/api');
 }
 
 define('DBHOST', getenv('DBHOST'));
@@ -55,18 +57,18 @@ define('BASE_PATH', realpath(dirname(__FILE__) . '/../../'));
 define('DEBUG', true);
 
 
-// require BASE_PATH . '/vendor/autoload.php';
+require BASE_PATH . '/vendor/autoload.php';
 
-// use Cloudinary\Configuration\Configuration;
+use Cloudinary\Configuration\Configuration;
 
-// // Cloudinary configuration
-// Configuration::instance([
-//     'cloud' => [
-//         'cloud_name' => getenv('CLOUDINARY_CLOUD_NAME'),
-//         'api_key' => getenv('CLOUDINARY_API_KEY'),
-//         'api_secret' => getenv('CLOUDINARY_API_SECRET')
-//     ],
-//     'url' => [
-//         'secure' => true
-//     ]
-// ]);
+// Cloudinary configuration
+Configuration::instance([
+    'cloud' => [
+        'cloud_name' => getenv('CLOUDINARY_CLOUD_NAME'),
+        'api_key' => getenv('CLOUDINARY_API_KEY'),
+        'api_secret' => getenv('CLOUDINARY_API_SECRET')
+    ],
+    'url' => [
+        'secure' => true
+    ]
+]);

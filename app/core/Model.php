@@ -5,7 +5,7 @@ trait Model
     // multiple inheritance using trait
     use Database;
 
-    protected $limit = 10;
+    protected $limit = 100;
     protected $offset = 0;
     protected $order_type     = "desc";
     //protected $order_column = "id";

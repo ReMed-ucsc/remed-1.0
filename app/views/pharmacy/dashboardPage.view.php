@@ -68,7 +68,7 @@
         <div class="cards">
           <div class="profilecard">
             <div class="profilecard-left">
-              <img src="<?= ROOT ?>/assets/images/admin.png" class="card-icon">
+              <img src="<?= ROOT ?>/assets/images/pharmacy logo.png" class="card-icon">
               <h4>Profile</h4>
               <div class="data">
                 <p><?= $pharmacyName->name ?></p>
@@ -131,9 +131,9 @@
           <div class="inventory">
             <div class="weekly">
               Inventory
-              <h5>Weekly
-                <ul class="sub-menu size1"></ul>
-                <i class="arrow ph-bold ph-caret-down"></i>
+              <!-- <h5>Weekly</h5> -->
+              <!-- <ul class="sub-menu size1"></ul> -->
+              <!-- <i class="arrow ph-bold ph-caret-down"></i> -->
               </h5>
             </div>
             <canvas id="myPieChart"></canvas>

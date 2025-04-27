@@ -38,6 +38,13 @@ document.addEventListener("DOMContentLoaded", function () {
             text: "Revenue (Rs)",
           },
         },
+        x: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: `${income.labels[0]} - ${income.labels[6]} (days)`,
+          },
+        },
       },
       plugins: {
         tooltip: {

@@ -10,12 +10,11 @@ class Admin extends User
     protected $allowedColumns = ['id', 'username', 'email', 'contactNo', 'password', 'token', 'token_expiry'];
 
 
-    // Validation method
     public function validation($data)
     {
-        $this->errors = []; // Reset errors
+        $this->errors = []; 
 
-        // Validate username
+        
         if (empty($data['username'])) {
             $this->errors['username'] = "User name is required.";
         }
@@ -24,20 +23,19 @@ class Admin extends User
             $this ->errors['contactNo']="Contact No is required.";
         }
 
-        // Validate email
+        
         if (empty($data['email']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             $this->errors['email'] = "Invalid email format.";
         }
 
-        // Validate password
+        
         if (empty($data['password'])) {
             $this->errors['password'] = "Password is required.";
         }
 
-        return empty($this->errors); // Pass if no errors
+        return empty($this->errors); 
     }
 
-    // Method to register an admin
     public function registerAdmin($username, $email, $contactNo, $password)
     {
         $data = [
@@ -48,7 +46,7 @@ class Admin extends User
             'token' => bin2hex(random_bytes(16)), // Generate a random 32-character token
         ];
 
-        return $this->insert($data); // Save to database
+        return $this->insert($data); 
     }
 
     public function emailExists($email)

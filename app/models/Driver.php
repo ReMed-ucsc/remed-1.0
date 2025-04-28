@@ -47,7 +47,7 @@ class Driver extends User
         $query = "SELECT * FROM driver WHERE email = :email LIMIT 1";
         $result = $this->query($query, ['email' => $email]);
 
-        return $result ? $result[0] : null; // Return the first object or null
+        return $result ? $result[0] : null; 
     }
 
     public function registerDriver($name, $email, $password, $dob, $tellNo, $NIC, $deliveryTime, $vehicalNumber)
@@ -93,12 +93,10 @@ class Driver extends User
         $result = $this->query($sql, ['status' => $status]);
 
 
-        // If the result is an object, access the property using ->
         if (is_array($result) && isset($result[0])) {
-            return $result[0]->row_count; // Access the property as an object
+            return $result[0]->row_count; 
         }
 
-        // Default return value if no result is found
         return 0;
     }
 

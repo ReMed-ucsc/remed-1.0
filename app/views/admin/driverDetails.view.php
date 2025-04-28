@@ -1,11 +1,9 @@
 <?php
-// Sample data for demonstration (replace with your own data source or database)
 require_once BASE_PATH . '/app/views/inc/header.view.php';
 require_once BASE_PATH . '/app/views/inc/navBar.view.php';
 ?>
 
 <body>
-    <!-- Search Box Form -->
     <div class="above-table">
         <div class="search-container">
             <form id="search-form">
@@ -21,7 +19,6 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
     </div>
 
 
-    <!-- Table Structure -->
     <div class="details-container">
         <table class="table-container">
             <thead>
@@ -30,7 +27,6 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                     <th>Driver Name</th>
                     <th>Contact Number</th>
                     <th>Delivery Time</th>
-                    <!-- <th>Email</th> -->
                     <th>Status</th>
                 </tr>
             </thead>
@@ -42,7 +38,6 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                             <td><?= htmlspecialchars($drivers->driverName) ?></td>
                             <td><?= htmlspecialchars($drivers->telNo) ?></td>
                             <td><?= htmlspecialchars($drivers->deliveryTime) ?></td>
-                            <!-- <td><?= htmlspecialchars($drivers->email) ?></td> -->
                             <td><span class="status-user"><?= htmlspecialchars($drivers->status) ?></span></td>
                         </tr>
                     <?php endif; ?>

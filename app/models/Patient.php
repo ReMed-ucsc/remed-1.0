@@ -3,7 +3,6 @@
 class Patient extends User
 {
     use Model;
-    // use User;
 
     protected $table = 'patient';
     protected $allowedColumns = ['PatientID','patientName', 'email','dob','gender','contact','address', 'password', 'token'];

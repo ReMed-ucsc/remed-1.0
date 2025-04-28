@@ -5,7 +5,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $licenseNumber = $_POST['licenseNumber'] ?? '';
     $reason = $_POST['reason'] ?? '';
 
-    // Delete logic: Here, you'd implement the logic to delete the pharmacy from the system
     echo "Pharmacy {$pharmacyName} removed for the reason: {$reason}";
 }
 

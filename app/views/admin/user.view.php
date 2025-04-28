@@ -4,7 +4,6 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
 ?>
 
 <body>
-    <!-- Search Box Form -->
     <div class="search-container">
         <form id="search-form">
             <input type="text" id="searchInput" name="search" class="search-box" placeholder="Search here..." value="<?php if (isset($_GET['search'])) { echo htmlspecialchars($_GET['search']);} ?>">
@@ -15,7 +14,6 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
 
 
 
-    <!-- Table Structure -->
     <div class="details-container">
         <table class="table-container">
             <thead>
@@ -25,9 +23,7 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
                     <th>Gender</th>
                     <th>Date of Birth</th>
                     <th>Contact Number</th>
-                    <!-- <th>Email</th> -->
                     <th>Address</th>
-                    <!-- <th>Status</th> -->
                 </tr>
             </thead>
             <tbody>

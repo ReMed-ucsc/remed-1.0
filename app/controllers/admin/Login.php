@@ -92,56 +92,6 @@ class Login
             $this->view('admin/dashboard', $data);
         }
     }
-    // public function forgetPassword(){
-    //     $admin=new Admin();
 
-    //     $this->view('admin/forgetPassword');
-    // }
-    // public function forgetPasswordReset(){
-    //     $admin=new Admin();
-
-    //     $this->view('admin/forgetPasswordReset');
-    // }
-    // public function showResetForm()
-    // {
-    //     $admin = new Admin;
-    //     $token = $_GET['token'] ?? '';
-        
-    //     if (!$token || !$admin->isValidResetToken($token)) {
-    //         echo "Invalid or expired token.";
-    //         return;
-    //     }
-
-    //     require BASE_PATH . '/app/views/admin/forgetPasswordReset.view.php';
-    // }
-
-
-    // public function handleReset()
-    // {
-    //     $admin = new Admin;
-    //     $token = $_POST['token'] ?? '';
-    //     $password = $_POST['password'] ?? '';
-    //     $confirm = $_POST['confirm_password'] ?? '';
-
-
-    //     if ($password !== $confirm) {
-    //         $error = "Passwords do not match.";
-    //         $token = htmlspecialchars($token);
-    //         require BASE_PATH . '/app/views/admin/forgetPasswordReset.view.php';
-    //         return;
-    //     }
-
-    //     $user = $admin->findByResetToken($token);
-    //     if (!$user) {
-    //         echo "Invalid or expired token.";
-    //         return;
-    //     }
-
-    //     $admin->updatePassword($user->id, password_hash($password, PASSWORD_DEFAULT));
-    //     $admin->clearResetToken($user->id);
-
-    //     redirect('admin/login?reset=success');
-
-    // }
 
 }

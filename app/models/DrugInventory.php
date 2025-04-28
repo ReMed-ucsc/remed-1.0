@@ -10,18 +10,12 @@ class DrugInventory
 
     public function updateInventory($inventoryId, $threshold, $storageLocation, $storageConditions, $unitPrice)
     {
-        // $query = "
-        //     UPDATE drugInventory
-        //     SET  thresholdLimit = ?, storageLocation = ?, storageConditions = ?, unitPrice = ?,
-        //     WHERE InventoryId = ?;
 
-        // ";
 
         $data = ['thresholdLimit' => $threshold, 'storageLocation' => $storageLocation, 'storageConditions' => $storageConditions, 'unitPrice' => $unitPrice];
         $conditions = ['InventoryId' => $inventoryId];
 
 
-        // $data = [$threshold, $storageLocation, $storageConditions, $unitPrice, $inventoryId];
 
         return $this->updateWithConditions($data, $conditions);
     }

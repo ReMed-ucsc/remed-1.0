@@ -21,9 +21,7 @@ class User
             'notification' => $Msg,
             'notificationDriver' => $MsgDriver
         ];
-        // var_dump( $data );
         $this->view('admin/user', $data);
     }
 
-    // add other methods like edit, update, delete, etc.
 }

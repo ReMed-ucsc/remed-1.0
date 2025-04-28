@@ -12,7 +12,6 @@ class Dashboard
     {
         
 
-        // Get session data
         $AdminID = $this->getSession('id');
         $adminEmail = $this->getSession('email');
         $authToken = $this->getSession('auth_token');
@@ -28,7 +27,6 @@ class Dashboard
         $petient = new Patient();
         $patientCount = $petient->getlastId();
 
-        // Get all pharmacies
         $AdminModel = new Admin();
         
 
@@ -44,7 +42,6 @@ class Dashboard
                 'notification'=>$Msg,
                 'notificationDriver'=> $MsgDriver            ];
         }
-        // Pass session data to the view
         $data = [
             'email' => $adminEmail,
             'id' => $AdminID,
@@ -65,5 +62,4 @@ class Dashboard
         $this->view('admin/dashboard', $data);
     }
    
-    // add other methods like edit, update, delete, etc.
 }

@@ -28,7 +28,6 @@ class DriverDetails
 
     public function create()
     {
-        // Prepare data for the view
         
         $driver = new Driver();
         $data = [
@@ -65,7 +64,6 @@ class DriverDetails
             if (!preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email)) {
                 $data['errors']['email'] = "Wrrong Email !";
             }
-            // Prepare driver data
             $updateData = [
                 'driverName' => $name,
                 'telNo' => $telNo,
@@ -77,7 +75,6 @@ class DriverDetails
                 'fcmToken' => md5(uniqid())
             ];
 
-            // Validate and save
             if (empty($data['errors'])) {
                 $driver->insert($updateData);
                 redirect('admin/driverDetails');
@@ -89,6 +86,5 @@ class DriverDetails
     }
     
 
-    // add other methods like edit, update, delete, etc.
 }
 

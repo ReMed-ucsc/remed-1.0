@@ -16,8 +16,8 @@ class Legal
 
         $MsgDriver = $driver->notificationDriver('pending');
         $Msg = $msg -> notification('pending');
-        $privacyArr = $legal->getPrivacyPolicy();         // returns array
-        $termsArr = $legal->getTermsConditions();         // returns array
+        $privacyArr = $legal->getPrivacyPolicy();         
+        $termsArr = $legal->getTermsConditions();         
 
         $privacy = $privacyArr[0]->privacy_policy ?? '';
         $terms = $termsArr[0]->terms_and_conditions ?? '';

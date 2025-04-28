@@ -11,7 +11,6 @@ class User
     {
         $this->errors = [];
 
-        // Validate email
         if (empty($data['email'])) {
             $this->errors['email'] = "Email is required";
         } else if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
@@ -20,7 +19,6 @@ class User
             $this->errors['email'] = "Email is already taken";
         }
 
-        // Validate password
         if (empty($data['password'])) {
             $this->errors['password'] = "Password is required";
         } else if (strlen($data['password']) < 8) {
@@ -76,7 +74,7 @@ class User
         $result = $this->query($sql);
 
         if (is_array($result) && isset($result[0])) {
-            return $result[0]->approved_count; // Access the property as an object
+            return $result[0]->approved_count; 
         }
 
         return 0;

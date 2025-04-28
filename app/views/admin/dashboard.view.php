@@ -7,7 +7,6 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php' ?>
 
 <body>
 
-    <!-- dashboardBody start -->
     <div class="dashboard">
         <div class="line">
             <div class="card greenA">
@@ -45,7 +44,6 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php' ?>
     <script>
         var ROOT = '<?= ROOT ?>';
 
-        //Animation for card number counting
         document.addEventListener("DOMContentLoaded", function () {
             const cards = document.querySelectorAll('.card h2');
 

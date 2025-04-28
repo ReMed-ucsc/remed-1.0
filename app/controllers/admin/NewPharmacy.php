@@ -8,7 +8,7 @@ class NewPharmacy
     }
     public function index()
     {
-        // $user = new User;
+       
         $msg = new Pharmacy();
         $driver = new Driver();
 

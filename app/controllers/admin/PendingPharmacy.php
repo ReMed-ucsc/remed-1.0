@@ -101,7 +101,6 @@ class PendingPharmacy
                 'status'=>"APPROVED",
                 'document'=>$document
             ];
-            // File upload handling
             if (isset($_FILES['document']) && $_FILES['document']['error'] == UPLOAD_ERR_OK) {
                 $uploadDir = BASE_PATH . '/uploads/NMRA/';
                 if (!is_dir($uploadDir)) {
@@ -116,7 +115,7 @@ class PendingPharmacy
                 }
             }
 
-            // Validate and insert
+            
             if (empty($data['errors'])) {
 
                 $pharmacyModel->update($id, $updateData, 'PharmacyID');
@@ -141,5 +140,4 @@ class PendingPharmacy
 
 }
 
-// add other methods like edit, update, delete, etc.
 

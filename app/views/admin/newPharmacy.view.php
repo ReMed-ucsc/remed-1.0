@@ -75,7 +75,6 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
 
                 <div>
                     <label for="address">Pharmacy Address:</label>
-                    <!-- <input class="Input" type="text" id="address" name="address" placeholder="Enter address" required> -->
                     <input class="Input" type="text" id="pharmacy-address" name="pharmacy-address"
                         placeholder="Enter pharmacy address">
                     <input type="hidden" id="latitude" name="latitude">
@@ -121,29 +120,24 @@ require_once BASE_PATH . '/app/views/inc/navBar.view.php';
             var longitudeField = document.getElementById('longitude');
 
             try {
-                // Initialize the autocomplete for Sri Lanka
                 var autocomplete = new google.maps.places.Autocomplete(searchInput, {
                     types: ['address'],
                     componentRestrictions: {
                         country: 'lk'
-                    } // 'lk' is the country code for Sri Lanka
+                    } 
                 });
 
-                // When a place is selected, populate the lat/lng fields
                 autocomplete.addListener('place_changed', function () {
                     var place = autocomplete.getPlace();
 
-                    // Verify that we got a valid place with geometry
                     if (!place.geometry) {
                         console.error("Autocomplete's returned place contains no geometry");
                         return;
                     }
 
-                    // Get the location data
                     var lat = place.geometry.location.lat();
                     var lng = place.geometry.location.lng();
 
-                    // Set the values in the hidden fields
                     latitudeField.value = lat;
                     longitudeField.value = lng;
 

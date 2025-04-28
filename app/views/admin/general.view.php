@@ -2,7 +2,6 @@
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $contactInfo = $_POST['contactInfo'] ?? '';
 
-    // Update logic: Here you'd implement the logic to update the contact information in the database
     echo "Contact information has been updated.";
 }
 

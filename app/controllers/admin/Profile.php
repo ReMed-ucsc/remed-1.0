@@ -65,7 +65,6 @@ class Profile
             $password = $_POST['password'] ?? '';
             $confirm_password = $_POST['confirm_password'] ?? '';
 
-            // Validate password match
             if (!empty($password) && $password !== $confirm_password) {
                 $data['errors']['confirm_password'] = "Passwords do not match.";
             }
@@ -98,5 +97,4 @@ class Profile
     }
 
 
-    // add other methods like edit, update, delete, etc.
 }

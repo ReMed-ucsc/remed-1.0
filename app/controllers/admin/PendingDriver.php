@@ -67,5 +67,5 @@ class PendingDriver
         $driverModel->rejectDriver($id);
         redirect("admin/PendingDriver");
     }
-    // add other methods like edit, update, delete, etc.
+    
 }

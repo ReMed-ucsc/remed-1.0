@@ -26,5 +26,5 @@ class AccountManage
         $this->view('admin/accountManage', $data);
     }
 
-    // add other methods like edit, update, delete, etc.
+    
 }

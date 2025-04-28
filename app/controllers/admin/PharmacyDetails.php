@@ -8,15 +8,11 @@ class PharmacyDetails
     }
     public function index()
     {
-        // Protect the route
-        // $this->protectRoute();
-
-        // Get session data
+        
         $PharmacyID = $this->getSession('pharmacy_id');
         $name = $this->getSession('pharmacy_name');
         $authToken = $this->getSession('auth_token');
 
-        // Get all pharmacies
         $PharmacyModel = new Pharmacy();
         $Msg = $PharmacyModel->notification('pending');
         $pharmacy = $PharmacyModel->getPharmacies('APPROVED');
@@ -37,9 +33,7 @@ class PharmacyDetails
 
     public function edit($id)
     {
-        // Protect the route
 
-        // $this->protectRoute();
 
         $pharmacyModel = new Pharmacy();
         $driver = new Driver();
@@ -121,8 +115,6 @@ class PharmacyDetails
 
     public function create()
     {
-        // Protect the route
-        // $this->protectRoute();
 
         
         $pharmacy = new Pharmacy();
@@ -174,7 +166,6 @@ class PharmacyDetails
                 $data['errors']['email']="Wrrong Email !";
             }
 
-            // Prepare basic data
             $Newdata = [
                 'name' => $name,
                 'pharmacistName' => $pharmacist,
@@ -214,13 +205,11 @@ class PharmacyDetails
         }
 
 
-        // redirect('admin/pharmacyDetails');
         $this->view('admin/newPharmacy', $data);
     }
     public function delete($id)
     {
-        // Protect the route
-        // $this->protectRoute();
+
 
         $pharmacyModel = new Pharmacy();
         $pharmacyModel->delete($id, 'PharmacyID');

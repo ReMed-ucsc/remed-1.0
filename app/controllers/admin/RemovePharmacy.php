@@ -14,5 +14,4 @@ class RemovePharmacy
         $this->view('admin/pharmacyDetails', $data);
     }
 
-    // add other methods like edit, update, delete, etc.
 }

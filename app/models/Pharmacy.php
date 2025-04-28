@@ -27,7 +27,6 @@ class Pharmacy extends User
     public function delete($id, $id_column = 'PharmacyID')
     {
         try {
-            // Validate ID
             if (empty($id)) {
                 throw new Exception("Invalid pharmacy ID");
             }
@@ -35,7 +34,6 @@ class Pharmacy extends User
             $data[$id_column] = $id;
             $query = "DELETE FROM $this->table WHERE $id_column = :$id_column";
 
-            // Execute the query and check result
             $result = $this->query($query, $data);
 
             if ($result === false) {
@@ -56,24 +54,21 @@ class Pharmacy extends User
 
     function validate($data)
     {
-        $this->errors = []; // Reset errors
+        $this->errors = []; 
 
-        // Validate pharmacy name
         if (empty($data['name'])) {
             $this->errors['name'] = "Pharmacy name is required.";
         }
 
-        // Validate email
         if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             $this->errors['email'] = "Invalid email format.";
         }
 
-        // Validate contact number
         if (!is_numeric($data['contactNo']) || strlen($data['contactNo']) < 10) {
             $this->errors['contactNo'] = "Invalid contact number.";
         }
 
-        return empty($this->errors); // Pass if no errors
+        return empty($this->errors); 
     }
 
 
@@ -116,7 +111,7 @@ class Pharmacy extends User
         $result = $this->query($sql, ['status' => $status]);
 
         if (is_array($result) && isset($result[0])) {
-            return $result[0]->approved_count; // Access the property as an object
+            return $result[0]->approved_count; 
         }
         return 0;
     }
@@ -129,7 +124,6 @@ class Pharmacy extends User
     {
         $rangeInMeters = $range * 1000;
 
-        // Define columns to select
         $columns = [
             'PharmacyID',
             'name',
@@ -140,12 +134,10 @@ class Pharmacy extends User
             'ST_Distance_Sphere(POINT(longitude, latitude), POINT(:longitude, :latitude)) AS distance'
         ];
 
-        // Define conditions
         $conditions = [
             'raw' => "ST_Distance_Sphere(POINT(longitude, latitude), POINT(:longitude, :latitude)) <= :rangeInMeters"
         ];
 
-        // Bind additional parameters for raw SQL conditions
         $additionalData = [
             'longitude' => $longitude,
             'latitude' => $latitude,

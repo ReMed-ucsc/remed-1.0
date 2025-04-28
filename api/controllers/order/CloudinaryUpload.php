@@ -145,4 +145,22 @@ class CreateOrderController
         $response['result']['message'] = $result->getMessage();
         echo json_encode($response);
     }
+
+
+
+public function filterData($filter)
+{
+    $query = "SELECT * FROM $this->table WHERE ProductName LIKE :filter";
+    return $this->query($query, ['filter' => "%$filter%"]);
+}
+
+$filter = $_GET['filter'] ?? '';
+$data = $model->filterData($filter);
+
+<form method="get">
+  <input type="text" name="filter" placeholder="Search products">
+  <button type="submit">Search</button>
+</form>
+
+
 }

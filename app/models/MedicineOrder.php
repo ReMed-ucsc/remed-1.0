@@ -20,7 +20,7 @@ class MedicineOrder
     private $WAITING_FOR_DRIVER = 'WD'; // waiting for driver to accept the order
     private $DELIVERY_IN_PROGRESS = 'I';
     private $DELIVERY_REJECTED = 'DR';
-    private $DELIVERY_COMPLETED = 'WC';
+    private $DELIVERY_COMPLETED = 'DC';
     private $WAITING_FOR_PICKUP = 'WP';
     private $DRIVER_PICKED_UP = 'DP';
 

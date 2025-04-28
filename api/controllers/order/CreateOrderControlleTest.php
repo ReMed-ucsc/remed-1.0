@@ -153,3 +153,53 @@ class CreateOrderController
         echo json_encode($response);
     }
 }
+
+
+public function index()
+{
+    //get session data
+    $pharmacyId = $this->getSession('user_id');
+    $authToken = $this->getSession('auth_token');
+
+    date_default_timezone_set("Asia/Colombo");
+
+    $date = isset($_GET['date']) ? $_GET['date'] : date('Y-m-d');
+
+    // Extract month and year from date
+    $timestamp = strtotime($date);
+    $month = (int)date('n', $timestamp);
+    $year = (int)date('Y', $timestamp);
+
+    $incomeModel = new MedicineOrder();
+    $incomeData = $incomeModel->getIncome($pharmacyId, $month, $year);
+
+    $expenseModel = new StockDataView;
+    $stockData = $expenseModel->getMedicineStockPurchaseDetails($pharmacyId, $month, $year);
+
+    $totalIncome = 0;
+    foreach ($incomeData as $item) {
+        $totalIncome += $item->totalBill;
+    }
+
+    $this->setSession('totalIncome', $totalIncome);
+
+    $totalExpenses = 0;
+    foreach ($stockData as $item) {
+        $totalExpenses += $item->purchaseCost;
+    }
+
+    $data = [
+        'userId' => $pharmacyId,
+        'auth_token' => $authToken,
+        'incomeData' => $incomeData,
+        'expenses' => $stockData,
+        'totalIncome' => $totalIncome,
+        'totalExpenses' => $totalExpenses,
+        'orders' => $incomeData,
+        'month' => $month,
+        'year' => $year,
+        'date' => $date // Pass the full date to the view
+    ];
+
+    $this->view('pharmacy/incomeView', $data);
+}

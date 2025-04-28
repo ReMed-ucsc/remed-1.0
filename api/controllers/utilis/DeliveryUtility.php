@@ -98,6 +98,7 @@ class DeliveryUility
                             'pharmacyAddress' => $deliveryData[0]->destination,
                             'deliveryAddress' => $deliveryData[0]->address,
                             'orderId' => strval($orderId),
+                            'paymentMethod' => 'COD'
                         ],
                     ],
                 ];
